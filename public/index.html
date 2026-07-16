@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IQ Test — Free Cognitive Assessment | iq-test.icu</title>
+  <meta name="description" content="Take a free 16-question cognitive assessment measuring verbal, numerical, logical, and spatial reasoning. Scientifically scored with Item Response Theory. Results in 10 minutes." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="IQ Test — Free Cognitive Assessment" />
+  <meta property="og:description" content="16 questions. 4 cognitive domains. Scientifically scored. No signup required." />
+  <meta property="og:url" content="https://iq-test.icu" />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- FAQ JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What does this IQ test measure?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "This assessment measures fluid intelligence across four cognitive domains: verbal reasoning, numerical reasoning, logical deduction, and spatial visualization. It uses 16 original items calibrated with Item Response Theory."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is my score calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your responses are scored server-side using a Three-Parameter Logistic Item Response Theory model, accounting for item difficulty, discrimination, and guessing probability. The result is converted to a standard IQ scale with mean 100 and standard deviation 15."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does the premium report cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The full cognitive report costs $4.99 USD, a one-time payment. No subscriptions. It includes detailed breakdown across all four cognitive domains with personalized AI-generated insights."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is your refund policy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We offer a 7-day refund policy from the date of purchase. No support ticket required — refunds are processed via your payment receipt."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this a clinical IQ test?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. This is not a clinical or professionally validated IQ assessment. It should not be used for diagnostic, employment, educational placement, or legal purposes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is my data protected?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Your data is stored securely in an encrypted database accessible only via server-side service keys. We comply with PIPEDA and CASL regulations. Consent records are retained for a minimum of 3 years."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does the test take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The test consists of 16 questions across four categories and typically takes 8 to 10 minutes to complete. No signup is required to start."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- ═══ HERO ═══ -->
+    <section id="hero" class="hero active">
+      <p class="hero__eyebrow">Free cognitive assessment</p>
+      <h1 class="hero__title">The Answer Sheet</h1>
+      <p class="hero__subtitle">
+        Measure your cognitive ability across four domains. Scientifically scored using Item Response Theory. No signup required.
+      </p>
+      <div class="hero__meta">
+        <div class="hero__meta-item">
+          <span class="mono">16</span> questions
+        </div>
+        <div class="hero__meta-item">
+          <span class="mono">4</span> categories
+        </div>
+        <div class="hero__meta-item">
+          <span class="mono">8–10</span> minutes
+        </div>
+      </div>
+      <button id="start-btn" class="btn" onclick="App.startQuiz()">Begin Assessment</button>
+    </section>
+
+    <!-- ═══ QUIZ ═══ -->
+    <section id="quiz">
+      <div class="progress__text" id="progress-text"></div>
+      <div class="progress">
+        <div class="progress__fill" id="progress-fill"></div>
+      </div>
+      <div id="question-container"></div>
+      <div class="quiz-nav">
+        <button id="prev-btn" class="btn btn--outline" onclick="App.prevQuestion()">← Back</button>
+        <button id="next-btn" class="btn" onclick="App.nextQuestion()">Next →</button>
+      </div>
+    </section>
+
+    <!-- ═══ RESULTS ═══ -->
+    <section id="results" class="results">
+      <h2>Your Results</h2>
+
+      <div class="results__score-card" id="score-card">
+        <div class="results__band" id="score-band"></div>
+        <p class="results__subtitle">Your cognitive performance band</p>
+      </div>
+
+      <!-- Post-payment status -->
+      <div id="post-payment-status" style="display:none;">
+        <div class="status-message status-message--success" id="status-text"></div>
+      </div>
+
+      <!-- Premium CTA (hidden post-purchase) -->
+      <div class="premium-cta" id="premium-cta">
+        <h3 class="premium-cta__title">Unlock Your Full Cognitive Report</h3>
+        <ul class="premium-cta__features">
+          <li>Detailed verbal, numerical, logical &amp; spatial breakdown</li>
+          <li>AI-generated personalized cognitive profile</li>
+          <li>Practical improvement suggestions</li>
+          <li>Delivered instantly to your email</li>
+        </ul>
+        <div class="premium-cta__price">$4.99 <span>USD · one-time</span></div>
+
+        <div class="form-group">
+          <label for="email-input">Email address</label>
+          <input type="email" id="email-input" class="input" placeholder="you@example.com" required />
+        </div>
+
+        <div class="consent">
+          <input type="checkbox" id="consent-checkbox" />
+          <label for="consent-checkbox">
+            Send me my report and occasional updates from Apex Business Systems. You can unsubscribe anytime. See our <a href="#faq" style="color: var(--red-pen);">Privacy Policy</a>.
+          </label>
+        </div>
+
+        <button id="checkout-btn" class="btn btn--red" onclick="App.checkout()" disabled>
+          Unlock Full Report — $4.99 USD
+        </button>
+      </div>
+    </section>
+
+    <!-- ═══ FAQ ═══ -->
+    <section id="faq">
+      <h2 style="margin-bottom: var(--space-xl);">Frequently Asked Questions</h2>
+
+      <div class="faq__item">
+        <div class="faq__question" onclick="App.toggleFaq(this)">What does this test measure?</div>
+        <div class="faq__answer">This assessment measures fluid intelligence (Gf) across four cognitive domains: verbal reasoning, numerical reasoning, logical deduction, and spatial visualization. It uses 16 original items calibrated with Item Response Theory to estimate your cognitive ability.</div>
+      </div>
+
+      <div class="faq__item">
+        <div class="faq__question" onclick="App.toggleFaq(this)">How is my score calculated?</div>
+        <div class="faq__answer">Your responses are scored server-side using a Three-Parameter Logistic (3PL) Item Response Theory model. This accounts for item difficulty, discrimination, and guessing probability to produce a calibrated ability estimate, converted to a standard IQ scale (mean 100, standard deviation 15).</div>
+      </div>
+
+      <div class="faq__item">
+        <div class="faq__question" onclick="App.toggleFaq(this)">How much does the premium report cost?</div>
+        <div class="faq__answer">The full cognitive report costs $4.99 USD, a one-time payment. There are no subscriptions or recurring charges. The report includes a detailed breakdown of your performance across all four cognitive domains with personalized AI-generated insights.</div>
+      </div>
+
+      <div class="faq__item">
+        <div class="faq__question" onclick="App.toggleFaq(this)">What is your refund policy?</div>
+        <div class="faq__answer">We offer a 7-day refund policy from the date of purchase. No support ticket is required — refunds are processed directly via your payment receipt.</div>
+      </div>
+
+      <div class="faq__item">
+        <div class="faq__question" onclick="App.toggleFaq(this)">Is this a clinical IQ test?</div>
+        <div class="faq__answer">No. This is not a clinical or professionally validated IQ assessment. It should not be used for diagnostic, employment, educational placement, or legal purposes. It is designed as an accessible cognitive self-assessment tool for personal insight.</div>
+      </div>
+
+      <div class="faq__item">
+        <div class="faq__question" onclick="App.toggleFaq(this)">How is my data protected?</div>
+        <div class="faq__answer">Your data is stored securely in an encrypted database accessible only via server-side service keys. We comply with PIPEDA and CASL regulations. Consent records are retained for a minimum of 3 years. You can request data deletion at any time.</div>
+      </div>
+
+      <div class="faq__item">
+        <div class="faq__question" onclick="App.toggleFaq(this)">How long does the test take?</div>
+        <div class="faq__answer">The test consists of 16 questions across four categories and typically takes 8 to 10 minutes to complete. No signup is required to start.</div>
+      </div>
+
+      <!-- Disclaimers -->
+      <div class="disclaimers">
+        <p>
+          <strong>Disclaimer:</strong> This is not a clinical or professionally validated IQ assessment.
+          It is not designed for and should not be used for diagnostic, employment, educational placement,
+          or legal purposes. Results are for personal entertainment and self-insight only.
+          This assessment does not replace a professional cognitive evaluation administered by a licensed psychologist.
+        </p>
+        <p style="margin-top: var(--space-md);">
+          © 2026 Apex Business Systems Ltd., Edmonton, AB, Canada. All rights reserved.
+        </p>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <a href="#faq">FAQ</a> · <a href="mailto:support@iq-test.icu">Contact</a>
+      <p style="margin-top: var(--space-sm);">iq-test.icu — The Answer Sheet</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

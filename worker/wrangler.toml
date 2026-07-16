@@ -1,0 +1,18 @@
+name = "apex-iqtest-worker"
+main = "worker.js"
+compatibility_date = "2024-12-01"
+account_id = "ac6add7009ec690cb919dc97d13d6fc6"
+
+[vars]
+SUPABASE_URL = "https://buaxjmahjinuowoidhmn.supabase.co"
+
+# Secrets (set via `wrangler secret put <NAME>`):
+# SUPABASE_SERVICE_KEY
+# STRIPE_SECRET_KEY
+# STRIPE_WEBHOOK_SECRET
+# GROQ_API_KEY
+# RESEND_API_KEY
+
+[[routes]]
+pattern = "iq-test.icu/api/*"
+zone_name = "iq-test.icu"
