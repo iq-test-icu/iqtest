@@ -213,7 +213,7 @@ async function sendReportEmail(email, report, band, iq, env) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      from: 'IQ Test <report@iq-test.icu>',
+      from: 'IQ TEST <info-outreach@iq-test.icu>',
       to: [email],
       subject: `Your Cognitive Report — ${band}`,
       html: htmlBody,
