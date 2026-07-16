@@ -1,234 +1,436 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IQ Test — Free Cognitive Assessment | iq-test.icu</title>
-  <meta name="description" content="Take a free 16-question cognitive assessment measuring verbal, numerical, logical, and spatial reasoning. Scientifically scored with Item Response Theory. Results in 10 minutes." />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="IQ Test — Free Cognitive Assessment" />
-  <meta property="og:description" content="16 questions. 4 cognitive domains. Scientifically scored. No signup required." />
-  <meta property="og:url" content="https://iq-test.icu" />
-  <meta property="og:type" content="website" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="styles.css" />
-
-  <!-- FAQ JSON-LD -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "What does this IQ test measure?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "This assessment measures fluid intelligence across four cognitive domains: verbal reasoning, numerical reasoning, logical deduction, and spatial visualization. It uses 16 original items calibrated with Item Response Theory."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How is my score calculated?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Your responses are scored server-side using a Three-Parameter Logistic Item Response Theory model, accounting for item difficulty, discrimination, and guessing probability. The result is converted to a standard IQ scale with mean 100 and standard deviation 15."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How much does the premium report cost?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The full cognitive report costs $4.99 USD, a one-time payment. No subscriptions. It includes detailed breakdown across all four cognitive domains with personalized AI-generated insights."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What is your refund policy?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We offer a 7-day refund policy from the date of purchase. No support ticket required — refunds are processed via your payment receipt."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Is this a clinical IQ test?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. This is not a clinical or professionally validated IQ assessment. It should not be used for diagnostic, employment, educational placement, or legal purposes."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How is my data protected?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Your data is stored securely in an encrypted database accessible only via server-side service keys. We comply with PIPEDA and CASL regulations. Consent records are retained for a minimum of 3 years."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "How long does the test take?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "The test consists of 16 questions across four categories and typically takes 8 to 10 minutes to complete. No signup is required to start."
-        }
-      }
-    ]
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Cognitive Skills Test — Instant Score + Full Report | IQ·Test</title>
+<meta name="description" content="A 16-item pattern, logic, verbal, and numeric reasoning test. Free instant score across 4 categories, plus an optional full written report with your percentile placement.">
+<link rel="canonical" href="https://iq-test.icu/">
+<meta property="og:title" content="IQ·Test — The Answer Sheet">
+<meta property="og:description" content="16 items. 4 categories. Free instant score, full report available after.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://iq-test.icu/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "IQ·Test — The Answer Sheet",
+  "url": "https://iq-test.icu/",
+  "applicationCategory": "Quiz",
+  "description": "A 16-item cognitive skills self-assessment covering pattern recognition, logic, verbal reasoning, and numeric reasoning, with a free instant score and an optional full written report.",
+  "offers": {
+    "@type": "Offer",
+    "price": "4.99",
+    "priceCurrency": "USD",
+    "description": "Full written report with category percentile breakdown"
   }
-  </script>
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is this a real IQ test?",
+      "acceptedAnswer": {"@type": "Answer", "text": "No. IQ\u00b7Test is a self-insight cognitive skills quiz for entertainment and personal reflection. It is not a clinical or psychometrically validated intelligence test, and no score from this site should be used for diagnostic, clinical, employment, or educational placement decisions. For a validated assessment, consult a licensed psychologist."}
+    },
+    {
+      "@type": "Question",
+      "name": "How is the score calculated?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Each of the 16 items falls into one of four categories: numeric reasoning, verbal reasoning, logic, and pattern recognition. Your raw score across all four is converted into a cognitive index on a 85-145 scale, modeled on a standard mean-100 / SD-15 distribution, purely as a familiar frame of reference."}
+    },
+    {
+      "@type": "Question",
+      "name": "What does the full report include?",
+      "acceptedAnswer": {"@type": "Answer", "text": "A category-by-category breakdown, an estimated percentile placement, and a short written analysis of your reasoning pattern generated from your specific answers. It's delivered by email within about 30 seconds of payment."}
+    },
+    {
+      "@type": "Question",
+      "name": "Can I get a refund?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every report email includes a self-serve refund link valid for 7 days, no support ticket required."}
+    }
+  ]
+}
+</script>
+<style>
+  :root{
+    --room:#161412; --paper:#F3EEE2; --paper-2:#EAE3D2;
+    --ink:#262019; --text:#E9E3D6; --muted:#9C9384;
+    --line-dark:#3A342C; --line-paper:#D9D0BC;
+    --pen:#B3221F; --pen-dim:#3A1210; --pencil:#8B8175;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--room); color:var(--text);
+    font-family:'Inter',sans-serif; min-height:100vh;
+    display:flex; flex-direction:column; align-items:center;
+  }
+  .mono{font-family:'JetBrains Mono',monospace;}
+  .display{font-family:'Space Grotesk',sans-serif;}
+  .wrap{width:100%; max-width:680px; padding:24px; flex:1; display:flex; flex-direction:column;}
+  header{display:flex; justify-content:space-between; align-items:center; padding:16px 0 28px;}
+  .logo{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.05rem; letter-spacing:0.01em;}
+  .logo .dot{color:var(--pen);}
+  .serial{font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--muted); letter-spacing:0.05em;}
+
+  .screen{display:none; flex-direction:column; gap:0; animation:fade .35s ease;}
+  .screen.active{display:flex;}
+  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .booklet{
+    background:var(--paper); color:var(--ink); border-radius:3px;
+    padding:34px 30px; box-shadow:0 30px 60px -20px rgba(0,0,0,0.55);
+    position:relative;
+  }
+  .booklet:before{
+    content:""; position:absolute; top:0; left:22px; right:22px; height:1px;
+    background:var(--line-paper);
+  }
+  .eyebrow{font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.12em; color:var(--pen); font-weight:700; text-transform:uppercase; margin-bottom:10px;}
+  h1{font-family:'Space Grotesk',sans-serif; font-size:2rem; line-height:1.15; font-weight:700; letter-spacing:-0.01em; margin-bottom:12px;}
+  p.lead{color:#544B3D; font-size:0.98rem; line-height:1.55;}
+  .chip-row{display:flex; gap:10px; margin:20px 0; flex-wrap:wrap;}
+  .chip{font-family:'JetBrains Mono',monospace; font-size:0.75rem; border:1px solid var(--line-paper); border-radius:100px; padding:5px 12px; color:#544B3D;}
+  .chip b{color:var(--ink);}
+
+  .btn{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:0.95rem;
+    padding:14px 22px; border-radius:4px; border:none; cursor:pointer;
+    transition:transform .12s ease, opacity .12s ease; display:inline-block;
+  }
+  .btn:active{transform:scale(0.98);}
+  .btn-primary{background:var(--pen); color:#FBEDE9;}
+  .btn-primary:hover{opacity:0.92;}
+  .disclaimer{color:var(--muted); font-size:0.76rem; line-height:1.5; margin-top:18px;}
+  .disclaimer.on-paper{color:#8A8069;}
+
+  .test-meta{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; padding:0 2px;}
+  .q-counter{font-family:'JetBrains Mono',monospace; color:var(--muted); font-size:0.8rem;}
+  .progress-track{height:3px; background:var(--line-dark); border-radius:2px; overflow:hidden; margin-bottom:18px;}
+  .progress-fill{height:100%; background:var(--pen); width:0%; transition:width .3s ease;}
+  .q-text{font-size:1.2rem; font-weight:600; line-height:1.4; margin-bottom:22px; font-family:'Space Grotesk',sans-serif;}
+  .options{display:flex; flex-direction:column; gap:11px;}
+  .opt{
+    display:flex; align-items:center; gap:14px; text-align:left; background:transparent;
+    border:1px solid var(--line-paper); color:var(--ink); padding:13px 16px; border-radius:4px;
+    cursor:pointer; font-size:0.96rem; font-family:'Inter',sans-serif;
+    transition:border-color .15s ease, background .15s ease;
+  }
+  .opt:hover{border-color:var(--pen);}
+  .opt.selected{border-color:var(--pen); background:#FBEDE9;}
+  .bubble{
+    width:22px; height:22px; border-radius:50%; border:2px solid var(--pencil);
+    flex-shrink:0; position:relative;
+  }
+  .opt.selected .bubble{border-color:var(--pen);}
+  .opt.selected .bubble:after{
+    content:""; position:absolute; inset:3px; border-radius:50%; background:var(--pen);
+  }
+  .opt-letter{font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--pencil); position:absolute; top:2px; left:6.5px;}
+
+  .curve-wrap{margin:8px 0 6px;}
+  .curve-caption{text-align:center; font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:#544B3D; margin-top:6px;}
+  .curve-caption b{color:var(--pen); font-size:1.05rem;}
+  .ledger{margin:22px 0; border-top:1px solid var(--line-paper);}
+  .ledger-row{display:flex; justify-content:space-between; align-items:center; padding:11px 2px; border-bottom:1px solid var(--line-paper);}
+  .ledger-cat{font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:#544B3D; letter-spacing:0.03em;}
+  .ledger-score{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:0.95rem;}
+  .ledger-score .of{color:var(--muted); font-weight:500; font-size:0.8rem;}
+
+  .receipt{background:var(--room); color:var(--text); border-radius:3px; padding:26px 28px; margin-top:22px; border:1px dashed var(--line-dark);}
+  .receipt h2{font-family:'Space Grotesk',sans-serif; font-size:1.2rem; margin-bottom:8px;}
+  .receipt p.lead{color:var(--muted);}
+  .price-row{display:flex; align-items:baseline; gap:8px; margin:14px 0;}
+  .price{font-family:'JetBrains Mono',monospace; font-size:1.7rem; font-weight:700; color:var(--text);}
+  .price-note{color:var(--muted); font-size:0.85rem;}
+  ul.includes{list-style:none; display:flex; flex-direction:column; gap:7px; margin:16px 0; color:var(--muted); font-size:0.88rem;}
+  ul.includes li:before{content:"— "; color:var(--pen);}
+  input[type=email]{
+    width:100%; background:#211E1A; border:1px solid var(--line-dark); color:var(--text);
+    padding:13px 14px; border-radius:4px; font-size:0.95rem; font-family:'Inter',sans-serif; margin-bottom:12px;
+  }
+  input[type=email]:focus{outline:2px solid var(--pen); outline-offset:1px;}
+  .error-msg{color:#F0908C; font-size:0.85rem; display:none; margin-bottom:10px;}
+
+  .info-block{margin-top:56px; padding-top:8px;}
+  .info-block h2{font-family:'Space Grotesk',sans-serif; font-size:1.3rem; margin-bottom:10px; color:var(--text);}
+  .info-block p{color:var(--muted); font-size:0.92rem; line-height:1.6; margin-bottom:14px;}
+  .faq-item{margin-bottom:18px;}
+  .faq-item h3{font-family:'Inter',sans-serif; font-size:0.98rem; font-weight:600; color:var(--text); margin-bottom:5px;}
+  .faq-item p{color:var(--muted); font-size:0.9rem; line-height:1.55; margin:0;}
+
+  footer{color:var(--muted); font-size:0.78rem; padding:32px 0 12px; text-align:center;}
+  footer a{color:var(--muted);}
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:0.01ms !important;} }
+</style>
 </head>
 <body>
+<div class="wrap">
+  <header>
+    <div class="logo">IQ<span class="dot">·</span>TEST</div>
+    <div class="serial" id="serialTag">FORM A · NO. 2026-0716</div>
+  </header>
 
-  <div class="container">
+  <section class="screen active" id="screen-hero">
+    <div class="booklet">
+      <div class="eyebrow">The Answer Sheet</div>
+      <h1>Sixteen items. Four categories. One honest score.</h1>
+      <p class="lead">A pattern, logic, verbal, and numeric reasoning test you can finish in about five minutes. Free instant score. A full written breakdown is available after, if you want it.</p>
+      <div class="chip-row">
+        <span class="chip"><b>16</b> items</span>
+        <span class="chip"><b>4</b> categories</span>
+        <span class="chip"><b>~5</b> min</span>
+      </div>
+      <button class="btn btn-primary" onclick="startTest()">Begin the test →</button>
+      <p class="disclaimer on-paper">Self-insight tool for entertainment and reflection. Not a clinical or psychometrically validated intelligence assessment — see the FAQ below.</p>
+    </div>
+  </section>
 
-    <!-- ═══ HERO ═══ -->
-    <section id="hero" class="hero active">
-      <p class="hero__eyebrow">Free cognitive assessment</p>
-      <h1 class="hero__title">The Answer Sheet</h1>
-      <p class="hero__subtitle">
-        Measure your cognitive ability across four domains. Scientifically scored using Item Response Theory. No signup required.
-      </p>
-      <div class="hero__meta">
-        <div class="hero__meta-item">
-          <span class="mono">16</span> questions
+  <section class="screen" id="screen-test">
+    <div class="test-meta">
+      <span class="q-counter">ITEM <span id="qNum">01</span>/16</span>
+      <span class="q-counter" id="qCategory">PATTERN</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="booklet">
+      <div class="q-text" id="qText"></div>
+      <div class="options" id="qOptions"></div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-result">
+    <div class="booklet">
+      <div class="eyebrow">Result — Free Estimate</div>
+      <div class="curve-wrap">
+        <svg viewBox="0 0 400 100" width="100%" height="100" id="curveSvg">
+          <path id="curvePath" d="M0,90 C60,90 90,10 200,10 C310,10 340,90 400,90" fill="none" stroke="#D9D0BC" stroke-width="2"/>
+          <circle id="curveMarker" cx="200" cy="10" r="5" fill="#B3221F"/>
+        </svg>
+      </div>
+      <div class="curve-caption">Cognitive Index <b id="indexReadout">--</b> · roughly the <span id="percentileReadout">--</span>th percentile</div>
+
+      <div class="ledger" id="ledgerRows"></div>
+
+      <div class="receipt">
+        <h2>Get the full report</h2>
+        <p class="lead">Category-by-category percentile, and a written read on your reasoning pattern — generated from your actual answers.</p>
+        <div class="price-row">
+          <span class="price">$4.99</span>
+          <span class="price-note">one-time · emailed instantly</span>
         </div>
-        <div class="hero__meta-item">
-          <span class="mono">4</span> categories
-        </div>
-        <div class="hero__meta-item">
-          <span class="mono">8–10</span> minutes
-        </div>
-      </div>
-      <button id="start-btn" class="btn" onclick="App.startQuiz()">Begin Assessment</button>
-    </section>
-
-    <!-- ═══ QUIZ ═══ -->
-    <section id="quiz">
-      <div class="progress__text" id="progress-text"></div>
-      <div class="progress">
-        <div class="progress__fill" id="progress-fill"></div>
-      </div>
-      <div id="question-container"></div>
-      <div class="quiz-nav">
-        <button id="prev-btn" class="btn btn--outline" onclick="App.prevQuestion()">← Back</button>
-        <button id="next-btn" class="btn" onclick="App.nextQuestion()">Next →</button>
-      </div>
-    </section>
-
-    <!-- ═══ RESULTS ═══ -->
-    <section id="results" class="results">
-      <h2>Your Results</h2>
-
-      <div class="results__score-card" id="score-card">
-        <div class="results__band" id="score-band"></div>
-        <p class="results__subtitle">Your cognitive performance band</p>
-      </div>
-
-      <!-- Post-payment status -->
-      <div id="post-payment-status" style="display:none;">
-        <div class="status-message status-message--success" id="status-text"></div>
-      </div>
-
-      <!-- Premium CTA (hidden post-purchase) -->
-      <div class="premium-cta" id="premium-cta">
-        <h3 class="premium-cta__title">Unlock Your Full Cognitive Report</h3>
-        <ul class="premium-cta__features">
-          <li>Detailed verbal, numerical, logical &amp; spatial breakdown</li>
-          <li>AI-generated personalized cognitive profile</li>
-          <li>Practical improvement suggestions</li>
-          <li>Delivered instantly to your email</li>
+        <ul class="includes">
+          <li>Full 4-category percentile breakdown</li>
+          <li>Written reasoning-style analysis</li>
+          <li>In your inbox in ~30 seconds</li>
         </ul>
-        <div class="premium-cta__price">$4.99 <span>USD · one-time</span></div>
-
-        <div class="form-group">
-          <label for="email-input">Email address</label>
-          <input type="email" id="email-input" class="input" placeholder="you@example.com" required />
-        </div>
-
-        <div class="consent">
-          <input type="checkbox" id="consent-checkbox" />
-          <label for="consent-checkbox">
-            Send me my report and occasional updates from Apex Business Systems. You can unsubscribe anytime. See our <a href="#faq" style="color: var(--red-pen);">Privacy Policy</a>.
-          </label>
-        </div>
-
-        <button id="checkout-btn" class="btn btn--red" onclick="App.checkout()" disabled>
-          Unlock Full Report — $4.99 USD
-        </button>
+        <input type="email" id="emailInput" placeholder="you@email.com" autocomplete="email">
+        <label style="display:flex; gap:8px; align-items:flex-start; font-size:0.82rem; color:var(--muted); margin-bottom:14px; cursor:pointer;">
+          <input type="checkbox" id="consentCheck" style="margin-top:3px;">
+          <span>I agree to receive my report by email. No other messages unless I opt in separately.</span>
+        </label>
+        <div class="error-msg" id="checkoutError">Enter a valid email and check the consent box — that's where your report goes.</div>
+        <button class="btn btn-primary" style="width:100%; text-align:center;" onclick="startCheckout()" id="checkoutBtn">Unlock full report — $4.99</button>
+        <p class="disclaimer">Self-serve refund within 7 days from the link in your receipt email — no ticket needed.</p>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- ═══ FAQ ═══ -->
-    <section id="faq">
-      <h2 style="margin-bottom: var(--space-xl);">Frequently Asked Questions</h2>
+  <section class="screen" id="screen-report">
+    <div class="booklet">
+      <h1 id="reportHeadline">Your full report</h1>
+      <p class="lead" id="reportBody">Loading your report…</p>
+    </div>
+  </section>
 
-      <div class="faq__item">
-        <div class="faq__question" onclick="App.toggleFaq(this)">What does this test measure?</div>
-        <div class="faq__answer">This assessment measures fluid intelligence (Gf) across four cognitive domains: verbal reasoning, numerical reasoning, logical deduction, and spatial visualization. It uses 16 original items calibrated with Item Response Theory to estimate your cognitive ability.</div>
-      </div>
+  <div class="info-block">
+    <h2>About this test</h2>
+    <p>IQ·Test is a 16-item cognitive skills self-assessment split evenly across four categories: numeric reasoning, verbal reasoning, logical deduction, and pattern recognition. It takes most people 4–6 minutes. The free result shows your raw score and category split immediately; the paid report adds an estimated percentile and a short written analysis of your reasoning pattern.</p>
 
-      <div class="faq__item">
-        <div class="faq__question" onclick="App.toggleFaq(this)">How is my score calculated?</div>
-        <div class="faq__answer">Your responses are scored server-side using a Three-Parameter Logistic (3PL) Item Response Theory model. This accounts for item difficulty, discrimination, and guessing probability to produce a calibrated ability estimate, converted to a standard IQ scale (mean 100, standard deviation 15).</div>
-      </div>
-
-      <div class="faq__item">
-        <div class="faq__question" onclick="App.toggleFaq(this)">How much does the premium report cost?</div>
-        <div class="faq__answer">The full cognitive report costs $4.99 USD, a one-time payment. There are no subscriptions or recurring charges. The report includes a detailed breakdown of your performance across all four cognitive domains with personalized AI-generated insights.</div>
-      </div>
-
-      <div class="faq__item">
-        <div class="faq__question" onclick="App.toggleFaq(this)">What is your refund policy?</div>
-        <div class="faq__answer">We offer a 7-day refund policy from the date of purchase. No support ticket is required — refunds are processed directly via your payment receipt.</div>
-      </div>
-
-      <div class="faq__item">
-        <div class="faq__question" onclick="App.toggleFaq(this)">Is this a clinical IQ test?</div>
-        <div class="faq__answer">No. This is not a clinical or professionally validated IQ assessment. It should not be used for diagnostic, employment, educational placement, or legal purposes. It is designed as an accessible cognitive self-assessment tool for personal insight.</div>
-      </div>
-
-      <div class="faq__item">
-        <div class="faq__question" onclick="App.toggleFaq(this)">How is my data protected?</div>
-        <div class="faq__answer">Your data is stored securely in an encrypted database accessible only via server-side service keys. We comply with PIPEDA and CASL regulations. Consent records are retained for a minimum of 3 years. You can request data deletion at any time.</div>
-      </div>
-
-      <div class="faq__item">
-        <div class="faq__question" onclick="App.toggleFaq(this)">How long does the test take?</div>
-        <div class="faq__answer">The test consists of 16 questions across four categories and typically takes 8 to 10 minutes to complete. No signup is required to start.</div>
-      </div>
-
-      <!-- Disclaimers -->
-      <div class="disclaimers">
-        <p>
-          <strong>Disclaimer:</strong> This is not a clinical or professionally validated IQ assessment.
-          It is not designed for and should not be used for diagnostic, employment, educational placement,
-          or legal purposes. Results are for personal entertainment and self-insight only.
-          This assessment does not replace a professional cognitive evaluation administered by a licensed psychologist.
-        </p>
-        <p style="margin-top: var(--space-md);">
-          © 2026 Apex Business Systems Ltd., Edmonton, AB, Canada. All rights reserved.
-        </p>
-      </div>
-    </section>
-
+    <h2>Frequently asked questions</h2>
+    <div class="faq-item">
+      <h3>Is this a real IQ test?</h3>
+      <p>No. This is a self-insight quiz for entertainment and personal reflection, not a clinical or psychometrically validated intelligence test. Scores here shouldn't be used for diagnostic, employment, or educational decisions — for that, consult a licensed psychologist.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How is the score calculated?</h3>
+      <p>Your raw score across the 16 items is converted to a cognitive index on an 85–145 scale, modeled on a standard mean-100 / SD-15 distribution, as a familiar frame of reference rather than a clinical claim.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What's in the full report?</h3>
+      <p>A category-by-category breakdown, an estimated percentile, and a short written analysis generated from your specific answers — emailed within about 30 seconds of payment.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Can I get a refund?</h3>
+      <p>Yes — every report email includes a self-serve refund link valid for 7 days. No support ticket required.</p>
+    </div>
   </div>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <a href="#faq">FAQ</a> · <a href="mailto:support@iq-test.icu">Contact</a>
-      <p style="margin-top: var(--space-sm);">iq-test.icu — The Answer Sheet</p>
-    </div>
-  </footer>
+  <footer>IQ·TEST · <a href="#">Methodology</a> · <a href="#">Refund policy</a> · <a href="#">Contact</a></footer>
+</div>
 
-  <script src="app.js"></script>
+<script>
+const API_BASE = ""; // same-origin — Worker is routed at iq-test.icu/api/*
+
+const QUESTIONS = [
+  {cat:"NUMERIC", text:"2, 6, 12, 20, 30, ?", opts:["36","40","42","44"], correct:2},
+  {cat:"NUMERIC", text:"3, 9, 27, 81, ?", opts:["162","216","243","324"], correct:2},
+  {cat:"NUMERIC", text:"1, 4, 9, 16, 25, ?", opts:["30","32","36","49"], correct:2},
+  {cat:"NUMERIC", text:"100, 91, 79, 64, ?", opts:["46","48","50","52"], correct:1},
+  {cat:"VERBAL", text:"Ocean is to Wave as Mountain is to ___", opts:["Rock","Avalanche","Peak","Cliff"], correct:1},
+  {cat:"VERBAL", text:"Author is to Book as Composer is to ___", opts:["Instrument","Symphony","Orchestra","Note"], correct:1},
+  {cat:"VERBAL", text:"Which word does NOT belong: Whisper, Shout, Murmur, Silence", opts:["Whisper","Shout","Murmur","Silence"], correct:3},
+  {cat:"VERBAL", text:"Thermometer is to Temperature as Scale is to ___", opts:["Fish","Weight","Balance","Number"], correct:1},
+  {cat:"LOGIC", text:"All Zeppos are Farbles. Some Farbles are Wickets. Therefore:", opts:["All Zeppos are Wickets","Some Zeppos may be Wickets","No Zeppos are Wickets","All Wickets are Zeppos"], correct:1},
+  {cat:"LOGIC", text:"If it rains, the game is cancelled. The game was NOT cancelled. Therefore:", opts:["It rained","It did not rain","It might have rained","No conclusion possible"], correct:1},
+  {cat:"LOGIC", text:"Five friends sit in a row. Ana is left of Ben. Cid is right of Ben. Who is in the middle?", opts:["Ana","Ben","Cid","Cannot determine"], correct:1},
+  {cat:"LOGIC", text:"A box has more red balls than blue. It has more blue than green. Which is true?", opts:["Green > Red","Red > Green","Green = Red","Cannot determine"], correct:1},
+  {cat:"PATTERN", text:"A, C, F, J, O, ?", opts:["S","T","U","V"], correct:2},
+  {cat:"PATTERN", text:"2, 4, 8, 16, ?, 64", opts:["24","28","32","48"], correct:2},
+  {cat:"PATTERN", text:"AB, DE, GH, JK, ?", opts:["LM","MN","NO","LN"], correct:1},
+  {cat:"PATTERN", text:"1, 1, 2, 3, 5, 8, ?", opts:["11","12","13","14"], correct:2},
+];
+
+const PERCENTILE_TABLE = [[85,16],[90,25],[95,37],[100,50],[105,63],[110,75],[115,84],[120,91],[125,95],[130,98],[135,99],[140,99.6],[145,99.9]];
+function percentileFor(index){
+  for(let i=0;i<PERCENTILE_TABLE.length-1;i++){
+    const [x0,y0]=PERCENTILE_TABLE[i], [x1,y1]=PERCENTILE_TABLE[i+1];
+    if(index>=x0 && index<=x1){
+      const t=(index-x0)/(x1-x0);
+      return Math.round(y0+t*(y1-y0));
+    }
+  }
+  return index<85?16:99.9;
+}
+
+let current = 0;
+let answers = [];
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startTest(){
+  current = 0; answers = [];
+  show('screen-test');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = QUESTIONS[current];
+  document.getElementById('qNum').textContent = String(current+1).padStart(2,'0');
+  document.getElementById('qCategory').textContent = q.cat;
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('progressFill').style.width = `${(current/QUESTIONS.length)*100}%`;
+  const optsEl = document.getElementById('qOptions');
+  optsEl.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  q.opts.forEach((opt, i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="bubble"><span class="opt-letter">${letters[i]}</span></span>${opt}`;
+    btn.onclick = ()=> selectAnswer(i);
+    optsEl.appendChild(btn);
+  });
+}
+
+function selectAnswer(i){
+  answers[current] = i;
+  current++;
+  if(current < QUESTIONS.length){
+    renderQuestion();
+  } else {
+    document.getElementById('progressFill').style.width = `100%`;
+    finishTest();
+  }
+}
+
+function finishTest(){
+  const catScores = {NUMERIC:0, VERBAL:0, LOGIC:0, PATTERN:0};
+  const catMax = {NUMERIC:0, VERBAL:0, LOGIC:0, PATTERN:0};
+  let raw = 0;
+  QUESTIONS.forEach((q, i)=>{
+    catMax[q.cat]++;
+    if(answers[i] === q.correct){ raw++; catScores[q.cat]++; }
+  });
+  const index = Math.round(85 + (raw/QUESTIONS.length) * 60);
+  const pct = percentileFor(index);
+  window.__result = {raw, index, percentile: pct, catScores, catMax, answers};
+
+  document.getElementById('indexReadout').textContent = index;
+  document.getElementById('percentileReadout').textContent = pct;
+
+  const x = ((index-85)/60) * 400;
+  const t = x/400;
+  const y = 90 - Math.sin(Math.PI*t) * 80 * Math.exp(-Math.pow((t-0.5)*2.2,2)*0.4);
+  document.getElementById('curveMarker').setAttribute('cx', x.toFixed(1));
+  document.getElementById('curveMarker').setAttribute('cy', Math.max(8,y).toFixed(1));
+
+  const ledger = document.getElementById('ledgerRows');
+  ledger.innerHTML = '';
+  Object.keys(catScores).forEach(cat=>{
+    const row = document.createElement('div');
+    row.className = 'ledger-row';
+    row.innerHTML = `<span class="ledger-cat">${cat}</span><span class="ledger-score">${catScores[cat]} <span class="of">/ ${catMax[cat]}</span></span>`;
+    ledger.appendChild(row);
+  });
+  show('screen-result');
+}
+
+async function startCheckout(){
+  const email = document.getElementById('emailInput').value.trim();
+  const consented = document.getElementById('consentCheck').checked;
+  const errEl = document.getElementById('checkoutError');
+  errEl.style.display = 'none';
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !consented){
+    errEl.style.display = 'block';
+    return;
+  }
+  const btn = document.getElementById('checkoutBtn');
+  btn.disabled = true; btn.textContent = 'Loading checkout…';
+  try{
+    const saveRes = await fetch(`${API_BASE}/api/save-result`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({email, consentGiven:consented, ...window.__result})
+    });
+    if(!saveRes.ok) throw new Error('save failed');
+    const {id} = await saveRes.json();
+
+    const checkoutRes = await fetch(`${API_BASE}/api/checkout`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({id, email})
+    });
+    if(!checkoutRes.ok) throw new Error('checkout failed');
+    const {url} = await checkoutRes.json();
+    window.location.href = url;
+  } catch(e){
+    errEl.style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Unlock full report — $4.99';
+  }
+}
+
+(async function checkReportView(){
+  const params = new URLSearchParams(window.location.search);
+  const reportId = params.get('report');
+  if(!reportId) return;
+  show('screen-report');
+  try{
+    const res = await fetch(`${API_BASE}/api/report?id=${encodeURIComponent(reportId)}`);
+    const data = await res.json();
+    if(data.paid && data.report){
+      document.getElementById('reportBody').textContent = data.report;
+    } else {
+      document.getElementById('reportBody').textContent = "Payment still processing — refresh in a few seconds, or check your email.";
+    }
+  } catch(e){
+    document.getElementById('reportBody').textContent = "Couldn't load your report. It's also on its way to your inbox.";
+  }
+})();
+</script>
 </body>
 </html>
