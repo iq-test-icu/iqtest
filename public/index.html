@@ -1028,8 +1028,7 @@
 <div class="wrap">
   <header>
     <div class="logo-wrap">
-      <img src="icon.png" class="logo-img" alt="IQ·Test Gold Medallion Logo" onerror="this.style.display='none'">
-      <div class="logo-text">IQ<span>·</span>TEST</div>
+      <img src="wordmark.png" alt="IQ·Test" style="height:28px; width:auto; object-fit:contain; display:block;" onerror="this.style.display='none'">
     </div>
     <div class="serial" id="serialTag">COMPARED AGAINST: DA VINCI · CURIE · TESLA</div>
   </header>
@@ -1046,20 +1045,20 @@
         </div>
       </div>
       
-      <div class="eyebrow">Apex Cognitive Assessment</div>
+      <div class="eyebrow">Cognitive Assessment</div>
       <h1 style="text-align:center;">Which mind matches yours?</h1>
-      <p class="lead" style="text-align:center;">Evaluate your fluid intelligence across four cognitive domains in just five minutes. Secure your instant baseline score, then unlock the historical genius whose reasoning pattern aligns with yours.</p>
+      <p class="lead" style="text-align:center;">16 questions. About five minutes. Your score is free the moment you finish. Then decide if you want to know which historical figure you actually think like.</p>
       
       <div class="chip-row">
-        <span class="chip"><b>16</b> calibrated items</span>
-        <span class="chip"><b>4</b> core categories</span>
-        <span class="chip"><b>~5</b> min duration</span>
+        <span class="chip"><b>16</b> questions</span>
+        <span class="chip"><b>4</b> categories</span>
+        <span class="chip"><b>5 min</b> average</span>
       </div>
       
       <div style="text-align:center;">
-        <button class="btn btn-primary" onclick="startTest()">Find out →</button>
+        <button class="btn btn-primary" onclick="startTest()">Start the test</button>
       </div>
-      <p class="disclaimer" style="text-align:center;">Self-insight cognitive skills quiz for entertainment and personal reflection. Not a clinical or psychometrically validated intelligence test — see the FAQ below.</p>
+      <p class="disclaimer" style="text-align:center;">This is a self-insight quiz, not a clinical IQ test. Your score is for personal reflection only. See the FAQ below for full methodology details.</p>
     </div>
   </section>
 
@@ -1099,9 +1098,9 @@
       </div>
 
       <div class="tease-box">
-        <span class="tease-label">YOUR GENIUS ALIGNMENT</span>
-        <span class="tease-blur">â–ˆâ–ˆâ–ˆâ–ˆ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ</span>
-        <span class="tease-cta">Unlock your detailed report to reveal your match</span>
+        <span class="tease-label">YOUR HISTORICAL MATCH</span>
+        <span class="tease-blur">████ ███████</span>
+        <span class="tease-cta">Get the full report to see who you think like</span>
       </div>
 
       <div class="value-stack">
@@ -1124,47 +1123,41 @@
       </div>
 
       <div class="receipt">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
-          <h2>Select Report Tier</h2>
-          <div class="live-badge">
-            <span class="live-dot"></span>
-            14,249 scored today
-          </div>
-        </div>
-        <p class="lead" style="font-size:0.9rem; margin-bottom:18px;">Pick how deep you want to go. Both reports are delivered by email within 30 seconds.</p>
+        <h2 style="margin-bottom:8px;">Get the full report</h2>
+        <p class="lead" style="font-size:0.9rem; margin-bottom:20px; color:var(--text-secondary);">Your report arrives by email in under a minute.</p>
         
         <div class="tier-row">
           <label class="tier-opt selected" id="tierBasicLabel">
             <input type="radio" name="tier" value="basic" id="tierBasic" checked onchange="onTierChange()">
             <div style="width:100%;">
               <div class="tier-header-row">
-                <span class="tier-name">Basic Report</span>
+                <span class="tier-name">Score Report</span>
                 <span class="tier-price">$1.99</span>
               </div>
-              <div class="tier-desc">Full 4-category score and percentile metrics.</div>
+              <div class="tier-desc">Full score, percentile, and breakdown across all four question categories.</div>
             </div>
           </label>
           <label class="tier-opt" id="tierDetailedLabel">
             <input type="radio" name="tier" value="detailed" id="tierDetailed" onchange="onTierChange()">
             <div style="width:100%;">
               <div class="tier-header-row">
-                <span class="tier-name">Detailed Report</span>
+                <span class="tier-name">Deep Report</span>
                 <span class="tier-price">$3.99</span>
               </div>
-              <div class="tier-desc">Adds a written reasoning audit, reflection analysis, and your historical mind match.</div>
+              <div class="tier-desc">Everything in Score, plus a written analysis of how you reason and which historical mind most closely mirrors yours.</div>
             </div>
           </label>
         </div>
         
-        <input type="email" id="emailInput" placeholder="you@email.com" autocomplete="email">
+        <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
         <label style="display:flex; gap:10px; align-items:flex-start; font-size:0.82rem; color:var(--text-muted); margin-bottom:18px; cursor:pointer;">
           <input type="checkbox" id="consentCheck" style="margin-top:3px; accent-color:var(--gold);">
-          <span>I agree to receive my result by email. No marketing emails or newsletters unless explicitly opted-in.</span>
+          <span>Send my report to this email. No newsletters, no marketing follow-ups.</span>
         </label>
         
-        <div class="error-msg" id="checkoutError">Please enter a valid email address and accept the checkbox to send your report.</div>
-        <button class="btn btn-primary" style="width:100%;" onclick="startCheckout()" id="checkoutBtn">Unlock my result — $1.99</button>
-        <p class="disclaimer" style="font-size:0.72rem; text-align:center;">7-day self-serve refund link provided in every receipt email.</p>
+        <div class="error-msg" id="checkoutError">Please enter a valid email and tick the checkbox above.</div>
+        <button class="btn btn-primary" style="width:100%;" onclick="startCheckout()" id="checkoutBtn">Get my report &mdash; $1.99</button>
+        <p class="disclaimer" style="font-size:0.72rem; text-align:center; margin-top:10px;">Payment processed securely by Stripe. We never see your card details.</p>
       </div>
     </div>
   </section>
@@ -1178,7 +1171,8 @@
 
   <div class="info-block">
     <h2>About this test</h2>
-    <p>IQ·Test is a 16-item cognitive skills self-assessment split evenly across four categories: numeric reasoning, verbal reasoning, logical deduction, and pattern recognition. It takes most people 4–6 minutes. The free result shows your raw score and category split immediately; the paid report adds an estimated percentile and a short written analysis of your reasoning pattern.</p>
+    <p>IQ·Test is 16 questions across four areas: number patterns, verbal reasoning, logical deduction, and spatial/pattern recognition. Most people finish in 4 to 6 minutes. Your free score is shown the moment you are done. If you want to know more about what your score means, or which historical mind you think like, the paid report covers that.</p>
+    <p style="font-size:0.85rem; color:var(--text-muted); margin-top:8px;">Built by <strong style="color:var(--text-secondary);">APEX Business Systems</strong> in Edmonton, AB. Questions? <a href="/support.html" style="color:var(--gold);">We are reachable by email</a> and read every message.</p>
 
     <h2>Frequently asked questions</h2>
     <div class="faq-accordion">
@@ -1189,7 +1183,7 @@
         </button>
         <div class="faq-content">
           <div class="faq-content-inner">
-            No. IQ·Test is a self-insight cognitive skills quiz for entertainment and personal reflection. It is not a clinical or psychometrically validated intelligence test, and no score from this site should be used for diagnostic, clinical, employment, or educational placement decisions. For a validated assessment, consult a licensed psychologist.
+            No, and we want to be upfront about that. This is a reasoning skills quiz for personal curiosity. It is not a clinical assessment and your score should not be used for any professional, educational, or medical purpose. If you need a validated measure of cognitive ability, a licensed psychologist can help with that.
           </div>
         </div>
       </div>
@@ -1200,18 +1194,29 @@
         </button>
         <div class="faq-content">
           <div class="faq-content-inner">
-            Each of the 16 items falls into one of four categories: numeric reasoning, verbal reasoning, logic, and pattern recognition. Your raw score across all four is converted into a cognitive index on a 85-145 scale, modeled on a standard mean-100 / SD-15 distribution, purely as a familiar frame of reference.
+            Each question belongs to one of four categories: numeric reasoning, verbal reasoning, logic, or pattern recognition. Your raw score is mapped to an index on the 85 to 145 scale, using the same mean-100, SD-15 framework that traditional IQ testing uses as a reference point. This makes your number readable, not clinically precise.
           </div>
         </div>
       </div>
       <div class="faq-item">
         <button class="faq-trigger" onclick="toggleFaq(this)">
-          What's the difference between the Basic and Detailed result?
+          What is the difference between the two report tiers?
           <span class="faq-icon">+</span>
         </button>
         <div class="faq-content">
           <div class="faq-content-inner">
-            Basic ($1.99) unlocks your full 4-category percentile breakdown. Detailed ($3.99) adds a written analysis of your reasoning pattern and the historical figure whose estimated score lands closest to yours. Both are delivered by email within about 30 seconds of payment.
+            The Score Report ($1.99) gives you your full breakdown across all four categories and your population percentile. The Deep Report ($3.99) adds a written analysis of your reasoning style and identifies the historical figure whose thinking pattern most closely aligns with yours. Both arrive by email in under a minute.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          What happens to my data?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-content">
+          <div class="faq-content-inner">
+            We collect your answers and, if you buy a report, your email. We do not sell it, share it with advertisers, or add you to any mailing list. Payment is processed by Stripe and we never see your card details. Full details are in our <a href="/privacy.html" style="color:var(--gold);">privacy policy</a>.
           </div>
         </div>
       </div>
@@ -1220,8 +1225,14 @@
   </div>
 
   <footer>
-    <img src="wordmark.png" alt="IQ·Test Logo Wordmark" style="height:20px; width:auto; display:block; margin:0 auto 16px; filter:brightness(0.9) drop-shadow(0 0 4px rgba(255,255,255,0.05)); opacity:0.85;" onerror="this.style.display='none'">
-    IQ·TEST · <a href="#">Methodology</a> · <a href="#">Refund policy</a> · <a href="#">Contact</a>
+    <img src="wordmark.png" alt="IQ·Test" style="height:20px; width:auto; display:block; margin:0 auto 16px; opacity:0.7;" onerror="this.style.display='none'">
+    <div style="margin-bottom:10px;">
+      <a href="/about.html">About</a> &nbsp;&middot;&nbsp;
+      <a href="/support.html">Support</a> &nbsp;&middot;&nbsp;
+      <a href="/privacy.html">Privacy</a> &nbsp;&middot;&nbsp;
+      <a href="mailto:support@iq-test.icu">Contact</a>
+    </div>
+    <div>&copy; 2025 APEX Business Systems Ltd. &nbsp;&middot;&nbsp; Edmonton, AB &nbsp;&middot;&nbsp; <a href="mailto:support@iq-test.icu">support@iq-test.icu</a></div>
   </footer>
 </div>
 
