@@ -6,10 +6,13 @@
 <title>About | IQ·Test</title>
 <meta name="description" content="IQ·Test is built by APEX Business Systems in Edmonton, AB. A short cognitive quiz with a straightforward purpose.">
 <link rel="canonical" href="https://iq-test.icu/about">
-<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="icon" type="image/webp" href="/favicon.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Outfit:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Fraunces:opsz,wght@9..144,300..700&display=swap" rel="stylesheet">
 <style>
+  html {
+    font-size: 17px;
+  }
   :root {
     --bg: oklch(0.06 0.002 95);
     --gold: oklch(0.72 0.12 95);
@@ -22,14 +25,14 @@
   body {
     background: var(--bg);
     color: var(--text);
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Fraunces', Georgia, serif;
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
   }
   .page { max-width: 720px; margin: 0 auto; padding: 60px 24px 100px; }
   .back {
     display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'Fraunces', Georgia, serif;
     font-size: 0.75rem;
     color: var(--muted);
     text-decoration: none;
@@ -38,13 +41,20 @@
   }
   .back:hover { color: var(--gold); }
   h1 {
-    font-family: 'Fraunces', serif;
+    font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 400;
+    font-weight: 700;
     margin-bottom: 24px;
   }
   p { color: oklch(0.85 0.005 95); margin-bottom: 18px; font-size: 1rem; }
-  h2 { font-size: 1.1rem; font-weight: 600; margin-top: 40px; margin-bottom: 12px; color: var(--gold); }
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 40px;
+    margin-bottom: 12px;
+    color: var(--gold);
+  }
   a { color: var(--gold); }
   .company-block {
     background: var(--bg-card);

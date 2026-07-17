@@ -8,7 +8,6 @@ pattern = "iq-test.icu/api/*"
 zone_name = "iq-test.icu"
 
 [vars]
-SUPABASE_URL = "https://buaxjmahjinuowoidhmn.supabase.co"
 ALLOWED_ORIGIN = "https://iq-test.icu"
 RESEND_FROM = "IQ Test <report@iq-test.icu>"
 
