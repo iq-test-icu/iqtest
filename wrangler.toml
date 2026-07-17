@@ -1,3 +1,6 @@
 name = "apex-iqtest"
-pages_build_output_dir = "public"
-compatibility_date = "2024-03-20"
+compatibility_date = "2026-07-17"
+
+[assets]
+directory = "./public"
+
