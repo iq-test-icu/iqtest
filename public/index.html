@@ -7,11 +7,17 @@
 <meta name="description" content="A free 16-question cognitive test across 4 categories. Get your instant score, then unlock which historical figure scored exactly where you do.">
 <link rel="canonical" href="https://iq-test.icu/">
 <meta property="og:title" content="IQ·Test — Which mind matches yours?">
-<meta property="og:description" content="Free instant score. Unlock your historical figure match for $3.99.">
+<meta property="og:description" content="Free instant score. Unlock your historical figure match — from $1.99.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://iq-test.icu/">
+<meta property="og:image" content="https://iq-test.icu/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://iq-test.icu/og.png">
 <meta name="robots" content="index, follow">
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
@@ -24,9 +30,9 @@
   "description": "A 16-item cognitive skills self-assessment covering pattern recognition, logic, verbal reasoning, and numeric reasoning, with a free instant score and an optional full written report.",
   "offers": {
     "@type": "Offer",
-    "price": "4.99",
+    "price": "1.99",
     "priceCurrency": "USD",
-    "description": "Full written report with category percentile breakdown"
+    "description": "Basic Result — full 4-category percentile breakdown"
   }
 }
 </script>
@@ -344,7 +350,7 @@ const QUESTIONS = [
   {cat:"NUMERIC", text:"2, 6, 12, 20, 30, ?", opts:["36","40","42","44"], correct:2},
   {cat:"NUMERIC", text:"3, 9, 27, 81, ?", opts:["162","216","243","324"], correct:2},
   {cat:"NUMERIC", text:"1, 4, 9, 16, 25, ?", opts:["30","32","36","49"], correct:2},
-  {cat:"NUMERIC", text:"100, 91, 79, 64, ?", opts:["46","48","50","52"], correct:1},
+  {cat:"NUMERIC", text:"100, 91, 79, 64, ?", opts:["46","48","50","52"], correct:0},
   {cat:"VERBAL", text:"Ocean is to Wave as Mountain is to ___", opts:["Rock","Avalanche","Peak","Cliff"], correct:1},
   {cat:"VERBAL", text:"Author is to Book as Composer is to ___", opts:["Instrument","Symphony","Orchestra","Note"], correct:1},
   {cat:"VERBAL", text:"Which word does NOT belong: Whisper, Shout, Murmur, Silence", opts:["Whisper","Shout","Murmur","Silence"], correct:3},
@@ -402,6 +408,22 @@ function renderQuestion(){
     optsEl.appendChild(btn);
   });
 }
+
+// ── Keyboard navigation (1-4 or A-D selects answer; Enter auto-advances on selection) ──
+document.addEventListener('keydown', e => {
+  const screen = document.querySelector('.screen.active');
+  if (!screen || screen.id !== 'screen-test') return;
+  const map = {'1':0,'2':1,'3':2,'4':3,'a':0,'b':1,'c':2,'d':3};
+  const key = e.key.toLowerCase();
+  const opts = document.querySelectorAll('.opt');
+  if (key in map && map[key] < opts.length) {
+    // Visually highlight
+    opts.forEach(o => o.classList.remove('selected'));
+    opts[map[key]].classList.add('selected');
+    // Short delay so the user sees the selection flash
+    setTimeout(() => selectAnswer(map[key]), 120);
+  }
+});
 
 function selectAnswer(i){
   answers[current] = i;
@@ -484,7 +506,7 @@ async function startCheckout(){
     window.location.href = url;
   } catch(e){
     errEl.style.display = 'block';
-    btn.disabled = false; btn.textContent = 'Unlock full report — $4.99';
+    btn.disabled = false; btn.textContent = `Unlock my result — $${TIER_PRICE[tier]}`;
   }
 }
 

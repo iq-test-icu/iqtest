@@ -33,3 +33,7 @@ alter table sessions enable row level security;
 -- Consent records: retain a minimum of 3 years past last interaction (CASL evidentiary
 -- requirement for a Canada-based sender). Do not shorten this without checking current
 -- CASL guidance — this file is not legal advice, confirm with counsel before launch.
+
+-- Migration: add tier column (§6 of execution contract)
+-- Safe to run multiple times — "add column if not exists" is idempotent.
+alter table sessions add column if not exists tier text check (tier in ('basic','detailed'));

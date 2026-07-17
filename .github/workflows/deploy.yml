@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy-worker:
+    name: Deploy Worker → iq-test.icu/api/*
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: worker
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Deploy Cloudflare Worker
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          workingDirectory: worker
+
+  # Pages deploys automatically via its GitHub connection.
+  # This job exists only to surface both deployments in the same run.
+  note-pages:
+    name: Pages auto-deploys via Cloudflare CI
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Cloudflare Pages detects the push and redeploys automatically."
