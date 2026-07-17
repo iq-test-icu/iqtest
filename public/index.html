@@ -6,8 +6,8 @@
 <title>Free Cognitive Test — Which Historical Figure Matches Your Score? | IQ·Test</title>
 <meta name="description" content="A free 16-question cognitive test across 4 categories. Get your instant score, then unlock which historical figure thinks the way you do.">
 <link rel="canonical" href="https://iq-test.icu/">
-<meta property="og:title" content="IQ·Test — Which mind matches yours?">
-<meta property="og:description" content="Free instant score. Unlock your historical figure match — from $1.99.">
+<meta property="og:title" content="Free Cognitive Test — Which Historical Figure Matches Your Score?">
+<meta property="og:description" content="16 questions. 5 minutes. Free instant score. Discover if you think like Einstein, Newton, or Da Vinci. Detailed report from $1.99.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://iq-test.icu/">
 <meta property="og:image" content="https://iq-test.icu/og.png">
@@ -15,7 +15,16 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://iq-test.icu/og.png">
-<meta name="robots" content="index, follow">
+<meta name="twitter:title" content="Free Cognitive Test — Which Historical Figure Matches Your Score?">
+<meta name="twitter:description" content="16 questions. Free instant score. Unlock your historical figure match from $1.99.">
+<!-- AI/GEO Optimization signals -->
+<meta name="author" content="APEX Business Systems Ltd.">
+<meta name="keywords" content="free IQ test, cognitive test online, IQ quiz, cognitive skills assessment, historical figure IQ match, pattern recognition test, verbal reasoning test">
+<meta name="subject" content="Cognitive assessment quiz">
+<meta name="language" content="en">
+<meta name="geo.region" content="CA-AB">
+<meta name="geo.placename" content="Edmonton, Alberta, Canada">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <link rel="icon" type="image/webp" href="/favicon.webp">
 <link rel="apple-touch-icon" href="/icon.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,6 +50,79 @@
       "acceptedAnswer": {"@type": "Answer", "text": "Basic ($1.99) unlocks your full 4-category percentile breakdown. Detailed ($3.99) adds a written analysis of your reasoning pattern and a thematic historical figure match based on your strongest category — not a numeric score comparison, since no verified test-score data exists for historical figures. Both are delivered by email within about 30 seconds of payment."}
     }
   ]
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "IQ·Test — Free Cognitive Test",
+  "url": "https://iq-test.icu/",
+  "description": "A free 16-question cognitive skills quiz. Get your instant score and discover which historical figure thinks like you.",
+  "applicationCategory": "EducationalApplication",
+  "operatingSystem": "All",
+  "offers": [
+    {
+      "@type": "Offer",
+      "name": "Score Report",
+      "price": "1.99",
+      "priceCurrency": "USD",
+      "description": "Full percentile breakdown across 4 cognitive categories"
+    },
+    {
+      "@type": "Offer",
+      "name": "Deep Report",
+      "price": "3.99",
+      "priceCurrency": "USD",
+      "description": "Full report plus historical figure match and reasoning analysis"
+    }
+  ],
+  "author": {
+    "@type": "Organization",
+    "name": "APEX Business Systems Ltd.",
+    "url": "https://apexbusiness.systems",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Edmonton",
+      "addressRegion": "AB",
+      "addressCountry": "CA"
+    }
+  },
+  "inLanguage": "en",
+  "isAccessibleForFree": true
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Quiz",
+  "name": "Free Cognitive Skills Quiz",
+  "url": "https://iq-test.icu/",
+  "educationalLevel": "general",
+  "about": {
+    "@type": "Thing",
+    "name": "Cognitive ability",
+    "sameAs": "https://en.wikipedia.org/wiki/Cognitive_ability"
+  },
+  "provider": {
+    "@type": "Organization",
+    "name": "APEX Business Systems Ltd."
+  }
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Free Cognitive Test",
+  "speakable": {
+    "@type": "SpeakableSpecification",
+    "cssSelector": [".info-block p", ".faq-content-inner"]
+  },
+  "url": "https://iq-test.icu/"
 }
 </script>
 <style>
@@ -1031,6 +1113,59 @@
     100% { transform: scale(2.5); opacity: 0; }
   }
 
+  /* Phase 5: CRO Additions */
+  .tier-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bg-dark);
+    background: var(--gold);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-left: 10px;
+    vertical-align: middle;
+    box-shadow: 0 0 8px var(--gold-glow);
+  }
+
+  .score-reveal-num {
+    display: inline-block;
+    transition: transform .15s ease;
+  }
+
+  .upsell-section {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .6s cubic-bezier(0.16,1,0.3,1), transform .6s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .upsell-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .score-flash {
+    animation: scoreFlash .35s ease forwards;
+  }
+
+  @keyframes scoreFlash {
+    0%   { text-shadow: 0 0 10px var(--gold-glow); }
+    50%  { text-shadow: 0 0 32px var(--gold), 0 0 60px var(--gold-glow); }
+    100% { text-shadow: 0 0 10px var(--gold-glow); }
+  }
+
+  .tease-icon {
+    font-size: 2rem;
+    animation: pulseIcon 2s ease-in-out infinite;
+  }
+
+  @keyframes pulseIcon {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     #splash { display: none; }
     .splash-line { animation: none !important; stroke-dashoffset: 0 !important; }
@@ -1039,6 +1174,42 @@
 </style>
 </head>
 <body>
+<noscript>
+  <main style="max-width:660px;margin:0 auto;padding:24px;font-family:sans-serif;">
+    <h1>Free Cognitive Test — Which Historical Figure Matches Your Score?</h1>
+    <p>Take our free 16-question cognitive skills test covering numeric reasoning,
+    verbal reasoning, logical deduction, and pattern recognition. Most people
+    finish in under 5 minutes. Your score is instant and free. Optionally unlock
+    a detailed report ($1.99–$3.99) revealing which historical figure — Einstein,
+    Newton, Da Vinci, or others — thinks most like you.</p>
+    <h2>How it works</h2>
+    <ol>
+      <li>Answer 16 questions across 4 cognitive categories</li>
+      <li>See your free cognitive index score and percentile instantly</li>
+      <li>Optionally pay $1.99 for a full report or $3.99 for a deep analysis
+      including your historical figure match</li>
+    </ol>
+    <h2>About the test</h2>
+    <p>IQ·Test is a self-insight quiz built by APEX Business Systems in Edmonton,
+    Alberta. It is not a clinical IQ test. For a validated assessment, consult a
+    licensed psychologist.</p>
+    <h2>Frequently Asked Questions</h2>
+    <dl>
+      <dt>Is this a real IQ test?</dt>
+      <dd>No. This is a cognitive skills quiz for personal reflection, not a
+      clinical assessment.</dd>
+      <dt>How is the score calculated?</dt>
+      <dd>Raw score across 16 questions maps to a cognitive index on the 85–145
+      scale using the standard mean-100/SD-15 framework.</dd>
+      <dt>What is the difference between the Basic and Detailed report?</dt>
+      <dd>Basic ($1.99) gives your full percentile breakdown. Detailed ($3.99)
+      adds a written reasoning analysis and your historical figure match.</dd>
+      <dt>What happens to my data?</dt>
+      <dd>Your answers and email (if purchasing) are never sold or shared.
+      Payment is processed by Stripe.</dd>
+    </dl>
+  </main>
+</noscript>
 <div class="bg-glow-1"></div>
 <div class="bg-glow-2"></div>
 
@@ -1189,66 +1360,69 @@
       </div>
 
       <div class="tease-box">
-        <span class="tease-label">YOUR HISTORICAL MATCH</span>
+        <div class="tease-icon">🔭</div>
+        <span class="tease-label">YOUR HISTORICAL MATCH IS LOCKED</span>
         <span class="tease-blur">████ ███████</span>
-        <span class="tease-cta">Get the full report to see who you think like</span>
+        <span class="tease-cta">Unlock the Deep Report to see which historical mind you think like</span>
       </div>
 
-      <div class="value-stack">
-        <div class="value-card">
-          <div class="value-title"><span>ðŸ”’</span> Your Full Score</div>
-          <div class="value-desc">The exact result across all 16 questions, not just a range.</div>
+      <div class="upsell-section" id="upsellSection">
+        <div class="value-stack">
+          <div class="value-card">
+            <div class="value-title"><span>📊</span> Category Percentiles</div>
+            <div class="value-desc">How your verbal, numeric, logical, and spatial scores compare, category by category.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-title"><span>🧠</span> Reasoning Style Analysis</div>
+            <div class="value-desc">A plain-language read on how you approach problems, based on your actual answers.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-title"><span>🏛️</span> Thematic Historical Match</div>
+            <div class="value-desc">Discover the scientist, philosopher, or inventor whose thinking pattern most closely mirrors yours.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-title"><span>📬</span> Delivered in &lt;60 Seconds</div>
+            <div class="value-desc">Your full report arrives by email the moment your payment processes.</div>
+          </div>
         </div>
-        <div class="value-card">
-          <div class="value-title"><span>ðŸ”’</span> Category Percentiles</div>
-          <div class="value-desc">How your verbal, numerical, logical, and spatial scores compare, category by category.</div>
-        </div>
-        <div class="value-card">
-          <div class="value-title"><span>ðŸ”’</span> Thematic Historical Match</div>
-          <div class="value-desc">Identify the scientist or philosopher who matches your reasoning patterns.</div>
-        </div>
-        <div class="value-card">
-          <div class="value-title"><span>ðŸ”’</span> Your Reasoning Style</div>
-          <div class="value-desc">A plain-language read on how you approach problems, based on your actual answers.</div>
-        </div>
-      </div>
 
-      <div class="receipt">
-        <h2 style="margin-bottom:8px;">Get the full report</h2>
-        <p class="lead" style="font-size:0.9rem; margin-bottom:20px; color:var(--text-secondary);">Your report arrives by email in under a minute.</p>
-        
-        <div class="tier-row">
-          <label class="tier-opt selected" id="tierBasicLabel">
-            <input type="radio" name="tier" value="basic" id="tierBasic" checked onchange="onTierChange()">
-            <div style="width:100%;">
-              <div class="tier-header-row">
-                <span class="tier-name">Score Report</span>
-                <span class="tier-price">$1.99</span>
+        <div class="receipt">
+          <h2 style="margin-bottom:8px;">Reveal your historical match</h2>
+          <p class="lead" style="font-size:0.9rem; margin-bottom:20px; color:var(--text-secondary);">Your report is generated and emailed in under 60 seconds.</p>
+          
+          <div class="tier-row">
+            <label class="tier-opt" id="tierBasicLabel">
+              <input type="radio" name="tier" value="basic" id="tierBasic" onchange="onTierChange()">
+              <div style="width:100%;">
+                <div class="tier-header-row">
+                  <span class="tier-name">Score Report</span>
+                  <span class="tier-price">$1.99</span>
+                </div>
+                <div class="tier-desc">Full score, percentile, and category breakdown. No historical match included.</div>
               </div>
-              <div class="tier-desc">Full score, percentile, and breakdown across all four question categories.</div>
-            </div>
-          </label>
-          <label class="tier-opt" id="tierDetailedLabel">
-            <input type="radio" name="tier" value="detailed" id="tierDetailed" onchange="onTierChange()">
-            <div style="width:100%;">
-              <div class="tier-header-row">
-                <span class="tier-name">Deep Report</span>
-                <span class="tier-price">$3.99</span>
+            </label>
+            <label class="tier-opt selected" id="tierDetailedLabel">
+              <input type="radio" name="tier" value="detailed" id="tierDetailed" checked onchange="onTierChange()">
+              <div style="width:100%;">
+                <div class="tier-header-row">
+                  <span class="tier-name">Deep Report <span class="tier-badge">Most Popular</span></span>
+                  <span class="tier-price">$3.99</span>
+                </div>
+                <div class="tier-desc">Everything in Score, plus your written reasoning analysis and the historical figure who thinks like you.</div>
               </div>
-              <div class="tier-desc">Everything in Score, plus a written analysis of how you reason and which historical mind most closely mirrors yours.</div>
-            </div>
+            </label>
+          </div>
+          
+          <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
+          <label style="display:flex; gap:10px; align-items:flex-start; font-size:0.82rem; color:var(--text-muted); margin-bottom:18px; cursor:pointer;">
+            <input type="checkbox" id="consentCheck" style="margin-top:3px; accent-color:var(--gold);">
+            <span>Send my report to this email. No newsletters, no marketing follow-ups.</span>
           </label>
+          
+          <div class="error-msg" id="checkoutError">Please enter a valid email and tick the checkbox above.</div>
+          <button class="btn btn-primary" style="width:100%;" onclick="startCheckout()" id="checkoutBtn">Reveal my historical match &mdash; $3.99</button>
+          <p class="disclaimer" style="font-size:0.72rem; text-align:center; margin-top:10px;">One-time payment. No subscription. Processed securely by Stripe.</p>
         </div>
-        
-        <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
-        <label style="display:flex; gap:10px; align-items:flex-start; font-size:0.82rem; color:var(--text-muted); margin-bottom:18px; cursor:pointer;">
-          <input type="checkbox" id="consentCheck" style="margin-top:3px; accent-color:var(--gold);">
-          <span>Send my report to this email. No newsletters, no marketing follow-ups.</span>
-        </label>
-        
-        <div class="error-msg" id="checkoutError">Please enter a valid email and tick the checkbox above.</div>
-        <button class="btn btn-primary" style="width:100%;" onclick="startCheckout()" id="checkoutBtn">Get my report &mdash; $1.99</button>
-        <p class="disclaimer" style="font-size:0.72rem; text-align:center; margin-top:10px;">Payment processed securely by Stripe. We never see your card details.</p>
       </div>
     </div>
   </section>
@@ -1264,8 +1438,14 @@
 
   <footer>
     <img src="/wordmark.webp" alt="IQ·Test" style="height:20px; width:auto; display:block; margin:0 auto 16px; opacity:0.7;" onerror="this.style.display='none'">
-    <div style="margin-bottom:10px;">
+    <div style="margin-bottom:15px; line-height: 1.8;">
       <a href="/about.html">About</a> &nbsp;&middot;&nbsp;
+      <a href="/methodology.html">Methodology</a> &nbsp;&middot;&nbsp;
+      <a href="/what-is-an-iq-test.html">What is an IQ Test?</a> &nbsp;&middot;&nbsp;
+      <a href="/free-iq-test-online.html">Free IQ Test Online</a> &nbsp;&middot;&nbsp;
+      <br>
+      <a href="/historical-figures-iq.html">Historical IQs</a> &nbsp;&middot;&nbsp;
+      <a href="/cognitive-test-vs-iq-test.html">Cognitive vs IQ Test</a> &nbsp;&middot;&nbsp;
       <a href="/support.html">Support</a> &nbsp;&middot;&nbsp;
       <a href="/privacy.html">Privacy</a> &nbsp;&middot;&nbsp;
       <a href="mailto:support@iq-test.icu">Contact</a>
@@ -1480,8 +1660,34 @@ function finishTest(){
   const pct = percentileFor(index);
   window.__result = {raw, index, percentile: pct, catScores, catMax, answers};
 
-  document.getElementById('indexReadout').textContent = index;
-  document.getElementById('percentileReadout').textContent = pct;
+  // Animated count-up for cognitive index (peak-end psychology)
+  const indexEl = document.getElementById('indexReadout');
+  const pctEl   = document.getElementById('percentileReadout');
+  const startVal = Math.max(85, index - 30);
+  const duration = 900;
+  const startTime = performance.now();
+  function countUp(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease-out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const displayVal = Math.round(startVal + (index - startVal) * eased);
+    indexEl.textContent = displayVal;
+    if (progress < 1) {
+      requestAnimationFrame(countUp);
+    } else {
+      indexEl.textContent = index;
+      indexEl.classList.add('score-flash');
+      setTimeout(() => indexEl.classList.remove('score-flash'), 400);
+      // Fade in upsell section after score lands
+      setTimeout(() => {
+        const upsell = document.getElementById('upsellSection');
+        if (upsell) upsell.classList.add('visible');
+      }, 350);
+    }
+  }
+  requestAnimationFrame(countUp);
+  pctEl.textContent = pct;
 
   const x = ((index-85)/60) * 400;
   const t = x/400;
@@ -1505,12 +1711,16 @@ function finishTest(){
 }
 
 const TIER_PRICE = {basic:'1.99', detailed:'3.99'};
+const TIER_CTA = {
+  basic:    'Get my score report \u2014 $1.99',
+  detailed: 'Reveal my historical match \u2014 $3.99'
+};
 
 function onTierChange(){
   const tier = document.querySelector('input[name="tier"]:checked').value;
   document.getElementById('tierBasicLabel').classList.toggle('selected', tier==='basic');
   document.getElementById('tierDetailedLabel').classList.toggle('selected', tier==='detailed');
-  document.getElementById('checkoutBtn').textContent = `Unlock my result — $${TIER_PRICE[tier]}`;
+  document.getElementById('checkoutBtn').textContent = TIER_CTA[tier];
 }
 
 async function startCheckout(){

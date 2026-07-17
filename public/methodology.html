@@ -99,9 +99,36 @@
     <li><strong>Pattern Recognition</strong>: Evaluates your speed at isolating visual consistency, sequential letter patterns, and spatial transformations.</li>
   </ul>
 
-  <h2>3. Scoring Mechanism & Reference Scale</h2>
-  <p>Each correct response scores 1 point, resulting in a raw score range from 0 to 16. This raw score is mapped to an overall <strong>Cognitive Index</strong> between 85 and 145. This mapping uses a standard normal distribution model (modeled on a mean of 100 and a standard deviation of 15) purely as a familiar and readable frame of reference. 
-  Our comparative percentile estimates are calculated internally against platform performance statistics and do not represent a standardized national norm sample.</p>
+  <h2>3. Scoring Mechanism & Reference Scale (How IQ is Calculated)</h2>
+  <p>To understand how a score is calculated on IQ·Test, it is helpful to look at how modern psychometric instruments compute intelligence scores. Historically, early tests calculated IQ using a simple ratio formula based on a subject's mental age relative to their chronological age. However, this ratio model had significant limitations (for example, mental age slows down in adulthood while chronological age continues to increase, causing scores to artificially drop with age).</p>
+  
+  <h3>The Deviation IQ Method</h3>
+  <p>Modern intelligence scales (including the Wechsler Adult Intelligence Scale and the Stanford-Binet) use the <strong>Deviation IQ method</strong>. This statistical approach calculates IQ by comparing an individual's raw performance score to the distribution of scores achieved by a representative peer group sample of their chronological age. This comparison is mapped onto a standard normal distribution (the bell curve).</p>
+  
+  <p>Under this statistical framework, the population average is set to exactly <strong>100</strong>, with the standard deviation (SD, denoted as &sigma;) set to <strong>15</strong>. The formula used to calculate a deviation IQ score is:</p>
+  <p style="font-family:monospace; text-align:center; color:var(--gold); margin: 24px 0;">IQ = 100 + 15 * Z</p>
+  
+  <p>Where <strong>Z</strong> represents the standard score or <i>Z-score</i>. The Z-score measures how many standard deviations an individual's raw score is away from the peer group mean. It is calculated using the formula:</p>
+  <p style="font-family:monospace; text-align:center; color:var(--gold); margin: 24px 0;">Z = (X - &mu;) / &sigma;</p>
+  
+  <p>Where:</p>
+  <ul>
+    <li><strong>X</strong>: The individual's raw score (on our quiz, the number of correct answers out of 16).</li>
+    <li><strong>&mu; (Mu)</strong>: The average raw score of the peer standardization sample.</li>
+    <li><strong>&sigma; (Sigma)</strong>: The standard deviation of the peer standardization sample's raw scores.</li>
+  </ul>
+
+  <h3>From Z-Scores to Percentiles</h3>
+  <p>Once the Z-score is computed, it can be mapped directly to a percentile rank. The percentile rank indicates the percentage of the population that scores at or below that particular score level. For example:</p>
+  <ul>
+    <li>A Z-score of <strong>0</strong> maps to an IQ of <strong>100</strong>, placing the individual in the <strong>50th percentile</strong> (exactly average).</li>
+    <li>A Z-score of <strong>+1.0</strong> maps to an IQ of <strong>115</strong>, placing them in approximately the <strong>84th percentile</strong>.</li>
+    <li>A Z-score of <strong>+2.0</strong> maps to an IQ of <strong>130</strong>, placing them in approximately the <strong>98th percentile</strong>.</li>
+    <li>A Z-score of <strong>-1.0</strong> maps to an IQ of <strong>85</strong>, placing them in approximately the <strong>16th percentile</strong>.</li>
+  </ul>
+
+  <h3>Platform Scaling & Standardization</h3>
+  <p>On IQ·Test, each correct response scores 1 point, resulting in a raw score range from 0 to 16. This raw score is mapped to an overall <strong>Cognitive Index</strong> between 85 and 145. This mapping uses the deviation IQ model calibrated against platform performance statistics. Because our user base is self-selected rather than a clinically controlled national norm sample, the comparative percentile estimates represent standing relative to other test-takers on this platform.</p>
 
   <h2>4. Caveats & Interpretation</h2>
   <p>Performance on online cognitive puzzles can fluctuate significantly based on multiple session-specific variables. These include:</p>
@@ -126,6 +153,11 @@
   <a href="/">Home</a>
   <a href="/about.html">About</a>
   <a href="/methodology.html">Methodology</a>
+  <a href="/what-is-an-iq-test.html">What is an IQ Test?</a>
+  <a href="/free-iq-test-online.html">Free IQ Test Online</a>
+  <br><br>
+  <a href="/historical-figures-iq.html">Historical IQs</a>
+  <a href="/cognitive-test-vs-iq-test.html">Cognitive vs IQ Test</a>
   <a href="/support.html">Support</a>
   <a href="/privacy.html">Privacy</a>
   <br><br>
