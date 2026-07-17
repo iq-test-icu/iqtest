@@ -11,8 +11,9 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://iq-test.icu/">
 <meta name="robots" content="index, follow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -59,10 +60,10 @@
 </script>
 <style>
   :root{
-    --room:#161412; --paper:#F3EEE2; --paper-2:#EAE3D2;
-    --ink:#262019; --text:#E9E3D6; --muted:#9C9384;
-    --line-dark:#3A342C; --line-paper:#D9D0BC;
-    --pen:#B3221F; --pen-dim:#3A1210; --pencil:#8B8175;
+    --room:#12100D; --paper:#F1E6C9; --paper-2:#E8D9AE;
+    --ink:#241C10; --text:#EDE3CB; --muted:#9C9078;
+    --line-dark:#3D3423; --line-paper:#D8C79A;
+    --pen:#9C3B2C; --pen-dim:#3A1710; --pencil:#8B8175; --gold:#C9A24B;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{
@@ -92,7 +93,7 @@
     background:var(--line-paper);
   }
   .eyebrow{font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.12em; color:var(--pen); font-weight:700; text-transform:uppercase; margin-bottom:10px;}
-  h1{font-family:'Space Grotesk',sans-serif; font-size:2rem; line-height:1.15; font-weight:700; letter-spacing:-0.01em; margin-bottom:12px;}
+  h1{font-family:'Fraunces',serif; font-size:2.15rem; line-height:1.15; font-weight:600; letter-spacing:-0.01em; margin-bottom:12px;}
   p.lead{color:#544B3D; font-size:0.98rem; line-height:1.55;}
   .chip-row{display:flex; gap:10px; margin:20px 0; flex-wrap:wrap;}
   .chip{font-family:'JetBrains Mono',monospace; font-size:0.75rem; border:1px solid var(--line-paper); border-radius:100px; padding:5px 12px; color:#544B3D;}
@@ -142,13 +143,13 @@
   .ledger-score{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:0.95rem;}
   .ledger-score .of{color:var(--muted); font-weight:500; font-size:0.8rem;}
 
-  .tease-box{display:flex; flex-direction:column; align-items:center; gap:4px; text-align:center; background:#EAE3D2; border-radius:3px; padding:16px; margin:6px 0 0; border:1px dashed var(--pen);}
-  .tease-label{font-family:'JetBrains Mono',monospace; font-size:0.68rem; letter-spacing:0.1em; color:var(--pen); font-weight:700;}
-  .tease-blur{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.1rem; color:var(--ink); filter:blur(4px); user-select:none;}
+  .tease-box{display:flex; flex-direction:column; align-items:center; gap:4px; text-align:center; background:#E8D9AE; border-radius:3px; padding:16px; margin:6px 0 0; border:1px solid var(--gold);}
+  .tease-label{font-family:'JetBrains Mono',monospace; font-size:0.68rem; letter-spacing:0.1em; color:#7A5F1E; font-weight:700;}
+  .tease-blur{font-family:'Fraunces',serif; font-weight:600; font-size:1.15rem; color:var(--ink); filter:blur(4px); user-select:none;}
   .tease-cta{font-size:0.78rem; color:#7A6F5C;}
   .tier-row{display:flex; flex-direction:column; gap:10px; margin:16px 0;}
   .tier-opt{display:flex; gap:10px; align-items:flex-start; border:1px solid var(--line-dark); border-radius:6px; padding:12px 14px; cursor:pointer; transition:border-color .15s ease;}
-  .tier-opt.selected{border-color:var(--pen);}
+  .tier-opt.selected{border-color:var(--gold);}
   .tier-opt input{margin-top:3px;}
   .tier-name{font-weight:600; font-size:0.95rem;}
   .tier-price{color:var(--pen); font-family:'JetBrains Mono',monospace; margin-left:6px;}
@@ -177,10 +178,39 @@
 
   footer{color:var(--muted); font-size:0.78rem; padding:32px 0 12px; text-align:center;}
   footer a{color:var(--muted);}
+
+  #splash{position:fixed; inset:0; background:var(--room); z-index:100; display:flex; align-items:center; justify-content:center; transition:opacity .6s ease, visibility .6s ease;}
+  #splash.gone{opacity:0; visibility:hidden; pointer-events:none;}
+  #splash svg{width:92px; height:92px;}
+  #splash .splash-line{stroke-dasharray:40; stroke-dashoffset:40; animation:drawline 1.1s ease forwards;}
+  #splash .splash-line:nth-child(3){animation-delay:.05s;}
+  #splash .splash-line:nth-child(4){animation-delay:.15s;}
+  #splash .splash-line:nth-child(5){animation-delay:.25s;}
+  #splash .splash-line:nth-child(6){animation-delay:.35s;}
+  @keyframes drawline{ to{stroke-dashoffset:0;} }
+
+  .constellation{position:absolute; top:-30px; right:-40px; width:180px; height:180px; opacity:0.35; pointer-events:none;}
+  .booklet{position:relative; overflow:visible;}
+
+  @media (prefers-reduced-motion: reduce){ #splash{display:none;} .splash-line{animation:none !important; stroke-dashoffset:0 !important;} }
   @media (prefers-reduced-motion: reduce){ *{animation-duration:0.01ms !important;} }
 </style>
 </head>
 <body>
+<div id="splash" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#C9A24B" stroke-width="1.2" class="splash-line"/>
+    <line x1="50" y1="50" x2="27" y2="27" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
+    <line x1="50" y1="50" x2="73" y2="27" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
+    <line x1="50" y1="50" x2="27" y2="73" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
+    <line x1="50" y1="50" x2="79" y2="21" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
+    <circle cx="27" cy="27" r="3.2" fill="#C9A24B"/>
+    <circle cx="73" cy="27" r="3.2" fill="#C9A24B"/>
+    <circle cx="27" cy="73" r="3.2" fill="#C9A24B"/>
+    <circle cx="79" cy="21" r="3.8" fill="#EDE3CB"/>
+    <circle cx="50" cy="50" r="5.5" fill="#EDE3CB"/>
+  </svg>
+</div>
 <div class="wrap">
   <header>
     <div class="logo">IQ<span class="dot">·</span>TEST</div>
@@ -189,6 +219,16 @@
 
   <section class="screen active" id="screen-hero">
     <div class="booklet">
+      <svg class="constellation" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="#C9A24B" stroke-width="1"/>
+        <line x1="50" y1="50" x2="27" y2="27" stroke="#C9A24B" stroke-width="1"/>
+        <line x1="50" y1="50" x2="73" y2="27" stroke="#C9A24B" stroke-width="1"/>
+        <line x1="50" y1="50" x2="27" y2="73" stroke="#C9A24B" stroke-width="1"/>
+        <line x1="50" y1="50" x2="79" y2="21" stroke="#C9A24B" stroke-width="1"/>
+        <circle cx="27" cy="27" r="3" fill="#C9A24B"/><circle cx="73" cy="27" r="3" fill="#C9A24B"/>
+        <circle cx="27" cy="73" r="3" fill="#C9A24B"/><circle cx="79" cy="21" r="3.5" fill="#C9A24B"/>
+        <circle cx="50" cy="50" r="5" fill="#C9A24B"/>
+      </svg>
       <h1>Which mind matches yours?</h1>
       <p class="lead">16 questions, four categories, about five minutes. Your free score lands instantly — your full result, including the historical figure who scored exactly where you do, is one tap past that.</p>
       <div class="chip-row">
@@ -294,6 +334,11 @@
 
 <script>
 const API_BASE = ""; // same-origin — Worker is routed at iq-test.icu/api/*
+
+const splashEl = document.getElementById('splash');
+function dismissSplash(){ splashEl.classList.add('gone'); }
+setTimeout(dismissSplash, 1400);
+splashEl.addEventListener('click', dismissSplash);
 
 const QUESTIONS = [
   {cat:"NUMERIC", text:"2, 6, 12, 20, 30, ?", opts:["36","40","42","44"], correct:2},

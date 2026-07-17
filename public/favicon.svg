@@ -1,0 +1,13 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IQ Test emblem">
+  <circle cx="50" cy="50" r="48" fill="#12100D"/>
+  <circle cx="50" cy="50" r="40" fill="none" stroke="#C9A24B" stroke-width="1.2"/>
+  <line x1="50" y1="50" x2="27" y2="27" stroke="#C9A24B" stroke-width="1.4"/>
+  <line x1="50" y1="50" x2="73" y2="27" stroke="#C9A24B" stroke-width="1.4"/>
+  <line x1="50" y1="50" x2="27" y2="73" stroke="#C9A24B" stroke-width="1.4"/>
+  <line x1="50" y1="50" x2="79" y2="21" stroke="#C9A24B" stroke-width="1.4"/>
+  <circle cx="27" cy="27" r="3.2" fill="#C9A24B"/>
+  <circle cx="73" cy="27" r="3.2" fill="#C9A24B"/>
+  <circle cx="27" cy="73" r="3.2" fill="#C9A24B"/>
+  <circle cx="79" cy="21" r="3.8" fill="#EDE3CB"/>
+  <circle cx="50" cy="50" r="5.5" fill="#EDE3CB"/>
+</svg>
