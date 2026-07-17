@@ -19,23 +19,7 @@
 <link rel="icon" type="image/png" href="/favicon.png">
 <link rel="apple-touch-icon" href="/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "IQ·Test — The Answer Sheet",
-  "url": "https://iq-test.icu/",
-  "applicationCategory": "Quiz",
-  "description": "A 16-item cognitive skills self-assessment covering pattern recognition, logic, verbal reasoning, and numeric reasoning, with a free instant score and an optional full written report.",
-  "offers": {
-    "@type": "Offer",
-    "price": "1.99",
-    "priceCurrency": "USD",
-    "description": "Basic Result — full 4-category percentile breakdown"
-  }
-}
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -65,144 +49,973 @@
 }
 </script>
 <style>
-  :root{
-    --room:#12100D; --paper:#F1E6C9; --paper-2:#E8D9AE;
-    --ink:#241C10; --text:#EDE3CB; --muted:#9C9078;
-    --line-dark:#3D3423; --line-paper:#D8C79A;
-    --pen:#9C3B2C; --pen-dim:#3A1710; --pencil:#8B8175; --gold:#C9A24B;
+  :root {
+    --bg-dark: oklch(0.06 0.002 95);
+    --bg-card: oklch(0.10 0.006 95 / 0.85);
+    --bg-card-hover: oklch(0.13 0.009 95 / 0.95);
+    --border-color: oklch(0.18 0.008 95 / 0.7);
+    --border-gold: oklch(0.72 0.11 95 / 0.16);
+    --border-gold-hover: oklch(0.72 0.11 95 / 0.5);
+    
+    --text-primary: oklch(0.97 0.002 95);
+    --text-secondary: oklch(0.85 0.005 95);
+    --text-muted: oklch(0.62 0.008 95);
+    
+    --gold: oklch(0.72 0.12 95);
+    --gold-glow: oklch(0.72 0.12 95 / 0.15);
+    --red: oklch(0.52 0.17 28);
+    --red-hover: oklch(0.58 0.19 28);
+    --red-glow: oklch(0.52 0.17 28 / 0.3);
+    
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-display: 'Outfit', sans-serif;
+    --font-serif: 'Fraunces', serif;
+    --font-body: 'Outfit', sans-serif;
   }
-  *{box-sizing:border-box; margin:0; padding:0;}
-  body{
-    background:var(--room); color:var(--text);
-    font-family:'Inter',sans-serif; min-height:100vh;
-    display:flex; flex-direction:column; align-items:center;
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
   }
-  .mono{font-family:'JetBrains Mono',monospace;}
-  .display{font-family:'Space Grotesk',sans-serif;}
-  .wrap{width:100%; max-width:680px; padding:24px; flex:1; display:flex; flex-direction:column;}
-  header{display:flex; justify-content:space-between; align-items:center; padding:16px 0 28px;}
-  .logo{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.05rem; letter-spacing:0.01em;}
-  .logo .dot{color:var(--pen);}
-  .serial{font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--muted); letter-spacing:0.05em;}
-
-  .screen{display:none; flex-direction:column; gap:0; animation:fade .35s ease;}
-  .screen.active{display:flex;}
-  @keyframes fade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
-
-  .booklet{
-    background:var(--paper); color:var(--ink); border-radius:3px;
-    padding:34px 30px; box-shadow:0 30px 60px -20px rgba(0,0,0,0.55);
-    position:relative;
+  
+  /* Modern ambient background glows (Linear/Resend aesthetic) */
+  body::before {
+    content: "";
+    position: absolute;
+    top: -150px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 450px;
+    background: radial-gradient(ellipse at 50% 0%, var(--gold-glow) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
   }
-  .booklet:before{
-    content:""; position:absolute; top:0; left:22px; right:22px; height:1px;
-    background:var(--line-paper);
+  
+  .bg-glow-1 {
+    position: absolute;
+    top: 280px; left: -120px;
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, oklch(0.72 0.12 95 / 0.045) 0%, transparent 70%);
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
   }
-  .eyebrow{font-family:'JetBrains Mono',monospace; font-size:0.72rem; letter-spacing:0.12em; color:var(--pen); font-weight:700; text-transform:uppercase; margin-bottom:10px;}
-  h1{font-family:'Fraunces',serif; font-size:2.15rem; line-height:1.15; font-weight:600; letter-spacing:-0.01em; margin-bottom:12px;}
-  p.lead{color:#544B3D; font-size:0.98rem; line-height:1.55;}
-  .chip-row{display:flex; gap:10px; margin:20px 0; flex-wrap:wrap;}
-  .chip{font-family:'JetBrains Mono',monospace; font-size:0.75rem; border:1px solid var(--line-paper); border-radius:100px; padding:5px 12px; color:#544B3D;}
-  .chip b{color:var(--ink);}
 
-  .btn{
-    font-family:'Inter',sans-serif; font-weight:600; font-size:0.95rem;
-    padding:14px 22px; border-radius:4px; border:none; cursor:pointer;
-    transition:transform .12s ease, opacity .12s ease; display:inline-block;
+  .bg-glow-2 {
+    position: absolute;
+    top: 700px; right: -180px;
+    width: 450px; height: 450px;
+    background: radial-gradient(circle, oklch(0.52 0.17 28 / 0.035) 0%, transparent 70%);
+    filter: blur(110px);
+    pointer-events: none;
+    z-index: 0;
   }
-  .btn:active{transform:scale(0.98);}
-  .btn-primary{background:var(--pen); color:#FBEDE9;}
-  .btn-primary:hover{opacity:0.92;}
-  .disclaimer{color:var(--muted); font-size:0.76rem; line-height:1.5; margin-top:18px;}
-  .disclaimer.on-paper{color:#8A8069;}
-
-  .test-meta{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px; padding:0 2px;}
-  .q-counter{font-family:'JetBrains Mono',monospace; color:var(--muted); font-size:0.8rem;}
-  .progress-track{height:3px; background:var(--line-dark); border-radius:2px; overflow:hidden; margin-bottom:18px;}
-  .progress-fill{height:100%; background:var(--pen); width:0%; transition:width .3s ease;}
-  .q-text{font-size:1.2rem; font-weight:600; line-height:1.4; margin-bottom:22px; font-family:'Space Grotesk',sans-serif;}
-  .options{display:flex; flex-direction:column; gap:11px;}
-  .opt{
-    display:flex; align-items:center; gap:14px; text-align:left; background:transparent;
-    border:1px solid var(--line-paper); color:var(--ink); padding:13px 16px; border-radius:4px;
-    cursor:pointer; font-size:0.96rem; font-family:'Inter',sans-serif;
-    transition:border-color .15s ease, background .15s ease;
+  
+  /* === UNIFIED GENIUS MURAL === */
+  .mural-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
   }
-  .opt:hover{border-color:var(--pen);}
-  .opt.selected{border-color:var(--pen); background:#FBEDE9;}
-  .bubble{
-    width:22px; height:22px; border-radius:50%; border:2px solid var(--pencil);
-    flex-shrink:0; position:relative;
+
+  .mural-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    /* Partially desaturate — let a hint of warm tone survive */
+    filter: grayscale(80%) contrast(1.1) brightness(0.85);
+    /*
+      soft-light on a dark background: lifts midtones and face highlights
+      into visibility while keeping the mural clearly subordinate.
+      No visible image rectangle — dark page background absorbs dark mural pixels.
+    */
+    mix-blend-mode: soft-light;
+    opacity: 0.55;
+    user-select: none;
+    -webkit-user-drag: none;
   }
-  .opt.selected .bubble{border-color:var(--pen);}
-  .opt.selected .bubble:after{
-    content:""; position:absolute; inset:3px; border-radius:50%; background:var(--pen);
+
+  /*
+    Two-layer vignette strategy:
+    1. Strong edge crush (box-shadow) — eliminates any hard image border
+    2. Soft centre fade — dims the mural behind the content card only,
+       keeping the outer figures bright enough to be seen
+  */
+  .mural-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 55% 50% at 50% 42%,
+      rgba(9,8,6,0.72) 0%,
+      rgba(9,8,6,0.45) 35%,
+      transparent 70%
+    );
+    box-shadow: inset 0 0 200px 100px var(--bg-dark);
   }
-  .opt-letter{font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--pencil); position:absolute; top:2px; left:6.5px;}
 
-  .curve-wrap{margin:8px 0 6px;}
-  .curve-caption{text-align:center; font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:#544B3D; margin-top:6px;}
-  .curve-caption b{color:var(--pen); font-size:1.05rem;}
-  .ledger{margin:22px 0; border-top:1px solid var(--line-paper);}
-  .ledger-row{display:flex; justify-content:space-between; align-items:center; padding:11px 2px; border-bottom:1px solid var(--line-paper);}
-  .ledger-cat{font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:#544B3D; letter-spacing:0.03em;}
-  .ledger-score{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:0.95rem;}
-  .ledger-score .of{color:var(--muted); font-weight:500; font-size:0.8rem;}
-
-  .tease-box{display:flex; flex-direction:column; align-items:center; gap:4px; text-align:center; background:#E8D9AE; border-radius:3px; padding:16px; margin:6px 0 0; border:1px solid var(--gold);}
-  .tease-label{font-family:'JetBrains Mono',monospace; font-size:0.68rem; letter-spacing:0.1em; color:#7A5F1E; font-weight:700;}
-  .tease-blur{font-family:'Fraunces',serif; font-weight:600; font-size:1.15rem; color:var(--ink); filter:blur(4px); user-select:none;}
-  .tease-cta{font-size:0.78rem; color:#7A6F5C;}
-  .tier-row{display:flex; flex-direction:column; gap:10px; margin:16px 0;}
-  .tier-opt{display:flex; gap:10px; align-items:flex-start; border:1px solid var(--line-dark); border-radius:6px; padding:12px 14px; cursor:pointer; transition:border-color .15s ease;}
-  .tier-opt.selected{border-color:var(--gold);}
-  .tier-opt input{margin-top:3px;}
-  .tier-name{font-weight:600; font-size:0.95rem;}
-  .tier-price{color:var(--pen); font-family:'JetBrains Mono',monospace; margin-left:6px;}
-  .tier-desc{color:var(--muted); font-size:0.82rem; margin-top:2px;}
-  .receipt{background:var(--room); color:var(--text); border-radius:3px; padding:26px 28px; margin-top:22px; border:1px dashed var(--line-dark);}
-  .receipt h2{font-family:'Space Grotesk',sans-serif; font-size:1.2rem; margin-bottom:8px;}
-  .receipt p.lead{color:var(--muted);}
-  .price-row{display:flex; align-items:baseline; gap:8px; margin:14px 0;}
-  .price{font-family:'JetBrains Mono',monospace; font-size:1.7rem; font-weight:700; color:var(--text);}
-  .price-note{color:var(--muted); font-size:0.85rem;}
-  ul.includes{list-style:none; display:flex; flex-direction:column; gap:7px; margin:16px 0; color:var(--muted); font-size:0.88rem;}
-  ul.includes li:before{content:"— "; color:var(--pen);}
-  input[type=email]{
-    width:100%; background:#211E1A; border:1px solid var(--line-dark); color:var(--text);
-    padding:13px 14px; border-radius:4px; font-size:0.95rem; font-family:'Inter',sans-serif; margin-bottom:12px;
+  @media (max-width: 900px) {
+    .mural-bg { opacity: 0.35; }
   }
-  input[type=email]:focus{outline:2px solid var(--pen); outline-offset:1px;}
-  .error-msg{color:#F0908C; font-size:0.85rem; display:none; margin-bottom:10px;}
 
-  .info-block{margin-top:56px; padding-top:8px;}
-  .info-block h2{font-family:'Space Grotesk',sans-serif; font-size:1.3rem; margin-bottom:10px; color:var(--text);}
-  .info-block p{color:var(--muted); font-size:0.92rem; line-height:1.6; margin-bottom:14px;}
-  .faq-item{margin-bottom:18px;}
-  .faq-item h3{font-family:'Inter',sans-serif; font-size:0.98rem; font-weight:600; color:var(--text); margin-bottom:5px;}
-  .faq-item p{color:var(--muted); font-size:0.9rem; line-height:1.55; margin:0;}
+  @media (max-width: 600px) {
+    .mural-container { display: none; }
+  }
+  
+  .wrap {
+    width: 100%;
+    max-width: 660px;
+    padding: 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0 28px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 32px;
+  }
+  
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .logo-img {
+    height: 32px;
+    width: auto;
+    filter: drop-shadow(0 0 12px var(--gold-glow));
+  }
+  
+  .logo-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    color: var(--text-primary);
+  }
+  
+  .logo-text span {
+    color: var(--gold);
+    text-shadow: 0 0 10px var(--gold-glow);
+  }
+  
+  .serial {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.01);
+  }
+  
+  .screen {
+    display: none;
+    flex-direction: column;
+    animation: slideUp .45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  
+  .screen.active {
+    display: flex;
+  }
+  
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); filter: blur(4px); }
+    to { opacity: 1; transform: translateY(0); filter: none; }
+  }
+  
+  /* Premium Glassmorphic Cards */
+  .app-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 48px 36px;
+    box-shadow: 
+      0 40px 80px -20px rgba(0,0,0,0.85),
+      inset 0 1px 0 rgba(255,255,255,0.03);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .app-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--border-gold-hover), transparent);
+  }
+  
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    text-align: center;
+    text-shadow: 0 0 12px var(--gold-glow);
+  }
+  
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.85rem;
+    line-height: 1.15;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+  }
+  
+  .lead {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.68;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+  
+  .chip-row {
+    display: flex;
+    gap: 12px;
+    margin: 28px 0 36px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    padding: 6px 16px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  }
+  
+  .chip b {
+    color: var(--gold);
+  }
+  
+  .btn {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 16px 36px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-primary {
+    background: var(--red);
+    color: oklch(0.98 0.005 95);
+    border: 1px solid oklch(0.6 0.17 28);
+    box-shadow: 
+      0 4px 20px var(--red-glow),
+      inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+  
+  .btn-primary:hover {
+    background: var(--red-hover);
+    box-shadow: 
+      0 6px 30px oklch(0.58 0.19 28 / 0.5),
+      inset 0 1px 0 rgba(255,255,255,0.25);
+    transform: translateY(-2px);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+  
+  .disclaimer {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin-top: 24px;
+  }
+  
+  /* Orbital Medallion Component */
+  .hero-visual-container {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0 36px;
+    position: relative;
+    height: 160px;
+  }
+  
+  .orbital-ring {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border: 1px dashed var(--border-gold);
+    border-radius: 50%;
+    animation: rotateRing 60s linear infinite;
+  }
+  
+  .orbital-ring-inner {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+  }
 
-  footer{color:var(--muted); font-size:0.78rem; padding:32px 0 12px; text-align:center;}
-  footer a{color:var(--muted);}
+  .orbital-dot {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    top: 0; left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px var(--gold);
+  }
+  
+  @keyframes rotateRing {
+    to { transform: rotate(360deg); }
+  }
+  
+  .brand-logo-medallion {
+    width: 76px;
+    height: 76px;
+    border-radius: 24px; /* +30% Squircle corner styling */
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 
+      0 0 35px var(--gold-glow),
+      inset 0 1px 0 rgba(255,255,255,0.15);
+    border: 1.5px solid var(--gold);
+    background: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
 
-  #splash{position:fixed; inset:0; background:var(--room); z-index:100; display:flex; align-items:center; justify-content:center; transition:opacity .6s ease, visibility .6s ease;}
-  #splash.gone{opacity:0; visibility:hidden; pointer-events:none;}
-  #splash svg{width:92px; height:92px;}
-  #splash .splash-line{stroke-dasharray:40; stroke-dashoffset:40; animation:drawline 1.1s ease forwards;}
-  #splash .splash-line:nth-child(3){animation-delay:.05s;}
-  #splash .splash-line:nth-child(4){animation-delay:.15s;}
-  #splash .splash-line:nth-child(5){animation-delay:.25s;}
-  #splash .splash-line:nth-child(6){animation-delay:.35s;}
-  @keyframes drawline{ to{stroke-dashoffset:0;} }
+  .brand-logo-medallion:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  
+  .brand-logo-medallion img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+  
+  /* Quiz Cards */
+  .test-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .q-counter {
+    font-family: var(--font-mono);
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+  
+  .progress-track {
+    height: 4px;
+    background: var(--border-color);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.5);
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--red), var(--gold));
+    width: 0%;
+    transition: width .35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 8px var(--red);
+  }
+  
+  .q-text {
+    font-size: 1.45rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 32px;
+    font-family: var(--font-display);
+    color: var(--text-primary);
+  }
+  
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  
+  .opt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    background: rgba(255,255,255,0.015);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 18px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.01);
+  }
+  
+  .opt:hover {
+    border-color: var(--border-gold-hover);
+    background: rgba(255,255,255,0.03);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: 
+      0 10px 20px rgba(0,0,0,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  
+  .opt.selected {
+    border-color: var(--gold);
+    background: var(--gold-glow);
+    color: var(--text-primary);
+    box-shadow: 
+      0 0 20px var(--gold-glow),
+      inset 0 1px 0 rgba(201, 162, 75, 0.1);
+  }
+  
+  .opt-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .bubble {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid var(--text-muted);
+    flex-shrink: 0;
+    position: relative;
+    transition: all .25s ease;
+  }
+  
+  .opt.selected .bubble {
+    border-color: var(--gold);
+    background: var(--gold);
+  }
+  
+  .opt.selected .bubble:after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border-radius: 50%;
+    background: var(--bg-dark);
+  }
+  
+  .key-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    background: rgba(255,255,255,0.04);
+    color: var(--text-muted);
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    font-weight: 700;
+  }
+  
+  /* Result Section & Dynamic Radar */
+  .result-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    margin: 24px 0;
+  }
+  
+  @media(min-width: 600px) {
+    .result-grid { grid-template-columns: 1.15fr 0.85fr; }
+  }
+  
+  .radar-container {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+  }
+  
+  .bell-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .curve-wrap {
+    width: 100%;
+    margin-top: 12px;
+  }
+  
+  .curve-caption {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 14px;
+  }
+  
+  .curve-caption b {
+    color: var(--gold);
+    font-size: 1.25rem;
+    text-shadow: 0 0 10px var(--gold-glow);
+  }
+  
+  .ledger {
+    margin-top: 24px;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .ledger-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .ledger-cat {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+  }
+  
+  .ledger-score {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  
+  .ledger-score .of {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.85rem;
+  }
+  
+  /* Bento Grid / Lock Cards */
+  .value-stack {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 36px 0 24px;
+  }
+  
+  @media(min-width: 500px) {
+    .value-stack { grid-template-columns: 1fr 1fr; }
+  }
+  
+  .value-card {
+    background: rgba(255,255,255,0.015);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.01);
+  }
+  
+  .value-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .value-title span {
+    color: var(--gold);
+  }
+  
+  .value-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+  
+  .tease-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    background: rgba(201, 162, 75, 0.04);
+    border-radius: 12px;
+    padding: 28px 24px;
+    margin: 32px 0 0;
+    border: 1px dashed var(--gold);
+    box-shadow: inset 0 0 15px var(--gold-glow);
+  }
+  
+  .tease-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  
+  .tease-blur {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    filter: blur(7px);
+    user-select: none;
+    letter-spacing: 0.15em;
+  }
+  
+  .tease-cta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  
+  /* Checkout Area */
+  .receipt {
+    background: rgba(0,0,0,0.25);
+    border-radius: 12px;
+    padding: 40px 32px;
+    margin-top: 40px;
+    border: 1px solid var(--border-color);
+  }
+  
+  .receipt h2 {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  
+  .tier-row {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 24px 0;
+  }
+  
+  .tier-opt {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all .25s ease;
+    background: rgba(255,255,255,0.01);
+  }
+  
+  .tier-opt:hover {
+    border-color: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.02);
+  }
+  
+  .tier-opt.selected {
+    border-color: var(--gold);
+    background: var(--gold-glow);
+    box-shadow: 0 0 15px var(--gold-glow);
+  }
+  
+  .tier-opt input {
+    margin-top: 4px;
+    accent-color: var(--gold);
+  }
+  
+  .tier-header-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: baseline;
+  }
+  
+  .tier-name {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+  }
+  
+  .tier-price {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  
+  .tier-desc {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 6px;
+    line-height: 1.45;
+  }
+  
+  input[type=email] {
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 18px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    margin-bottom: 20px;
+    transition: all .25s ease;
+  }
+  
+  input[type=email]:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 12px var(--gold-glow);
+  }
+  
+  .error-msg {
+    color: #F0908C;
+    font-size: 0.85rem;
+    display: none;
+    margin-bottom: 18px;
+    font-family: var(--font-mono);
+  }
+  
+  /* Interactive Accordion FAQs */
+  .info-block {
+    margin-top: 80px;
+    padding-top: 24px;
+  }
+  
+  .info-block h2 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+    border-left: 3px solid var(--gold);
+    padding-left: 14px;
+  }
+  
+  .info-block p {
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all .25s ease;
+  }
+  
+  .faq-item:hover {
+    border-color: rgba(255,255,255,0.12);
+  }
+  
+  .faq-trigger {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    text-align: left;
+    padding: 22px 28px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-body);
+  }
+  
+  .faq-icon {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    transition: transform .25s ease;
+  }
+  
+  .faq-item.open .faq-icon {
+    transform: rotate(45deg);
+    color: var(--gold);
+  }
+  
+  .faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s cubic-bezier(0.16, 1, 0.3, 1);
+    background: rgba(0,0,0,0.15);
+  }
+  
+  .faq-content-inner {
+    padding: 0 28px 24px;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+  
+  footer {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    padding: 60px 0 32px;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    margin-top: 64px;
+  }
+  
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color .2s ease;
+  }
+  
+  footer a:hover {
+    color: var(--gold);
+  }
+  
+  /* Splash Loading Screen */
+  #splash {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-dark);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .6s ease, visibility .6s ease;
+  }
+  
+  #splash.gone {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  
+  #splash svg {
+    width: 100px;
+    height: 100px;
+  }
+  
+  #splash .splash-line {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: drawline 1.2s ease forwards;
+  }
+  
+  #splash .splash-line:nth-child(3) { animation-delay: .05s; }
+  #splash .splash-line:nth-child(4) { animation-delay: .15s; }
+  #splash .splash-line:nth-child(5) { animation-delay: .25s; }
+  #splash .splash-line:nth-child(6) { animation-delay: .35s; }
+  
+  @keyframes drawline { to { stroke-dashoffset: 0; } }
+  
+  /* Live traffic badge */
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(217, 65, 65, 0.08);
+    color: #F0908C;
+    border: 1px solid rgba(217, 65, 65, 0.15);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+  
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    background: #D94141;
+    border-radius: 50%;
+    position: relative;
+  }
+  
+  .live-dot::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid #D94141;
+    animation: pulseBadge 1.8s infinite;
+  }
+  
+  @keyframes pulseBadge {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
 
-  .constellation{position:absolute; top:-30px; right:-40px; width:180px; height:180px; opacity:0.35; pointer-events:none;}
-  .booklet{position:relative; overflow:visible;}
-
-  @media (prefers-reduced-motion: reduce){ #splash{display:none;} .splash-line{animation:none !important; stroke-dashoffset:0 !important;} }
-  @media (prefers-reduced-motion: reduce){ *{animation-duration:0.01ms !important;} }
+  @media (prefers-reduced-motion: reduce) {
+    #splash { display: none; }
+    .splash-line { animation: none !important; stroke-dashoffset: 0 !important; }
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
 </style>
 </head>
 <body>
+<div class="bg-glow-1"></div>
+<div class="bg-glow-2"></div>
+
+<!-- Unified genius mural — single panoramic oil painting, four figures, one scene -->
+<div class="mural-container" aria-hidden="true">
+  <img src="mural_bg.png" class="mural-bg" alt="" draggable="false">
+  <div class="mural-vignette"></div>
+</div>
+
 <div id="splash" aria-hidden="true">
   <svg viewBox="0 0 100 100">
     <circle cx="50" cy="50" r="40" fill="none" stroke="#C9A24B" stroke-width="1.2" class="splash-line"/>
@@ -219,94 +1032,150 @@
 </div>
 <div class="wrap">
   <header>
-    <div class="logo">IQ<span class="dot">·</span>TEST</div>
+    <div class="logo-wrap">
+      <img src="icon.png" class="logo-img" alt="IQ·Test Gold Medallion Logo" onerror="this.style.display='none'">
+      <div class="logo-text">IQ<span>·</span>TEST</div>
+    </div>
     <div class="serial" id="serialTag">COMPARED AGAINST: DA VINCI · CURIE · TESLA</div>
   </header>
 
   <section class="screen active" id="screen-hero">
-    <div class="booklet">
-      <svg class="constellation" viewBox="0 0 100 100" aria-hidden="true">
-        <circle cx="50" cy="50" r="40" fill="none" stroke="#C9A24B" stroke-width="1"/>
-        <line x1="50" y1="50" x2="27" y2="27" stroke="#C9A24B" stroke-width="1"/>
-        <line x1="50" y1="50" x2="73" y2="27" stroke="#C9A24B" stroke-width="1"/>
-        <line x1="50" y1="50" x2="27" y2="73" stroke="#C9A24B" stroke-width="1"/>
-        <line x1="50" y1="50" x2="79" y2="21" stroke="#C9A24B" stroke-width="1"/>
-        <circle cx="27" cy="27" r="3" fill="#C9A24B"/><circle cx="73" cy="27" r="3" fill="#C9A24B"/>
-        <circle cx="27" cy="73" r="3" fill="#C9A24B"/><circle cx="79" cy="21" r="3.5" fill="#C9A24B"/>
-        <circle cx="50" cy="50" r="5" fill="#C9A24B"/>
-      </svg>
-      <h1>Which mind matches yours?</h1>
-      <p class="lead">16 questions, four categories, about five minutes. Your free score lands instantly — your full result, including the historical figure who scored exactly where you do, is one tap past that.</p>
-      <div class="chip-row">
-        <span class="chip"><b>16</b> items</span>
-        <span class="chip"><b>4</b> categories</span>
-        <span class="chip"><b>~5</b> min</span>
+    <div class="app-card">
+      <div class="hero-visual-container">
+        <div class="orbital-ring">
+          <div class="orbital-dot"></div>
+        </div>
+        <div class="orbital-ring-inner"></div>
+        <div class="brand-logo-medallion">
+          <img src="icon.png" alt="Gold Medallion Centerpiece">
+        </div>
       </div>
-      <button class="btn btn-primary" onclick="startTest()">Find out →</button>
-      <p class="disclaimer on-paper">Self-insight tool for entertainment and reflection. Not a clinical or psychometrically validated intelligence assessment — see the FAQ below.</p>
+      
+      <div class="eyebrow">Apex Cognitive Assessment</div>
+      <h1 style="text-align:center;">Which mind matches yours?</h1>
+      <p class="lead" style="text-align:center;">Evaluate your fluid intelligence across four cognitive domains in just five minutes. Secure your instant baseline score, then unlock the historical genius whose reasoning pattern aligns with yours.</p>
+      
+      <div class="chip-row">
+        <span class="chip"><b>16</b> calibrated items</span>
+        <span class="chip"><b>4</b> core categories</span>
+        <span class="chip"><b>~5</b> min duration</span>
+      </div>
+      
+      <div style="text-align:center;">
+        <button class="btn btn-primary" onclick="startTest()">Find out →</button>
+      </div>
+      <p class="disclaimer" style="text-align:center;">Self-insight cognitive skills quiz for entertainment and personal reflection. Not a clinical or psychometrically validated intelligence test — see the FAQ below.</p>
     </div>
   </section>
 
   <section class="screen" id="screen-test">
-    <div class="test-meta">
+    <div class="test-header">
       <span class="q-counter">ITEM <span id="qNum">01</span>/16</span>
       <span class="q-counter" id="qCategory">PATTERN</span>
     </div>
     <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="booklet">
+    <div class="app-card">
       <div class="q-text" id="qText"></div>
       <div class="options" id="qOptions"></div>
     </div>
+    <p class="disclaimer" style="text-align:center; font-family:var(--font-mono); font-size:0.7rem; opacity: 0.6;">Keyboard shortcuts: [1-4] or [A-D] selects options instantly</p>
   </section>
 
   <section class="screen" id="screen-result">
-    <div class="booklet">
-      <div class="eyebrow">Result — Free Estimate</div>
-      <div class="curve-wrap">
-        <svg viewBox="0 0 400 100" width="100%" height="100" id="curveSvg">
-          <path id="curvePath" d="M0,90 C60,90 90,10 200,10 C310,10 340,90 400,90" fill="none" stroke="#D9D0BC" stroke-width="2"/>
-          <circle id="curveMarker" cx="200" cy="10" r="5" fill="#B3221F"/>
-        </svg>
+    <div class="app-card">
+      <div class="eyebrow">Cognitive Fingerprint Teaser</div>
+      
+      <div class="result-grid">
+        <div class="radar-container" id="radarContainer">
+          <!-- Dynamic SVG Radar Chart gets inserted here -->
+        </div>
+        
+        <div class="bell-container">
+          <div class="curve-wrap">
+            <svg viewBox="0 0 400 110" width="100%" height="110" id="curveSvg">
+              <path id="curvePath" d="M0,100 C60,100 90,10 200,10 C310,10 340,100 400,100" fill="none" stroke="var(--border-color)" stroke-width="2"/>
+              <circle id="curveMarker" cx="200" cy="10" r="6" fill="var(--red)"/>
+            </svg>
+          </div>
+          <div class="curve-caption">Cognitive Index <b id="indexReadout">--</b> · <span id="percentileReadout">--</span>th percentile</div>
+          
+          <div class="ledger" id="ledgerRows" style="width:100%;"></div>
+        </div>
       </div>
-      <div class="curve-caption">Cognitive Index <b id="indexReadout">--</b> · roughly the <span id="percentileReadout">--</span>th percentile</div>
-
-      <div class="ledger" id="ledgerRows"></div>
 
       <div class="tease-box">
-        <span class="tease-label">YOUR HISTORICAL MATCH</span>
-        <span class="tease-blur">████ ███████</span>
-        <span class="tease-cta">Unlock below to reveal who</span>
+        <span class="tease-label">YOUR GENIUS ALIGNMENT</span>
+        <span class="tease-blur">â–ˆâ–ˆâ–ˆâ–ˆ â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ</span>
+        <span class="tease-cta">Unlock your detailed report to reveal your match</span>
+      </div>
+
+      <div class="value-stack">
+        <div class="value-card">
+          <div class="value-title"><span>ðŸ”’</span> Calibrated Point Estimate</div>
+          <div class="value-desc">Scientific index calculation with custom standard error margins.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-title"><span>ðŸ”’</span> Population Percentiles</div>
+          <div class="value-desc">Your standing relative to both global and national adult cohorts.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-title"><span>ðŸ”’</span> Thematic Historical Match</div>
+          <div class="value-desc">Identify the scientist or philosopher who matches your reasoning patterns.</div>
+        </div>
+        <div class="value-card">
+          <div class="value-title"><span>ðŸ”’</span> Cognitive Reflection Score</div>
+          <div class="value-desc">Measures System 1 intuition overrides against System 2 logical checking.</div>
+        </div>
       </div>
 
       <div class="receipt">
-        <h2>You've seen the number. Here's what it means.</h2>
-        <p class="lead">Pick how deep you want to go.</p>
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:12px; flex-wrap:wrap; gap:8px;">
+          <h2>Select Report Tier</h2>
+          <div class="live-badge">
+            <span class="live-dot"></span>
+            14,249 scored today
+          </div>
+        </div>
+        <p class="lead" style="font-size:0.9rem; margin-bottom:18px;">Pick how deep you want to go. Both reports are delivered by email within 30 seconds.</p>
+        
         <div class="tier-row">
           <label class="tier-opt selected" id="tierBasicLabel">
             <input type="radio" name="tier" value="basic" id="tierBasic" checked onchange="onTierChange()">
-            <div><div class="tier-name">Basic result <span class="tier-price">$1.99</span></div>
-            <div class="tier-desc">Full 4-category percentile breakdown.</div></div>
+            <div style="width:100%;">
+              <div class="tier-header-row">
+                <span class="tier-name">Basic Report</span>
+                <span class="tier-price">$1.99</span>
+              </div>
+              <div class="tier-desc">Full 4-category score and percentile metrics.</div>
+            </div>
           </label>
           <label class="tier-opt" id="tierDetailedLabel">
             <input type="radio" name="tier" value="detailed" id="tierDetailed" onchange="onTierChange()">
-            <div><div class="tier-name">Detailed result <span class="tier-price">$3.99</span></div>
-            <div class="tier-desc">Everything in Basic, plus a written reasoning analysis and your historical figure match.</div></div>
+            <div style="width:100%;">
+              <div class="tier-header-row">
+                <span class="tier-name">Detailed Report</span>
+                <span class="tier-price">$3.99</span>
+              </div>
+              <div class="tier-desc">Adds a written reasoning audit, reflection analysis, and your historical mind match.</div>
+            </div>
           </label>
         </div>
+        
         <input type="email" id="emailInput" placeholder="you@email.com" autocomplete="email">
-        <label style="display:flex; gap:8px; align-items:flex-start; font-size:0.82rem; color:var(--muted); margin-bottom:14px; cursor:pointer;">
-          <input type="checkbox" id="consentCheck" style="margin-top:3px;">
-          <span>I agree to receive my result by email. No other messages unless I opt in separately.</span>
+        <label style="display:flex; gap:10px; align-items:flex-start; font-size:0.82rem; color:var(--text-muted); margin-bottom:18px; cursor:pointer;">
+          <input type="checkbox" id="consentCheck" style="margin-top:3px; accent-color:var(--gold);">
+          <span>I agree to receive my result by email. No marketing emails or newsletters unless explicitly opted-in.</span>
         </label>
-        <div class="error-msg" id="checkoutError">Enter a valid email and check the consent box — that's where your result goes.</div>
-        <button class="btn btn-primary" style="width:100%; text-align:center;" onclick="startCheckout()" id="checkoutBtn">Unlock my result — $1.99</button>
-        <p class="disclaimer">Self-serve refund within 7 days from the link in your receipt email — no ticket needed.</p>
+        
+        <div class="error-msg" id="checkoutError">Please enter a valid email address and accept the checkbox to send your report.</div>
+        <button class="btn btn-primary" style="width:100%;" onclick="startCheckout()" id="checkoutBtn">Unlock my result — $1.99</button>
+        <p class="disclaimer" style="font-size:0.72rem; text-align:center;">7-day self-serve refund link provided in every receipt email.</p>
       </div>
     </div>
   </section>
 
   <section class="screen" id="screen-report">
-    <div class="booklet">
+    <div class="app-card">
       <h1 id="reportHeadline">Your full report</h1>
       <p class="lead" id="reportBody">Loading your report…</p>
     </div>
@@ -317,25 +1186,58 @@
     <p>IQ·Test is a 16-item cognitive skills self-assessment split evenly across four categories: numeric reasoning, verbal reasoning, logical deduction, and pattern recognition. It takes most people 4–6 minutes. The free result shows your raw score and category split immediately; the paid report adds an estimated percentile and a short written analysis of your reasoning pattern.</p>
 
     <h2>Frequently asked questions</h2>
-    <div class="faq-item">
-      <h3>Is this a real IQ test?</h3>
-      <p>No. This is a self-insight quiz for entertainment and personal reflection, not a clinical or psychometrically validated intelligence test. Scores here shouldn't be used for diagnostic, employment, or educational decisions — for that, consult a licensed psychologist.</p>
-    </div>
-    <div class="faq-item">
-      <h3>How is the score calculated?</h3>
-      <p>Your raw score across the 16 items is converted to a cognitive index on an 85–145 scale, modeled on a standard mean-100 / SD-15 distribution, as a familiar frame of reference rather than a clinical claim.</p>
-    </div>
-    <div class="faq-item">
-      <h3>What's the difference between Basic and Detailed?</h3>
-      <p>Basic ($1.99) unlocks your full 4-category percentile breakdown. Detailed ($3.99) adds a written reasoning analysis plus the historical figure whose estimated score lands closest to yours. Both arrive by email in about 30 seconds.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Can I get a refund?</h3>
-      <p>Yes — every report email includes a self-serve refund link valid for 7 days. No support ticket required.</p>
+    <div class="faq-accordion">
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          Is this a real IQ test?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-content">
+          <div class="faq-content-inner">
+            No. IQ·Test is a self-insight cognitive skills quiz for entertainment and personal reflection. It is not a clinical or psychometrically validated intelligence test, and no score from this site should be used for diagnostic, clinical, employment, or educational placement decisions. For a validated assessment, consult a licensed psychologist.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          How is the score calculated?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-content">
+          <div class="faq-content-inner">
+            Each of the 16 items falls into one of four categories: numeric reasoning, verbal reasoning, logic, and pattern recognition. Your raw score across all four is converted into a cognitive index on a 85-145 scale, modeled on a standard mean-100 / SD-15 distribution, purely as a familiar frame of reference.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          What's the difference between the Basic and Detailed result?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-content">
+          <div class="faq-content-inner">
+            Basic ($1.99) unlocks your full 4-category percentile breakdown. Detailed ($3.99) adds a written analysis of your reasoning pattern and the historical figure whose estimated score lands closest to yours. Both are delivered by email within about 30 seconds of payment.
+          </div>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          Can I get a refund?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-content">
+          <div class="faq-content-inner">
+            Yes. Every report email includes a self-serve refund link valid for 7 days, no support ticket required.
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <footer>IQ·TEST · <a href="#">Methodology</a> · <a href="#">Refund policy</a> · <a href="#">Contact</a></footer>
+  <footer>
+    <img src="wordmark.png" alt="IQ·Test Logo Wordmark" style="height:20px; width:auto; display:block; margin:0 auto 16px; filter:brightness(0.9) drop-shadow(0 0 4px rgba(255,255,255,0.05)); opacity:0.85;" onerror="this.style.display='none'">
+    IQ·TEST · <a href="#">Methodology</a> · <a href="#">Refund policy</a> · <a href="#">Contact</a>
+  </footer>
 </div>
 
 <script>
@@ -403,13 +1305,19 @@ function renderQuestion(){
   q.opts.forEach((opt, i)=>{
     const btn = document.createElement('button');
     btn.className = 'opt';
-    btn.innerHTML = `<span class="bubble"><span class="opt-letter">${letters[i]}</span></span>${opt}`;
+    btn.innerHTML = `
+      <span class="opt-content">
+        <span class="bubble"></span>
+        <span>${opt}</span>
+      </span>
+      <span class="key-badge">${letters[i]}</span>
+    `;
     btn.onclick = ()=> selectAnswer(i);
     optsEl.appendChild(btn);
   });
 }
 
-// ── Keyboard navigation (1-4 or A-D selects answer; Enter auto-advances on selection) ──
+// â”€â”€ Keyboard navigation (1-4 or A-D selects answer; Enter auto-advances on selection) â”€â”€
 document.addEventListener('keydown', e => {
   const screen = document.querySelector('.screen.active');
   if (!screen || screen.id !== 'screen-test') return;
@@ -417,10 +1325,8 @@ document.addEventListener('keydown', e => {
   const key = e.key.toLowerCase();
   const opts = document.querySelectorAll('.opt');
   if (key in map && map[key] < opts.length) {
-    // Visually highlight
     opts.forEach(o => o.classList.remove('selected'));
     opts[map[key]].classList.add('selected');
-    // Short delay so the user sees the selection flash
     setTimeout(() => selectAnswer(map[key]), 120);
   }
 });
@@ -434,6 +1340,83 @@ function selectAnswer(i){
     document.getElementById('progressFill').style.width = `100%`;
     finishTest();
   }
+}
+
+function renderRadarChart(scores, maxScores) {
+  const categories = ["NUMERIC", "VERBAL", "LOGIC", "PATTERN"];
+  const width = 180;
+  const height = 180;
+  const cx = width / 2;
+  const cy = height / 2;
+  const r = 70; // max radius
+
+  // Axis endpoint calculations (4-axis diamond)
+  const angleStep = Math.PI / 2; // 90 degrees per axis
+  
+  // Outer boundaries grid lines
+  let gridPaths = "";
+  for (let gridLevel = 1; gridLevel <= 4; gridLevel++) {
+    const levelR = r * (gridLevel / 4);
+    const points = [];
+    for (let i = 0; i < 4; i++) {
+      const angle = i * angleStep - Math.PI / 2;
+      const x = cx + levelR * Math.cos(angle);
+      const y = cy + levelR * Math.sin(angle);
+      points.push(`${x},${y}`);
+    }
+    gridPaths += `<polygon points="${points.join(' ')}" fill="none" stroke="var(--border-color)" stroke-width="1" />`;
+  }
+
+  // Draw axis lines
+  let axisLines = "";
+  for (let i = 0; i < 4; i++) {
+    const angle = i * angleStep - Math.PI / 2;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    axisLines += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="var(--border-color)" stroke-width="1" />`;
+  }
+
+  // Calculate user value points
+  const userPoints = [];
+  categories.forEach((cat, i) => {
+    const score = scores[cat] ?? 0;
+    const maxVal = maxScores[cat] ?? 4;
+    const ratio = score / maxVal;
+    
+    // Keep a minimum ratio so the shape is visible
+    const valueR = r * Math.max(0.15, ratio);
+    const angle = i * angleStep - Math.PI / 2;
+    const x = cx + valueR * Math.cos(angle);
+    const y = cy + valueR * Math.sin(angle);
+    userPoints.push(`${x},${y}`);
+  });
+
+  // Category label labels placement
+  const labelBuffer = 15;
+  const labelsText = categories.map((cat, i) => {
+    const angle = i * angleStep - Math.PI / 2;
+    const textAnchor = i === 1 ? "start" : i === 3 ? "end" : "middle";
+    const alignmentBaseline = i === 0 ? "auto" : i === 2 ? "hanging" : "middle";
+    
+    const x = cx + (r + labelBuffer) * Math.cos(angle);
+    const y = cy + (r + labelBuffer) * Math.sin(angle) + (i === 2 ? 2 : i === 0 ? -4 : 0);
+    return `<text x="${x}" y="${y}" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9" font-weight="700" text-anchor="${textAnchor}" dominant-baseline="${alignmentBaseline}">${cat}</text>`;
+  }).join("");
+
+  const svgHtml = `
+    <svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">
+      ${gridPaths}
+      ${axisLines}
+      <!-- User Data Shape -->
+      <polygon points="${userPoints.join(' ')}" fill="var(--gold-glow)" stroke="var(--gold)" stroke-width="2" />
+      ${userPoints.map(p => {
+        const [x, y] = p.split(',');
+        return `<circle cx="${x}" cy="${y}" r="3.5" fill="var(--gold)" />`;
+      }).join("")}
+      ${labelsText}
+    </svg>
+  `;
+  document.getElementById('radarContainer').innerHTML = svgHtml;
 }
 
 function finishTest(){
@@ -453,7 +1436,7 @@ function finishTest(){
 
   const x = ((index-85)/60) * 400;
   const t = x/400;
-  const y = 90 - Math.sin(Math.PI*t) * 80 * Math.exp(-Math.pow((t-0.5)*2.2,2)*0.4);
+  const y = 100 - Math.sin(Math.PI*t) * 90 * Math.exp(-Math.pow((t-0.5)*2.2,2)*0.4);
   document.getElementById('curveMarker').setAttribute('cx', x.toFixed(1));
   document.getElementById('curveMarker').setAttribute('cy', Math.max(8,y).toFixed(1));
 
@@ -465,6 +1448,10 @@ function finishTest(){
     row.innerHTML = `<span class="ledger-cat">${cat}</span><span class="ledger-score">${catScores[cat]} <span class="of">/ ${catMax[cat]}</span></span>`;
     ledger.appendChild(row);
   });
+
+  // Render SVG Radar Chart
+  renderRadarChart(catScores, catMax);
+
   show('screen-result');
 }
 
@@ -507,6 +1494,30 @@ async function startCheckout(){
   } catch(e){
     errEl.style.display = 'block';
     btn.disabled = false; btn.textContent = `Unlock my result — $${TIER_PRICE[tier]}`;
+  }
+}
+
+// Interactive FAQ Accordion Trigger
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const content = btn.nextElementSibling;
+  
+  const isOpen = item.classList.contains('open');
+  
+  // Close all other items
+  document.querySelectorAll('.faq-item').forEach(otherItem => {
+    if (otherItem !== item) {
+      otherItem.classList.remove('open');
+      otherItem.querySelector('.faq-content').style.maxHeight = null;
+    }
+  });
+  
+  if (isOpen) {
+    item.classList.remove('open');
+    content.style.maxHeight = null;
+  } else {
+    item.classList.add('open');
+    content.style.maxHeight = content.scrollHeight + "px";
   }
 }
 
