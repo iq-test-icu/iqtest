@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Free Cognitive Test — Which Historical Figure Matches Your Score? | IQ·Test</title>
-<meta name="description" content="A free 16-question cognitive test across 4 categories. Get your instant score, then unlock which historical figure scored exactly where you do.">
+<meta name="description" content="A free 16-question cognitive test across 4 categories. Get your instant score, then unlock which historical figure thinks the way you do.">
 <link rel="canonical" href="https://iq-test.icu/">
 <meta property="og:title" content="IQ·Test — Which mind matches yours?">
 <meta property="og:description" content="Free instant score. Unlock your historical figure match — from $1.99.">
@@ -38,7 +38,7 @@
     {
       "@type": "Question",
       "name": "What's the difference between the Basic and Detailed result?",
-      "acceptedAnswer": {"@type": "Answer", "text": "Basic ($1.99) unlocks your full 4-category percentile breakdown. Detailed ($3.99) adds a written analysis of your reasoning pattern and the historical figure whose estimated score lands closest to yours. Both are delivered by email within about 30 seconds of payment."}
+      "acceptedAnswer": {"@type": "Answer", "text": "Basic ($1.99) unlocks your full 4-category percentile breakdown. Detailed ($3.99) adds a written analysis of your reasoning pattern and a thematic historical figure match based on your strongest category — not a numeric score comparison, since no verified test-score data exists for historical figures. Both are delivered by email within about 30 seconds of payment."}
     }
   ]
 }
@@ -142,6 +142,7 @@
     user-select: none;
     -webkit-user-drag: none;
   }
+  svg.mural-bg { object-fit: unset; } /* sizing handled by viewBox + preserveAspectRatio="slice" instead */
 
   /*
     Two-layer vignette strategy:
@@ -1005,9 +1006,22 @@
 <div class="bg-glow-1"></div>
 <div class="bg-glow-2"></div>
 
-<!-- Unified genius mural — single panoramic oil painting, four figures, one scene -->
+<!-- Ambient constellation field — echoes the emblem motif (four nodes orbiting one), no imagery of real people -->
 <div class="mural-container" aria-hidden="true">
-  <img src="mural_bg.png" class="mural-bg" alt="" draggable="false">
+  <svg class="mural-bg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
+    <g stroke="#C9A24B" stroke-width="0.15" fill="none" opacity="0.5">
+      <line x1="8" y1="15" x2="22" y2="30"/><line x1="22" y1="30" x2="18" y2="48"/>
+      <line x1="80" y1="12" x2="92" y2="26"/><line x1="92" y1="26" x2="86" y2="44"/>
+      <line x1="12" y1="70" x2="26" y2="82"/>
+      <line x1="70" y1="75" x2="84" y2="88"/><line x1="70" y1="75" x2="60" y2="90"/>
+    </g>
+    <g fill="#C9A24B" opacity="0.6">
+      <circle cx="8" cy="15" r="0.6"/><circle cx="22" cy="30" r="0.5"/><circle cx="18" cy="48" r="0.5"/>
+      <circle cx="80" cy="12" r="0.6"/><circle cx="92" cy="26" r="0.5"/><circle cx="86" cy="44" r="0.5"/>
+      <circle cx="12" cy="70" r="0.5"/><circle cx="26" cy="82" r="0.5"/>
+      <circle cx="70" cy="75" r="0.6"/><circle cx="84" cy="88" r="0.5"/><circle cx="60" cy="90" r="0.5"/>
+    </g>
+  </svg>
   <div class="mural-vignette"></div>
 </div>
 
@@ -1030,7 +1044,7 @@
     <div class="logo-wrap">
       <img src="wordmark.png" alt="IQ·Test" style="height:28px; width:auto; object-fit:contain; display:block;" onerror="this.style.display='none'">
     </div>
-    <div class="serial" id="serialTag">COMPARED AGAINST: DA VINCI · CURIE · TESLA</div>
+    <div class="serial" id="serialTag">MATCHED AGAINST HISTORY'S SHARPEST MINDS</div>
   </header>
 
   <section class="screen active" id="screen-hero">
@@ -1105,20 +1119,20 @@
 
       <div class="value-stack">
         <div class="value-card">
-          <div class="value-title"><span>ðŸ”’</span> Calibrated Point Estimate</div>
-          <div class="value-desc">Scientific index calculation with custom standard error margins.</div>
+          <div class="value-title"><span>ðŸ”’</span> Your Full Score</div>
+          <div class="value-desc">The exact result across all 16 questions, not just a range.</div>
         </div>
         <div class="value-card">
-          <div class="value-title"><span>ðŸ”’</span> Population Percentiles</div>
-          <div class="value-desc">Your standing relative to both global and national adult cohorts.</div>
+          <div class="value-title"><span>ðŸ”’</span> Category Percentiles</div>
+          <div class="value-desc">How your verbal, numerical, logical, and spatial scores compare, category by category.</div>
         </div>
         <div class="value-card">
           <div class="value-title"><span>ðŸ”’</span> Thematic Historical Match</div>
           <div class="value-desc">Identify the scientist or philosopher who matches your reasoning patterns.</div>
         </div>
         <div class="value-card">
-          <div class="value-title"><span>ðŸ”’</span> Cognitive Reflection Score</div>
-          <div class="value-desc">Measures System 1 intuition overrides against System 2 logical checking.</div>
+          <div class="value-title"><span>ðŸ”’</span> Your Reasoning Style</div>
+          <div class="value-desc">A plain-language read on how you approach problems, based on your actual answers.</div>
         </div>
       </div>
 
