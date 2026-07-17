@@ -3,11 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Free Cognitive Skills Test — Instant Score + Full Report | IQ·Test</title>
-<meta name="description" content="A 16-item pattern, logic, verbal, and numeric reasoning test. Free instant score across 4 categories, plus an optional full written report with your percentile placement.">
+<title>Free Cognitive Test — Which Historical Figure Matches Your Score? | IQ·Test</title>
+<meta name="description" content="A free 16-question cognitive test across 4 categories. Get your instant score, then unlock which historical figure scored exactly where you do.">
 <link rel="canonical" href="https://iq-test.icu/">
-<meta property="og:title" content="IQ·Test — The Answer Sheet">
-<meta property="og:description" content="16 items. 4 categories. Free instant score, full report available after.">
+<meta property="og:title" content="IQ·Test — Which mind matches yours?">
+<meta property="og:description" content="Free instant score. Unlock your historical figure match for $3.99.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://iq-test.icu/">
 <meta name="robots" content="index, follow">
@@ -46,8 +46,8 @@
     },
     {
       "@type": "Question",
-      "name": "What does the full report include?",
-      "acceptedAnswer": {"@type": "Answer", "text": "A category-by-category breakdown, an estimated percentile placement, and a short written analysis of your reasoning pattern generated from your specific answers. It's delivered by email within about 30 seconds of payment."}
+      "name": "What's the difference between the Basic and Detailed result?",
+      "acceptedAnswer": {"@type": "Answer", "text": "Basic ($1.99) unlocks your full 4-category percentile breakdown. Detailed ($3.99) adds a written analysis of your reasoning pattern and the historical figure whose estimated score lands closest to yours. Both are delivered by email within about 30 seconds of payment."}
     },
     {
       "@type": "Question",
@@ -142,6 +142,17 @@
   .ledger-score{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:0.95rem;}
   .ledger-score .of{color:var(--muted); font-weight:500; font-size:0.8rem;}
 
+  .tease-box{display:flex; flex-direction:column; align-items:center; gap:4px; text-align:center; background:#EAE3D2; border-radius:3px; padding:16px; margin:6px 0 0; border:1px dashed var(--pen);}
+  .tease-label{font-family:'JetBrains Mono',monospace; font-size:0.68rem; letter-spacing:0.1em; color:var(--pen); font-weight:700;}
+  .tease-blur{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:1.1rem; color:var(--ink); filter:blur(4px); user-select:none;}
+  .tease-cta{font-size:0.78rem; color:#7A6F5C;}
+  .tier-row{display:flex; flex-direction:column; gap:10px; margin:16px 0;}
+  .tier-opt{display:flex; gap:10px; align-items:flex-start; border:1px solid var(--line-dark); border-radius:6px; padding:12px 14px; cursor:pointer; transition:border-color .15s ease;}
+  .tier-opt.selected{border-color:var(--pen);}
+  .tier-opt input{margin-top:3px;}
+  .tier-name{font-weight:600; font-size:0.95rem;}
+  .tier-price{color:var(--pen); font-family:'JetBrains Mono',monospace; margin-left:6px;}
+  .tier-desc{color:var(--muted); font-size:0.82rem; margin-top:2px;}
   .receipt{background:var(--room); color:var(--text); border-radius:3px; padding:26px 28px; margin-top:22px; border:1px dashed var(--line-dark);}
   .receipt h2{font-family:'Space Grotesk',sans-serif; font-size:1.2rem; margin-bottom:8px;}
   .receipt p.lead{color:var(--muted);}
@@ -173,20 +184,19 @@
 <div class="wrap">
   <header>
     <div class="logo">IQ<span class="dot">·</span>TEST</div>
-    <div class="serial" id="serialTag">FORM A · NO. 2026-0716</div>
+    <div class="serial" id="serialTag">COMPARED AGAINST: DA VINCI · CURIE · TESLA</div>
   </header>
 
   <section class="screen active" id="screen-hero">
     <div class="booklet">
-      <div class="eyebrow">The Answer Sheet</div>
-      <h1>Sixteen items. Four categories. One honest score.</h1>
-      <p class="lead">A pattern, logic, verbal, and numeric reasoning test you can finish in about five minutes. Free instant score. A full written breakdown is available after, if you want it.</p>
+      <h1>Which mind matches yours?</h1>
+      <p class="lead">16 questions, four categories, about five minutes. Your free score lands instantly — your full result, including the historical figure who scored exactly where you do, is one tap past that.</p>
       <div class="chip-row">
         <span class="chip"><b>16</b> items</span>
         <span class="chip"><b>4</b> categories</span>
         <span class="chip"><b>~5</b> min</span>
       </div>
-      <button class="btn btn-primary" onclick="startTest()">Begin the test →</button>
+      <button class="btn btn-primary" onclick="startTest()">Find out →</button>
       <p class="disclaimer on-paper">Self-insight tool for entertainment and reflection. Not a clinical or psychometrically validated intelligence assessment — see the FAQ below.</p>
     </div>
   </section>
@@ -216,25 +226,34 @@
 
       <div class="ledger" id="ledgerRows"></div>
 
+      <div class="tease-box">
+        <span class="tease-label">YOUR HISTORICAL MATCH</span>
+        <span class="tease-blur">████ ███████</span>
+        <span class="tease-cta">Unlock below to reveal who</span>
+      </div>
+
       <div class="receipt">
-        <h2>Get the full report</h2>
-        <p class="lead">Category-by-category percentile, and a written read on your reasoning pattern — generated from your actual answers.</p>
-        <div class="price-row">
-          <span class="price">$4.99</span>
-          <span class="price-note">one-time · emailed instantly</span>
+        <h2>You've seen the number. Here's what it means.</h2>
+        <p class="lead">Pick how deep you want to go.</p>
+        <div class="tier-row">
+          <label class="tier-opt selected" id="tierBasicLabel">
+            <input type="radio" name="tier" value="basic" id="tierBasic" checked onchange="onTierChange()">
+            <div><div class="tier-name">Basic result <span class="tier-price">$1.99</span></div>
+            <div class="tier-desc">Full 4-category percentile breakdown.</div></div>
+          </label>
+          <label class="tier-opt" id="tierDetailedLabel">
+            <input type="radio" name="tier" value="detailed" id="tierDetailed" onchange="onTierChange()">
+            <div><div class="tier-name">Detailed result <span class="tier-price">$3.99</span></div>
+            <div class="tier-desc">Everything in Basic, plus a written reasoning analysis and your historical figure match.</div></div>
+          </label>
         </div>
-        <ul class="includes">
-          <li>Full 4-category percentile breakdown</li>
-          <li>Written reasoning-style analysis</li>
-          <li>In your inbox in ~30 seconds</li>
-        </ul>
         <input type="email" id="emailInput" placeholder="you@email.com" autocomplete="email">
         <label style="display:flex; gap:8px; align-items:flex-start; font-size:0.82rem; color:var(--muted); margin-bottom:14px; cursor:pointer;">
           <input type="checkbox" id="consentCheck" style="margin-top:3px;">
-          <span>I agree to receive my report by email. No other messages unless I opt in separately.</span>
+          <span>I agree to receive my result by email. No other messages unless I opt in separately.</span>
         </label>
-        <div class="error-msg" id="checkoutError">Enter a valid email and check the consent box — that's where your report goes.</div>
-        <button class="btn btn-primary" style="width:100%; text-align:center;" onclick="startCheckout()" id="checkoutBtn">Unlock full report — $4.99</button>
+        <div class="error-msg" id="checkoutError">Enter a valid email and check the consent box — that's where your result goes.</div>
+        <button class="btn btn-primary" style="width:100%; text-align:center;" onclick="startCheckout()" id="checkoutBtn">Unlock my result — $1.99</button>
         <p class="disclaimer">Self-serve refund within 7 days from the link in your receipt email — no ticket needed.</p>
       </div>
     </div>
@@ -261,8 +280,8 @@
       <p>Your raw score across the 16 items is converted to a cognitive index on an 85–145 scale, modeled on a standard mean-100 / SD-15 distribution, as a familiar frame of reference rather than a clinical claim.</p>
     </div>
     <div class="faq-item">
-      <h3>What's in the full report?</h3>
-      <p>A category-by-category breakdown, an estimated percentile, and a short written analysis generated from your specific answers — emailed within about 30 seconds of payment.</p>
+      <h3>What's the difference between Basic and Detailed?</h3>
+      <p>Basic ($1.99) unlocks your full 4-category percentile breakdown. Detailed ($3.99) adds a written reasoning analysis plus the historical figure whose estimated score lands closest to yours. Both arrive by email in about 30 seconds.</p>
     </div>
     <div class="faq-item">
       <h3>Can I get a refund?</h3>
@@ -382,9 +401,19 @@ function finishTest(){
   show('screen-result');
 }
 
+const TIER_PRICE = {basic:'1.99', detailed:'3.99'};
+
+function onTierChange(){
+  const tier = document.querySelector('input[name="tier"]:checked').value;
+  document.getElementById('tierBasicLabel').classList.toggle('selected', tier==='basic');
+  document.getElementById('tierDetailedLabel').classList.toggle('selected', tier==='detailed');
+  document.getElementById('checkoutBtn').textContent = `Unlock my result — $${TIER_PRICE[tier]}`;
+}
+
 async function startCheckout(){
   const email = document.getElementById('emailInput').value.trim();
   const consented = document.getElementById('consentCheck').checked;
+  const tier = document.querySelector('input[name="tier"]:checked').value;
   const errEl = document.getElementById('checkoutError');
   errEl.style.display = 'none';
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !consented){
@@ -403,7 +432,7 @@ async function startCheckout(){
 
     const checkoutRes = await fetch(`${API_BASE}/api/checkout`, {
       method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({id, email})
+      body: JSON.stringify({id, email, tier})
     });
     if(!checkoutRes.ok) throw new Error('checkout failed');
     const {url} = await checkoutRes.json();
