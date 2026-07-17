@@ -314,7 +314,6 @@ async function sendReportEmail(env, to, report, index, tier) {
   if (!to) return;
 
   const subjectLabel = tier === "basic" ? "Basic Result" : "Detailed Result";
-  const refundLine   = "A self-serve refund link valid for 7 days is in your Stripe receipt email — no support ticket needed.";
 
   await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -326,7 +325,7 @@ async function sendReportEmail(env, to, report, index, tier) {
       from:    env.RESEND_FROM,
       to,
       subject: `Your IQ·Test ${subjectLabel} — Cognitive Index ${index}`,
-      text:    `${report}\n\n---\n${refundLine}\n\n— IQ·Test\niq-test.icu`,
+      text:    `${report}\n\n---\n— IQ·Test\niq-test.icu`,
     }),
   });
 }
