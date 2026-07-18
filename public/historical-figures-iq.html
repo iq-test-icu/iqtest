@@ -3,16 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Historical Figures' IQ Scores: Estimates & Historiometry | IQ·Test</title>
-<meta name="description" content="What were the IQ scores of history's greatest minds? Explore estimated IQs for Einstein, Da Vinci, Newton, and Curie, and how researchers calculate them.">
-<link rel="canonical" href="https://iq-test.icu/historical-figures-iq.html">
+<title>Historical Figures' IQ Scores: Estimates and Reality | IQ·Test</title>
+<meta name="description" content="What were the IQ scores of history's greatest minds? Explore estimated IQs for Einstein, Da Vinci, Newton, and why most historical IQ claims are speculative.">
+<link rel="canonical" href="https://iq-test.icu/historical-figures-iq">
+<meta property="og:title" content="Historical Figures' IQ Scores: Estimates and Reality">
+<meta property="og:description" content="Explore estimated IQs for Einstein, Da Vinci, Newton, and why most historical IQ claims are speculative.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://iq-test.icu/historical-figures-iq">
+<meta property="og:image" content="https://iq-test.icu/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Historical Figures' IQ Scores">
+<meta name="twitter:description" content="What were the IQ scores of history's greatest minds?">
+<meta name="robots" content="index, follow">
 <link rel="icon" type="image/webp" href="/favicon.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Fraunces:opsz,wght@9..144,300..700&display=swap" rel="stylesheet">
 <style>
-  html {
-    font-size: 17px;
-  }
+  html { font-size: 17px; }
   :root {
     --bg: oklch(0.06 0.002 95);
     --gold: oklch(0.72 0.12 95);
@@ -20,6 +27,9 @@
     --muted: oklch(0.62 0.008 95);
     --border: oklch(0.18 0.008 95 / 0.7);
     --bg-card: oklch(0.10 0.006 95 / 0.85);
+    --red: oklch(0.52 0.17 28);
+    --red-hover: oklch(0.58 0.19 28);
+    --red-glow: oklch(0.52 0.17 28 / 0.3);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -45,29 +55,76 @@
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
     margin-bottom: 24px;
+    line-height: 1.2;
   }
   p { color: oklch(0.85 0.005 95); margin-bottom: 18px; font-size: 1rem; }
   h2 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.15rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    margin-top: 40px;
-    margin-bottom: 12px;
+    margin-top: 48px;
+    margin-bottom: 16px;
     color: var(--gold);
   }
   ul, ol { margin-left: 20px; margin-bottom: 18px; color: oklch(0.85 0.005 95); }
   li { margin-bottom: 8px; }
-  a { color: var(--gold); }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  
   .company-block {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 28px 32px;
-    margin-top: 40px;
-    font-size: 0.9rem;
-    color: oklch(0.78 0.006 95);
+    padding: 32px;
+    margin-top: 48px;
+    text-align: center;
   }
-  .company-block strong { color: var(--text); }
+  .btn {
+    display: inline-block;
+    background: var(--red);
+    color: var(--text);
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 16px 36px;
+    border-radius: 8px;
+    border: 1px solid oklch(0.6 0.17 28);
+    box-shadow: 0 4px 20px var(--red-glow), inset 0 1px 0 rgba(255,255,255,0.15);
+    text-decoration: none;
+    margin-top: 16px;
+    transition: all 0.2s ease;
+  }
+  .btn:hover {
+    background: var(--red-hover);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .faq-q {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .faq-a {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
   footer {
     text-align: center;
     padding: 32px 24px;
@@ -78,6 +135,73 @@
   footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
   footer a:hover { color: var(--gold); }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Historical Figures' IQ Scores: Estimates and Reality",
+  "description": "What were the IQ scores of history's greatest minds? Explore estimated IQs for Einstein, Da Vinci, Newton, and why most historical IQ claims are speculative.",
+  "image": "https://iq-test.icu/og.png",
+  "author": {
+    "@type": "Organization",
+    "name": "APEX Business Systems Ltd.",
+    "url": "https://apexbusiness.systems"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "IQ·Test",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://iq-test.icu/icon.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://iq-test.icu/historical-figures-iq"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "https://iq-test.icu/"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Historical Figures IQ",
+    "item": "https://iq-test.icu/historical-figures-iq"
+  }]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Did Albert Einstein ever take an IQ test?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Modern standardized IQ tests were not in widespread clinical use during his youth, and he never sat for one as an adult. Any IQ score attributed to Einstein is a post-humous estimate."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Who has the highest estimated IQ in history?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Based on early childhood intellectual milestones, historiometric researchers often cite John Stuart Mill or Johann Wolfgang von Goethe as having estimated IQs between 180 and 200, though these are mathematical estimates, not clinical scores."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div class="page">
@@ -85,55 +209,47 @@
 
   <h1>Historical Figures' IQ Scores: Estimates and Reality</h1>
 
-  <p>How smart was Albert Einstein? What was Leonardo da Vinci's IQ? People have asked these questions for decades. Because modern intelligence tests were not created until the early 20th century, none of history's greatest scientists, artists, or philosophers ever sat down to take a standardized WAIS or Stanford-Binet exam. Yet, various publications frequently cite exact IQ scores like "160 for Einstein" or "220 for Goethe."</p>
+  <p>Can historical figures really be assigned IQ scores? The short answer is no. Because modern clinical intelligence tests like the WAIS or Stanford-Binet were not created until the early 20th century, none of history's greatest scientists, artists, or philosophers ever sat down to take one. Despite this, you will frequently see exact IQ scores cited online, such as "160 for Einstein" or "200 for Da Vinci." These numbers are not actual test results; they are retrospective estimates based on biographical research and historiometry.</p>
 
-  <p>To understand where these numbers come from, we have to look at the academic study of historiometry—specifically the landmark research of psychologist Catharine Cox Miles—and examine the difference between a real test score and a historical estimate.</p>
+  <h2>Why most genius IQ claims are speculative</h2>
+  <p>Almost all cited IQ scores for historical figures originate from a single 1926 study: <i>"The Early Mental Traits of Three Hundred Geniuses,"</i> by Catharine Cox. Working at Stanford University, Cox and her team analyzed biographical records, writings, and early developmental milestones of historical geniuses. They estimated the age at which each subject performed cognitive tasks that matched the mental age standards of the Stanford-Binet test.</p>
+  <p>While groundbreaking, modern cognitive scientists highlight major caveats. First, biographical bias heavily favors individuals from wealthy families who could afford tutors and keep detailed journals. Second, Cox used an outdated ratio IQ formula (Mental Age / Chronological Age), whereas modern scores use deviation scaling against a peer group. Under modern scaling, scores above 160 are mathematically extremely rare and difficult to standardize.</p>
 
-  <h2>The Cox Study of 1926</h2>
-  <p>Almost all cited IQ scores for historical figures originate from a single academic source: the 1926 study <i>"The Early Mental Traits of Three Hundred Geniuses,"</i> conducted by Catharine Cox (later Catharine Cox Miles) at Stanford University. Working alongside Lewis Terman, the developer of the Stanford-Binet scale, Cox analyzed biographical records, writings, and early developmental milestones of 300 historical geniuses born between 1450 and 1850.</p>
-  <p>Cox and two independent raters evaluated these records to estimate the age at which each subject performed cognitive tasks that would match the mental age standards of the Stanford-Binet test. The study yielded two estimates for each individual:</p>
-  <ul>
-    <li>An IQ estimate based on development up to age 17.</li>
-    <li>An IQ estimate based on development between ages 17 and 26.</li>
-  </ul>
-  <p>The average estimated IQ for the 300 geniuses was 135, but several individuals stood out with exceptionally high scores.</p>
+  <h2>Why style-of-thinking comparison is more honest</h2>
+  <p>Assigning a fake numerical score to a historical figure creates a misleading benchmark. However, examining <i>how</i> they thought is highly valuable. Some geniuses, like Marie Curie, showcased intense focus, logical sorting, and mathematical precision. Others, like Leonardo da Vinci, exhibited unparalleled visual-spatial reasoning and lateral thinking. Comparing your own cognitive strengths to these established patterns of reasoning is far more accurate and insightful than comparing yourself to a speculative number.</p>
 
-  <h2>Estimated IQs of Prominent Geniuses</h2>
-  <p>Based on Cox's study and subsequent historiometric reviews by later researchers, here are some of the most frequently discussed historical IQ estimates:</p>
-  <ul>
-    <li><strong>John Stuart Mill (Estimated IQ: 190–200)</strong>: The English philosopher read Greek at age three, Latin at age eight, and wrote a history of Rome at age six. His early intellectual output is considered one of the most extreme cases of early development on record.</li>
-    <li><strong>Johann Wolfgang von Goethe (Estimated IQ: 180–190)</strong>: The German polymath wrote complex literature and spoke several languages before age ten.</li>
-    <li><strong>Isaac Newton (Estimated IQ: 190–200)</strong>: Newton formulated calculus and the laws of motion. His logical and mathematical concentration is widely cited as among the highest in human history.</li>
-    <li><strong>Leonardo da Vinci (Estimated IQ: 180–200)</strong>: Although biographical records from his childhood are sparse, his journals showcase unparalleled spatial reasoning, engineering vision, and artistic synthesis.</li>
-    <li><strong>Marie Curie (Estimated IQ: 180–185)</strong>: The double Nobel laureate showcased intense focus, logical sorting, and mathematical precision during her early schooling in Poland.</li>
-    <li><strong>Albert Einstein (Estimated IQ: 160)</strong>: While Einstein did not display the extreme early verbal milestones of John Stuart Mill, his spatial and mathematical thought experiments in adolescence indicate an IQ of at least 160.</li>
-  </ul>
+  <h2>How IQ·Test builds historical matches</h2>
+  <p>At <a href="/">IQ·Test</a>, we do not claim you have the same numerical IQ as Isaac Newton. Instead, our Deep Report takes your raw category scores across numeric, verbal, logical, and spatial domains to determine your unique cognitive fingerprint. We then match your specific reasoning style with a historical genius who displayed similar cognitive strengths and approaches to problem-solving.</p>
 
-  <h2>Are Historiometric Estimates Accurate?</h2>
-  <p>While Cox’s study was groundbreaking, modern cognitive scientists highlight several major caveats regarding historical IQ estimates:</p>
-  <ol>
-    <li><strong>Biographical Bias</strong>: Estimates rely on surviving written records. Individuals from wealthy families who could afford tutors and keep detailed journals are much easier to study than equally bright individuals from impoverished backgrounds.</li>
-    <li><strong>Mental Age vs. Deviation IQ</strong>: Cox used the ratio IQ formula (Mental Age / Chronological Age). Under modern deviation scaling (which compares you strictly against a peer group normal curve), scores above 160 are mathematically extremely rare and difficult to standardize.</li>
-    <li><strong>The Flynn Effect</strong>: Average scores have risen over the generations due to improved education, health, and visual stimulus. A score of 100 today is cognitively different from a score of 100 in 1850.</li>
-  </ol>
-
-  <h2>Historical Matching at IQ·Test</h2>
-  <p>Because no standardized IQ data exists for historical figures, it is impossible to state with absolute certainty that you "have the same IQ as Isaac Newton." However, we can compare your <i>cognitive style</i>. </p>
-  <p>At <a href="/">IQ·Test</a>, our Deep Report takes your raw category scores (verbal reasoning, numeric patterns, logical deduction, and spatial awareness) and matches your profile with a historical genius who displayed similar reasoning strengths. This pairing helps you understand whether your thinking is thematic, verbal, numerical, logical, or visual-spatial—just like the minds of the past.</p>
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-accordion">
+    <div class="faq-item">
+      <div class="faq-q">Did Albert Einstein ever take an IQ test?</div>
+      <div class="faq-a">No. Modern standardized IQ tests were not in widespread clinical use during his youth, and he never sat for one as an adult. Any IQ score attributed to Einstein is a post-humous estimate.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Who has the highest estimated IQ in history?</div>
+      <div class="faq-a">Based on early childhood intellectual milestones, historiometric researchers often cite John Stuart Mill or Johann Wolfgang von Goethe as having estimated IQs between 180 and 200, though these are mathematical estimates, not clinical scores.</div>
+    </div>
+  </div>
 
   <div class="company-block">
-    <strong>Which historical mind matches your cognitive fingerprint?</strong><br>
-    Take our 16-question quiz and see which scientist, philosopher, or creator thought most like you.
-    <br><br>
-    <a href="/" style="font-weight:600;">Find Your Historical Match →</a>
+    <h2 style="margin-top:0;">Which historical mind matches your cognitive fingerprint?</h2>
+    <p>Take our 16-question quiz and see which scientist, philosopher, or creator thought most like you.</p>
+    <a href="/" class="btn">See which historical figure matches your reasoning pattern</a>
   </div>
 </div>
 <footer>
   <a href="/">Home</a>
-  <a href="/about.html">About</a>
-  <a href="/methodology.html">Methodology</a>
-  <a href="/support.html">Support</a>
-  <a href="/privacy.html">Privacy</a>
+  <a href="/about">About</a>
+  <a href="/methodology">Methodology</a>
+  <a href="/what-is-an-iq-test">What is an IQ Test?</a>
+  <a href="/free-iq-test-online">Free IQ Test Online</a>
+  <br><br>
+  <a href="/historical-figures-iq">Historical IQs</a>
+  <a href="/cognitive-test-vs-iq-test">Cognitive vs IQ Test</a>
+  <a href="/support">Support</a>
+  <a href="/privacy">Privacy</a>
   <br><br>
   &copy; 2026 APEX Business Systems Ltd. &nbsp;·&nbsp; Edmonton, AB
 </footer>

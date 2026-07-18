@@ -6,13 +6,20 @@
 <title>Methodology & Technical Notes | IQ·Test</title>
 <meta name="description" content="Technical details, limitations, and score reference scale documentation for the IQ·Test cognitive self-insight quiz.">
 <link rel="canonical" href="https://iq-test.icu/methodology">
+<meta property="og:title" content="Methodology & Technical Notes">
+<meta property="og:description" content="Technical details, limitations, and score reference scale documentation for the IQ·Test cognitive self-insight quiz.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://iq-test.icu/methodology">
+<meta property="og:image" content="https://iq-test.icu/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Methodology & Technical Notes">
+<meta name="twitter:description" content="Technical details, limitations, and score reference scale documentation for the IQ·Test cognitive self-insight quiz.">
+<meta name="robots" content="index, follow">
 <link rel="icon" type="image/webp" href="/favicon.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Fraunces:opsz,wght@9..144,300..700&display=swap" rel="stylesheet">
 <style>
-  html {
-    font-size: 17px;
-  }
+  html { font-size: 17px; }
   :root {
     --bg: oklch(0.06 0.002 95);
     --gold: oklch(0.72 0.12 95);
@@ -20,6 +27,9 @@
     --muted: oklch(0.62 0.008 95);
     --border: oklch(0.18 0.008 95 / 0.7);
     --bg-card: oklch(0.10 0.006 95 / 0.85);
+    --red: oklch(0.52 0.17 28);
+    --red-hover: oklch(0.58 0.19 28);
+    --red-glow: oklch(0.52 0.17 28 / 0.3);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -45,29 +55,83 @@
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
     margin-bottom: 24px;
+    line-height: 1.2;
   }
   p { color: oklch(0.85 0.005 95); margin-bottom: 18px; font-size: 1rem; }
   h2 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.15rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    margin-top: 40px;
-    margin-bottom: 12px;
+    margin-top: 48px;
+    margin-bottom: 16px;
     color: var(--gold);
   }
-  ul { margin-left: 20px; margin-bottom: 18px; color: oklch(0.85 0.005 95); }
+  h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 12px;
+  }
+  ul, ol { margin-left: 20px; margin-bottom: 18px; color: oklch(0.85 0.005 95); }
   li { margin-bottom: 8px; }
-  a { color: var(--gold); }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  
   .company-block {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 28px 32px;
-    margin-top: 40px;
-    font-size: 0.9rem;
-    color: oklch(0.78 0.006 95);
+    padding: 32px;
+    margin-top: 48px;
+    text-align: center;
   }
-  .company-block strong { color: var(--text); }
+  .btn {
+    display: inline-block;
+    background: var(--red);
+    color: var(--text);
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 16px 36px;
+    border-radius: 8px;
+    border: 1px solid oklch(0.6 0.17 28);
+    box-shadow: 0 4px 20px var(--red-glow), inset 0 1px 0 rgba(255,255,255,0.15);
+    text-decoration: none;
+    margin-top: 16px;
+    transition: all 0.2s ease;
+  }
+  .btn:hover {
+    background: var(--red-hover);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .faq-q {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .faq-a {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
   footer {
     text-align: center;
     padding: 32px 24px;
@@ -78,6 +142,73 @@
   footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
   footer a:hover { color: var(--gold); }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Methodology & Technical Notes",
+  "description": "Technical details, limitations, and score reference scale documentation for the IQ·Test cognitive self-insight quiz.",
+  "image": "https://iq-test.icu/og.png",
+  "author": {
+    "@type": "Organization",
+    "name": "APEX Business Systems Ltd.",
+    "url": "https://apexbusiness.systems"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "IQ·Test",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://iq-test.icu/icon.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://iq-test.icu/methodology"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "https://iq-test.icu/"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Methodology",
+    "item": "https://iq-test.icu/methodology"
+  }]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "How does the IQ·Test calculate your score?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your raw score out of 16 questions is mapped to an index on the 85 to 145 scale purely as a familiar reference point, using our platform's self-selected performance statistics."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does the historical figure matching work?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The detailed reflection matches your strongest domain score (e.g. spatial reasoning vs verbal logic) with a thematic historical figure who displayed similar cognitive strengths in their recorded problem solving."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div class="page">
@@ -85,12 +216,9 @@
 
   <h1>Methodology & Technical Notes</h1>
 
-  <p>At IQ·Test, we believe in radical transparency. Below is an honest, plain-language description of how our quiz is structured, how scores are calculated, and what conclusions can and cannot be drawn from the results.</p>
+  <p>At IQ·Test, we believe in radical transparency. The score you receive at the end of our 16-question quiz is calculated by evaluating your logical reasoning, numerical recognition, spatial reasoning, and verbal comprehension. This document explains how our quiz is structured, how scores are calculated into a cognitive index, and what conclusions can and cannot be drawn from the results.</p>
 
-  <h2>1. Objective of the Quiz</h2>
-  <p>This experience is designed as a puzzle-based cognitive self-insight quiz for entertainment and personal reflection. It is intended to explore how you approach four core domains of logical reasoning. It is <strong>not</strong> a clinical, diagnostic, educational-placement, or employment-evaluation tool. If you require a validated, psychologist-administered intelligence scale (such as the WAIS or Stanford-Binet), please consult a licensed professional.</p>
-
-  <h2>2. Structure & Construct Clarity</h2>
+  <h2>Categories measured</h2>
   <p>The quiz consists of 16 puzzle items divided equally into four core reasoning domains. Each item maps to exactly one category:</p>
   <ul>
     <li><strong>Numeric Reasoning</strong>: Evaluates your ability to spot patterns, structural intervals, and relationships in numerical sequences.</li>
@@ -99,67 +227,57 @@
     <li><strong>Pattern Recognition</strong>: Evaluates your speed at isolating visual consistency, sequential letter patterns, and spatial transformations.</li>
   </ul>
 
-  <h2>3. Scoring Mechanism & Reference Scale (How IQ is Calculated)</h2>
-  <p>To understand how a score is calculated on IQ·Test, it is helpful to look at how modern psychometric instruments compute intelligence scores. Historically, early tests calculated IQ using a simple ratio formula based on a subject's mental age relative to their chronological age. However, this ratio model had significant limitations (for example, mental age slows down in adulthood while chronological age continues to increase, causing scores to artificially drop with age).</p>
-  
-  <h3>The Deviation IQ Method</h3>
-  <p>Modern intelligence scales (including the Wechsler Adult Intelligence Scale and the Stanford-Binet) use the <strong>Deviation IQ method</strong>. This statistical approach calculates IQ by comparing an individual's raw performance score to the distribution of scores achieved by a representative peer group sample of their chronological age. This comparison is mapped onto a standard normal distribution (the bell curve).</p>
-  
-  <p>Under this statistical framework, the population average is set to exactly <strong>100</strong>, with the standard deviation (SD, denoted as &sigma;) set to <strong>15</strong>. The formula used to calculate a deviation IQ score is:</p>
-  <p style="font-family:monospace; text-align:center; color:var(--gold); margin: 24px 0;">IQ = 100 + 15 * Z</p>
-  
-  <p>Where <strong>Z</strong> represents the standard score or <i>Z-score</i>. The Z-score measures how many standard deviations an individual's raw score is away from the peer group mean. It is calculated using the formula:</p>
-  <p style="font-family:monospace; text-align:center; color:var(--gold); margin: 24px 0;">Z = (X - &mu;) / &sigma;</p>
-  
-  <p>Where:</p>
+  <h2>Raw score to cognitive index mapping</h2>
+  <p>On IQ·Test, each correct response scores 1 point, resulting in a raw score range from 0 to 16. This raw score is mapped to an overall Cognitive Index between 85 and 145. This mapping uses a deviation IQ model calibrated against our platform's own performance statistics. It compares an individual's raw performance score to the distribution of scores achieved by our self-selected user base, mapping it onto a standard normal distribution.</p>
+
+  <h2>Percentile framing</h2>
+  <p>Once the deviation Z-score is computed, it can be mapped directly to a percentile rank. The percentile rank indicates the percentage of the population that scores at or below that particular score level. For example:</p>
   <ul>
-    <li><strong>X</strong>: The individual's raw score (on our quiz, the number of correct answers out of 16).</li>
-    <li><strong>&mu; (Mu)</strong>: The average raw score of the peer standardization sample.</li>
-    <li><strong>&sigma; (Sigma)</strong>: The standard deviation of the peer standardization sample's raw scores.</li>
+    <li>A score of <strong>100</strong> places the individual in the <strong>50th percentile</strong> (exactly average).</li>
+    <li>A score of <strong>115</strong> places them in approximately the <strong>84th percentile</strong>.</li>
+    <li>A score of <strong>130</strong> places them in approximately the <strong>98th percentile</strong>.</li>
+    <li>A score of <strong>85</strong> places them in approximately the <strong>16th percentile</strong>.</li>
   </ul>
 
-  <h3>From Z-Scores to Percentiles</h3>
-  <p>Once the Z-score is computed, it can be mapped directly to a percentile rank. The percentile rank indicates the percentage of the population that scores at or below that particular score level. For example:</p>
-  <ul>
-    <li>A Z-score of <strong>0</strong> maps to an IQ of <strong>100</strong>, placing the individual in the <strong>50th percentile</strong> (exactly average).</li>
-    <li>A Z-score of <strong>+1.0</strong> maps to an IQ of <strong>115</strong>, placing them in approximately the <strong>84th percentile</strong>.</li>
-    <li>A Z-score of <strong>+2.0</strong> maps to an IQ of <strong>130</strong>, placing them in approximately the <strong>98th percentile</strong>.</li>
-    <li>A Z-score of <strong>-1.0</strong> maps to an IQ of <strong>85</strong>, placing them in approximately the <strong>16th percentile</strong>.</li>
-  </ul>
+  <h2>Why the scale is a familiar reference, not diagnosis</h2>
+  <p>This experience is designed as a puzzle-based cognitive self-insight quiz for entertainment and personal reflection. We use the 85 to 145 index purely as a familiar scaling metric. It is <strong>not</strong> a clinical, diagnostic, educational-placement, or employment-evaluation tool. Because our user base is self-selected rather than a clinically controlled national norm sample, the comparative percentile estimates represent standing relative to other test-takers on this platform.</p>
 
-  <h3>Platform Scaling & Standardization</h3>
-  <p>On IQ·Test, each correct response scores 1 point, resulting in a raw score range from 0 to 16. This raw score is mapped to an overall <strong>Cognitive Index</strong> between 85 and 145. This mapping uses the deviation IQ model calibrated against platform performance statistics. Because our user base is self-selected rather than a clinically controlled national norm sample, the comparative percentile estimates represent standing relative to other test-takers on this platform.</p>
-
-  <h2>4. Caveats & Interpretation</h2>
-  <p>Performance on online cognitive puzzles can fluctuate significantly based on multiple session-specific variables. These include:</p>
-  <ul>
-    <li>Sleep and physical fatigue.</li>
-    <li>Stress levels and temporal focus.</li>
-    <li>Environmental distractions or noise.</li>
-    <li>The device screen size and interface responsiveness.</li>
-  </ul>
-  <p>Because cognitive reasoning is dynamic, a single sitting on a 16-question puzzle set is not a permanent measure of capability. Results are snapshots of performance on these specific tasks.</p>
-
-  <h2>5. Thematic Historical Comparison</h2>
+  <h2>How historical figure matching works</h2>
   <p>Our Detailed Reflection matches your strongest domain score with a thematic historical figure (such as Ada Lovelace, Mary Shelley, Aristotle, or Leonardo da Vinci). This pairing is purely a conceptual storytelling device based on historical style, <strong>not</strong> a claim of measured IQ equivalence, as verified test-score data does not exist for historical figures.</p>
 
-  <h2>6. Data Deletion & Privacy</h2>
-  <p>We respect your privacy and do not sell your personal data. We store your email to deliver reports and anonymize session statistics after 90 days. You can request the complete and immediate deletion of your data and email at any time by writing to <a href="mailto:privacy@iq-test.icu">privacy@iq-test.icu</a>.</p>
+  <h2>Data collection and limitations</h2>
+  <p>Performance on online cognitive puzzles can fluctuate significantly based on multiple session-specific variables, such as sleep, physical fatigue, stress levels, and environmental distractions. Results are snapshots of performance on these specific tasks in one sitting.</p>
+  <p>We respect your privacy and do not sell your personal data. We store your email to deliver reports and anonymize session statistics after 90 days.</p>
 
-  <h2>7. Ongoing Updates</h2>
-  <p>To ensure high quality, we periodically review our item pool and scoring calibrations. Updates to the scoring model will be noted on this page with updated methodology versions.</p>
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-accordion">
+    <div class="faq-item">
+      <div class="faq-q">How does the IQ·Test calculate your score?</div>
+      <div class="faq-a">Your raw score out of 16 questions is mapped to an index on the 85 to 145 scale purely as a familiar reference point, using our platform's self-selected performance statistics.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How does the historical figure matching work?</div>
+      <div class="faq-a">The detailed reflection matches your strongest domain score (e.g. spatial reasoning vs verbal logic) with a thematic historical figure who displayed similar cognitive strengths in their recorded problem solving.</div>
+    </div>
+  </div>
+
+  <div class="company-block">
+    <h2 style="margin-top:0;">Ready to check your cognitive baseline?</h2>
+    <p>Try our free 16-question assessment.</p>
+    <a href="/" class="btn">Start the free test</a>
+  </div>
 </div>
 <footer>
   <a href="/">Home</a>
-  <a href="/about.html">About</a>
-  <a href="/methodology.html">Methodology</a>
-  <a href="/what-is-an-iq-test.html">What is an IQ Test?</a>
-  <a href="/free-iq-test-online.html">Free IQ Test Online</a>
+  <a href="/about">About</a>
+  <a href="/methodology">Methodology</a>
+  <a href="/what-is-an-iq-test">What is an IQ Test?</a>
+  <a href="/free-iq-test-online">Free IQ Test Online</a>
   <br><br>
-  <a href="/historical-figures-iq.html">Historical IQs</a>
-  <a href="/cognitive-test-vs-iq-test.html">Cognitive vs IQ Test</a>
-  <a href="/support.html">Support</a>
-  <a href="/privacy.html">Privacy</a>
+  <a href="/historical-figures-iq">Historical IQs</a>
+  <a href="/cognitive-test-vs-iq-test">Cognitive vs IQ Test</a>
+  <a href="/support">Support</a>
+  <a href="/privacy">Privacy</a>
   <br><br>
   &copy; 2026 APEX Business Systems Ltd. &nbsp;·&nbsp; Edmonton, AB
 </footer>

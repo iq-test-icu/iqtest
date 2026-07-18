@@ -4,3 +4,6 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-XSS-Protection: 1; mode=block
   Content-Security-Policy: default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https:; frame-src 'self' https://js.stripe.com; connect-src 'self' https://api.stripe.com https://iq-test.icu;
+
+https://*.pages.dev/*
+  X-Robots-Tag: noindex

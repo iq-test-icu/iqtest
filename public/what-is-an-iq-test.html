@@ -5,14 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What is an IQ Test? History, Meaning & Types | IQ·Test</title>
 <meta name="description" content="What is an IQ test? Understand the history of intelligence scales, Wechsler scores, g-factor, and how clinical cognitive tests compare to online quizzes.">
-<link rel="canonical" href="https://iq-test.icu/what-is-an-iq-test.html">
+<link rel="canonical" href="https://iq-test.icu/what-is-an-iq-test">
+<meta property="og:title" content="What is an IQ Test? History, Meaning & Types">
+<meta property="og:description" content="Understand the history of intelligence scales, Wechsler scores, g-factor, and how clinical cognitive tests compare to online quizzes.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://iq-test.icu/what-is-an-iq-test">
+<meta property="og:image" content="https://iq-test.icu/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What is an IQ Test?">
+<meta name="twitter:description" content="Understand the history of intelligence scales and what an IQ test actually measures.">
+<meta name="robots" content="index, follow">
 <link rel="icon" type="image/webp" href="/favicon.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Fraunces:opsz,wght@9..144,300..700&display=swap" rel="stylesheet">
 <style>
-  html {
-    font-size: 17px;
-  }
+  html { font-size: 17px; }
   :root {
     --bg: oklch(0.06 0.002 95);
     --gold: oklch(0.72 0.12 95);
@@ -20,6 +27,9 @@
     --muted: oklch(0.62 0.008 95);
     --border: oklch(0.18 0.008 95 / 0.7);
     --bg-card: oklch(0.10 0.006 95 / 0.85);
+    --red: oklch(0.52 0.17 28);
+    --red-hover: oklch(0.58 0.19 28);
+    --red-glow: oklch(0.52 0.17 28 / 0.3);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -45,29 +55,76 @@
     font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 700;
     margin-bottom: 24px;
+    line-height: 1.2;
   }
   p { color: oklch(0.85 0.005 95); margin-bottom: 18px; font-size: 1rem; }
   h2 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: 1.15rem;
+    font-size: 1.5rem;
     font-weight: 600;
-    margin-top: 40px;
-    margin-bottom: 12px;
+    margin-top: 48px;
+    margin-bottom: 16px;
     color: var(--gold);
   }
   ul, ol { margin-left: 20px; margin-bottom: 18px; color: oklch(0.85 0.005 95); }
   li { margin-bottom: 8px; }
-  a { color: var(--gold); }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  
   .company-block {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 14px;
-    padding: 28px 32px;
-    margin-top: 40px;
-    font-size: 0.9rem;
-    color: oklch(0.78 0.006 95);
+    padding: 32px;
+    margin-top: 48px;
+    text-align: center;
   }
-  .company-block strong { color: var(--text); }
+  .btn {
+    display: inline-block;
+    background: var(--red);
+    color: var(--text);
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 16px 36px;
+    border-radius: 8px;
+    border: 1px solid oklch(0.6 0.17 28);
+    box-shadow: 0 4px 20px var(--red-glow), inset 0 1px 0 rgba(255,255,255,0.15);
+    text-decoration: none;
+    margin-top: 16px;
+    transition: all 0.2s ease;
+  }
+  .btn:hover {
+    background: var(--red-hover);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+  
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .faq-q {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .faq-a {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
   footer {
     text-align: center;
     padding: 32px 24px;
@@ -78,6 +135,73 @@
   footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
   footer a:hover { color: var(--gold); }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "What is an IQ Test?",
+  "description": "Understand the history of intelligence scales, Wechsler scores, g-factor, and how clinical cognitive tests compare to online quizzes.",
+  "image": "https://iq-test.icu/og.png",
+  "author": {
+    "@type": "Organization",
+    "name": "APEX Business Systems Ltd.",
+    "url": "https://apexbusiness.systems"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "IQ·Test",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://iq-test.icu/icon.webp"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://iq-test.icu/what-is-an-iq-test"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "https://iq-test.icu/"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "What is an IQ Test?",
+    "item": "https://iq-test.icu/what-is-an-iq-test"
+  }]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can you prepare for an IQ test?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "While you cannot study facts to improve your score, familiarizing yourself with the format of pattern recognition, logic puzzles, and reasoning questions can reduce test anxiety and slightly improve performance by making you faster."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is an IQ score permanent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Cognitive abilities can shift over a lifetime due to aging, education, health, and neuroplasticity. However, scores taken in adulthood tend to remain relatively stable compared to childhood scores."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div class="page">
@@ -85,60 +209,69 @@
 
   <h1>What is an IQ Test?</h1>
 
-  <p>An Intelligence Quotient (IQ) test is a psychometrically designed instrument used to assess human intelligence. The resulting score represents a relative measure of an individual's cognitive capabilities compared against a peer group sample. Rather than checking specific factual knowledge, IQ tests attempt to measure fundamental cognitive processes including logical deduction, mathematical reasoning, visual-spatial awareness, and semantic comprehension.</p>
+  <p>An Intelligence Quotient (IQ) test is a standardized psychometric assessment designed to measure human cognitive abilities and intellectual potential. Rather than testing specific learned knowledge or trivia, it measures how well you process information, solve problems, recognize patterns, and use logic. Your final score is a relative measure, meaning your cognitive performance is compared directly to a statistically representative sample of your peers.</p>
 
-  <p>IQ tests have been central to cognitive science, educational diagnostics, and psychology for more than a century. To understand what an IQ test represents, it is helpful to look at its history, how the math is calculated, and what score ranges actually mean in terms of cognitive capacity.</p>
-
-  <h2>The History of IQ Testing</h2>
-  <p>The modern concept of intelligence testing began in France in the early 20th century. Psychologist Alfred Binet was commissioned by the French government to identify students who struggled academically. Along with Theodore Simon, he created the Binet-Simon scale in 1905. This first test focused on mental age (the average level of performance for a given chronological age).</p>
-  <p>Later, German psychologist William Stern proposed the term "Intelligence Quotient" (IQ). He calculated it using a simple ratio formula:</p>
-  <p style="font-family:monospace; text-align:center; color:var(--gold);">IQ = (Mental Age / Chronological Age) * 100</p>
-  <p>In 1916, Lewis Terman of Stanford University adapted the test for American populations, creating the Stanford-Binet Intelligence Scale. This was the dominant scale until David Wechsler introduced the Wechsler Adult Intelligence Scale (WAIS) in 1955. Wechsler changed the scoring mechanism from age ratios to deviation IQ, comparing individual performance to a standardized normal distribution of their peers.</p>
-
-  <h2>How IQ Scores are Calculated</h2>
-  <p>Modern IQ tests do not rely on mental age ratios. Instead, they use a statistical normal distribution (a bell curve) to scale scores. The population mean is set at exactly 100, with a standard deviation (SD) of 15 points. Under this deviation model:</p>
+  <h2>What an IQ test measures</h2>
+  <p>Most modern clinical intelligence assessments aim to measure the "g factor," or general intelligence. This is broken down into several core domains of cognitive functioning:</p>
   <ul>
-    <li><strong>68.2%</strong> of the population scores between 85 and 115 (within one standard deviation of the mean).</li>
-    <li><strong>95.4%</strong> of the population scores between 70 and 130 (within two standard deviations).</li>
-    <li><strong>99.7%</strong> of the population scores between 55 and 145 (within three standard deviations).</li>
+    <li><strong>Working Memory:</strong> The ability to hold and manipulate information in your mind over short periods.</li>
+    <li><strong>Processing Speed:</strong> How quickly you can accurately process simple or routine visual information.</li>
+    <li><strong>Fluid Reasoning:</strong> The capacity to think logically and solve novel problems without relying on prior knowledge.</li>
+    <li><strong>Verbal Comprehension:</strong> The ability to understand, analyze, and use language effectively.</li>
   </ul>
-  <p>If you score a 115, you are performing one standard deviation above the mean, placing you in approximately the 84th percentile. A score of 130 places you in the 98th percentile, which is often the threshold for high-intelligence groups like Mensa.</p>
 
-  <h2>Clinical Tests vs. Online Quizzes</h2>
-  <p>There is a substantial difference between a clinical, psychologist-administered intelligence assessment and a short online quiz:</p>
-  <ol>
-    <li><strong>Standardization and Norming</strong>: Clinical assessments (such as the WAIS-IV or Woodcock-Johnson) are administered in controlled environments by licensed professionals. The results are compared against representative national samples.</li>
-    <li><strong>Breadth of Domains</strong>: A full clinical test covers multiple categories over several hours, including working memory, processing speed, perceptual reasoning, and verbal comprehension. Online quizzes typically assess logical patterns and sequences over 5 to 15 minutes.</li>
-    <li><strong>Reliability and Validity</strong>: Clinical instruments are psychometrically validated over years of research to ensure they measure general intelligence (the "g factor") reliably without cultural or demographic bias.</li>
-  </ol>
-  <p>Online quizzes like <a href="/">IQ·Test</a> are great tools for entertainment and personal reflection, but they are not clinical diagnostics. They provide a quick, engaging snapshot of puzzle-solving performance using the 85–145 deviation frame of reference purely as a familiar scaling metric.</p>
-
-  <h2>What do the ranges mean?</h2>
-  <p>Under the standard Wechsler scale, scores are classified into general ranges:</p>
+  <h2>Common question types</h2>
+  <p>To assess these domains, IQ tests employ various puzzle formats. If you take a cognitive assessment, you will likely encounter:</p>
   <ul>
-    <li><strong>130 and above</strong>: Very Superior (often referred to as gifted).</li>
-    <li><strong>120 to 129</strong>: Superior.</li>
-    <li><strong>110 to 119</strong>: High Average.</li>
-    <li><strong>90 to 109</strong>: Average (the bulk of the general population).</li>
-    <li><strong>80 to 89</strong>: Low Average.</li>
-    <li><strong>70 to 79</strong>: Borderline.</li>
-    <li><strong>69 and below</strong>: Extremely Low.</li>
+    <li><strong>Pattern Recognition:</strong> Identifying the next shape or sequence in a visual matrix.</li>
+    <li><strong>Numeric Reasoning:</strong> Finding the missing number in a mathematical sequence.</li>
+    <li><strong>Logical Deduction:</strong> Solving syllogisms (e.g., "All X are Y. Some Y are Z. Are all X Z?").</li>
+    <li><strong>Verbal Analogies:</strong> Identifying relationships between words (e.g., "Tree is to Forest as Star is to...").</li>
   </ul>
-  <p>IQ is not a fixed, immutable measure of your worth or capability. It is a model of logical and spatial processing speeds. Research shows that cognitive abilities can shift throughout life based on education, lifestyle, and health.</p>
+
+  <h2>How IQ scores are usually scaled</h2>
+  <p>Modern IQ tests use a statistical normal distribution known as a bell curve. The mean (average) score of the population is anchored exactly at 100, with a standard deviation of 15 points. This means:</p>
+  <ul>
+    <li><strong>68%</strong> of people score between 85 and 115 (Average).</li>
+    <li><strong>95%</strong> of people score between 70 and 130.</li>
+    <li><strong>98th Percentile:</strong> A score of 130 or higher, generally considered the threshold for high-IQ societies like Mensa.</li>
+  </ul>
+
+  <h2>How this site differs</h2>
+  <p>It is important to draw a clear distinction between a clinical assessment and an online self-insight quiz. <a href="/">IQ·Test</a> provides a 16-question online cognitive assessment covering numeric, verbal, logic, and pattern recognition skills. It uses the familiar 85-145 index purely as an entertaining frame of reference. A true clinical assessment, like the WAIS-IV, is administered by a licensed psychologist over several hours and is extensively normed across demographics.</p>
+
+  <h2>Limits of entertainment and self-insight tests</h2>
+  <p>While online cognitive quizzes are engaging and provide a useful snapshot of your puzzle-solving speed and logical reasoning, they are not diagnostic tools. They should not be used for educational placement, clinical diagnoses, or hiring decisions. They are best enjoyed as a tool for personal reflection and a fun way to exercise your brain.</p>
+
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-accordion">
+    <div class="faq-item">
+      <div class="faq-q">Can you prepare for an IQ test?</div>
+      <div class="faq-a">While you cannot study facts to improve your score, familiarizing yourself with the format of pattern recognition, logic puzzles, and reasoning questions can reduce test anxiety and slightly improve performance by making you faster.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Is an IQ score permanent?</div>
+      <div class="faq-a">No. Cognitive abilities can shift over a lifetime due to aging, education, health, and neuroplasticity. However, scores taken in adulthood tend to remain relatively stable compared to childhood scores.</div>
+    </div>
+  </div>
 
   <div class="company-block">
-    <strong>Want to check your cognitive reasoning skills?</strong><br>
-    Try our free 16-question online quiz to see how you perform across verbal, numeric, logic, and visual-spatial domains.
-    <br><br>
-    <a href="/" style="font-weight:600;">Take the Free Cognitive Test →</a>
+    <h2 style="margin-top:0;">Want to test your cognitive skills?</h2>
+    <p>Try our free 16-question assessment to see how you perform across verbal, numeric, logic, and visual-spatial domains.</p>
+    <a href="/" class="btn">Take the free cognitive test</a>
   </div>
 </div>
 <footer>
   <a href="/">Home</a>
-  <a href="/about.html">About</a>
-  <a href="/methodology.html">Methodology</a>
-  <a href="/support.html">Support</a>
-  <a href="/privacy.html">Privacy</a>
+  <a href="/about">About</a>
+  <a href="/methodology">Methodology</a>
+  <a href="/what-is-an-iq-test">What is an IQ Test?</a>
+  <a href="/free-iq-test-online">Free IQ Test Online</a>
+  <br><br>
+  <a href="/historical-figures-iq">Historical IQs</a>
+  <a href="/cognitive-test-vs-iq-test">Cognitive vs IQ Test</a>
+  <a href="/support">Support</a>
+  <a href="/privacy">Privacy</a>
   <br><br>
   &copy; 2026 APEX Business Systems Ltd. &nbsp;·&nbsp; Edmonton, AB
 </footer>
