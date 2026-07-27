@@ -34,6 +34,8 @@ alter table sessions enable row level security;
 -- requirement for a Canada-based sender). Do not shorten this without checking current
 -- CASL guidance — this file is not legal advice, confirm with counsel before launch.
 
--- Migration: add tier column (§6 of execution contract)
+-- Migration: add tier column (§6 of execution contract) and lead capture columns
 -- Safe to run multiple times — "add column if not exists" is idempotent.
-alter table sessions add column if not exists tier text check (tier in ('basic','detailed'));
+alter table sessions add column if not exists tier text check (tier in ('basic','detailed','complete'));
+alter table sessions add column if not exists lead_only boolean default false;
+alter table sessions add column if not exists marketing_opt_in boolean default false;

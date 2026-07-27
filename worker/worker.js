@@ -22,9 +22,9 @@
  */
 
 // ── Tier config ──────────────────────────────────────────────────────────────
-const PRICE_CENTS   = { basic: 199, detailed: 399 };
-const PRODUCT_NAME  = { basic: "IQ·Test Basic Result", detailed: "IQ·Test Detailed Result" };
-const VALID_TIERS   = new Set(["basic", "detailed"]);
+const PRICE_CENTS   = { basic: 199, detailed: 399, complete: 699 };
+const PRODUCT_NAME  = { basic: "IQ·Test Basic Result", detailed: "IQ·Test Detailed Result", complete: "IQ·Test Complete Report + Printable Certificate" };
+const VALID_TIERS   = new Set(["basic", "detailed", "complete"]);
 
 // ── CORS ─────────────────────────────────────────────────────────────────────
 const corsHeaders = (origin) => ({
@@ -85,6 +85,13 @@ export default {
 
     const clientIp = req.headers.get("CF-Connecting-IP") || "127.0.0.1";
 
+    // T-09: Block WP scanner probes early at Worker level to clean logs & avoid 5xx noise
+    const scannerRegex = /^\/(wp-admin|wp-includes|wp-content|wp-login|xmlrpc|cms|\.env)/i;
+    if (scannerRegex.test(url.pathname)) {
+      logEvent(env, "bot_probe_blocked", { status: "blocked", ip: clientIp, path: url.pathname });
+      return new Response("Forbidden", { status: 403, headers: cors });
+    }
+
     try {
       let body = null;
       if (req.method === "POST") {
@@ -131,7 +138,8 @@ export default {
 
       return new Response("Not found", { status: 404, headers: cors });
     } catch (err) {
-      console.error(err);
+      console.error("Unhandled Worker exception:", err);
+      logEvent(env, "unhandled_exception", { status: "failed", errorCode: err.message });
       return json({ error: "internal_error" }, 500, cors);
     }
   },
@@ -188,12 +196,12 @@ async function sbUpdate(env, id, patch) {
 // ── Handlers ─────────────────────────────────────────────────────────────────
 
 /** POST /api/save-result
- *  body: { email, consentGiven, raw, index, percentile, catScores, catMax, answers }
+ *  body: { email, consentGiven, marketingOptIn, leadOnly, raw, index, percentile, catScores, catMax, answers }
  *  -> { id }
  */
 async function handleSaveResult(body, env, cors) {
   if (!body) return json({ error: "invalid_payload" }, 400, cors);
-  const { email, raw, index, percentile, catScores, catMax, answers, consentGiven } = body;
+  const { email, raw, index, percentile, catScores, catMax, answers, consentGiven, marketingOptIn, leadOnly } = body;
 
   if (!validateEmail(email) || typeof raw !== "number") {
     logEvent(env, "save_result_failed", { status: "failed", errorCode: "invalid_payload", email });
@@ -213,11 +221,13 @@ async function handleSaveResult(body, env, cors) {
     percentile_estimate:  percentile ?? null,
     category_breakdown:   { catScores, catMax },
     paid:                 false,
+    lead_only:            Boolean(leadOnly),
+    marketing_opt_in:     Boolean(marketingOptIn),
     consent_given_at:     new Date().toISOString(), // server-stamped, not client
     consent_text_version: "v1",
   });
 
-  logEvent(env, "result_saved", { sessionId: row.id, status: "success", email });
+  logEvent(env, leadOnly ? "lead_captured" : "result_saved", { sessionId: row.id, status: "success", email, marketingOptIn: Boolean(marketingOptIn) });
   return json({ id: row.id }, 200, cors);
 }
 
@@ -483,13 +493,20 @@ STRICT RULES — violations are not acceptable:
     const content = data.choices[0].message.content.trim();
 
     if (validateReportContent(content)) {
+      if (tier === "complete") {
+        return content + `\n\n---\n### Printable Certificate of Cognitive Assessment\n**IQ·TEST COGNITIVE ASSESSMENT INDEX: ${cognitive_index}**\n*Estimated Population Percentile: ${percentile_estimate ?? 'N/A'}th Percentile*\n*Issued by APEX Business Systems Ltd. (Edmonton, AB)*\n*Verification ID: ${row.id}*\n\nThis certificate verifies completion of the 16-item self-insight cognitive reasoning evaluation across numeric, verbal, logical, and spatial reasoning domains.`;
+      }
       return content;
     }
   } catch (err) {
     console.error("Groq generation or validation failed, using fallback template:", err);
   }
 
-  return fallbackDetailedTemplate(row);
+  const fallback = fallbackDetailedTemplate(row);
+  if (tier === "complete") {
+    return fallback + `\n\n---\n### Printable Certificate of Cognitive Assessment\n**IQ·TEST COGNITIVE ASSESSMENT INDEX: ${cognitive_index}**\n*Estimated Population Percentile: ${percentile_estimate ?? 'N/A'}th Percentile*\n*Issued by APEX Business Systems Ltd. (Edmonton, AB)*\n*Verification ID: ${row.id}*\n\nThis certificate verifies completion of the 16-item self-insight cognitive reasoning evaluation across numeric, verbal, logical, and spatial reasoning domains.`;
+  }
+  return fallback;
 }
 
 // ── Resend email ──────────────────────────────────────────────────────────────
@@ -497,7 +514,7 @@ STRICT RULES — violations are not acceptable:
 async function sendReportEmail(env, to, report, index, tier) {
   if (!to) return;
 
-  const subjectLabel = tier === "basic" ? "Basic Result" : "Detailed Result";
+  const subjectLabel = tier === "basic" ? "Basic Result" : tier === "complete" ? "Complete Report & Certificate" : "Detailed Result";
   
   const htmlBody = `
     <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; line-height:1.6; color:#1a1a1a; max-width:600px; margin:0 auto; padding:24px; background-color:#ffffff; border:1px solid #eaeaea; border-radius:12px;">
