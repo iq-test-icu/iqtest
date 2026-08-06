@@ -1445,8 +1445,25 @@
 
         <div class="receipt">
           <h2 style="margin-bottom:8px;">Choose your report tier</h2>
-          <p class="lead" style="font-size:0.9rem; margin-bottom:20px; color:var(--text-secondary);">One-time payment. No subscription trap. Delivered by email in &lt;60 seconds.</p>
-          
+          <p class="lead" style="font-size:0.9rem; margin-bottom:20px; color:var(--text-secondary);">One-time payment. No subscription. Emailed in under 60 seconds.</p>
+
+          <!-- Sample excerpt — gives people a concrete preview before they pay -->
+          <details style="margin-bottom:20px; border:1px solid var(--border-color); border-radius:10px; padding:14px 16px; cursor:pointer;">
+            <summary style="font-size:0.85rem; font-weight:600; color:var(--gold); list-style:none; display:flex; justify-content:space-between; align-items:center;">
+              <span>📄 See a sample Deep Report excerpt</span>
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:400;">click to expand</span>
+            </summary>
+            <div style="margin-top:12px; font-size:0.83rem; color:var(--text-secondary); line-height:1.7; border-top:1px solid var(--border-color); padding-top:12px; font-style:italic;">
+              <strong style="color:var(--text-primary); font-style:normal;">Overall Summary</strong><br>
+              Your puzzle responses indicate a constructive reasoning pattern combining systematic deduction with an ability to hold multiple relational concepts simultaneously. You tend to resolve ambiguity by narrowing to structure rather than intuition.<br><br>
+              <strong style="color:var(--text-primary); font-style:normal;">Strongest Reasoning Signal</strong><br>
+              Your Logic scores were most pronounced — you consistently identified which premises were sufficient and which required additional constraints. This reflects deliberate, rule-governed thinking rather than trial-and-error pattern matching.<br><br>
+              <strong style="color:var(--text-primary); font-style:normal;">Thematic Historical Match</strong><br>
+              Your Logic result echoes the kind of thinking associated with Aristotle — not a numeric comparison, but a shared tendency to formalise relationships between statements before drawing conclusions.<br><br>
+              <span style="font-size:0.78rem; color:var(--text-muted);">↑ This is an illustrative excerpt. Your actual report is generated from your specific answers and score breakdown.</span>
+            </div>
+          </details>
+
           <div class="tier-row">
             <label class="tier-opt" id="tierBasicLabel">
               <input type="radio" name="tier" value="basic" id="tierBasic" onchange="onTierChange()">
@@ -1455,7 +1472,7 @@
                   <span class="tier-name">Score Report</span>
                   <span class="tier-price">$1.99</span>
                 </div>
-                <div class="tier-desc">Full score, percentile, and 4-category breakdown. No historical match.</div>
+                <div class="tier-desc">Your estimated percentile across all 4 categories (Numeric, Verbal, Logic, Pattern). Plain text. Emailed in ~30 seconds.</div>
               </div>
             </label>
             <label class="tier-opt selected" id="tierDetailedLabel">
@@ -1465,7 +1482,7 @@
                   <span class="tier-name">Deep Report <span class="tier-badge">Most Popular</span></span>
                   <span class="tier-price">$3.99</span>
                 </div>
-                <div class="tier-desc">Everything in Score, plus written reasoning analysis and your historical figure match.</div>
+                <div class="tier-desc">Everything in Score Report, plus a ~200-word written analysis across 6 sections (Summary, Domain Observations, Strongest Signal, Context, Takeaway, Historical Match). Emailed in ~45 seconds.</div>
               </div>
             </label>
             <label class="tier-opt" id="tierCompleteLabel">
@@ -1475,17 +1492,17 @@
                   <span class="tier-name">Complete Report <span class="tier-badge" style="background:#4ADE80; color:#062310;">Best Value</span></span>
                   <span class="tier-price">$6.99</span>
                 </div>
-                <div class="tier-desc">Everything in Deep Report, plus printable PDF certificate of assessment.</div>
+                <div class="tier-desc">Everything in Deep Report, plus a printable Certificate of Cognitive Assessment with your Verification ID. Emailed in ~60 seconds.</div>
               </div>
             </label>
           </div>
-          
+
           <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
           <label style="display:flex; gap:10px; align-items:flex-start; font-size:0.82rem; color:var(--text-muted); margin-bottom:18px; cursor:pointer;">
             <input type="checkbox" id="consentCheck" checked style="margin-top:3px; accent-color:var(--gold);">
             <span>Send my report to this email. No newsletters, no marketing follow-ups.</span>
           </label>
-          
+
           <div class="error-msg" id="checkoutError">Please enter a valid email and tick the checkbox above.</div>
           <button class="btn btn-primary" style="width:100%;" onclick="startCheckout()" id="checkoutBtn">Reveal my historical match &mdash; $3.99</button>
           <p class="disclaimer" style="font-size:0.75rem; text-align:center; margin-top:12px; font-weight:600; color:var(--text-secondary);">🔒 One-time payment. No subscription. No surprise charges. Processed securely by Stripe.</p>
@@ -1563,16 +1580,21 @@ const QUESTIONS = [
   {cat:"PATTERN", text:"1, 1, 2, 3, 5, 8, ?", opts:["11","12","13","14"], correct:2},
 ];
 
-const PERCENTILE_TABLE = [[85,16],[90,25],[95,37],[100,50],[105,63],[110,75],[115,84],[120,91],[125,95],[130,98],[135,99],[140,99.6],[145,99.9]];
+// Percentile lookup calibrated to 16-item raw score distribution.
+// Derived from a normal approximation (mean=8, SD=3.2) for a timed
+// 16-item test. Will be replaced with empirical count(*) distribution
+// from Supabase sessions table once sufficient volume is collected.
+// Each entry: [rawScore, estimatedPercentile]
+const RAW_PCT_TABLE = [
+  [0,1],[1,2],[2,4],[3,7],[4,11],[5,17],[6,25],[7,35],
+  [8,50],[9,65],[10,75],[11,84],[12,90],[13,94],[14,97],
+  [15,99],[16,99]
+];
 function percentileFor(index){
-  for(let i=0;i<PERCENTILE_TABLE.length-1;i++){
-    const [x0,y0]=PERCENTILE_TABLE[i], [x1,y1]=PERCENTILE_TABLE[i+1];
-    if(index>=x0 && index<=x1){
-      const t=(index-x0)/(x1-x0);
-      return Math.round(y0+t*(y1-y0));
-    }
-  }
-  return index<85?16:99.9;
+  // Convert index back to raw score for lookup (inverse of: index = 85 + (raw/16)*60)
+  const raw = Math.round(((index - 85) / 60) * 16);
+  const clamped = Math.max(0, Math.min(16, raw));
+  return RAW_PCT_TABLE[clamped][1];
 }
 
 let current = 0;
@@ -1904,10 +1926,14 @@ async function startCheckout(){
   }
 }
 
+// Gift checkout flow is not yet implemented.
+// The broken CTA has been removed from the paid report screen.
+// When gift flow is ready: accept a recipient email, issue a
+// Stripe Checkout for the 'detailed' tier with metadata.gift_recipient,
+// and on webhook completion send the report to that address.
 function startGiftCheckout(){
   trackEvent("gift_checkout_clicked");
-  // Gift checkout pre-selects detailed report tier
-  window.location.href = "https://iq-test.icu/?gift=true";
+  window.location.href = "/";
 }
 
 // Interactive FAQ Accordion Trigger
@@ -1944,10 +1970,10 @@ function toggleFaq(btn) {
     const data = await res.json();
     if(data.paid && data.report){
       document.getElementById('reportBody').innerHTML = `<div style="white-space:pre-wrap;">${data.report}</div>
-      <div class="receipt" style="margin-top:32px; border-color:var(--gold); text-align:center;">
-        <h3 style="font-family:var(--font-display); font-size:1.25rem; margin-bottom:8px; color:var(--gold);">🎁 Gift a Deep Report to a Friend (50% Off)</h3>
-        <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:16px;">Know someone who would love to test their mind? Send an instant access pass for just $1.99.</p>
-        <button class="btn btn-primary" onclick="startGiftCheckout()">Gift a Friend's Test Pass — $1.99</button>
+      <div class="receipt" style="margin-top:32px; border-color:var(--border-color); text-align:center;">
+        <h3 style="font-family:var(--font-display); font-size:1.1rem; margin-bottom:8px; color:var(--text-primary);">🔗 Share your result</h3>
+        <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:16px;">Know someone who'd find this interesting? Challenge them to take the test.</p>
+        <button class="btn" style="background:rgba(255,255,255,0.06); border:1px solid var(--border-color); color:var(--text-secondary);" onclick="shareResult()">Copy / Share Test Link</button>
       </div>`;
       trackEvent("report_viewed", { reportId });
     } else {
