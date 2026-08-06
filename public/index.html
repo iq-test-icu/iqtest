@@ -1780,6 +1780,11 @@ function finishTest(){
 function trackEvent(name, meta = {}) {
   try {
     console.log("[TELEMETRY]", name, meta);
+    fetch((typeof API_BASE !== "undefined" ? API_BASE : "") + "/api/track", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, meta })
+    }).catch(() => {});
   } catch(e) {}
 }
 
@@ -1874,12 +1879,17 @@ async function startCheckout(){
   btn.disabled = true; btn.textContent = 'Loading checkout…';
   trackEvent("checkout_started", { email, tier });
   try{
-    const saveRes = await fetch(`${API_BASE}/api/save-result`, {
-      method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({email, consentGiven:consented, ...window.__result})
-    });
-    if(!saveRes.ok) throw new Error('save failed');
-    const {id} = await saveRes.json();
+    let id = window.__leadSavedId;
+    if (!id) {
+      const saveRes = await fetch(`${API_BASE}/api/save-result`, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({email, consentGiven:consented, ...window.__result})
+      });
+      if(!saveRes.ok) throw new Error('save failed');
+      const saveData = await saveRes.json();
+      id = saveData.id;
+      window.__leadSavedId = id;
+    }
 
     const checkoutRes = await fetch(`${API_BASE}/api/checkout`, {
       method:'POST', headers:{'Content-Type':'application/json'},

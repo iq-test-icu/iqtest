@@ -76,6 +76,12 @@ function validateEmail(email) {
   return typeof email === "string" && email.length <= 254 && re.test(email);
 }
 
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+function isUuid(id) {
+  return typeof id === "string" && UUID_REGEX.test(id);
+}
+
 export default {
   async fetch(req, env) {
     const url  = new URL(req.url);
@@ -84,13 +90,6 @@ export default {
     if (req.method === "OPTIONS") return new Response(null, { headers: cors });
 
     const clientIp = req.headers.get("CF-Connecting-IP") || "127.0.0.1";
-
-    // T-09: Block WP scanner probes early at Worker level to clean logs & avoid 5xx noise
-    const scannerRegex = /^\/(wp-admin|wp-includes|wp-content|wp-login|xmlrpc|cms|\.env)/i;
-    if (scannerRegex.test(url.pathname)) {
-      logEvent(env, "bot_probe_blocked", { status: "blocked", ip: clientIp, path: url.pathname });
-      return new Response("Forbidden", { status: 403, headers: cors });
-    }
 
     try {
       let body = null;
@@ -129,6 +128,8 @@ export default {
 
       if (url.pathname === "/api/save-result" && req.method === "POST")
         return await handleSaveResult(body, env, cors);
+      if (url.pathname === "/api/track" && req.method === "POST")
+        return await handleTrackEvent(body, env, cors);
       if (url.pathname === "/api/checkout" && req.method === "POST")
         return await handleCheckout(body, env, cors);
       if (url.pathname === "/api/webhook" && req.method === "POST")
@@ -163,6 +164,7 @@ async function sbInsert(env, table, row) {
 }
 
 async function sbSelect(env, id) {
+  if (!isUuid(id)) return null;
   const res = await fetch(
     `${env.SUPABASE_URL}/rest/v1/sessions?id=eq.${id}&select=*`,
     {
@@ -336,9 +338,26 @@ async function handleWebhook(req, env, cors) {
 async function handleGetReport(url, env, cors) {
   const id = url.searchParams.get("id");
   if (!id) return json({ error: "missing_id" }, 400, cors);
+  if (!isUuid(id)) return json({ error: "invalid_id" }, 400, cors);
   const row = await sbSelect(env, id);
   if (!row) return json({ error: "not_found" }, 404, cors);
   return json({ paid: row.paid, report: row.report || null, tier: row.tier || null }, 200, cors);
+}
+
+/** POST /api/track
+ *  body: { name, meta }
+ *  -> { ok: true }
+ */
+async function handleTrackEvent(body, env, cors) {
+  if (!body || typeof body.name !== "string" || !body.name.trim()) {
+    return json({ error: "invalid_payload" }, 400, cors);
+  }
+  const { name, meta } = body;
+  await sbInsert(env, "events", {
+    event_name: name,
+    meta:       meta || {},
+  });
+  return json({ ok: true }, 200, cors);
 }
 
 // ── Report generation ─────────────────────────────────────────────────────────
