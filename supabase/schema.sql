@@ -39,3 +39,14 @@ alter table sessions enable row level security;
 alter table sessions add column if not exists tier text check (tier in ('basic','detailed','complete'));
 alter table sessions add column if not exists lead_only boolean default false;
 alter table sessions add column if not exists marketing_opt_in boolean default false;
+
+-- Telemetry events table
+create table if not exists events (
+  id uuid primary key default gen_random_uuid(),
+  event_name text not null,
+  meta jsonb,
+  created_at timestamptz not null default now()
+);
+
+alter table events enable row level security;
+
