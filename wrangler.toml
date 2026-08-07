@@ -1,0 +1,19 @@
+name = "apex-iqtest-worker"
+main = "worker/worker.js"
+compatibility_date = "2026-07-16"
+account_id = "ac6add7009ec690cb919dc97d13d6fc6"
+
+[[routes]]
+pattern = "iq-test.icu/api/*"
+zone_name = "iq-test.icu"
+
+[vars]
+ALLOWED_ORIGIN = "https://iq-test.icu"
+RESEND_FROM = "IQ Test <report@iq-test.icu>"
+
+# Secrets — set via `wrangler secret put <NAME>`, never committed here:
+#   SUPABASE_SERVICE_KEY
+#   STRIPE_SECRET_KEY
+#   STRIPE_WEBHOOK_SECRET
+#   GROQ_API_KEY
+#   RESEND_API_KEY
