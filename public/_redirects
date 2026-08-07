@@ -1,3 +1,8 @@
-http://iq-test.icu/* https://iq-test.icu/:splat 301
-https://www.iq-test.icu/* https://iq-test.icu/:splat 301
-http://www.iq-test.icu/* https://iq-test.icu/:splat 301
+/about.html /about 301
+/cognitive-test-vs-iq-test.html /cognitive-test-vs-iq-test 301
+/free-iq-test-online.html /free-iq-test-online 301
+/historical-figures-iq.html /historical-figures-iq 301
+/methodology.html /methodology 301
+/privacy.html /privacy 301
+/support.html /support 301
+/what-is-an-iq-test.html /what-is-an-iq-test 301
