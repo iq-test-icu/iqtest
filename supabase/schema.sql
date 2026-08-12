@@ -50,3 +50,13 @@ create table if not exists events (
 
 alter table events enable row level security;
 
+-- Migration: abandoned-lead recovery sweep (CRO audit 2026-08-10).
+-- recovery_sent tracks whether the one-time follow-up email has already gone
+-- out, so the Cron Trigger sweep in worker.js never double-sends. The partial
+-- index matches the sweep's WHERE clause exactly, keeping the scheduled query
+-- cheap as the sessions table grows. Safe to run multiple times.
+alter table sessions add column if not exists recovery_sent boolean not null default false;
+
+create index if not exists sessions_recovery_sweep_idx on sessions (created_at)
+  where paid = false and recovery_sent = false and marketing_opt_in = true;
+

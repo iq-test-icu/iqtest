@@ -5,6 +5,10 @@
  *   POST /api/checkout      -> Stripe Checkout Session (tier: basic|detailed), return {url}
  *   POST /api/webhook       -> Stripe webhook (checkout.session.completed) -> report + email
  *   GET  /api/report?id=    -> {paid, report, tier}
+ *   GET  /api/unsubscribe?id= -> one-click CASL unsubscribe, sets marketing_opt_in=false
+ *
+ * Scheduled (Cron Trigger, see wrangler.toml [triggers]):
+ *   Daily recovery sweep — one follow-up email to opted-in, unpaid leads 48h+ old.
  *
  * Secrets (wrangler secret put <NAME>):
  *   SUPABASE_URL, SUPABASE_SERVICE_KEY
@@ -19,6 +23,10 @@
  *   - CASL: consent_given_at is always set server-side; client timestamp is never trusted.
  *   - No npm SDK dependencies — raw fetch() only.
  *   - Historical figure pairing in Detailed is THEMATIC, never numeric (no "Einstein's IQ was X").
+ *   - Recovery sweep only emails marketing_opt_in=true rows (promotional message under CASL,
+ *     not covered by the mandatory "send my score" consent) and every send carries a working
+ *     one-click unsubscribe link + List-Unsubscribe header. Engineering judgment, not legal
+ *     advice — confirm with counsel before relying on this for a live CASL obligation.
  */
 
 // ── Tier config ──────────────────────────────────────────────────────────────
@@ -56,7 +64,7 @@ function isRateLimited(ip) {
   return false;
 }
 
-function logEvent(env, eventName, { sessionId = null, tier = null, status, errorCode = null, email = null, ip = null } = {}) {
+function logEvent(env, eventName, { sessionId = null, tier = null, status, errorCode = null, email = null, ip = null, meta = null } = {}) {
   const logObj = {
     timestamp: new Date().toISOString(),
     event_name: eventName,
@@ -68,6 +76,7 @@ function logEvent(env, eventName, { sessionId = null, tier = null, status, error
   };
   if (email) logObj.email = email;
   if (ip) logObj.ip = ip;
+  if (meta) logObj.meta = meta; // optional structured extras (e.g. batch counts) — never required
   console.log(JSON.stringify(logObj));
 }
 
@@ -136,6 +145,8 @@ export default {
         return await handleWebhook(req, env, cors);
       if (url.pathname === "/api/report" && req.method === "GET")
         return await handleGetReport(url, env, cors);
+      if (url.pathname === "/api/unsubscribe" && req.method === "GET")
+        return await handleUnsubscribe(url, env, cors);
 
       return new Response("Not found", { status: 404, headers: cors });
     } catch (err) {
@@ -143,6 +154,11 @@ export default {
       logEvent(env, "unhandled_exception", { status: "failed", errorCode: err.message });
       return json({ error: "internal_error" }, 500, cors);
     }
+  },
+
+  // Cloudflare Cron Trigger entry point — see wrangler.toml [triggers].
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(handleRecoverySweep(env));
   },
 };
 
@@ -177,6 +193,27 @@ async function sbSelect(env, id) {
   if (!res.ok) throw new Error(`supabase select failed: ${await res.text()}`);
   const rows = await res.json();
   return rows[0] || null;
+}
+
+/** Rows eligible for the recovery sweep — mirrors sessions_recovery_sweep_idx
+ *  in supabase/schema.sql exactly, so the query stays index-backed. */
+async function sbSelectRecoveryCandidates(env, cutoffIso, limit) {
+  const params = new URLSearchParams({
+    paid:             "eq.false",
+    recovery_sent:    "eq.false",
+    marketing_opt_in: "eq.true",
+    created_at:       `lt.${cutoffIso}`,
+    select:           "id,email,cognitive_index,percentile_estimate",
+    limit:            String(limit),
+  });
+  const res = await fetch(`${env.SUPABASE_URL}/rest/v1/sessions?${params.toString()}`, {
+    headers: {
+      apikey:        env.SUPABASE_SERVICE_KEY,
+      Authorization: `Bearer ${env.SUPABASE_SERVICE_KEY}`,
+    },
+  });
+  if (!res.ok) throw new Error(`supabase recovery query failed: ${await res.text()}`);
+  return await res.json();
 }
 
 async function sbUpdate(env, id, patch) {
@@ -342,6 +379,31 @@ async function handleGetReport(url, env, cors) {
   const row = await sbSelect(env, id);
   if (!row) return json({ error: "not_found" }, 404, cors);
   return json({ paid: row.paid, report: row.report || null, tier: row.tier || null }, 200, cors);
+}
+
+/** GET /api/unsubscribe?id=<uuid>
+ *  One-click CASL unsubscribe — sets marketing_opt_in=false. Always returns a
+ *  friendly HTML confirmation, even for an invalid/missing id, so the link
+ *  never surfaces a broken page or leaks whether an id exists.
+ */
+async function handleUnsubscribe(url, env, cors) {
+  const id = url.searchParams.get("id");
+  if (isUuid(id)) {
+    try {
+      await sbUpdate(env, id, { marketing_opt_in: false });
+      logEvent(env, "unsubscribed", { sessionId: id, status: "success" });
+    } catch (err) {
+      logEvent(env, "unsubscribe_failed", { sessionId: id, status: "failed", errorCode: err.message });
+    }
+  }
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Unsubscribed | IQ·Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; background:#0d0d0d; color:#eee; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; text-align:center; padding:24px;">
+<div><h1 style="color:#B49048; font-size:1.4rem;">You're unsubscribed</h1>
+<p style="color:#aaa; max-width:360px; margin:0 auto;">You won't receive any more optional emails from IQ·Test. Your saved score, if any, is unaffected.</p>
+<p style="margin-top:20px;"><a href="https://iq-test.icu" style="color:#B49048;">Return to iq-test.icu</a></p></div>
+</body></html>`;
+  return new Response(html, { status: 200, headers: { ...cors, "Content-Type": "text/html; charset=utf-8" } });
 }
 
 /** POST /api/track
@@ -530,6 +592,30 @@ STRICT RULES — violations are not acceptable:
 
 // ── Resend email ──────────────────────────────────────────────────────────────
 
+/**
+ * Single POST path to Resend for every outbound email.
+ *
+ * fetch() resolves normally on a 4xx/5xx, so an unchecked call silently reports
+ * success on a rejected send. That mattered in both call sites below: the paid
+ * path would mark the row paid + report_sent_at with no report ever delivered,
+ * and the recovery sweep would set recovery_sent=true and burn the lead forever.
+ * Throwing here pushes both into their existing retry paths — Stripe re-delivers
+ * the webhook (guarded by `!row.paid`, so it stays idempotent) and the next
+ * nightly sweep re-picks the untouched row.
+ */
+async function postResend(env, payload) {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization:  `Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ from: env.RESEND_FROM, ...payload }),
+  });
+  if (!res.ok) throw new Error(`resend send failed (${res.status}): ${await res.text()}`);
+  return res;
+}
+
 async function sendReportEmail(env, to, report, index, tier) {
   if (!to) return;
 
@@ -550,19 +636,104 @@ async function sendReportEmail(env, to, report, index, tier) {
     </div>
   `;
 
-  await fetch("https://api.resend.com/emails", {
-    method: "POST",
+  await postResend(env, {
+    to,
+    subject: `Your IQ·Test ${subjectLabel} — Cognitive Index ${index}`,
+    text:    `${report}\n\n---\n— IQ·Test\niq-test.icu`,
+    html:    htmlBody,
+  });
+}
+
+// ── Recovery sweep (abandoned-lead follow-up, CASL-gated) ────────────────────
+
+/**
+ * Fires once per Cron Trigger (see wrangler.toml [triggers]). Sends ONE
+ * follow-up email to leads who completed the free score, opted in to
+ * "occasional cognitive-science content" (marketing_opt_in=true), haven't
+ * purchased, haven't already been swept, and are 48h+ old. Capped at 200
+ * rows/run and never throws past a single row — one bad send must not block
+ * the rest of the batch or the next scheduled run.
+ */
+async function handleRecoverySweep(env) {
+  const cutoff = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
+
+  let candidates;
+  try {
+    candidates = await sbSelectRecoveryCandidates(env, cutoff, 200);
+  } catch (err) {
+    logEvent(env, "recovery_sweep_query_failed", { status: "failed", errorCode: err.message });
+    return;
+  }
+
+  logEvent(env, "recovery_sweep_started", { status: "success", meta: { candidateCount: candidates.length } });
+
+  for (const row of candidates) {
+    try {
+      await sendRecoveryEmail(env, row.email, row);
+      await sbUpdate(env, row.id, { recovery_sent: true });
+      logEvent(env, "recovery_email_sent", { sessionId: row.id, status: "success", email: row.email });
+    } catch (err) {
+      logEvent(env, "recovery_email_failed", { sessionId: row.id, status: "failed", errorCode: err.message, email: row.email });
+    }
+  }
+
+  logEvent(env, "recovery_sweep_completed", { status: "success", meta: { candidateCount: candidates.length } });
+}
+
+async function sendRecoveryEmail(env, to, row) {
+  if (!to) return;
+
+  const reportUrl = `${env.ALLOWED_ORIGIN}/?report=${row.id}`;
+  const unsubUrl  = `${env.ALLOWED_ORIGIN}/api/unsubscribe?id=${row.id}`;
+  const indexLine = row.cognitive_index != null
+    ? `Your cognitive index was ${row.cognitive_index}${row.percentile_estimate != null ? ` (around the ${row.percentile_estimate}th percentile)` : ""}.`
+    : "Your result is still saved.";
+
+  const text = `Hi,
+
+A little while ago you took the IQ·Test cognitive assessment and got your free score. ${indexLine}
+
+If you'd like the full percentile breakdown, or the written reasoning analysis and historical figure match, you can pick it up from the same link:
+
+${reportUrl}
+
+No pressure — if you're not interested, no action needed. You're getting this because you opted in to occasional cognitive-science content when you took the test.
+
+Unsubscribe from these emails: ${unsubUrl}
+
+— IQ·Test
+iq-test.icu`;
+
+  const html = `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; line-height:1.6; color:#1a1a1a; max-width:600px; margin:0 auto; padding:24px; background-color:#ffffff; border:1px solid #eaeaea; border-radius:12px;">
+      <div style="text-align:center; margin-bottom:24px; border-bottom:1px solid #eaeaea; padding-bottom:16px;">
+        <span style="font-family:Georgia,serif; font-size:24px; font-weight:bold; letter-spacing:0.05em; color:#B49048;">IQ&middot;TEST</span>
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:#666666; margin-top:4px;">YOUR SAVED RESULT</div>
+      </div>
+      <div style="font-size:15px; margin-bottom:24px;">
+        <p>A little while ago you took the IQ·Test cognitive assessment and got your free score. ${indexLine}</p>
+        <p>If you'd like the full percentile breakdown, or the written reasoning analysis and historical figure match, you can pick it up from the same link:</p>
+        <p style="text-align:center; margin:24px 0;"><a href="${reportUrl}" style="background:#B49048; color:#ffffff; text-decoration:none; padding:12px 28px; border-radius:8px; font-weight:600; display:inline-block;">View my saved result</a></p>
+        <p style="font-size:13px; color:#666666;">No pressure — if you're not interested, no action needed.</p>
+      </div>
+      <div style="margin-top:32px; border-top:1px solid #eaeaea; padding-top:16px; font-size:12px; color:#888888; text-align:center; line-height:1.5;">
+        This is a self-insight quiz, not a clinical IQ test.<br>
+        &copy; 2026 APEX Business Systems Ltd. &nbsp;&middot;&nbsp; Edmonton, AB<br>
+        <a href="https://iq-test.icu" style="color:#B49048; text-decoration:none;">iq-test.icu</a> &nbsp;&middot;&nbsp;
+        <a href="${unsubUrl}" style="color:#888888;">Unsubscribe</a>
+      </div>
+    </div>
+  `;
+
+  await postResend(env, {
+    to,
+    subject: "Your IQ·Test score is still saved",
+    text,
+    html,
     headers: {
-      Authorization:  `Bearer ${env.RESEND_API_KEY}`,
-      "Content-Type": "application/json",
+      "List-Unsubscribe":      `<${unsubUrl}>`,
+      "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
     },
-    body: JSON.stringify({
-      from:    env.RESEND_FROM,
-      to,
-      subject: `Your IQ·Test ${subjectLabel} — Cognitive Index ${index}`,
-      text:    `${report}\n\n---\n— IQ·Test\niq-test.icu`,
-      html:    htmlBody,
-    }),
   });
 }
 
