@@ -97,7 +97,7 @@ buildHtmlPage({
         <strong>Given Fact:</strong> Circle B is shaded black.
       </p>
       <p><strong>Question:</strong> What can be definitively concluded about Square A (which is adjacent to Circle B)?</p>
-      <button class="btn-outline" onclick="toggleSolution('solLogic', this)">🔍 Reveal Step-by-Step Solution</button>
+      <button class="btn-outline" aria-expanded="false" aria-controls="solLogic" onclick="toggleSolution('solLogic', this)">🔍 Reveal Step-by-Step Solution</button>
       
       <div id="solLogic" class="solution-panel">
         <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">✓ Deduction Breakdown (Modus Tollens):</p>
@@ -123,13 +123,10 @@ buildHtmlPage({
   <script>
     function toggleSolution(id, btn) {
       const panel = document.getElementById(id);
-      if (panel.style.display === 'block') {
-        panel.style.display = 'none';
-        btn.textContent = '🔍 Reveal Step-by-Step Solution';
-      } else {
-        panel.style.display = 'block';
-        btn.textContent = '▲ Hide Solution';
-      }
+      const isOpening = panel.style.display !== 'block';
+      panel.style.display = isOpening ? 'block' : 'none';
+      btn.textContent = isOpening ? '▲ Hide Solution' : '🔍 Reveal Step-by-Step Solution';
+      btn.setAttribute('aria-expanded', isOpening ? 'true' : 'false');
     }
   </script>`,
   faqs: [
@@ -231,7 +228,7 @@ buildHtmlPage({
         Sequence: 3, 7, 15, 31, 63, [ ? ]
       </p>
       <p><strong>Question:</strong> What is the next number in this progression, and what rule governs it?</p>
-      <button class="btn-outline" onclick="toggleSolution('solNum', this)">🔍 Reveal Step-by-Step Solution</button>
+      <button class="btn-outline" aria-expanded="false" aria-controls="solNum" onclick="toggleSolution('solNum', this)">🔍 Reveal Step-by-Step Solution</button>
       
       <div id="solNum" class="solution-panel">
         <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">✓ Two Valid Solution Paths:</p>
@@ -251,13 +248,10 @@ buildHtmlPage({
   <script>
     function toggleSolution(id, btn) {
       const panel = document.getElementById(id);
-      if (panel.style.display === 'block') {
-        panel.style.display = 'none';
-        btn.textContent = '🔍 Reveal Step-by-Step Solution';
-      } else {
-        panel.style.display = 'block';
-        btn.textContent = '▲ Hide Solution';
-      }
+      const isOpening = panel.style.display !== 'block';
+      panel.style.display = isOpening ? 'block' : 'none';
+      btn.textContent = isOpening ? '▲ Hide Solution' : '🔍 Reveal Step-by-Step Solution';
+      btn.setAttribute('aria-expanded', isOpening ? 'true' : 'false');
     }
   </script>`,
   faqs: [
@@ -360,7 +354,7 @@ buildHtmlPage({
         OMNISCIENT : KNOWLEDGE :: OMNIPOTENT : [ ? ]
       </p>
       <p><strong>Question:</strong> Complete the analogy by identifying the corresponding concept and underlying relational rule.</p>
-      <button class="btn-outline" onclick="toggleSolution('solVerb', this)">🔍 Reveal Step-by-Step Solution</button>
+      <button class="btn-outline" aria-expanded="false" aria-controls="solVerb" onclick="toggleSolution('solVerb', this)">🔍 Reveal Step-by-Step Solution</button>
       
       <div id="solVerb" class="solution-panel">
         <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">✓ Semantic Relationship Analysis:</p>
@@ -381,13 +375,10 @@ buildHtmlPage({
   <script>
     function toggleSolution(id, btn) {
       const panel = document.getElementById(id);
-      if (panel.style.display === 'block') {
-        panel.style.display = 'none';
-        btn.textContent = '🔍 Reveal Step-by-Step Solution';
-      } else {
-        panel.style.display = 'block';
-        btn.textContent = '▲ Hide Solution';
-      }
+      const isOpening = panel.style.display !== 'block';
+      panel.style.display = isOpening ? 'block' : 'none';
+      btn.textContent = isOpening ? '▲ Hide Solution' : '🔍 Reveal Step-by-Step Solution';
+      btn.setAttribute('aria-expanded', isOpening ? 'true' : 'false');
     }
   </script>`,
   faqs: [
@@ -499,7 +490,7 @@ buildHtmlPage({
         <strong>Row 3:</strong> Triangle with 1 dot &nbsp;→&nbsp; Triangle with 2 dots &nbsp;→&nbsp; <strong>[ ? ]</strong>
       </p>
       <p><strong>Question:</strong> What geometric figure and dot configuration completes Row 3?</p>
-      <button class="btn-outline" onclick="toggleSolution('solPat', this)">🔍 Reveal Step-by-Step Solution</button>
+      <button class="btn-outline" aria-expanded="false" aria-controls="solPat" onclick="toggleSolution('solPat', this)">🔍 Reveal Step-by-Step Solution</button>
       
       <div id="solPat" class="solution-panel">
         <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">✓ Multi-Variable Matrix Decomposition:</p>
@@ -520,13 +511,10 @@ buildHtmlPage({
   <script>
     function toggleSolution(id, btn) {
       const panel = document.getElementById(id);
-      if (panel.style.display === 'block') {
-        panel.style.display = 'none';
-        btn.textContent = '🔍 Reveal Step-by-Step Solution';
-      } else {
-        panel.style.display = 'block';
-        btn.textContent = '▲ Hide Solution';
-      }
+      const isOpening = panel.style.display !== 'block';
+      panel.style.display = isOpening ? 'block' : 'none';
+      btn.textContent = isOpening ? '▲ Hide Solution' : '🔍 Reveal Step-by-Step Solution';
+      btn.setAttribute('aria-expanded', isOpening ? 'true' : 'false');
     }
   </script>`,
   faqs: [
