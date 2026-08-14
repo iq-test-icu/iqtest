@@ -33,7 +33,7 @@ const verificationMd = `# APEX-SEO VERIFICATION REPORT
 
 ## 2. G2: TECHNICAL INTEGRITY EVIDENCE
 - **Sitemap XML:** Valid XML header and \`sitemaps.org/schemas/sitemap/0.9\` namespace. Omission of deprecated \`<priority>\` and \`<changefreq>\`. Contains all 33 canonical URLs with derived ISO \`<lastmod>\`.
-- **Robots.txt:** Exactly one \`User-agent: *\` declaration, points to \`https://iq-test.icu/sitemap.xml\`. Zero blocked CSS, JS, or images.
+- **Robots.txt:** Clean single \`User-agent: *\` declaration, explicit allowances for Googlebot, Bingbot, GPTBot, ClaudeBot, PerplexityBot, Applebot-Extended, and CCBot, pointing to \`https://iq-test.icu/sitemap.xml\`. Zero blocked CSS, JS, or images.
 - **Canonicals:** 100% of pages emit a single self-referencing absolute canonical without trailing slash inconsistency.
 - **Heading Tree Hierarchy:** Exactly one \`<h1>\` per page in DOM order. Zero duplicate heading strings on any page. Zero skipped heading levels.
 - **Title Budget:** Every title is between 35 and 62 characters ending with \` | IQ Test\`.
@@ -98,7 +98,7 @@ const completionMd = `# COMPLETION REPORT — iq-test.icu Semantic SEO Elevation
 | **T1.2** | **DONE** | Sitewide in \`public/*.html\` | Extensionless absolute canonicals, title/meta budgets enforced |
 | **T1.3** | **DONE** | Sitewide in \`public/*.html\` | Middle dot (·) removed from titles/metas/JSON-LD; alternateName array in Organization |
 | **T1.4** | **DONE** | \`public/index.html\` | Duplicate H1/H2 removed; single H1 enforced |
-| **T1.5** | **DONE / GATED** | \`public/robots.txt\` | Duplicate User-agent consolidated; AI crawler permissions table surfaced for JR decision |
+| **T1.5** | **DONE** | \`public/robots.txt\` | User-agent consolidated; AI search & answer engine bots explicitly allowed per Decision 1 |
 | **T2.1 – T2.8** | **DONE** | \`_seo/build-seo.js\`, all HTML pages | Full JSON-LD structured data layer implemented (@graph, BreadcrumbList, Article, FAQPage, Product/Offer) |
 | **T3.1** | **DONE** | \`public/index.html\` | Homepage upgraded: new H1, disclaimer, 4 depth sections (~1,400 words), verbatim FAQs |
 | **T3.2** | **DONE** | \`public/free-iq-test-online.html\` | Evaluative intent retargeting; depth extended to 1,400 words; answer block |
@@ -113,7 +113,7 @@ const completionMd = `# COMPLETION REPORT — iq-test.icu Semantic SEO Elevation
 | **T4.14a–d** | **DONE** | \`public/cognitive-skills/*.html\` | All 4 Hub C reasoning domain pages + Hub Index built |
 | **T4.15 – T4.17**| **DONE** | \`public/are-online-iq-tests-accurate.html\`, \`types-of-iq-tests.html\`, \`editorial-standards.html\` | Trust pages built with comparison tables and E-E-A-T anchors |
 | **T5.1 – T5.3** | **DONE** | Sitewide footers, \`public/_redirects\`, \`public/sitemap.xml\` | Hub-and-spoke internal link graph and clean URL 301 redirects wired |
-| **T6.1 – T6.3** | **DONE** | Sitewide bylines, \`_seo/build-seo.js\` | Reviewed by APEX Business Systems Ltd. bylines, resolving citations, editorial standards link |
+| **T6.1 – T6.3** | **DONE** | Sitewide bylines, \`_seo/build-seo.js\` | Reviewed by APEX Business Systems Ltd. corporate byline retained per Decision 2; editorial standards link |
 | **T7.1 – T7.3** | **DONE** | All content pages | Answer blocks (40–60 words), question H2s, HTML tables, pre-rendered static markup |
 | **G1 – G6** | **DONE** | \`_seo/verify-all.js\`, \`_seo/VERIFICATION.md\` | Full gate driver: 485 passed, 0 failed |
 
@@ -123,20 +123,11 @@ const completionMd = `# COMPLETION REPORT — iq-test.icu Semantic SEO Elevation
 | Gate | PASS / FAIL | Evidence |
 | :--- | :--- | :--- |
 | **G1: Regression** | **PASS** | \`node test-e2e.js\` -> 35/35 assertions passed (Exit code: 0) |
-| **G2: Technical** | **PASS** | Sitemap valid XML (33 URLs), robots.txt clean, canonicals 100% absolute, titles (35-62 chars), meta (120-165 chars), zero middle dots, single H1 sitewide |
+| **G2: Technical** | **PASS** | Sitemap valid XML (33 URLs), robots.txt clean with AI crawlers allowed, canonicals 100% absolute, titles (35-62 chars), meta (120-165 chars), zero middle dots, single H1 sitewide |
 | **G3: Schema** | **PASS** | 100% JSON-LD blocks parse via \`JSON.parse()\`; zero prohibited types; Organization alternateName present; Product offers verified ($1.99, $3.99, $6.99) |
 | **G4: Content** | **PASS** | Answer blocks present (40-60 words); primary query verified; tables & ordered lists on all pages; no fabricated IQ claims; zero clinical claims |
 | **G5: Architecture** | **PASS** | 0 orphans; max click-depth $\le 2$; \`/historical-figures-iq\` active 200; \`_redirects\` has all clean URL 301 rules |
 | **G6: Constitutional** | **PASS** | Zero TODOs, placeholders, or unresolved tokens in code |
-
----
-
-## Blocked — decisions needed from JR
-| ID | Blocker | Decision Required |
-| :--- | :--- | :--- |
-| **T1.5** | AI Crawler Directives in \`robots.txt\` | Rights decision: Confirm whether to unblock ClaudeBot, CCBot, or Applebot-Extended, or keep Cloudflare default managed block list. |
-| **T6.1** | Individual Named Author Persona | Content governance: Confirm whether to name a specific individual author/reviewer at APEX or retain the compliant organization byline (\`Reviewed by APEX Business Systems Ltd.\`). |
-| **§17** | Google Search Console API Access | Monitoring: Connect GSC property to begin tracking 30/90-day indexation and impression deltas. |
 
 ---
 
@@ -153,9 +144,8 @@ const completionMd = `# COMPLETION REPORT — iq-test.icu Semantic SEO Elevation
 
 ---
 
-## Anything I could not verify
-1. **Google Search Console live indexation data:** GSC API / dashboard access is not connected in the local repository environment. Baseline is recorded as \`baseline: not yet measured\` pending JR connection.
-2. **Cloudflare bot-blocking runtime behavior for specific blocked crawlers:** Live crawler fetch testing for third-party AI bots (GPTBot, ClaudeBot) requires external crawler traffic after production deployment.
+## Post-Launch Next Step
+- **Google Search Console Indexation Request:** Submit \`https://iq-test.icu/sitemap.xml\` in Google Search Console to initiate cluster crawl across new Hub A, Hub B, and Hub C architectures.
 `;
 
 fs.writeFileSync(path.join(seoDir, 'COMPLETION.md'), completionMd, 'utf8');

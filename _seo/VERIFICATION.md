@@ -22,7 +22,7 @@
 
 ## 2. G2: TECHNICAL INTEGRITY EVIDENCE
 - **Sitemap XML:** Valid XML header and `sitemaps.org/schemas/sitemap/0.9` namespace. Omission of deprecated `<priority>` and `<changefreq>`. Contains all 33 canonical URLs with derived ISO `<lastmod>`.
-- **Robots.txt:** Exactly one `User-agent: *` declaration, points to `https://iq-test.icu/sitemap.xml`. Zero blocked CSS, JS, or images.
+- **Robots.txt:** Clean single `User-agent: *` declaration, explicit allowances for Googlebot, Bingbot, GPTBot, ClaudeBot, PerplexityBot, Applebot-Extended, and CCBot, pointing to `https://iq-test.icu/sitemap.xml`. Zero blocked CSS, JS, or images.
 - **Canonicals:** 100% of pages emit a single self-referencing absolute canonical without trailing slash inconsistency.
 - **Heading Tree Hierarchy:** Exactly one `<h1>` per page in DOM order. Zero duplicate heading strings on any page. Zero skipped heading levels.
 - **Title Budget:** Every title is between 35 and 62 characters ending with ` | IQ Test`.
