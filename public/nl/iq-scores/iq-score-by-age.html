@@ -455,6 +455,131 @@
   }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
+  /* === RELATED RESEARCH LINKS & BACKLINK NETWORK === */
+  .related-network-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 26px 28px;
+    margin: 40px 0 32px;
+  }
+  .related-network-card h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .related-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .related-link-item {
+    background: oklch(0.08 0.005 95 / 0.7);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .related-link-item:hover {
+    border-color: var(--gold);
+    background: oklch(0.12 0.01 95 / 0.8);
+    transform: translateY(-2px);
+  }
+  .related-link-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .related-link-item:hover .related-link-title {
+    color: var(--gold);
+  }
+  .related-link-desc {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  /* === ACADEMIC CITATIONS & EXTERNAL AUTHORITY === */
+  .citations-block {
+    background: oklch(0.07 0.003 95 / 0.6);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 32px 0;
+    font-size: 0.84rem;
+  }
+  .citations-block h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .citation-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .citation-list li {
+    line-height: 1.5;
+    color: oklch(0.78 0.006 95);
+  }
+  .citation-list a {
+    color: var(--text);
+    text-decoration: underline;
+    text-decoration-color: rgba(201, 162, 75, 0.4);
+    text-underline-offset: 3px;
+    transition: color 0.15s ease;
+  }
+  .citation-list a:hover {
+    color: var(--gold);
+    text-decoration-color: var(--gold);
+  }
+
+  /* === EMBEDDABLE BACKLINK ASSET === */
+  .embed-backlink-card {
+    background: oklch(0.09 0.005 95 / 0.85);
+    border: 1px dashed var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 28px 0;
+    font-size: 0.82rem;
+  }
+  .embed-backlink-card h4 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .embed-backlink-card p {
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+  }
+  .citation-code-snippet {
+    background: oklch(0.04 0.002 95);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    overflow-x: auto;
+    font-family: monospace;
+    font-size: 0.76rem;
+    color: var(--gold);
+  }
+
   footer {
     text-align: center;
     padding: 40px 24px;
@@ -779,6 +904,91 @@
           <div class="faq-a">Verbal comprehension, vocabulary, and practical wisdom (crystallized intelligence) peak latest, typically between ages 55 and 70.</div>
         </div>
     </div>
+  
+  <div class="related-network-card">
+    <h3>🔗 Related Research &amp; Cognitive Analyses</h3>
+    <div class="related-links-grid">
+      
+        <a href="/iq-scores/iq-scale-chart" class="related-link-item">
+          <span class="related-link-title">IQ Scale Chart & Standard Classifications</span>
+          <span class="related-link-desc">Detailed breakdown of standard deviation thresholds and Wechsler categories.</span>
+        </a>
+
+        <a href="/iq-scores/iq-percentile-calculator" class="related-link-item">
+          <span class="related-link-title">IQ Percentile Calculator & Normal Curve</span>
+          <span class="related-link-desc">Convert any deviation IQ into exact population percentiles with interactive distribution.</span>
+        </a>
+
+        <a href="/iq-scores/average-iq" class="related-link-item">
+          <span class="related-link-title">What is the Average IQ Score?</span>
+          <span class="related-link-desc">Global normative baselines, the Flynn Effect, and population standard distributions.</span>
+        </a>
+
+        <a href="/iq-scores/high-iq-genius-range" class="related-link-item">
+          <span class="related-link-title">High IQ & Genius Score Criteria</span>
+          <span class="related-link-desc">Mensa qualifying standards (130+) and cognitive characteristics of the top 2%.</span>
+        </a>
+
+        <a href="/historical-figures-iq" class="related-link-item">
+          <span class="related-link-title">Historische Denkers & Cognitive Matching</span>
+          <span class="related-link-desc">Discover how Einstein, Da Vinci, Tesla, and Curie compare on cognitive trait scales.</span>
+        </a>
+
+        <a href="/cognitive-skills/pattern-recognition" class="related-link-item">
+          <span class="related-link-title">Pattern Recognition & Matrix Reasoning</span>
+          <span class="related-link-desc">Understanding non-verbal fluid intelligence and spatial problem solving.</span>
+        </a>
+    </div>
+  </div>
+  
+  <div class="citations-block">
+    <h3>📚 Scientific References &amp; Authoritative Citations</h3>
+    <ul class="citation-list">
+      
+        <li>
+          <a href="https://www.apa.org/topics/intelligence" target="_blank" rel="noopener noreferrer">
+            <strong>American Psychological Association (APA)</strong> — <em>Clinical and Psychometric Standards for Cognitive Assessment</em>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://pubmed.ncbi.nlm.nih.gov/22055279/" target="_blank" rel="noopener noreferrer">
+            <strong>National Center for Biotechnology Information (NCBI)</strong> — <em>Wechsler Adult Intelligence Scale Normative Standardization & Deviation Scoring</em>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.mensa.org/mensa-iq-challenge" target="_blank" rel="noopener noreferrer">
+            <strong>Mensa International</strong> — <em>Qualifying Score Thresholds on Standardized Intelligence Tests (Top 2%)</em>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.nature.com/subjects/cognitive-neuroscience" target="_blank" rel="noopener noreferrer">
+            <strong>Nature Neuroscience</strong> — <em>Neural Substrates of Matrix Reasoning and General Fluid Intelligence</em>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://stanford.edu" target="_blank" rel="noopener noreferrer">
+            <strong>Stanford University Binet Archive</strong> — <em>Historical Development of the Binet-Simon Intelligence Scale</em>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://www.wikidata.org/wiki/Q131549" target="_blank" rel="noopener noreferrer">
+            <strong>Wikidata Psychometric Ontology</strong> — <em>Intelligence Quotient Concept Representation (Q131549)</em>
+          </a>
+        </li>
+    </ul>
+  </div>
+  <div class="embed-backlink-card">
+    <h4>Cite This Page or Reference Our Psychometric Data</h4>
+    <p>Researchers, educators, and content publishers may reference this analysis using the citation hyperlink below:</p>
+    <div class="citation-code-snippet">
+      <code>&lt;a href="https://iq-test.icu/iq-scores/iq-score-by-age" title="https://iq-test.icu/iq-scores/iq-score-by-age"&gt;APEX IQ Test — IQ SCORES IQ SCORE BY AGE&lt;/a&gt;</code>
+    </div>
+  </div>
   
   <div class="cta-block">
     <h3>Discover Your Cognitive Profile</h3>
