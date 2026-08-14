@@ -1,0 +1,137 @@
+{
+  "doNotTranslate": [
+    "IQ·Test",
+    "IQ Test",
+    "APEX Business Systems Ltd.",
+    "Stripe",
+    "Cloudflare",
+    "Supabase",
+    "WAIS-IV",
+    "WAIS",
+    "WISC-V",
+    "Stanford-Binet",
+    "Raven's Progressive Matrices",
+    "MoCA",
+    "Flynn effect",
+    "Spearman's g",
+    "Cattell-Horn-Carroll",
+    "CHC",
+    "Gf",
+    "Gc",
+    "Gq",
+    "Gv",
+    "SD 15",
+    "SD 16"
+  ],
+  "forced": {
+    "de": {
+      "cognitive index": "Kognitiver Index",
+      "percentile": "Perzentil",
+      "reasoning domain": "Denkbereich",
+      "self-insight": "Selbsterkenntnis",
+      "not a clinical assessment": "keine klinische Diagnostik",
+      "standard deviation": "Standardabweichung"
+    },
+    "fr": {
+      "cognitive index": "Indice cognitif",
+      "percentile": "Centile",
+      "reasoning domain": "Domaine de raisonnement",
+      "self-insight": "Introspection cognitive",
+      "not a clinical assessment": "ceci n'est pas un diagnostic clinique",
+      "standard deviation": "Écart-type"
+    },
+    "es": {
+      "cognitive index": "Índice cognitivo",
+      "percentile": "Percentil",
+      "reasoning domain": "Dominio de razonamiento",
+      "self-insight": "Autoconocimiento cognitivo",
+      "not a clinical assessment": "no es una evaluación clínica",
+      "standard deviation": "Desviación estándar"
+    },
+    "pt": {
+      "cognitive index": "Índice cognitivo",
+      "percentile": "Percentil",
+      "reasoning domain": "Domínio de raciocínio",
+      "self-insight": "Autoconhecimento cognitivo",
+      "not a clinical assessment": "não é uma avaliação clínica",
+      "standard deviation": "Desvio padrão"
+    },
+    "it": {
+      "cognitive index": "Indice cognitivo",
+      "percentile": "Percentile",
+      "reasoning domain": "Dominio di ragionamento",
+      "self-insight": "Autoconsapevolezza cognitiva",
+      "not a clinical assessment": "non è una valutazione clinica",
+      "standard deviation": "Deviazione standard"
+    },
+    "nl": {
+      "cognitive index": "Cognitieve index",
+      "percentile": "Percentiel",
+      "reasoning domain": "Redeneerdomein",
+      "self-insight": "Zelfinzicht",
+      "not a clinical assessment": "geen klinisch onderzoek",
+      "standard deviation": "Standaarddeviatie"
+    },
+    "ja": {
+      "cognitive index": "認知指数",
+      "percentile": "パーセンタイル",
+      "reasoning domain": "思考領域",
+      "self-insight": "自己理解",
+      "not a clinical assessment": "臨床的な診断ではありません",
+      "standard deviation": "標準偏差"
+    },
+    "ko": {
+      "cognitive index": "인지 지수",
+      "percentile": "백분위수",
+      "reasoning domain": "추론 영역",
+      "self-insight": "자기 성찰",
+      "not a clinical assessment": "임상 진단용 검사가 아닙니다",
+      "standard deviation": "표준편차"
+    },
+    "zh": {
+      "cognitive index": "认知指数",
+      "percentile": "百分位数",
+      "reasoning domain": "推理领域",
+      "self-insight": "自我认知",
+      "not a clinical assessment": "非临床诊断评估",
+      "standard deviation": "标准差"
+    },
+    "ar": {
+      "cognitive index": "المؤشر المعرفي",
+      "percentile": "المئين",
+      "reasoning domain": "مجال التفكير الاستدلالي",
+      "self-insight": "معرفة الذات",
+      "not a clinical assessment": "ليس تقييماً طبياً أو تشخيصياً",
+      "standard deviation": "الانحراف المعياري"
+    },
+    "hi": {
+      "cognitive index": "संज्ञानात्मक सूचकांक (Cognitive Index)",
+      "percentile": "पर्सेंटाइल (Percentile)",
+      "reasoning domain": "तर्क क्षेत्र (Reasoning Domain)",
+      "self-insight": "आत्म-समझ",
+      "not a clinical assessment": "यह कोई नैदानिक या चिकित्सकीय परीक्षण नहीं है",
+      "standard deviation": "मानक विचलन (Standard Deviation)"
+    },
+    "tl": {
+      "cognitive index": "Cognitive Index",
+      "percentile": "Percentile",
+      "reasoning domain": "Reasoning Domain",
+      "self-insight": "Self-insight",
+      "not a clinical assessment": "hindi ito klinikal o medikal na pagsusuri",
+      "standard deviation": "Standard deviation"
+    }
+  },
+  "placeholders": [
+    "{pct}",
+    "{rarity}",
+    "{oneIn}",
+    "{score}",
+    "{sd}",
+    "{classification}",
+    "{category}",
+    "{url}",
+    "{date}",
+    "{name}",
+    "{language}"
+  ]
+}
