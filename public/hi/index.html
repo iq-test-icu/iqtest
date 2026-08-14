@@ -1177,7 +1177,7 @@
   [dir="rtl"] .lang-dropdown { right: auto; left: 0; }
 
 </style>
-    <link rel="alternate" hreflang="en" href="https://iq-test.icu">
+      <link rel="alternate" hreflang="en" href="https://iq-test.icu">
   <link rel="alternate" hreflang="de" href="https://iq-test.icu/de">
   <link rel="alternate" hreflang="fr" href="https://iq-test.icu/fr">
   <link rel="alternate" hreflang="es" href="https://iq-test.icu/es">
@@ -1224,13 +1224,13 @@
       },
       "contactPoint": [
         {
-          "@type": "संपर्कPoint",
+          "@type": "ContactPoint",
           "contactType": "customer support",
           "email": "support@iq-test.icu",
           "availableLanguage": "English"
         },
         {
-          "@type": "संपर्कPoint",
+          "@type": "ContactPoint",
           "contactType": "billing support",
           "email": "billing@iq-test.icu",
           "availableLanguage": "English"
@@ -1368,7 +1368,7 @@
 
 <!-- Unified genius mural — single panoramic oil painting, four figures, one scene -->
 <div class="mural-container" aria-hidden="true">
-  <img src="mural_bg.webp" class="mural-bg" alt="" draggable="false">
+  <img src="/mural_bg.webp" class="mural-bg" alt="" draggable="false">
   <div class="mural-vignette"></div>
 </div>
 
@@ -1387,7 +1387,7 @@
   </svg>
 </div>
 <div class="wrap">
-        <header>
+          <header>
     <div class="logo-wrap">
       <img src="/wordmark.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;" onerror="this.style.display='none'">
     </div>
@@ -1432,21 +1432,21 @@
         </div>
       </div>
       
-      <div class="eyebrow">Cognitive Assessment</div>
-      <h1 style="text-align:center;">Free IQ Test — See Your Score and the Mind That Matches It</h1>
-      <p style="text-align:center; font-size:0.92rem; color:var(--text-secondary); margin-top:-10px; margin-bottom:18px;">A 16-question cognitive skills test for self-insight and entertainment. Not a clinical or diagnostic IQ assessment.</p>
-      <p class="lead" style="text-align:center;">16 questions. हमारे बारे में five minutes. Your score is free the moment you finish. Then decide if you want to know which historical figure you actually think like.</p>
+      <div class="eyebrow">संज्ञानात्मक मूल्यांकन</div>
+      <h1 style="text-align:center;">मुफ्त आईक्यू टेस्ट — अपना स्कोर और अपने जैसा सोचने वाला ऐतिहासिक दिमाग जानें</h1>
+      <p style="text-align:center; font-size:0.92rem; color:var(--text-secondary); margin-top:-10px; margin-bottom:18px;">आत्म-अंतर्दृष्टि और मनोरंजन के लिए 16 प्रश्नों का संज्ञानात्मक कौशल परीक्षण। यह कोई नैदानिक या चिकित्सीय आईक्यू मूल्यांकन नहीं है।</p>
+      <p class="lead" style="text-align:center;">16 प्रश्न। लगभग पाँच मिनट। परीक्षण पूरा होते ही आपका स्कोर निःशुल्क उपलब्ध है। फिर जानें कि आपका सोचने का तरीका किस महान ऐतिहासिक व्यक्ति से मेल खाता है।</p>
       
       <div class="chip-row">
-        <span class="chip"><b>16</b> questions</span>
-        <span class="chip"><b>4</b> categories</span>
-        <span class="chip"><b>5 min</b> average</span>
+        <span class="chip"><b>16</b> प्रश्न</span>
+        <span class="chip"><b>4</b> श्रेणियां</span>
+        <span class="chip">औसत <b>5 मिनट</b></span>
       </div>
       
       <div style="text-align:center;">
-        <button class="btn btn-primary" onclick="startTest()">Start the test</button>
+        <button class="btn btn-primary" onclick="startTest()">परीक्षण शुरू करें</button>
       </div>
-      <p class="disclaimer" style="text-align:center;">This is a self-insight quiz, not a clinical IQ test. Your score is for personal reflection only. See the FAQ below for full methodology details.</p>
+      <p class="disclaimer" style="text-align:center;">यह आत्म-चिंतन के लिए एक क्विज़ है, न कि नैदानिक आईक्यू टेस्ट। आपका स्कोर केवल व्यक्तिगत संदर्भ के लिए है।</p>
     </div>
 
     <div class="info-block" id="content-hub">
@@ -1848,22 +1848,182 @@ setTimeout(dismissSplash, 1400);
 splashEl.addEventListener('click', dismissSplash);
 
 const QUESTIONS = [
-  {cat:"NUMERIC", text:"2, 6, 12, 20, 30, ?", opts:["36","40","42","44"], correct:2},
-  {cat:"NUMERIC", text:"3, 9, 27, 81, ?", opts:["162","216","243","324"], correct:2},
-  {cat:"NUMERIC", text:"1, 4, 9, 16, 25, ?", opts:["30","32","36","49"], correct:2},
-  {cat:"NUMERIC", text:"100, 91, 79, 64, ?", opts:["46","48","50","52"], correct:0},
-  {cat:"VERBAL", text:"Ocean is to Wave as Mountain is to ___", opts:["Rock","Avalanche","Peak","Cliff"], correct:1},
-  {cat:"VERBAL", text:"Author is to Book as Composer is to ___", opts:["Instrument","Symphony","Orchestra","Note"], correct:1},
-  {cat:"VERBAL", text:"Which word does NOT belong: Whisper, Shout, Murmur, Silence", opts:["Whisper","Shout","Murmur","Silence"], correct:3},
-  {cat:"VERBAL", text:"Thermometer is to Temperature as Scale is to ___", opts:["Fish","Weight","Balance","Number"], correct:1},
-  {cat:"LOGIC", text:"All Zeppos are Farbles. Some Farbles are Wickets. Therefore:", opts:["All Zeppos are Wickets","Some Zeppos may be Wickets","No Zeppos are Wickets","All Wickets are Zeppos"], correct:1},
-  {cat:"LOGIC", text:"If it rains, the game is cancelled. The game was NOT cancelled. Therefore:", opts:["It rained","It did not rain","It might have rained","No conclusion possible"], correct:1},
-  {cat:"LOGIC", text:"Five friends sit in a row. Ana is left of Ben. Cid is right of Ben. Who is in the middle?", opts:["Ana","Ben","Cid","Cannot determine"], correct:1},
-  {cat:"LOGIC", text:"A box has more red balls than blue. It has more blue than green. Which is true?", opts:["Green > Red","Red > Green","Green = Red","Cannot determine"], correct:1},
-  {cat:"PATTERN", text:"A, C, F, J, O, ?", opts:["S","T","U","V"], correct:2},
-  {cat:"PATTERN", text:"2, 4, 8, 16, ?, 64", opts:["24","28","32","48"], correct:2},
-  {cat:"PATTERN", text:"AB, DE, GH, JK, ?", opts:["LM","MN","NO","LN"], correct:1},
-  {cat:"PATTERN", text:"1, 1, 2, 3, 5, 8, ?", opts:["11","12","13","14"], correct:2},
+  {
+    "cat": "संख्यात्मक तर्क",
+    "text": "2, 6, 12, 20, 30, ?",
+    "opts": [
+      "36",
+      "40",
+      "42",
+      "44"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "संख्यात्मक तर्क",
+    "text": "3, 9, 27, 81, ?",
+    "opts": [
+      "162",
+      "216",
+      "243",
+      "324"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "संख्यात्मक तर्क",
+    "text": "1, 4, 9, 16, 25, ?",
+    "opts": [
+      "30",
+      "32",
+      "36",
+      "49"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "संख्यात्मक तर्क",
+    "text": "100, 91, 79, 64, ?",
+    "opts": [
+      "46",
+      "48",
+      "50",
+      "52"
+    ],
+    "correct": 0
+  },
+  {
+    "cat": "मौखिक तर्क",
+    "text": "समुद्र का संबंध लहर से है तो पर्वत का संबंध किससे है:",
+    "opts": [
+      "चट्टान",
+      "हिमस्खलन",
+      "चोटी",
+      "ढलान"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "मौखिक तर्क",
+    "text": "लेखक का संबंध पुस्तक से है तो संगीतकार का संबंध किससे है:",
+    "opts": [
+      "वाद्य यंत्र",
+      "सिम्फनी",
+      "ऑर्केस्ट्रा",
+      "सुर"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "मौखिक तर्क",
+    "text": "कौन सा शब्द दूसरों से अलग है: फुसफुसाहट, चीख, बुदबुदाहट, मौन",
+    "opts": [
+      "फुसफुसाहट",
+      "चीख",
+      "बुदबुदाहट",
+      "मौन"
+    ],
+    "correct": 3
+  },
+  {
+    "cat": "मौखिक तर्क",
+    "text": "थर्मामीटर का संबंध तापमान से है तो तराजू का संबंध किससे है:",
+    "opts": [
+      "मछली",
+      "वज़न",
+      "संतुलन",
+      "संख्या"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "तार्किक निष्कर्ष",
+    "text": "सभी ज़ेप्पो फ़ार्बल्स हैं। कुछ फ़ार्बल्स विकेट्स हैं। अतः:",
+    "opts": [
+      "सभी ज़ेप्पो विकेट्स हैं",
+      "कुछ ज़ेप्पो विकेट्स हो सकते हैं",
+      "कोई ज़ेप्पो विकेट नहीं है",
+      "सभी विकेट्स ज़ेप्पो हैं"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "तार्किक निष्कर्ष",
+    "text": "यदि वर्षा होती है तो खेल रद्द होता है। खेल रद्द नहीं हुआ। अतः:",
+    "opts": [
+      "वर्षा हुई",
+      "वर्षा नहीं हुई",
+      "वर्षा हो सकती थी",
+      "कोई निष्कर्ष संभव नहीं"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "तार्किक निष्कर्ष",
+    "text": "पाँच मित्र एक पंक्ति में बैठे हैं। एना बेन के बाईं ओर है। सिड बेन के दाईं ओर है। मध्य में कौन है?",
+    "opts": [
+      "एना",
+      "बेन",
+      "सिड",
+      "तय नहीं किया जा सकता"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "तार्किक निष्कर्ष",
+    "text": "एक बक्से में नीली गेंदों से अधिक लाल गेंदें हैं। हरी से अधिक नीली हैं। कौन सा सत्य है?",
+    "opts": [
+      "हरी > लाल",
+      "लाल > हरी",
+      "हरी = लाल",
+      "तय नहीं किया जा सकता"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "पैटर्न पहचान",
+    "text": "A, C, F, J, O, ?",
+    "opts": [
+      "S",
+      "T",
+      "U",
+      "V"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "पैटर्न पहचान",
+    "text": "2, 4, 8, 16, ?, 64",
+    "opts": [
+      "24",
+      "28",
+      "32",
+      "48"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "पैटर्न पहचान",
+    "text": "AB, DE, GH, JK, ?",
+    "opts": [
+      "LM",
+      "MN",
+      "NO",
+      "LN"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "पैटर्न पहचान",
+    "text": "1, 1, 2, 3, 5, 8, ?",
+    "opts": [
+      "11",
+      "12",
+      "13",
+      "14"
+    ],
+    "correct": 2
+  }
 ];
 
 // Percentile lookup calibrated to 16-item raw score distribution.

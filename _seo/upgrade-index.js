@@ -28,6 +28,8 @@ html = html.replace(/<meta\s+name=["']twitter:description["']\s+content=["'][\s\
 // Replace meta robots
 html = html.replace(/<meta\s+name=["']robots["']\s+content=["'][\s\S]*?["']>/i, `<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">`);
 
+html = html.replace('src="mural_bg.webp"', 'src="/mural_bg.webp"');
+
 // 2. Replace old JSON-LD scripts with single consolidated sitewide @graph + FAQPage + Product/Offer
 const homepageFaqs = [
   {
