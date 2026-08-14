@@ -1,27 +1,205 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy Policy | IQ Test (APEX Business Systems)</title>
-<meta name="description" content="Read the IQ Test privacy policy. Understand how session data is handled, our strict no-sale-of-data pledge, Stripe encryption, and CASL compliance.">
-<link rel="canonical" href="https://iq-test.icu/privacy">
-<meta property="og:title" content="Privacy Policy | IQ Test (APEX Business Systems)">
-<meta property="og:description" content="Read the IQ Test privacy policy. Understand how session data is handled, our strict no-sale-of-data pledge, Stripe encryption, and CASL compliance.">
-<meta property="og:type" content="article">
-<meta property="og:url" content="https://iq-test.icu/privacy">
-<meta property="og:image" content="https://iq-test.icu/og.png">
-<meta property="og:site_name" content="IQ Test">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Privacy Policy | IQ Test (APEX Business Systems)">
-<meta name="twitter:description" content="Read the IQ Test privacy policy. Understand how session data is handled, our strict no-sale-of-data pledge, Stripe encryption, and CASL compliance.">
-<meta name="twitter:image" content="https://iq-test.icu/og.png">
-<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-<link rel="icon" type="image/webp" href="/favicon.webp">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Fraunces:opsz,wght@9..144,300..700&display=swap" rel="stylesheet">
-<style>
+/**
+ * APEX-SEO Engine — iq-test.icu Semantic SEO Elevation
+ * Contract ID: APEX-SEO-IQT-2026-08-14-v1.0
+ * Pure Node.js — Zero New Dependencies — Surgical & Deterministic
+ */
 
+const fs = require('fs');
+const path = require('path');
+
+const rootDir = path.join(__dirname, '..');
+const publicDir = path.join(rootDir, 'public');
+
+// Ensure directories exist
+const dirs = [
+  path.join(publicDir, 'iq-scores'),
+  path.join(publicDir, 'historical-figures'),
+  path.join(publicDir, 'cognitive-skills')
+];
+dirs.forEach(d => {
+  if (!fs.existsSync(d)) fs.mkdirSync(d, { recursive: true });
+});
+
+// Organization Constants
+const ORG_SCHEMA = {
+  "@type": "Organization",
+  "@id": "https://iq-test.icu/#organization",
+  "name": "IQ Test",
+  "alternateName": ["IQ·Test", "IQ-Test", "iq-test.icu"],
+  "url": "https://iq-test.icu/",
+  "logo": {
+    "@type": "ImageObject",
+    "@id": "https://iq-test.icu/#logo",
+    "url": "https://iq-test.icu/icon.webp",
+    "width": 512,
+    "height": 512
+  },
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "APEX Business Systems Ltd.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Edmonton",
+      "addressRegion": "AB",
+      "addressCountry": "CA"
+    }
+  },
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "contactType": "customer support",
+      "email": "support@iq-test.icu",
+      "availableLanguage": "English"
+    },
+    {
+      "@type": "ContactPoint",
+      "contactType": "billing support",
+      "email": "billing@iq-test.icu",
+      "availableLanguage": "English"
+    }
+  ]
+};
+
+const WEBSITE_SCHEMA = {
+  "@type": "WebSite",
+  "@id": "https://iq-test.icu/#website",
+  "url": "https://iq-test.icu/",
+  "name": "IQ Test",
+  "publisher": { "@id": "https://iq-test.icu/#organization" },
+  "inLanguage": "en"
+};
+
+function escapeAttr(str) {
+  if (!str) return '';
+  return str.replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function buildJsonLdGraph({
+  pageUrl,
+  pageTitle,
+  pageDescription,
+  datePublished = "2026-07-18T00:00:00-06:00",
+  dateModified = "2026-08-14T12:25:00-06:00",
+  breadcrumbs = null,
+  article = null,
+  faqs = null,
+  products = null
+}) {
+  const graph = [
+    ORG_SCHEMA,
+    WEBSITE_SCHEMA,
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      "url": pageUrl,
+      "name": pageTitle,
+      "description": pageDescription,
+      "isPartOf": { "@id": "https://iq-test.icu/#website" },
+      "inLanguage": "en",
+      "datePublished": datePublished,
+      "dateModified": dateModified,
+      ...(breadcrumbs ? { "breadcrumb": { "@id": `${pageUrl}#breadcrumb` } } : {})
+    }
+  ];
+
+  if (breadcrumbs && breadcrumbs.length > 0) {
+    graph.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      "itemListElement": breadcrumbs.map((bc, idx) => {
+        const itemObj = {
+          "@type": "ListItem",
+          "position": idx + 1,
+          "name": bc.name
+        };
+        if (bc.url) itemObj.item = bc.url;
+        return itemObj;
+      })
+    });
+  }
+
+  if (article) {
+    graph.push({
+      "@type": "Article",
+      "@id": `${pageUrl}#article`,
+      "isPartOf": { "@id": `${pageUrl}#webpage` },
+      "mainEntityOfPage": { "@id": `${pageUrl}#webpage` },
+      "headline": article.headline.slice(0, 110),
+      "description": pageDescription,
+      "author": {
+        "@type": "Organization",
+        "name": "APEX Business Systems Ltd.",
+        "url": "https://apexbusiness.systems"
+      },
+      "publisher": { "@id": "https://iq-test.icu/#organization" },
+      "datePublished": datePublished,
+      "dateModified": dateModified,
+      "inLanguage": "en",
+      ...(article.about ? { "about": article.about } : {}),
+      ...(article.citation ? { "citation": article.citation } : {})
+    });
+  }
+
+  if (faqs && faqs.length > 0) {
+    graph.push({
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#faq`,
+      "mainEntity": faqs.map(f => ({
+        "@type": "Question",
+        "name": f.q,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": f.a
+        }
+      }))
+    });
+  }
+
+  if (products) {
+    graph.push({
+      "@type": "Product",
+      "@id": "https://iq-test.icu/#report-product",
+      "name": "IQ Test Cognitive Report",
+      "description": "A detailed breakdown of your results across four reasoning domains, with percentile placement and a historical-figure cognitive match.",
+      "brand": { "@id": "https://iq-test.icu/#organization" },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Score Report",
+          "price": "1.99",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://iq-test.icu/",
+          "priceValidUntil": "2027-08-14"
+        },
+        {
+          "@type": "Offer",
+          "name": "Deep Report",
+          "price": "3.99",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://iq-test.icu/",
+          "priceValidUntil": "2027-08-14"
+        },
+        {
+          "@type": "Offer",
+          "name": "Complete Report",
+          "price": "6.99",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://iq-test.icu/",
+          "priceValidUntil": "2027-08-14"
+        }
+      ]
+    });
+  }
+
+  return JSON.stringify({ "@context": "https://schema.org", "@graph": graph }, null, 2);
+}
+
+// Common Shared Styles
+const COMMON_STYLES = `
   html { font-size: 17px; }
   :root {
     --bg: oklch(0.06 0.002 95);
@@ -342,133 +520,103 @@
   }
   footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
   footer a:hover { color: var(--gold); }
+`;
 
+function buildHtmlPage({
+  relPath,
+  title,
+  description,
+  canonical,
+  breadcrumbs,
+  article,
+  faqs,
+  h1,
+  answerBlock,
+  bodyHtml,
+  customHead = '',
+  customScript = ''
+}) {
+  const jsonLd = buildJsonLdGraph({
+    pageUrl: canonical,
+    pageTitle: title,
+    pageDescription: description,
+    breadcrumbs,
+    article,
+    faqs
+  });
+
+  const breadcrumbsHtml = breadcrumbs && breadcrumbs.length > 0 ? `
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      ${breadcrumbs.map((bc, idx) => {
+        if (idx === breadcrumbs.length - 1) {
+          return `<span class="current">${bc.name}</span>`;
+        }
+        return `<a href="${bc.url}">${bc.name}</a><span class="sep">/</span>`;
+      }).join(' ')}
+    </nav>` : '';
+
+  const bylineHtml = article ? `
+    <div class="byline-bar">
+      <span>Published: <time datetime="2026-08-14">August 14, 2026</time></span>
+      <span>•</span>
+      <span>Reviewed by: <a href="/about">APEX Business Systems Ltd.</a></span>
+      <span>•</span>
+      <span><a href="/editorial-standards">Editorial Standards</a></span>
+    </div>` : '';
+
+  const answerBlockHtml = answerBlock ? `
+    <div class="answer-box">
+      ${answerBlock}
+    </div>` : '';
+
+  const faqsHtml = faqs && faqs.length > 0 ? `
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-accordion">
+      ${faqs.map(f => `
+        <div class="faq-item">
+          <div class="faq-q">${f.q}</div>
+          <div class="faq-a">${f.a}</div>
+        </div>`).join('\n')}
+    </div>` : '';
+
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>${escapeAttr(title)}</title>
+<meta name="description" content="${escapeAttr(description)}">
+<link rel="canonical" href="${canonical}">
+<meta property="og:title" content="${escapeAttr(title)}">
+<meta property="og:description" content="${escapeAttr(description)}">
+<meta property="og:type" content="article">
+<meta property="og:url" content="${canonical}">
+<meta property="og:image" content="https://iq-test.icu/og.png">
+<meta property="og:site_name" content="IQ Test">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${escapeAttr(title)}">
+<meta name="twitter:description" content="${escapeAttr(description)}">
+<meta name="twitter:image" content="https://iq-test.icu/og.png">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+<link rel="icon" type="image/webp" href="/favicon.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Fraunces:opsz,wght@9..144,300..700&display=swap" rel="stylesheet">
+<style>
+${COMMON_STYLES}
 </style>
-
+${customHead}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://iq-test.icu/#organization",
-      "name": "IQ Test",
-      "alternateName": [
-        "IQ·Test",
-        "IQ-Test",
-        "iq-test.icu"
-      ],
-      "url": "https://iq-test.icu/",
-      "logo": {
-        "@type": "ImageObject",
-        "@id": "https://iq-test.icu/#logo",
-        "url": "https://iq-test.icu/icon.webp",
-        "width": 512,
-        "height": 512
-      },
-      "parentOrganization": {
-        "@type": "Organization",
-        "name": "APEX Business Systems Ltd.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Edmonton",
-          "addressRegion": "AB",
-          "addressCountry": "CA"
-        }
-      },
-      "contactPoint": [
-        {
-          "@type": "ContactPoint",
-          "contactType": "customer support",
-          "email": "support@iq-test.icu",
-          "availableLanguage": "English"
-        },
-        {
-          "@type": "ContactPoint",
-          "contactType": "billing support",
-          "email": "billing@iq-test.icu",
-          "availableLanguage": "English"
-        }
-      ]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://iq-test.icu/#website",
-      "url": "https://iq-test.icu/",
-      "name": "IQ Test",
-      "publisher": {
-        "@id": "https://iq-test.icu/#organization"
-      },
-      "inLanguage": "en"
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://iq-test.icu/privacy#webpage",
-      "url": "https://iq-test.icu/privacy",
-      "name": "Privacy Policy | IQ Test (APEX Business Systems)",
-      "description": "Read the IQ Test privacy policy. Understand how session data is handled, our strict no-sale-of-data pledge, Stripe encryption, and CASL compliance.",
-      "isPartOf": {
-        "@id": "https://iq-test.icu/#website"
-      },
-      "inLanguage": "en",
-      "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T12:25:00-06:00",
-      "breadcrumb": {
-        "@id": "https://iq-test.icu/privacy#breadcrumb"
-      }
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "@id": "https://iq-test.icu/privacy#breadcrumb",
-      "itemListElement": [
-        {
-          "@type": "ListItem",
-          "position": 1,
-          "name": "Home",
-          "item": "https://iq-test.icu/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Privacy Policy"
-        }
-      ]
-    }
-  ]
-}
+${jsonLd}
 </script>
 </head>
 <body>
 <div class="page">
-  
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <a href="https://iq-test.icu/">Home</a><span class="sep">/</span> <span class="current">Privacy Policy</span>
-    </nav>
-  <h1>Privacy Policy</h1>
-  
-  
-    <div class="answer-box">
-      At IQ Test (operated by APEX Business Systems Ltd.), we respect your digital privacy. We collect only the data necessary to score your assessment and deliver optional reports. We never sell, rent, or trade your personal data with third parties.
-    </div>
-  
-    <h2>1. Information we collect</h2>
-    <ul>
-      <li><strong>Assessment Responses:</strong> Raw item answers are stored temporarily in session storage to calculate your cognitive score and percentile.</li>
-      <li><strong>Email Address:</strong> If you purchase a report or opt in for cognitive science updates, your email is stored securely to deliver your report.</li>
-      <li><strong>Payment Data:</strong> All financial transactions are handled directly through Stripe's encrypted payment gateway. We never view or store complete credit card numbers.</li>
-    </ul>
-
-    <h2>2. How we use your information</h2>
-    <p>Your information is used strictly to compute your test results, deliver purchased reports, and process one-time payments. If you explicitly opt in to receive cognitive-science articles, every email contains a direct, one-click CASL-compliant unsubscribe link.</p>
-
-    <h2>3. Data retention and third parties</h2>
-    <p>We do not share your information with advertisers, data brokers, or third-party marketers. We retain customer transaction records only as required by applicable tax and accounting laws.</p>
-
-    <h2>4. Contact our privacy officer</h2>
-    <p>For data access, correction, or deletion requests, contact our privacy officer at <a href="mailto:privacy@iq-test.icu">privacy@iq-test.icu</a>.</p>
-  
-  
+  ${breadcrumbsHtml}
+  <h1>${h1}</h1>
+  ${bylineHtml}
+  ${answerBlockHtml}
+  ${bodyHtml}
+  ${faqsHtml}
   
   <div class="cta-block">
     <h3>Discover Your Cognitive Profile</h3>
@@ -498,6 +646,19 @@
   <br><br>
   &copy; 2026 APEX Business Systems Ltd. &nbsp;&middot;&nbsp; Edmonton, AB, Canada &nbsp;&middot;&nbsp; <a href="mailto:support@iq-test.icu">support@iq-test.icu</a>
 </footer>
-
+${customScript}
 </body>
 </html>
+`;
+
+  const destFile = path.join(publicDir, relPath);
+  fs.writeFileSync(destFile, html, 'utf8');
+  console.log(`Generated: ${relPath} (${title.length} chars title, ${description.length} chars desc)`);
+}
+
+module.exports = {
+  buildJsonLdGraph,
+  buildHtmlPage,
+  escapeAttr,
+  publicDir
+};

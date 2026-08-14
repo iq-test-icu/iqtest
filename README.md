@@ -31,7 +31,7 @@ A modern, high-performance cognitive skills self-insight assessment platform. Bu
 - Set the publish directory to `public/`.
 
 ### 3. Database Initialization
-- Execute `supabase/schema.sql` in your Supabase SQL editor to provision the `sessions` table.
+- Execute `supabase/schema.sql` in your Supabase SQL editor to provision the `sessions` table. Re-running is safe — every migration in the file is `add column if not exists` / `create index if not exists`.
 
 ### 4. Worker Deployment
 - Deploy the Cloudflare Worker from the `worker/` directory:
@@ -51,3 +51,8 @@ A modern, high-performance cognitive skills self-insight assessment platform. Bu
 
 ### 6. Email Services
 - Verify the sending domain on Resend and add the necessary SPF/DKIM records to your DNS zone.
+
+### 7. Abandoned-Lead Recovery Sweep
+- Runs automatically once deployed — `wrangler deploy` registers the Cron Trigger defined in `wrangler.toml` (`[triggers]`, daily at 15:00 UTC). No new secrets required; reuses `RESEND_API_KEY`/`RESEND_FROM`.
+- Only emails leads who checked "Also send me occasional cognitive-science content" (`marketing_opt_in=true`) — the mandatory score-delivery consent alone does not qualify under CASL for a promotional message. Every send carries a working one-click unsubscribe link (`/api/unsubscribe?id=`) and a `List-Unsubscribe` header.
+- To verify locally before relying on the schedule: `cd worker && wrangler dev --test-scheduled`, then trigger `http://localhost:8787/__scheduled`.

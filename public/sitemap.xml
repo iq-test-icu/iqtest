@@ -2,56 +2,134 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://iq-test.icu/</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
+    <lastmod>2026-08-14</lastmod>
   </url>
   <url>
-    <loc>https://iq-test.icu/what-is-an-iq-test</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://iq-test.icu/iq-scores/</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/iq-scores/what-is-a-good-iq-score</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/iq-scores/iq-scale-chart</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/iq-scores/average-iq</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/iq-scores/iq-percentile-calculator</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/iq-scores/high-iq-genius-range</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/iq-scores/iq-score-by-age</loc>
+    <lastmod>2026-08-14</lastmod>
   </url>
   <url>
     <loc>https://iq-test.icu/historical-figures-iq</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <lastmod>2026-08-14</lastmod>
   </url>
   <url>
-    <loc>https://iq-test.icu/methodology</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <loc>https://iq-test.icu/historical-figures/albert-einstein-iq</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/historical-figures/leonardo-da-vinci-iq</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/historical-figures/nikola-tesla-iq</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/historical-figures/marie-curie-iq</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/historical-figures/isaac-newton-iq</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/historical-figures/stephen-hawking-iq</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/historical-figures/highest-iq-in-history</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/cognitive-skills/</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/cognitive-skills/logical-reasoning</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/cognitive-skills/numerical-reasoning</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/cognitive-skills/verbal-reasoning</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/cognitive-skills/pattern-recognition</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/what-is-an-iq-test</loc>
+    <lastmod>2026-08-14</lastmod>
   </url>
   <url>
     <loc>https://iq-test.icu/free-iq-test-online</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-08-14</lastmod>
   </url>
   <url>
     <loc>https://iq-test.icu/cognitive-test-vs-iq-test</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/methodology</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/are-online-iq-tests-accurate</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/types-of-iq-tests</loc>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/editorial-standards</loc>
+    <lastmod>2026-08-14</lastmod>
   </url>
   <url>
     <loc>https://iq-test.icu/about</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
+    <lastmod>2026-08-14</lastmod>
   </url>
   <url>
     <loc>https://iq-test.icu/support</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.5</priority>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/contact</loc>
+    <lastmod>2026-08-14</lastmod>
   </url>
   <url>
     <loc>https://iq-test.icu/privacy</loc>
-    <lastmod>2026-07-18</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
+    <lastmod>2026-08-14</lastmod>
+  </url>
+  <url>
+    <loc>https://iq-test.icu/terms</loc>
+    <lastmod>2026-08-14</lastmod>
   </url>
 </urlset>
