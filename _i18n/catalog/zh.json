@@ -1,0 +1,298 @@
+{
+  "$meta": {
+    "locale": "zh",
+    "sourceLocale": "en",
+    "engine": "groq/llama-3.3-70b-versatile",
+    "generatedAt": "2026-08-14T22:05:13.729Z",
+    "reviewStatus": "machine",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "nav.home": {
+    "src": "Home",
+    "t": "首页",
+    "ctx": "Main navigation label: Home",
+    "srcHash": "3a78695388b38b5c",
+    "status": "reviewed"
+  },
+  "nav.iq_scores": {
+    "src": "IQ Scores",
+    "t": "智商分数",
+    "ctx": "Main navigation label: IQ Scores Guide",
+    "srcHash": "724d309cdd72e8cd",
+    "status": "reviewed"
+  },
+  "nav.historical_minds": {
+    "src": "Historical Minds",
+    "t": "历史伟人",
+    "ctx": "Main navigation label: Historical Minds",
+    "srcHash": "9f45064500f6fbb5",
+    "status": "reviewed"
+  },
+  "nav.reasoning_domains": {
+    "src": "Reasoning Domains",
+    "t": "推理领域",
+    "ctx": "Main navigation label: Reasoning Domains",
+    "srcHash": "88df6030df59da53",
+    "status": "reviewed"
+  },
+  "nav.what_is_iq_test": {
+    "src": "What is an IQ Test?",
+    "t": "什么是智商测试？",
+    "ctx": "Main navigation label: What is an IQ Test",
+    "srcHash": "22d32047f81ee5c2",
+    "status": "reviewed"
+  },
+  "nav.free_test": {
+    "src": "Free IQ Test Online",
+    "t": "免费在线智商测试",
+    "ctx": "Footer navigation link: Free IQ Test Online",
+    "srcHash": "6db7310f9e4301c2",
+    "status": "reviewed"
+  },
+  "nav.accuracy": {
+    "src": "Test Accuracy",
+    "t": "测试准确度",
+    "ctx": "Footer navigation link: Test Accuracy",
+    "srcHash": "63c750b752acd802",
+    "status": "reviewed"
+  },
+  "nav.types": {
+    "src": "Types of Tests",
+    "t": "测试类型",
+    "ctx": "Footer navigation link: Types of Tests",
+    "srcHash": "ff73af077f16d468",
+    "status": "reviewed"
+  },
+  "nav.methodology": {
+    "src": "Methodology",
+    "t": "测验方法",
+    "ctx": "Footer navigation link: Methodology",
+    "srcHash": "f26d07e6b71e4259",
+    "status": "reviewed"
+  },
+  "nav.editorial_standards": {
+    "src": "Editorial Standards",
+    "t": "编辑标准",
+    "ctx": "Footer navigation link: Editorial Standards",
+    "srcHash": "6ad622be8ad16a4c",
+    "status": "reviewed"
+  },
+  "nav.about": {
+    "src": "About",
+    "t": "关于我们",
+    "ctx": "Footer navigation link: About",
+    "srcHash": "4efca0d10c5feb8e",
+    "status": "reviewed"
+  },
+  "nav.support": {
+    "src": "Support",
+    "t": "技术支持",
+    "ctx": "Footer navigation link: Support",
+    "srcHash": "be91940b79f46910",
+    "status": "reviewed"
+  },
+  "nav.contact": {
+    "src": "Contact",
+    "t": "联系我们",
+    "ctx": "Footer navigation link: Contact",
+    "srcHash": "2b5c3d26721ae9c3",
+    "status": "reviewed"
+  },
+  "nav.privacy": {
+    "src": "Privacy",
+    "t": "隐私政策",
+    "ctx": "Footer navigation link: Privacy",
+    "srcHash": "54a57c3147c49f33",
+    "status": "reviewed"
+  },
+  "nav.terms": {
+    "src": "Terms",
+    "t": "服务条款",
+    "ctx": "Footer navigation link: Terms",
+    "srcHash": "ede5489964834a51",
+    "status": "reviewed"
+  },
+  "footer.copyright": {
+    "src": "© 2026 APEX Business Systems Ltd. · Edmonton, AB",
+    "t": "© 2026 APEX Business Systems Ltd. · Edmonton, AB",
+    "ctx": "Footer copyright line",
+    "srcHash": "e224940b20bf410b",
+    "status": "reviewed"
+  },
+  "footer.editorial_byline": {
+    "src": "Reviewed by APEX Business Systems Ltd., Edmonton, Alberta",
+    "t": "由 APEX Business Systems Ltd.（加拿大埃德蒙顿）审核",
+    "ctx": "Editorial standards byline link",
+    "srcHash": "ac7ebafb1b52e7ae",
+    "status": "reviewed"
+  },
+  "footer.disclaimer": {
+    "src": "This assessment is designed for self-insight and personal discovery. It is not a clinical diagnostic instrument.",
+    "t": "本评估旨在帮助个人了解自我认知能力。非临床诊断评估。",
+    "ctx": "Mandatory non-clinical disclaimer footer",
+    "srcHash": "22a0967abd3e0639",
+    "status": "reviewed"
+  },
+  "switcher.label": {
+    "src": "Select Language",
+    "t": "选择语言",
+    "ctx": "aria-label for language switcher navigation",
+    "srcHash": "2d8f9954cb33c25b",
+    "status": "reviewed"
+  },
+  "banner.suggestion": {
+    "src": "This page is also available in {language}.",
+    "t": "本页面支持简体中文浏览。",
+    "ctx": "Proactive locale suggestion banner text",
+    "srcHash": "78a43d59f344bdbc",
+    "status": "reviewed"
+  },
+  "banner.switch_btn": {
+    "src": "Switch to {language}",
+    "t": "切换至简体中文",
+    "ctx": "Button to switch language on banner",
+    "srcHash": "e74b4e0cb2ca0462",
+    "status": "reviewed"
+  },
+  "banner.dismiss": {
+    "src": "Dismiss",
+    "t": "关闭",
+    "ctx": "Dismiss button label for locale banner",
+    "srcHash": "48845bff334a50a5",
+    "status": "reviewed"
+  },
+  "calc.title": {
+    "src": "Calculate Your Percentile Rank",
+    "t": "计算您的百分位排名",
+    "ctx": "Calculator widget heading",
+    "srcHash": "76dab23ed259a6f7",
+    "status": "reviewed"
+  },
+  "calc.label_input": {
+    "src": "Enter IQ Score (55–145):",
+    "t": "输入智商分数 (55–145):",
+    "ctx": "Calculator score input label",
+    "srcHash": "b75dbd13abc576db",
+    "status": "reviewed"
+  },
+  "calc.btn_update": {
+    "src": "Update Chart",
+    "t": "更新图表",
+    "ctx": "Calculator button label",
+    "srcHash": "95a396738913e1ce",
+    "status": "reviewed"
+  },
+  "calc.results_header": {
+    "src": "POPULATION PERCENTILE RANK",
+    "t": "人群百分位排名",
+    "ctx": "Calculator results title",
+    "srcHash": "a89a3dc4af1b8c19",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_median": {
+    "src": "Exact population median (higher than 50% of the population, 1 in 2 people)",
+    "t": "人群精确中位数（高于50%的人群，2人中占1人）",
+    "ctx": "Calculator rarity text for IQ 100",
+    "srcHash": "e34cc9a38d2679c4",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_high": {
+    "src": "Higher than approximately {pct} out of 100 people (1 in {oneIn} people)",
+    "t": "高于100人中约 {pct} 人（每 {oneIn} 人中占1人）",
+    "ctx": "Calculator rarity text above mean",
+    "srcHash": "8b8fc144b3574435",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_low": {
+    "src": "Lower than approximately {pct} out of 100 people (1 in {oneIn} people)",
+    "t": "低于100人中约 {pct} 人（每 {oneIn} 人中占1人）",
+    "ctx": "Calculator rarity text below mean",
+    "srcHash": "a69986c329d951bd",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_top_tail": {
+    "src": "Top 0.13% of the population (approximately 1 in 740 people)",
+    "t": "人群前 0.13%（约每 740 人中占1人）",
+    "ctx": "Calculator rarity text for IQ >= 145",
+    "srcHash": "8c2c103ea2841730",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_bottom_tail": {
+    "src": "Bottom 0.13% of the population (approximately 1 in 740 people)",
+    "t": "人群后 0.13%（约每 740 人中占1人）",
+    "ctx": "Calculator rarity text for IQ <= 55",
+    "srcHash": "f32b7139ab25641f",
+    "status": "reviewed"
+  },
+  "calc.wechsler_prefix": {
+    "src": "Wechsler Classification: {classification} ({sd} SD)",
+    "t": "韦克斯勒分类: {classification} ({sd} 标准差)",
+    "ctx": "Calculator classification label",
+    "srcHash": "8b7a204a774780e0",
+    "status": "reviewed"
+  },
+  "filter.all": {
+    "src": "All Thinkers (7)",
+    "t": "全部思想家 (7)",
+    "ctx": "Filter pill label: All Thinkers",
+    "srcHash": "2428f0911824cb6b",
+    "status": "reviewed"
+  },
+  "filter.visual": {
+    "src": "Visual-Spatial & Simulation",
+    "t": "视觉空间与模拟",
+    "ctx": "Filter pill label: Visual-Spatial",
+    "srcHash": "32cf056602e62129",
+    "status": "reviewed"
+  },
+  "filter.logic": {
+    "src": "Deductive Logic",
+    "t": "演绎逻辑",
+    "ctx": "Filter pill label: Deductive Logic",
+    "srcHash": "b55d42cb8e86f037",
+    "status": "reviewed"
+  },
+  "filter.empirical": {
+    "src": "Empirical Science",
+    "t": "实证科学",
+    "ctx": "Filter pill label: Empirical Science",
+    "srcHash": "c4d7f04e866ba6ad",
+    "status": "reviewed"
+  },
+  "filter.polymath": {
+    "src": "Polymathic Synthesis",
+    "t": "通才综合",
+    "ctx": "Filter pill label: Polymathic Synthesis",
+    "srcHash": "43c0b4d92d583270",
+    "status": "reviewed"
+  },
+  "puzzle.reveal_btn": {
+    "src": "🔍 Reveal Step-by-Step Solution",
+    "t": "🔍 查看逐步解析",
+    "ctx": "Interactive puzzle reveal button",
+    "srcHash": "50b8b87ca2d8eb0d",
+    "status": "reviewed"
+  },
+  "puzzle.hide_btn": {
+    "src": "▲ Hide Solution",
+    "t": "▲ 隐藏解析",
+    "ctx": "Interactive puzzle hide button",
+    "srcHash": "a5c5d1a86aad2190",
+    "status": "reviewed"
+  },
+  "table.copy_md": {
+    "src": "📋 Copy Markdown",
+    "t": "📋 复制 Markdown",
+    "ctx": "Table copy button label",
+    "srcHash": "cef61aed677dc831",
+    "status": "reviewed"
+  },
+  "table.copied": {
+    "src": "✓ Copied!",
+    "t": "✓ 已复制!",
+    "ctx": "Table copied confirmation state",
+    "srcHash": "4e45a91772b8f5dd",
+    "status": "reviewed"
+  }
+}

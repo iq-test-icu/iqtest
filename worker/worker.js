@@ -33,6 +33,7 @@
 const PRICE_CENTS   = { basic: 199, detailed: 399, complete: 699 };
 const PRODUCT_NAME  = { basic: "IQ·Test Basic Result", detailed: "IQ·Test Detailed Result", complete: "IQ·Test Complete Report + Printable Certificate" };
 const VALID_TIERS   = new Set(["basic", "detailed", "complete"]);
+const VALID_LOCALES = new Set(["en", "de", "fr", "es", "pt", "it", "nl", "ja", "ko", "zh", "ar", "hi", "tl"]);
 
 // ── CORS ─────────────────────────────────────────────────────────────────────
 const corsHeaders = (origin) => ({
@@ -253,6 +254,7 @@ async function handleSaveResult(body, env, cors) {
     return json({ error: "consent_required" }, 400, cors);
   }
 
+  const safeLocale = VALID_LOCALES.has(body.locale) ? body.locale : "en";
   const row = await sbInsert(env, "sessions", {
     email,
     answers,
@@ -263,21 +265,22 @@ async function handleSaveResult(body, env, cors) {
     paid:                 false,
     lead_only:            Boolean(leadOnly),
     marketing_opt_in:     Boolean(marketingOptIn),
+    locale:               safeLocale,
     consent_given_at:     new Date().toISOString(), // server-stamped, not client
     consent_text_version: "v1",
   });
 
-  logEvent(env, leadOnly ? "lead_captured" : "result_saved", { sessionId: row.id, status: "success", email, marketingOptIn: Boolean(marketingOptIn) });
+  logEvent(env, leadOnly ? "lead_captured" : "result_saved", { sessionId: row.id, status: "success", email, marketingOptIn: Boolean(marketingOptIn), locale: safeLocale });
   return json({ id: row.id }, 200, cors);
 }
 
 /** POST /api/checkout
- *  body: { id, email, tier }   tier: "basic" | "detailed"
+ *  body: { id, email, tier, locale }   tier: "basic" | "detailed"
  *  -> { url }
  */
 async function handleCheckout(body, env, cors) {
   if (!body) return json({ error: "invalid_payload" }, 400, cors);
-  const { id, email, tier } = body;
+  const { id, email, tier, locale } = body;
 
   if (!id || !validateEmail(email)) {
     logEvent(env, "checkout_failed", { status: "failed", errorCode: "invalid_payload", email });
@@ -290,8 +293,10 @@ async function handleCheckout(body, env, cors) {
 
   logEvent(env, "checkout_started", { sessionId: id, tier, status: "success", email });
 
-  // Store tier on the session row so the webhook can read it reliably
-  await sbUpdate(env, id, { tier });
+  // Store tier and locale on the session row so the webhook can read it reliably
+  const patch = { tier };
+  if (locale && VALID_LOCALES.has(locale)) patch.locale = locale;
+  await sbUpdate(env, id, patch);
 
   const successUrl = `${env.ALLOWED_ORIGIN}/?report=${id}`;
   const cancelUrl  = `${env.ALLOWED_ORIGIN}/`;
@@ -308,6 +313,10 @@ async function handleCheckout(body, env, cors) {
     "line_items[0][price_data][unit_amount]":        String(PRICE_CENTS[tier]),
     "line_items[0][price_data][product_data][name]": PRODUCT_NAME[tier],
   });
+
+  if (locale && VALID_LOCALES.has(locale)) {
+    params.set("locale", locale === "zh" ? "zh-Hans" : locale);
+  }
 
   const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
     method: "POST",
@@ -558,7 +567,7 @@ STRICT RULES — violations are not acceptable:
 - Do NOT state or imply any numeric IQ score for the historical figure. Historical IQ estimates for real people are unreliable and must not appear.
 - Do NOT say "your IQ is X" or "clinical" or "diagnostic" — use "cognitive index" or "score" only.
 - Do NOT claim this is a clinical or validated psychometric result.
-- Do NOT invent statistics. Plain, warm, specific tone. No filler.`;
+- Do NOT invent statistics. Plain, warm, specific tone. No filler.${row.locale && row.locale !== "en" ? `\n- OUTPUT LANGUAGE: You MUST write the entire report in ${row.locale} language natively.` : ""}`;
 
   try {
     const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {

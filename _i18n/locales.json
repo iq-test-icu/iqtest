@@ -1,0 +1,15 @@
+[
+  { "id": 1, "name": "English", "hreflang": "en", "lang": "en", "dir": "ltr", "ogLocale": "en_US", "script": "Latin", "tier": "source", "endonym": "English" },
+  { "id": 2, "name": "German", "hreflang": "de", "lang": "de", "dir": "ltr", "ogLocale": "de_DE", "script": "Latin", "tier": "A", "endonym": "Deutsch" },
+  { "id": 3, "name": "French", "hreflang": "fr", "lang": "fr", "dir": "ltr", "ogLocale": "fr_FR", "script": "Latin", "tier": "A", "endonym": "Français" },
+  { "id": 4, "name": "Spanish", "hreflang": "es", "lang": "es", "dir": "ltr", "ogLocale": "es_ES", "script": "Latin", "tier": "A", "endonym": "Español" },
+  { "id": 5, "name": "Portuguese", "hreflang": "pt", "lang": "pt", "dir": "ltr", "ogLocale": "pt_BR", "script": "Latin", "tier": "A", "endonym": "Português" },
+  { "id": 6, "name": "Italian", "hreflang": "it", "lang": "it", "dir": "ltr", "ogLocale": "it_IT", "script": "Latin", "tier": "A", "endonym": "Italiano" },
+  { "id": 7, "name": "Dutch", "hreflang": "nl", "lang": "nl", "dir": "ltr", "ogLocale": "nl_NL", "script": "Latin", "tier": "A", "endonym": "Nederlands" },
+  { "id": 8, "name": "Japanese", "hreflang": "ja", "lang": "ja", "dir": "ltr", "ogLocale": "ja_JP", "script": "Jpan", "tier": "B", "endonym": "日本語" },
+  { "id": 9, "name": "Korean", "hreflang": "ko", "lang": "ko", "dir": "ltr", "ogLocale": "ko_KR", "script": "Hang", "tier": "B", "endonym": "한국어" },
+  { "id": 10, "name": "Chinese (Mandarin)", "hreflang": "zh", "lang": "zh-Hans", "dir": "ltr", "ogLocale": "zh_CN", "script": "Hans", "tier": "B", "endonym": "简体中文" },
+  { "id": 11, "name": "Arabic (MSA)", "hreflang": "ar", "lang": "ar", "dir": "rtl", "ogLocale": "ar_AR", "script": "Arab", "tier": "C", "endonym": "العربية" },
+  { "id": 12, "name": "Hindi", "hreflang": "hi", "lang": "hi", "dir": "ltr", "ogLocale": "hi_IN", "script": "Deva", "tier": "C", "endonym": "हिन्दी" },
+  { "id": 13, "name": "Tagalog", "hreflang": "tl", "lang": "tl", "dir": "ltr", "ogLocale": "tl_PH", "script": "Latin", "tier": "C", "endonym": "Tagalog" }
+]

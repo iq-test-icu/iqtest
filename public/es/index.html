@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free IQ Test — Get Your Score in 5 Minutes | IQ Test</title>
+<meta name="description" content="Take a free 16-question IQ test and get your cognitive index, percentile, and category breakdown instantly. Optional detailed reports from $1.99.">
+<link rel="canonical" href="https://iq-test.icu/es">
+<meta property="og:title" content="Free IQ Test — Get Your Score in 5 Minutes | IQ Test">
+<meta property="og:description" content="Take a free 16-question IQ test and get your cognitive index, percentile, and category breakdown instantly. Optional detailed reports from $1.99.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://iq-test.icu/">
+<meta property="og:image" content="https://iq-test.icu/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://iq-test.icu/og.png">
+<meta name="twitter:title" content="Free IQ Test — Get Your Score in 5 Minutes | IQ Test">
+<meta name="twitter:description" content="Take a free 16-question IQ test and get your cognitive index, percentile, and category breakdown instantly. Optional detailed reports from $1.99.">
+<!-- AI/GEO Optimization signals -->
+<meta name="author" content="APEX Business Systems Ltd.">
+<meta name="keywords" content="free IQ test, cognitive test online, IQ quiz, cognitive skills assessment, historical figure IQ match, pattern recognition test, verbal reasoning test">
+<meta name="subject" content="Cognitive assessment quiz">
+<meta name="language" content="en">
+<meta name="geo.region" content="CA-AB">
+<meta name="geo.placename" content="Edmonton, Alberta, Canada">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" type="image/webp" href="/favicon.webp">
+<link rel="apple-touch-icon" href="/icon.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Fraunces:opsz,wght@9..144,300..700&display=swap" rel="stylesheet">
+<style>
+  html {
+    font-size: 17px;
+  }
+  :root {
+    --bg-dark: oklch(0.06 0.002 95);
+    --bg-card: oklch(0.10 0.006 95 / 0.85);
+    --bg-card-hover: oklch(0.13 0.009 95 / 0.95);
+    --border-color: oklch(0.18 0.008 95 / 0.7);
+    --border-gold: oklch(0.72 0.11 95 / 0.16);
+    --border-gold-hover: oklch(0.72 0.11 95 / 0.5);
+    
+    --text-primary: oklch(0.97 0.002 95);
+    --text-secondary: oklch(0.85 0.005 95);
+    --text-muted: oklch(0.62 0.008 95);
+    
+    --gold: oklch(0.72 0.12 95);
+    --gold-glow: oklch(0.72 0.12 95 / 0.15);
+    --red: oklch(0.52 0.17 28);
+    --red-hover: oklch(0.58 0.19 28);
+    --red-glow: oklch(0.52 0.17 28 / 0.3);
+    
+    --font-mono: 'Fraunces', Georgia, serif;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-serif: 'Space Grotesk', sans-serif;
+    --font-body: 'Fraunces', Georgia, serif;
+  }
+  
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body {
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+  }
+  
+  /* Modern ambient background glows (Linear/Resend aesthetic) */
+  body::before {
+    content: "";
+    position: absolute;
+    top: -150px; left: 50%; transform: translateX(-50%);
+    width: 900px; height: 450px;
+    background: radial-gradient(ellipse at 50% 0%, var(--gold-glow) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .bg-glow-1 {
+    position: absolute;
+    top: 280px; left: -120px;
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, oklch(0.72 0.12 95 / 0.045) 0%, transparent 70%);
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bg-glow-2 {
+    position: absolute;
+    top: 700px; right: -180px;
+    width: 450px; height: 450px;
+    background: radial-gradient(circle, oklch(0.52 0.17 28 / 0.035) 0%, transparent 70%);
+    filter: blur(110px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  /* === UNIFIED GENIUS MURAL === */
+  .mural-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .mural-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+    /* Partially desaturate — let a hint of warm tone survive */
+    filter: grayscale(80%) contrast(1.1) brightness(0.85);
+    /*
+      soft-light on a dark background: lifts midtones and face highlights
+      into visibility while keeping the mural clearly subordinate.
+      No visible image rectangle — dark page background absorbs dark mural pixels.
+    */
+    mix-blend-mode: soft-light;
+    opacity: 0.55;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  svg.mural-bg { object-fit: unset; } /* sizing handled by viewBox + preserveAspectRatio="slice" instead */
+
+  /*
+    Two-layer vignette strategy:
+    1. Strong edge crush (box-shadow) — eliminates any hard image border
+    2. Soft centre fade — dims the mural behind the content card only,
+       keeping the outer figures bright enough to be seen
+  */
+  .mural-vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 55% 50% at 50% 42%,
+      rgba(9,8,6,0.72) 0%,
+      rgba(9,8,6,0.45) 35%,
+      transparent 70%
+    );
+    box-shadow: inset 0 0 200px 100px var(--bg-dark);
+  }
+
+  @media (max-width: 900px) {
+    .mural-bg { opacity: 0.35; }
+  }
+
+  @media (max-width: 600px) {
+    .mural-container { display: none; }
+  }
+  
+  .wrap {
+    width: 100%;
+    max-width: 660px;
+    padding: 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+  
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 0 28px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 32px;
+  }
+  
+  .logo-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .logo-img {
+    height: 32px;
+    width: auto;
+    filter: drop-shadow(0 0 12px var(--gold-glow));
+  }
+  
+  .logo-text {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.08em;
+    color: var(--text-primary);
+  }
+  
+  .logo-text span {
+    color: var(--gold);
+    text-shadow: 0 0 10px var(--gold-glow);
+  }
+  
+  .serial {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.08em;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-color);
+    padding: 6px 12px;
+    border-radius: 6px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.01);
+  }
+  
+  .screen {
+    display: none;
+    flex-direction: column;
+    animation: slideUp .45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  
+  .screen.active {
+    display: flex;
+  }
+  
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(24px); filter: blur(4px); }
+    to { opacity: 1; transform: translateY(0); filter: none; }
+  }
+  
+  /* Premium Glassmorphic Cards */
+  .app-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 48px 36px;
+    box-shadow: 
+      0 40px 80px -20px rgba(0,0,0,0.85),
+      inset 0 1px 0 rgba(255,255,255,0.03);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .app-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--border-gold-hover), transparent);
+  }
+  
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.22em;
+    color: var(--gold);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    text-align: center;
+    text-shadow: 0 0 12px var(--gold-glow);
+  }
+  
+  h1 {
+    font-family: var(--font-serif);
+    font-size: 2.85rem;
+    line-height: 1.15;
+    font-weight: 300;
+    letter-spacing: -0.03em;
+    margin-bottom: 20px;
+    color: var(--text-primary);
+  }
+  
+  .lead {
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.68;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+  
+  .chip-row {
+    display: flex;
+    gap: 12px;
+    margin: 28px 0 36px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 100px;
+    padding: 6px 16px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+  }
+  
+  .chip b {
+    color: var(--gold);
+  }
+  
+  .btn {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 16px 36px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .btn-primary {
+    background: var(--red);
+    color: oklch(0.98 0.005 95);
+    border: 1px solid oklch(0.6 0.17 28);
+    box-shadow: 
+      0 4px 20px var(--red-glow),
+      inset 0 1px 0 rgba(255,255,255,0.15);
+  }
+  
+  .btn-primary:hover {
+    background: var(--red-hover);
+    box-shadow: 
+      0 6px 30px oklch(0.58 0.19 28 / 0.5),
+      inset 0 1px 0 rgba(255,255,255,0.25);
+    transform: translateY(-2px);
+  }
+  
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+  
+  .disclaimer {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin-top: 24px;
+  }
+  
+  /* Orbital Medallion Component */
+  .hero-visual-container {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0 36px;
+    position: relative;
+    height: 160px;
+  }
+  
+  .orbital-ring {
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border: 1px dashed var(--border-gold);
+    border-radius: 50%;
+    animation: rotateRing 60s linear infinite;
+  }
+  
+  .orbital-ring-inner {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+  }
+
+  .orbital-dot {
+    position: absolute;
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    top: 0; left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 8px var(--gold);
+  }
+  
+  @keyframes rotateRing {
+    to { transform: rotate(360deg); }
+  }
+  
+  .brand-logo-medallion {
+    width: 76px;
+    height: 76px;
+    border-radius: 24px; /* +30% Squircle corner styling */
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 
+      0 0 35px var(--gold-glow),
+      inset 0 1px 0 rgba(255,255,255,0.15);
+    border: 1.5px solid var(--gold);
+    background: var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+  }
+
+  .brand-logo-medallion:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  
+  .brand-logo-medallion img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 12px;
+  }
+  
+  /* Quiz Cards */
+  .test-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .q-counter {
+    font-family: var(--font-mono);
+    color: var(--gold);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+  
+  .progress-track {
+    height: 4px;
+    background: var(--border-color);
+    border-radius: 100px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.5);
+  }
+  
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--red), var(--gold));
+    width: 0%;
+    transition: width .35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 0 8px var(--red);
+  }
+  
+  .q-text {
+    font-size: 1.45rem;
+    font-weight: 500;
+    line-height: 1.4;
+    margin-bottom: 32px;
+    font-family: var(--font-display);
+    color: var(--text-primary);
+  }
+  
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  
+  .opt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    background: rgba(255,255,255,0.015);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 18px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all .25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.01);
+  }
+  
+  .opt:hover {
+    border-color: var(--border-gold-hover);
+    background: rgba(255,255,255,0.03);
+    color: var(--text-primary);
+    transform: translateY(-2px);
+    box-shadow: 
+      0 10px 20px rgba(0,0,0,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+  
+  .opt.selected {
+    border-color: var(--gold);
+    background: var(--gold-glow);
+    color: var(--text-primary);
+    box-shadow: 
+      0 0 20px var(--gold-glow),
+      inset 0 1px 0 rgba(201, 162, 75, 0.1);
+  }
+  
+  .opt-content {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .bubble {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid var(--text-muted);
+    flex-shrink: 0;
+    position: relative;
+    transition: all .25s ease;
+  }
+  
+  .opt.selected .bubble {
+    border-color: var(--gold);
+    background: var(--gold);
+  }
+  
+  .opt.selected .bubble:after {
+    content: "";
+    position: absolute;
+    inset: 6px;
+    border-radius: 50%;
+    background: var(--bg-dark);
+  }
+  
+  .key-badge {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    background: rgba(255,255,255,0.04);
+    color: var(--text-muted);
+    padding: 3px 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    font-weight: 700;
+  }
+  
+  /* Result Section & Dynamic Radar */
+  .result-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 36px;
+    margin: 24px 0;
+  }
+  
+  @media(min-width: 600px) {
+    .result-grid { grid-template-columns: 1.15fr 0.85fr; }
+  }
+  
+  .radar-container {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);
+  }
+  
+  .bell-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .curve-wrap {
+    width: 100%;
+    margin-top: 12px;
+  }
+  
+  .curve-caption {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 14px;
+  }
+  
+  .curve-caption b {
+    color: var(--gold);
+    font-size: 1.25rem;
+    text-shadow: 0 0 10px var(--gold-glow);
+  }
+  
+  .ledger {
+    margin-top: 24px;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .ledger-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .ledger-cat {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+  }
+  
+  .ledger-score {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+  }
+  
+  .ledger-score .of {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.85rem;
+  }
+  
+  /* Bento Grid / Lock Cards */
+  .value-stack {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 36px 0 24px;
+  }
+  
+  @media(min-width: 500px) {
+    .value-stack { grid-template-columns: 1fr 1fr; }
+  }
+  
+  .value-card {
+    background: rgba(255,255,255,0.015);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.01);
+  }
+  
+  .value-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .value-title span {
+    color: var(--gold);
+  }
+  
+  .value-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+  }
+  
+  .tease-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+    background: rgba(201, 162, 75, 0.04);
+    border-radius: 12px;
+    padding: 28px 24px;
+    margin: 32px 0 0;
+    border: 1px dashed var(--gold);
+    box-shadow: inset 0 0 15px var(--gold-glow);
+  }
+  
+  .tease-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    font-weight: 700;
+  }
+  
+  .tease-blur {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    filter: blur(7px);
+    user-select: none;
+    letter-spacing: 0.15em;
+  }
+  
+  .tease-cta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  
+  /* Checkout Area */
+  .receipt {
+    background: rgba(0,0,0,0.25);
+    border-radius: 12px;
+    padding: 40px 32px;
+    margin-top: 40px;
+    border: 1px solid var(--border-color);
+  }
+  
+  .receipt h2 {
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  
+  .tier-row {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 24px 0;
+  }
+  
+  .tier-opt {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    transition: all .25s ease;
+    background: rgba(255,255,255,0.01);
+  }
+  
+  .tier-opt:hover {
+    border-color: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.02);
+  }
+  
+  .tier-opt.selected {
+    border-color: var(--gold);
+    background: var(--gold-glow);
+    box-shadow: 0 0 15px var(--gold-glow);
+  }
+  
+  .tier-opt input {
+    margin-top: 4px;
+    accent-color: var(--gold);
+  }
+  
+  .tier-header-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: baseline;
+  }
+  
+  .tier-name {
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text-primary);
+  }
+  
+  .tier-price {
+    color: var(--gold);
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+  
+  .tier-desc {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 6px;
+    line-height: 1.45;
+  }
+  
+  input[type=email] {
+    width: 100%;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 18px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    margin-bottom: 20px;
+    transition: all .25s ease;
+  }
+  
+  input[type=email]:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 12px var(--gold-glow);
+  }
+  
+  .error-msg {
+    color: #F0908C;
+    font-size: 0.85rem;
+    display: none;
+    margin-bottom: 18px;
+    font-family: var(--font-mono);
+  }
+  
+  /* Interactive Accordion FAQs */
+  .info-block {
+    margin-top: 80px;
+    padding-top: 24px;
+  }
+  
+  .info-block h2 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+    border-left: 3px solid var(--gold);
+    padding-left: 14px;
+  }
+  
+  .info-block p {
+    color: var(--text-secondary);
+    font-size: 0.98rem;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all .25s ease;
+  }
+  
+  .faq-item:hover {
+    border-color: rgba(255,255,255,0.12);
+  }
+  
+  .faq-trigger {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    text-align: left;
+    padding: 22px 28px;
+    font-size: 1.05rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-body);
+  }
+  
+  .faq-icon {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    transition: transform .25s ease;
+  }
+  
+  .faq-item.open .faq-icon {
+    transform: rotate(45deg);
+    color: var(--gold);
+  }
+  
+  .faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .3s cubic-bezier(0.16, 1, 0.3, 1);
+    background: rgba(0,0,0,0.15);
+  }
+  
+  .faq-content-inner {
+    padding: 0 28px 24px;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+  
+  footer {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    padding: 60px 0 32px;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    margin-top: 64px;
+  }
+  
+  footer a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color .2s ease;
+  }
+  
+  footer a:hover {
+    color: var(--gold);
+  }
+  
+  .powered-by {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 24px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    opacity: 0.85;
+    letter-spacing: 0.03em;
+  }
+  
+  .powered-by-logos {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .powered-by-logos svg {
+    height: 24px;
+    width: auto;
+    fill: currentColor;
+    opacity: 0.9;
+    transition: opacity .2s ease, fill .2s ease, transform .2s ease;
+  }
+  
+  .powered-by-logos svg:hover {
+    opacity: 1;
+    fill: var(--gold);
+    transform: translateY(-1px);
+  }
+  
+  /* Splash Loading Screen */
+  #splash {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-dark);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity .6s ease, visibility .6s ease;
+  }
+  
+  #splash.gone {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  
+  #splash svg {
+    width: 100px;
+    height: 100px;
+  }
+  
+  #splash .splash-line {
+    stroke-dasharray: 40;
+    stroke-dashoffset: 40;
+    animation: drawline 1.2s ease forwards;
+  }
+  
+  #splash .splash-line:nth-child(3) { animation-delay: .05s; }
+  #splash .splash-line:nth-child(4) { animation-delay: .15s; }
+  #splash .splash-line:nth-child(5) { animation-delay: .25s; }
+  #splash .splash-line:nth-child(6) { animation-delay: .35s; }
+  
+  @keyframes drawline { to { stroke-dashoffset: 0; } }
+  
+  /* Live traffic badge */
+  .live-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(217, 65, 65, 0.08);
+    color: #F0908C;
+    border: 1px solid rgba(217, 65, 65, 0.15);
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+  }
+  
+  .live-dot {
+    width: 6px;
+    height: 6px;
+    background: #D94141;
+    border-radius: 50%;
+    position: relative;
+  }
+  
+  .live-dot::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid #D94141;
+    animation: pulseBadge 1.8s infinite;
+  }
+  
+  @keyframes pulseBadge {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(2.5); opacity: 0; }
+  }
+
+  /* Phase 5: CRO Additions */
+  .tier-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--bg-dark);
+    background: var(--gold);
+    border-radius: 4px;
+    padding: 2px 8px;
+    margin-left: 10px;
+    vertical-align: middle;
+    box-shadow: 0 0 8px var(--gold-glow);
+  }
+
+  .score-reveal-num {
+    display: inline-block;
+    transition: transform .15s ease;
+  }
+
+  .upsell-section {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .6s cubic-bezier(0.16,1,0.3,1), transform .6s cubic-bezier(0.16,1,0.3,1);
+  }
+
+  .upsell-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .score-flash {
+    animation: scoreFlash .35s ease forwards;
+  }
+
+  @keyframes scoreFlash {
+    0%   { text-shadow: 0 0 10px var(--gold-glow); }
+    50%  { text-shadow: 0 0 32px var(--gold), 0 0 60px var(--gold-glow); }
+    100% { text-shadow: 0 0 10px var(--gold-glow); }
+  }
+
+  .tease-icon {
+    font-size: 2rem;
+    animation: pulseIcon 2s ease-in-out infinite;
+  }
+
+  @keyframes pulseIcon {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #splash { display: none; }
+    .splash-line { animation: none !important; stroke-dashoffset: 0 !important; }
+    * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://iq-test.icu/#organization",
+      "name": "IQ Test",
+      "alternateName": [
+        "IQ·Test",
+        "IQ-Test",
+        "iq-test.icu"
+      ],
+      "url": "https://iq-test.icu/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://iq-test.icu/#logo",
+        "url": "https://iq-test.icu/icon.webp",
+        "width": 512,
+        "height": 512
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "APEX Business Systems Ltd.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Edmonton",
+          "addressRegion": "AB",
+          "addressCountry": "CA"
+        }
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactoPoint",
+          "contactType": "customer support",
+          "email": "support@iq-test.icu",
+          "availableLanguage": "English"
+        },
+        {
+          "@type": "ContactoPoint",
+          "contactType": "billing support",
+          "email": "billing@iq-test.icu",
+          "availableLanguage": "English"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://iq-test.icu/#website",
+      "url": "https://iq-test.icu/",
+      "name": "IQ Test",
+      "publisher": {
+        "@id": "https://iq-test.icu/#organization"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://iq-test.icu/#webpage",
+      "url": "https://iq-test.icu/",
+      "name": "Free IQ Test — Get Your Score in 5 Minutes | IQ Test",
+      "description": "Take a free 16-question IQ test and get your cognitive index, percentile, and category breakdown instantly. Optional detailed reports from $1.99.",
+      "isPartOf": {
+        "@id": "https://iq-test.icu/#website"
+      },
+      "inLanguage": "en",
+      "datePublished": "2026-07-18T00:00:00-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00"
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://iq-test.icu/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is this a real IQ test?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is a real cognitive skills test that reports your result on the familiar 85–145 scale used by traditional IQ scoring. It is not a clinical IQ assessment — those are administered one-to-one by a licensed psychologist using instruments such as the WAIS-IV."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I have to pay to see my score?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Your cognitive index score and percentile are shown free, immediately after the final question. Detailed reports are an optional one-time purchase, and there is no subscription."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long does the IQ test take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sixteen questions across four reasoning domains. Most people finish in under five minutes."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the score calculated?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Each of the 16 items falls into one of four categories: numeric reasoning, verbal reasoning, logic, and pattern recognition. Your raw score across all four is converted into a cognitive index on a 85-145 scale, modeled on a standard mean-100 / SD-15 distribution, purely as a familiar frame of reference."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between the report tiers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Score Report ($1.99) unlocks your full 4-category percentile breakdown. The Deep Report ($3.99) adds a written analysis of your reasoning pattern and a thematic historical figure match based on your strongest category. The Complete Report ($6.99) includes everything plus a printable certificate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens to my data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your answers and email (if purchasing) are never sold or shared. Payment is processed by Stripe. Optional cognitive-science emails are sent only if you tick that box, and each one has a one-click unsubscribe."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://iq-test.icu/#report-product",
+      "name": "IQ Test Cognitive Report",
+      "description": "A detailed breakdown of your results across four reasoning domains, with percentile placement and a historical-figure cognitive match.",
+      "brand": {
+        "@id": "https://iq-test.icu/#organization"
+      },
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Score Report",
+          "price": "1.99",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://iq-test.icu/",
+          "priceValidUntil": "2027-08-14"
+        },
+        {
+          "@type": "Offer",
+          "name": "Deep Report",
+          "price": "3.99",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://iq-test.icu/",
+          "priceValidUntil": "2027-08-14"
+        },
+        {
+          "@type": "Offer",
+          "name": "Complete Report",
+          "price": "6.99",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock",
+          "url": "https://iq-test.icu/",
+          "priceValidUntil": "2027-08-14"
+        }
+      ]
+    }
+  ]
+}
+</script>
+  <link rel="alternate" hreflang="en" href="https://iq-test.icu">
+  <link rel="alternate" hreflang="de" href="https://iq-test.icu/de">
+  <link rel="alternate" hreflang="fr" href="https://iq-test.icu/fr">
+  <link rel="alternate" hreflang="es" href="https://iq-test.icu/es">
+  <link rel="alternate" hreflang="pt" href="https://iq-test.icu/pt">
+  <link rel="alternate" hreflang="it" href="https://iq-test.icu/it">
+  <link rel="alternate" hreflang="nl" href="https://iq-test.icu/nl">
+  <link rel="alternate" hreflang="ja" href="https://iq-test.icu/ja">
+  <link rel="alternate" hreflang="ko" href="https://iq-test.icu/ko">
+  <link rel="alternate" hreflang="zh" href="https://iq-test.icu/zh">
+  <link rel="alternate" hreflang="ar" href="https://iq-test.icu/ar">
+  <link rel="alternate" hreflang="hi" href="https://iq-test.icu/hi">
+  <link rel="alternate" hreflang="tl" href="https://iq-test.icu/tl">
+  <link rel="alternate" hreflang="x-default" href="https://iq-test.icu">
+</head>
+<body>
+<noscript>
+  <main style="max-width:660px;margin:0 auto;padding:24px;font-family:sans-serif;">
+    <p style="font-size:1.4rem; font-weight:bold; color:#C9A24B;">Free IQ Test — 16-Question Cognitive Assessment</p>
+    <p>Take our free 16-question cognitive skills test covering numeric reasoning, verbal reasoning, logical deduction, and pattern recognition. Most people finish in under 5 minutes. Your score is instant and free. Optionally unlock a detailed report ($1.99–$6.99) revealing which historical figure — Einstein, Newton, Da Vinci, or others — thinks most like you.</p>
+  </main>
+</noscript>
+<div class="bg-glow-1"></div>
+<div class="bg-glow-2"></div>
+
+<!-- Unified genius mural — single panoramic oil painting, four figures, one scene -->
+<div class="mural-container" aria-hidden="true">
+  <img src="mural_bg.webp" class="mural-bg" alt="" draggable="false">
+  <div class="mural-vignette"></div>
+</div>
+
+<div id="splash" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#C9A24B" stroke-width="1.2" class="splash-line"/>
+    <line x1="50" y1="50" x2="27" y2="27" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
+    <line x1="50" y1="50" x2="73" y2="27" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
+    <line x1="50" y1="50" x2="27" y2="73" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
+    <line x1="50" y1="50" x2="79" y2="21" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
+    <circle cx="27" cy="27" r="3.2" fill="#C9A24B"/>
+    <circle cx="73" cy="27" r="3.2" fill="#C9A24B"/>
+    <circle cx="27" cy="73" r="3.2" fill="#C9A24B"/>
+    <circle cx="79" cy="21" r="3.8" fill="#EDE3CB"/>
+    <circle cx="50" cy="50" r="5.5" fill="#EDE3CB"/>
+  </svg>
+</div>
+<div class="wrap">
+  <header>
+    <div class="logo-wrap">
+      <img src="/wordmark.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;" onerror="this.style.display='none'">
+    </div>
+    <div class="serial" id="serialTag">MATCHED AGAINST HISTORY'S SHARPEST MINDS</div>
+  </header>
+
+  <section class="screen active" id="screen-hero">
+    <div class="app-card">
+      <div class="hero-visual-container">
+        <div class="orbital-ring">
+          <div class="orbital-dot"></div>
+        </div>
+        <div class="orbital-ring-inner"></div>
+        <div class="brand-logo-medallion">
+          <img src="/icon.webp" alt="Gold Medallion Centerpiece">
+        </div>
+      </div>
+      
+      <div class="eyebrow">Cognitive Assessment</div>
+      <h1 style="text-align:center;">Free IQ Test — See Your Score and the Mind That Matches It</h1>
+      <p style="text-align:center; font-size:0.92rem; color:var(--text-secondary); margin-top:-10px; margin-bottom:18px;">A 16-question cognitive skills test for self-insight and entertainment. Not a clinical or diagnostic IQ assessment.</p>
+      <p class="lead" style="text-align:center;">16 questions. Acerca de five minutes. Your score is free the moment you finish. Then decide if you want to know which historical figure you actually think like.</p>
+      
+      <div class="chip-row">
+        <span class="chip"><b>16</b> questions</span>
+        <span class="chip"><b>4</b> categories</span>
+        <span class="chip"><b>5 min</b> average</span>
+      </div>
+      
+      <div style="text-align:center;">
+        <button class="btn btn-primary" onclick="startTest()">Start the test</button>
+      </div>
+      <p class="disclaimer" style="text-align:center;">This is a self-insight quiz, not a clinical IQ test. Your score is for personal reflection only. See the FAQ below for full methodology details.</p>
+    </div>
+
+    <div class="info-block" id="content-hub">
+      <h2>Cognitive Self-Insight: Understand Your Problem-Solving Profile</h2>
+      <p>This free 16-question cognitive skills assessment evaluates your spatial reasoning, logical deduction, verbal comprehension, and numerical pattern recognition. Designed for anyone curious about how their mind works, the test maps your raw cognitive index across four distinct domains to create a unique reasoning profile. Unlike a clinical IQ test, this quiz focuses on engaging self-insight and problem-solving styles rather than clinical diagnostics. In about five minutes, you will receive a free, instant snapshot of your cognitive index score on the familiar 85–145 scale. After viewing your free baseline score, you can optionally unlock a detailed reasoning analysis that compares your exact style of thinking to history’s greatest scientists, philosophers, and inventors.</p>
+
+      <h2>What your cognitive index score actually means</h2>
+      <p>When you complete this assessment, your performance is expressed on the familiar 85–145 scale. In modern psychometrics, intelligence scores follow a standard Gaussian normal distribution where the population average is set to 100 with a standard deviation of 15. A score is not an absolute measure of brain capacity, but a relative index indicating your statistical percentile ranking compared to the broader population.</p>
+      
+      <table style="width:100%; border-collapse:collapse; margin:20px 0; font-family:var(--font-display); font-size:0.9rem; background:var(--bg-card); border-radius:8px; overflow:hidden; border:1px solid var(--border-color);">
+        <thead>
+          <tr style="background:rgba(255,255,255,0.05); color:var(--gold); text-align:left;">
+            <th style="padding:12px 16px; border-bottom:1px solid var(--border-color);">Cognitive Index</th>
+            <th style="padding:12px 16px; border-bottom:1px solid var(--border-color);">Population Percentile</th>
+            <th style="padding:12px 16px; border-bottom:1px solid var(--border-color);">Standard Classification</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:10px 16px; border-bottom:1px solid var(--border-color);"><strong>130 and above</strong></td>
+            <td style="padding:10px 16px; border-bottom:1px solid var(--border-color);">98th percentile and above</td>
+            <td style="padding:10px 16px; border-bottom:1px solid var(--border-color);">Very Superior (Top 2%)</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 16px; border-bottom:1px solid var(--border-color);"><strong>115 – 129</strong></td>
+            <td style="padding:10px 16px; border-bottom:1px solid var(--border-color);">84th to 97th percentile</td>
+            <td style="padding:10px 16px; border-bottom:1px solid var(--border-color);">High Average / Superior</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 16px; border-bottom:1px solid var(--border-color);"><strong>100</strong></td>
+            <td style="padding:10px 16px; border-bottom:1px solid var(--border-color);">50th percentile (Median)</td>
+            <td style="padding:10px 16px; border-bottom:1px solid var(--border-color);">Average (Exact Population Center)</td>
+          </tr>
+          <tr>
+            <td style="padding:10px 16px;"><strong>85 – 99</strong></td>
+            <td style="padding:10px 16px;">16th to 49th percentile</td>
+            <td style="padding:10px 16px;">Average / Low Average</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:28px;">These percentiles follow directly from the normal distribution curve and standard statistical conventions, not proprietary formulas.</p>
+
+      <h2>The four reasoning domains we measure</h2>
+      <p>Human intelligence is multidimensional. Our assessment evaluates four foundational cognitive pillars grounded in the Cattell–Horn–Carroll theory of human cognitive abilities:</p>
+      <ul style="color:var(--text-secondary); margin-bottom: 28px; margin-left: 20px; font-size: 0.95rem; line-height: 1.7;">
+        <li style="margin-bottom: 12px;"><strong><a href="/cognitive-skills/numerical-reasoning" style="color:var(--gold);">Numerical Reasoning</a>:</strong> Evaluates mathematical pattern detection, progression extrapolation, and quantitative problem-solving speed without requiring advanced calculus.</li>
+        <li style="margin-bottom: 12px;"><strong><a href="/cognitive-skills/verbal-reasoning" style="color:var(--gold);">Verbal Reasoning</a>:</strong> Measures semantic comprehension, relational concept analogies, and the deductive analysis of linguistic statements.</li>
+        <li style="margin-bottom: 12px;"><strong><a href="/cognitive-skills/logical-reasoning" style="color:var(--gold);">Logical Deduction</a>:</strong> Tests rule-based syllogisms, conditional constraint tracking, and systematic contradiction elimination.</li>
+        <li style="margin-bottom: 12px;"><strong><a href="/cognitive-skills/pattern-recognition" style="color:var(--gold);">Pattern Recognition</a>:</strong> Assesses visual-spatial matrix transformations, rotational symmetry, and nonverbal fluid intelligence (Gf).</li>
+      </ul>
+
+      <h2>Why we match you to a historical mind</h2>
+      <p>Unlike conventional tests that reduce your intellect to a cold number, our optional Deep Report matches your domain balance to history's most creative thinkers. This is an engaging storytelling and self-reflection device based on documented problem-solving styles. Whether you share the visual mental simulation of <a href="/historical-figures/nikola-tesla-iq" style="color:var(--gold);">Nikola Tesla</a>, the empirical perseverance of <a href="/historical-figures/marie-curie-iq" style="color:var(--gold);">Marie Curie</a>, the cross-domain polymathy of <a href="/historical-figures/leonardo-da-vinci-iq" style="color:var(--gold);">Leonardo da Vinci</a>, or the mathematical deduction of <a href="/historical-figures/isaac-newton-iq" style="color:var(--gold);">Isaac Newton</a>, your cognitive profile highlights how your unique mind processes information. Explore our full library of <a href="/historical-figures-iq" style="color:var(--gold);">historical figures' IQ profiles</a>.</p>
+
+      <h2>How this test is different from a clinical IQ test</h2>
+      <p>We believe in absolute transparency: <strong>this assessment is not a clinical diagnostic instrument.</strong> A clinical IQ test (such as the WAIS-IV or Stanford-Binet 5) is administered one-on-one by a licensed clinical psychologist over 60 to 90 minutes. Clinical tests are required for diagnostic evaluations, educational placement, and legal documentation. In contrast, our test is a rapid, accessible 5-minute self-insight tool designed to provide an entertaining baseline reflection of your reasoning strengths. To learn more, read our guide on <a href="/cognitive-test-vs-iq-test" style="color:var(--gold);">cognitive tests vs. IQ tests</a> and review the <a href="/types-of-iq-tests" style="color:var(--gold);">major types of IQ tests</a>.</p>
+
+      <h2>Frequently asked questions</h2>
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="toggleFaq(this)">
+            Is this a real IQ test?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              It is a real cognitive skills test that reports your result on the familiar 85–145 scale used by traditional IQ scoring. It is not a clinical IQ assessment — those are administered one-to-one by a licensed psychologist using instruments such as the WAIS-IV.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="toggleFaq(this)">
+            Do I have to pay to see my score?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              No. Your cognitive index score and percentile are shown free, immediately after the final question. Detailed reports are an optional one-time purchase, and there is no subscription.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="toggleFaq(this)">
+            How long does the IQ test take?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              Sixteen questions across four reasoning domains. Most people finish in under five minutes.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="toggleFaq(this)">
+            How is the score calculated?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              Each of the 16 items falls into one of four categories: numeric reasoning, verbal reasoning, logic, and pattern recognition. Your raw score across all four is converted into a cognitive index on a 85-145 scale, modeled on a standard mean-100 / SD-15 distribution, purely as a familiar frame of reference.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="toggleFaq(this)">
+            What is the difference between the report tiers?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              The Score Report ($1.99) unlocks your full 4-category percentile breakdown. The Deep Report ($3.99) adds a written analysis of your reasoning pattern and a thematic historical figure match based on your strongest category. The Complete Report ($6.99) includes everything plus a printable certificate.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-trigger" onclick="toggleFaq(this)">
+            What happens to my data?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-content">
+            <div class="faq-content-inner">
+              We collect your answers and, if you buy a report, your email. We never sell or share it, and payment is processed by Stripe. The only other email we ever send is the optional cognitive-science note you can tick a box for — and every one of those carries a one-click unsubscribe.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-test">
+    <div class="test-header">
+      <span class="q-counter">ITEM <span id="qNum">01</span>/16</span>
+      <span class="q-counter" id="qCategory">PATTERN</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="app-card">
+      <div class="q-text" id="qText"></div>
+      <div class="options" id="qOptions"></div>
+    </div>
+    <p class="disclaimer" style="text-align:center; font-family:var(--font-mono); font-size:0.7rem; opacity: 0.6;">Keyboard shortcuts: [1-4] or [A-D] selects options instantly</p>
+  </section>
+
+  <section class="screen" id="screen-result">
+    <div class="app-card">
+      <div class="eyebrow">Cognitive Fingerprint</div>
+      
+      <div class="result-grid">
+        <div class="radar-container" id="radarContainer">
+          <!-- Dynamic SVG Radar Chart gets inserted here -->
+        </div>
+        
+        <div class="bell-container">
+          <div class="curve-wrap">
+            <svg viewBox="0 0 400 110" width="100%" height="110" id="curveSvg">
+              <path id="curvePath" d="M0,100 C60,100 90,10 200,10 C310,10 340,100 400,100" fill="none" stroke="var(--border-color)" stroke-width="2"/>
+              <circle id="curveMarker" cx="200" cy="10" r="6" fill="var(--red)"/>
+            </svg>
+          </div>
+          <div class="curve-caption">Cognitive Index <b id="indexReadout">--</b> · <span id="percentileReadout">--</span>th percentile</div>
+          
+          <div class="ledger" id="ledgerRows" style="width:100%;"></div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin: 16px 0;">
+        <button class="btn" style="background:rgba(255,255,255,0.04); border:1px solid var(--border-color); color:var(--text-secondary); font-size:0.88rem; padding:10px 20px;" onclick="shareResult()">🔗 Copy / Share My Result</button>
+        <div id="shareNotice" style="display:none; font-size:0.8rem; color:var(--gold); margin-top:6px;">Result link copied to clipboard!</div>
+      </div>
+
+      <!-- T-01: Two-step lead capture interstitial -->
+      <div id="leadCaptureBox" style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-gold-hover); border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
+        <h3 style="font-family:var(--font-display); font-size:1.25rem; font-weight:600; color:var(--text-primary); margin-bottom:8px;">Want your free score snapshot emailed to you?</h3>
+        <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:16px;">Save your cognitive index & breakdown before unlocking your historical match.</p>
+        
+        <div style="max-width:440px; margin: 0 auto;">
+          <input type="email" id="leadEmailInput" placeholder="your@email.com" autocomplete="email" style="margin-bottom:12px;">
+          
+          <label style="display:flex; gap:10px; align-items:flex-start; font-size:0.8rem; color:var(--text-muted); text-align:left; margin-bottom:10px; cursor:pointer;">
+            <input type="checkbox" id="leadConsentCheck" checked style="margin-top:3px; accent-color:var(--gold);">
+            <span>Send my free score breakdown to this email (no spam, zero resale).</span>
+          </label>
+          
+          <label style="display:flex; gap:10px; align-items:flex-start; font-size:0.8rem; color:var(--text-muted); text-align:left; margin-bottom:16px; cursor:pointer;">
+            <input type="checkbox" id="leadMarketingCheck" style="margin-top:3px; accent-color:var(--gold);">
+            <span>Also send me occasional cognitive-science content (unsubscribe anytime).</span>
+          </label>
+          
+          <div class="error-msg" id="leadError" style="margin-bottom:12px;">Please enter a valid email address.</div>
+          
+          <button class="btn btn-primary" style="width:100%;" onclick="submitLead()" id="leadSubmitBtn">Save Score & View Historical Match →</button>
+        </div>
+      </div>
+
+      <div class="tease-box">
+        <div class="tease-icon">🔭</div>
+        <span class="tease-label">YOUR HISTORICAL MATCH IS LOCKED</span>
+        <span class="tease-blur">████ ███████</span>
+        <span class="tease-cta">Unlock your report to see which historical mind thinks like you</span>
+      </div>
+
+      <div class="upsell-section" id="upsellSection">
+        <div class="value-stack">
+          <div class="value-card">
+            <div class="value-title"><span>📊</span> Category Percentiles</div>
+            <div class="value-desc">How your verbal, numeric, logical, and spatial scores compare, category by category.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-title"><span>🧠</span> Reasoning Style Analysis</div>
+            <div class="value-desc">A plain-language read on how you approach problems, based on your actual answers.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-title"><span>🏛️</span> Thematic Historical Match</div>
+            <div class="value-desc">Discover the scientist, philosopher, or inventor whose thinking pattern most closely mirrors yours.</div>
+          </div>
+          <div class="value-card">
+            <div class="value-title"><span>📜</span> Official Certificate (Complete)</div>
+            <div class="value-desc">Printable PDF certificate of cognitive assessment with verification ID.</div>
+          </div>
+        </div>
+
+        <div class="receipt">
+          <h2 style="margin-bottom:8px;">Choose your report tier</h2>
+          <p class="lead" style="font-size:0.9rem; margin-bottom:20px; color:var(--text-secondary);">One-time payment. No subscription. Emailed in under 60 seconds.</p>
+
+          <!-- Sample excerpt — gives people a concrete preview before they pay -->
+          <details style="margin-bottom:20px; border:1px solid var(--border-color); border-radius:10px; padding:14px 16px; cursor:pointer;">
+            <summary style="font-size:0.85rem; font-weight:600; color:var(--gold); list-style:none; display:flex; justify-content:space-between; align-items:center;">
+              <span>📄 See a sample Deep Report excerpt</span>
+              <span style="font-size:0.75rem; color:var(--text-muted); font-weight:400;">click to expand</span>
+            </summary>
+            <div style="margin-top:12px; font-size:0.83rem; color:var(--text-secondary); line-height:1.7; border-top:1px solid var(--border-color); padding-top:12px; font-style:italic;">
+              <strong style="color:var(--text-primary); font-style:normal;">Overall Summary</strong><br>
+              Your puzzle responses indicate a constructive reasoning pattern combining systematic deduction with an ability to hold multiple relational concepts simultaneously. You tend to resolve ambiguity by narrowing to structure rather than intuition.<br><br>
+              <strong style="color:var(--text-primary); font-style:normal;">Strongest Reasoning Signal</strong><br>
+              Your Logic scores were most pronounced — you consistently identified which premises were sufficient and which required additional constraints. This reflects deliberate, rule-governed thinking rather than trial-and-error pattern matching.<br><br>
+              <strong style="color:var(--text-primary); font-style:normal;">Thematic Historical Match</strong><br>
+              Your Logic result echoes the kind of thinking associated with Aristotle — not a numeric comparison, but a shared tendency to formalise relationships between statements before drawing conclusions.<br><br>
+              <span style="font-size:0.78rem; color:var(--text-muted);">↑ This is an illustrative excerpt. Your actual report is generated from your specific answers and score breakdown.</span>
+            </div>
+          </details>
+
+          <div class="tier-row">
+            <label class="tier-opt" id="tierBasicLabel">
+              <input type="radio" name="tier" value="basic" id="tierBasic" onchange="onTierChange()">
+              <div style="width:100%;">
+                <div class="tier-header-row">
+                  <span class="tier-name">Score Report</span>
+                  <span class="tier-price">$1.99</span>
+                </div>
+                <div class="tier-desc">Your estimated percentile across all 4 categories (Numeric, Verbal, Logic, Pattern). Plain text. Emailed in ~30 seconds.</div>
+              </div>
+            </label>
+            <label class="tier-opt selected" id="tierDetailedLabel">
+              <input type="radio" name="tier" value="detailed" id="tierDetailed" checked onchange="onTierChange()">
+              <div style="width:100%;">
+                <div class="tier-header-row">
+                  <span class="tier-name">Deep Report <span class="tier-badge">Most Popular</span></span>
+                  <span class="tier-price">$3.99</span>
+                </div>
+                <div class="tier-desc">Everything in Score Report, plus a ~200-word written analysis across 6 sections (Summary, Domain Observations, Strongest Signal, Context, Takeaway, Historical Match). Emailed in ~45 seconds.</div>
+              </div>
+            </label>
+            <label class="tier-opt" id="tierCompleteLabel">
+              <input type="radio" name="tier" value="complete" id="tierComplete" onchange="onTierChange()">
+              <div style="width:100%;">
+                <div class="tier-header-row">
+                  <span class="tier-name">Complete Report <span class="tier-badge" style="background:#4ADE80; color:#062310;">Best Value</span></span>
+                  <span class="tier-price">$6.99</span>
+                </div>
+                <div class="tier-desc">Everything in Deep Report, plus a printable Certificate of Cognitive Assessment with your Verification ID. Emailed in ~60 seconds.</div>
+              </div>
+            </label>
+          </div>
+
+          <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
+          <label style="display:flex; gap:10px; align-items:flex-start; font-size:0.82rem; color:var(--text-muted); margin-bottom:18px; cursor:pointer;">
+            <input type="checkbox" id="consentCheck" checked style="margin-top:3px; accent-color:var(--gold);">
+            <span>Send my report to this email. No newsletters, no marketing follow-ups.</span>
+          </label>
+
+          <div class="error-msg" id="checkoutError">Please enter a valid email and tick the checkbox above.</div>
+          <button class="btn btn-primary" style="width:100%;" onclick="startCheckout()" id="checkoutBtn">Reveal my historical match &mdash; $3.99</button>
+          <p class="disclaimer" style="font-size:0.75rem; text-align:center; margin-top:12px; font-weight:600; color:var(--text-secondary);">🔒 One-time payment. No subscription. No surprise charges. Processed securely by Stripe.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-report">
+    <div class="app-card">
+      <div class="report-headline" id="reportHeadline" style="font-family:var(--font-display); font-size:1.8rem; font-weight:700; color:var(--text-primary); margin-bottom:12px;">Your full report</div>
+      <p class="lead" id="reportBody">Loading your report…</p>
+    </div>
+  </section>
+
+
+
+  
+    <div class="lang-switcher-container" style="margin: 20px 0; text-align: center; font-size: 0.85rem;">
+      <nav aria-label="Seleccionar idioma" class="lang-switcher" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 12px; opacity: 0.85;">
+        <a href="https://iq-test.icu" hreflang="en" lang="en" rel="alternate">English</a>
+        <a href="https://iq-test.icu/de" hreflang="de" lang="de" rel="alternate">Deutsch</a>
+        <a href="https://iq-test.icu/fr" hreflang="fr" lang="fr" rel="alternate">Français</a>
+        <a href="https://iq-test.icu/es" hreflang="es" lang="es" rel="alternate" aria-current="page" class="active">Español</a>
+        <a href="https://iq-test.icu/pt" hreflang="pt" lang="pt" rel="alternate">Português</a>
+        <a href="https://iq-test.icu/it" hreflang="it" lang="it" rel="alternate">Italiano</a>
+        <a href="https://iq-test.icu/nl" hreflang="nl" lang="nl" rel="alternate">Nederlands</a>
+        <a href="https://iq-test.icu/ja" hreflang="ja" lang="ja" rel="alternate">日本語</a>
+        <a href="https://iq-test.icu/ko" hreflang="ko" lang="ko" rel="alternate">한국어</a>
+        <a href="https://iq-test.icu/zh" hreflang="zh" lang="zh-Hans" rel="alternate">简体中文</a>
+        <a href="https://iq-test.icu/ar" hreflang="ar" lang="ar" rel="alternate">العربية</a>
+        <a href="https://iq-test.icu/hi" hreflang="hi" lang="hi" rel="alternate">हिन्दी</a>
+        <a href="https://iq-test.icu/tl" hreflang="tl" lang="tl" rel="alternate">Tagalog</a>
+      </nav>
+    </div>
+    <footer>
+    <img src="/wordmark.webp" alt="IQ Test" style="height:20px; width:auto; display:block; margin:0 auto 16px; opacity:0.7;" onerror="this.style.display='none'">
+    <div style="margin-bottom:15px; line-height: 1.8;">
+      <a href="/">Inicio</a> &nbsp;&middot;&nbsp;
+      <a href="/iq-scores/">Puntuaciones de CI</a> &nbsp;&middot;&nbsp;
+      <a href="/historical-figures-iq">Figuras históricas</a> &nbsp;&middot;&nbsp;
+      <a href="/cognitive-skills/">Dominios de razonamiento</a> &nbsp;&middot;&nbsp;
+      <a href="/what-is-an-iq-test">¿Qué es un test de CI?</a>
+      <br>
+      <a href="/free-iq-test-online">Test de CI gratis online</a> &nbsp;&middot;&nbsp;
+      <a href="/are-online-iq-tests-accurate">Precisión del test</a> &nbsp;&middot;&nbsp;
+      <a href="/types-of-iq-tests">Tipos de tests</a> &nbsp;&middot;&nbsp;
+      <a href="/methodology">Metodología</a> &nbsp;&middot;&nbsp;
+      <a href="/editorial-standards">Normas editoriales</a>
+      <br>
+      <a href="/about">Acerca de</a> &nbsp;&middot;&nbsp;
+      <a href="/support">Soporte</a> &nbsp;&middot;&nbsp;
+      <a href="/contact">Contacto</a> &nbsp;&middot;&nbsp;
+      <a href="/privacy">Privacidad</a> &nbsp;&middot;&nbsp;
+      <a href="/terms">Términos</a>
+    </div>
+    <div>&copy; 2026 APEX Business Systems Ltd. &nbsp;&middot;&nbsp; Edmonton, AB &nbsp;&middot;&nbsp; <a href="mailto:support@iq-test.icu">support@iq-test.icu</a></div>
+    
+    <div class="powered-by">
+      <span>powered by:</span>
+      <div class="powered-by-logos">
+        <a href="https://stripe.com" target="_blank" rel="noopener" aria-label="Stripe" style="margin:0; display:inline-flex;">
+          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Stripe</title><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/></svg>
+        </a>
+        <a href="https://cloudflare.com" target="_blank" rel="noopener" aria-label="Cloudflare" style="margin:0; display:inline-flex;">
+          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Cloudflare</title><path d="M16.5088 16.8447c.1475-.5068.0908-.9707-.1553-1.3154-.2246-.3164-.6045-.499-1.0615-.5205l-8.6592-.1123a.1559.1559 0 0 1-.1333-.0713c-.0283-.042-.0351-.0986-.021-.1553.0278-.084.1123-.1484.2036-.1562l8.7359-.1123c1.0351-.0489 2.1601-.8868 2.5537-1.9136l.499-1.3013c.0215-.0561.0293-.1128.0147-.168-.5625-2.5463-2.835-4.4453-5.5499-4.4453-2.5039 0-4.6284 1.6177-5.3876 3.8614-.4927-.3658-1.1187-.5625-1.794-.499-1.2026.119-2.1665 1.083-2.2861 2.2856-.0283.31-.0069.6128.0635.894C1.5683 13.171 0 14.7754 0 16.752c0 .1748.0142.3515.0352.5273.0141.083.0844.1475.1689.1475h15.9814c.0909 0 .1758-.0645.2032-.1553l.12-.4268zm2.7568-5.5634c-.0771 0-.1611 0-.2383.0112-.0566 0-.1054.0415-.127.0976l-.3378 1.1744c-.1475.5068-.0918.9707.1543 1.3164.2256.3164.6055.498 1.0625.5195l1.8437.1133c.0557 0 .1055.0263.1329.0703.0283.043.0351.1074.0214.1562-.0283.084-.1132.1485-.204.1553l-1.921.1123c-1.041.0488-2.1582.8867-2.5527 1.914l-.1406.3585c-.0283.0713.0215.1416.0986.1416h6.5977c.0771 0 .1474-.0489.169-.126.1122-.4082.1757-.837.1757-1.2803 0-2.6025-2.125-4.727-4.7344-4.727"/></svg>
+        </a>
+        <a href="https://supabase.com" target="_blank" rel="noopener" aria-label="Supabase" style="margin:0; display:inline-flex;">
+          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>Supabase</title><path d="M11.9 1.036c-.015-.986-1.26-1.41-1.874-.637L.764 12.05C-.33 13.427.65 15.455 2.409 15.455h9.579l.113 7.51c.014.985 1.259 1.408 1.873.636l9.262-11.653c1.093-1.375.113-3.403-1.645-3.403h-9.642z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<script>
+const API_BASE = ""; // same-origin — Worker is routed at iq-test.icu/api/*
+
+const splashEl = document.getElementById('splash');
+function dismissSplash(){ splashEl.classList.add('gone'); }
+setTimeout(dismissSplash, 1400);
+splashEl.addEventListener('click', dismissSplash);
+
+const QUESTIONS = [
+  {cat:"NUMERIC", text:"2, 6, 12, 20, 30, ?", opts:["36","40","42","44"], correct:2},
+  {cat:"NUMERIC", text:"3, 9, 27, 81, ?", opts:["162","216","243","324"], correct:2},
+  {cat:"NUMERIC", text:"1, 4, 9, 16, 25, ?", opts:["30","32","36","49"], correct:2},
+  {cat:"NUMERIC", text:"100, 91, 79, 64, ?", opts:["46","48","50","52"], correct:0},
+  {cat:"VERBAL", text:"Ocean is to Wave as Mountain is to ___", opts:["Rock","Avalanche","Peak","Cliff"], correct:1},
+  {cat:"VERBAL", text:"Author is to Book as Composer is to ___", opts:["Instrument","Symphony","Orchestra","Note"], correct:1},
+  {cat:"VERBAL", text:"Which word does NOT belong: Whisper, Shout, Murmur, Silence", opts:["Whisper","Shout","Murmur","Silence"], correct:3},
+  {cat:"VERBAL", text:"Thermometer is to Temperature as Scale is to ___", opts:["Fish","Weight","Balance","Number"], correct:1},
+  {cat:"LOGIC", text:"All Zeppos are Farbles. Some Farbles are Wickets. Therefore:", opts:["All Zeppos are Wickets","Some Zeppos may be Wickets","No Zeppos are Wickets","All Wickets are Zeppos"], correct:1},
+  {cat:"LOGIC", text:"If it rains, the game is cancelled. The game was NOT cancelled. Therefore:", opts:["It rained","It did not rain","It might have rained","No conclusion possible"], correct:1},
+  {cat:"LOGIC", text:"Five friends sit in a row. Ana is left of Ben. Cid is right of Ben. Who is in the middle?", opts:["Ana","Ben","Cid","Cannot determine"], correct:1},
+  {cat:"LOGIC", text:"A box has more red balls than blue. It has more blue than green. Which is true?", opts:["Green > Red","Red > Green","Green = Red","Cannot determine"], correct:1},
+  {cat:"PATTERN", text:"A, C, F, J, O, ?", opts:["S","T","U","V"], correct:2},
+  {cat:"PATTERN", text:"2, 4, 8, 16, ?, 64", opts:["24","28","32","48"], correct:2},
+  {cat:"PATTERN", text:"AB, DE, GH, JK, ?", opts:["LM","MN","NO","LN"], correct:1},
+  {cat:"PATTERN", text:"1, 1, 2, 3, 5, 8, ?", opts:["11","12","13","14"], correct:2},
+];
+
+// Percentile lookup calibrated to 16-item raw score distribution.
+// Derived from a normal approximation (mean=8, SD=3.2) for a timed
+// 16-item test. Will be replaced with empirical count(*) distribution
+// from Supabase sessions table once sufficient volume is collected.
+// Each entry: [rawScore, estimatedPercentile]
+const RAW_PCT_TABLE = [
+  [0,1],[1,2],[2,4],[3,7],[4,11],[5,17],[6,25],[7,35],
+  [8,50],[9,65],[10,75],[11,84],[12,90],[13,94],[14,97],
+  [15,99],[16,99]
+];
+function percentileFor(index){
+  // Convert index back to raw score for lookup (inverse of: index = 85 + (raw/16)*60)
+  const raw = Math.round(((index - 85) / 60) * 16);
+  const clamped = Math.max(0, Math.min(16, raw));
+  return RAW_PCT_TABLE[clamped][1];
+}
+
+let current = 0;
+let answers = [];
+
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startTest(){
+  current = 0; answers = [];
+  show('screen-test');
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q = QUESTIONS[current];
+  document.getElementById('qNum').textContent = String(current+1).padStart(2,'0');
+  document.getElementById('qCategory').textContent = q.cat;
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('progressFill').style.width = `${(current/QUESTIONS.length)*100}%`;
+  const optsEl = document.getElementById('qOptions');
+  optsEl.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  q.opts.forEach((opt, i)=>{
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `
+      <span class="opt-content">
+        <span class="bubble"></span>
+        <span>${opt}</span>
+      </span>
+      <span class="key-badge">${letters[i]}</span>
+    `;
+    btn.onclick = ()=> selectAnswer(i);
+    optsEl.appendChild(btn);
+  });
+}
+
+// â”€â”€ Keyboard navigation (1-4 or A-D selects answer; Enter auto-advances on selection) â”€â”€
+document.addEventListener('keydown', e => {
+  const screen = document.querySelector('.screen.active');
+  if (!screen || screen.id !== 'screen-test') return;
+  const map = {'1':0,'2':1,'3':2,'4':3,'a':0,'b':1,'c':2,'d':3};
+  const key = e.key.toLowerCase();
+  const opts = document.querySelectorAll('.opt');
+  if (key in map && map[key] < opts.length) {
+    opts.forEach(o => o.classList.remove('selected'));
+    opts[map[key]].classList.add('selected');
+    setTimeout(() => selectAnswer(map[key]), 120);
+  }
+});
+
+function selectAnswer(i){
+  answers[current] = i;
+  current++;
+  if(current < QUESTIONS.length){
+    renderQuestion();
+  } else {
+    document.getElementById('progressFill').style.width = `100%`;
+    finishTest();
+  }
+}
+
+function renderRadarChart(scores, maxScores) {
+  const categories = ["NUMERIC", "VERBAL", "LOGIC", "PATTERN"];
+  const width = 180;
+  const height = 180;
+  const cx = width / 2;
+  const cy = height / 2;
+  const r = 70; // max radius
+
+  // Axis endpoint calculations (4-axis diamond)
+  const angleStep = Math.PI / 2; // 90 degrees per axis
+  
+  // Outer boundaries grid lines
+  let gridPaths = "";
+  for (let gridLevel = 1; gridLevel <= 4; gridLevel++) {
+    const levelR = r * (gridLevel / 4);
+    const points = [];
+    for (let i = 0; i < 4; i++) {
+      const angle = i * angleStep - Math.PI / 2;
+      const x = cx + levelR * Math.cos(angle);
+      const y = cy + levelR * Math.sin(angle);
+      points.push(`${x},${y}`);
+    }
+    gridPaths += `<polygon points="${points.join(' ')}" fill="none" stroke="var(--border-color)" stroke-width="1" />`;
+  }
+
+  // Draw axis lines
+  let axisLines = "";
+  for (let i = 0; i < 4; i++) {
+    const angle = i * angleStep - Math.PI / 2;
+    const x = cx + r * Math.cos(angle);
+    const y = cy + r * Math.sin(angle);
+    axisLines += `<line x1="${cx}" y1="${cy}" x2="${x}" y2="${y}" stroke="var(--border-color)" stroke-width="1" />`;
+  }
+
+  // Calculate user value points
+  const userPoints = [];
+  categories.forEach((cat, i) => {
+    const score = scores[cat] ?? 0;
+    const maxVal = maxScores[cat] ?? 4;
+    const ratio = score / maxVal;
+    
+    // Keep a minimum ratio so the shape is visible
+    const valueR = r * Math.max(0.15, ratio);
+    const angle = i * angleStep - Math.PI / 2;
+    const x = cx + valueR * Math.cos(angle);
+    const y = cy + valueR * Math.sin(angle);
+    userPoints.push(`${x},${y}`);
+  });
+
+  // Category label labels placement
+  const labelBuffer = 15;
+  const labelsText = categories.map((cat, i) => {
+    const angle = i * angleStep - Math.PI / 2;
+    const textAnchor = i === 1 ? "start" : i === 3 ? "end" : "middle";
+    const alignmentBaseline = i === 0 ? "auto" : i === 2 ? "hanging" : "middle";
+    
+    const x = cx + (r + labelBuffer) * Math.cos(angle);
+    const y = cy + (r + labelBuffer) * Math.sin(angle) + (i === 2 ? 2 : i === 0 ? -4 : 0);
+    return `<text x="${x}" y="${y}" fill="var(--text-muted)" font-family="var(--font-mono)" font-size="9" font-weight="700" text-anchor="${textAnchor}" dominant-baseline="${alignmentBaseline}">${cat}</text>`;
+  }).join("");
+
+  const svgHtml = `
+    <svg viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">
+      ${gridPaths}
+      ${axisLines}
+      <!-- User Data Shape -->
+      <polygon points="${userPoints.join(' ')}" fill="var(--gold-glow)" stroke="var(--gold)" stroke-width="2" />
+      ${userPoints.map(p => {
+        const [x, y] = p.split(',');
+        return `<circle cx="${x}" cy="${y}" r="3.5" fill="var(--gold)" />`;
+      }).join("")}
+      ${labelsText}
+    </svg>
+  `;
+  document.getElementById('radarContainer').innerHTML = svgHtml;
+}
+
+function finishTest(){
+  const catScores = {NUMERIC:0, VERBAL:0, LOGIC:0, PATTERN:0};
+  const catMax = {NUMERIC:0, VERBAL:0, LOGIC:0, PATTERN:0};
+  let raw = 0;
+  QUESTIONS.forEach((q, i)=>{
+    catMax[q.cat]++;
+    if(answers[i] === q.correct){ raw++; catScores[q.cat]++; }
+  });
+  const index = Math.round(85 + (raw/QUESTIONS.length) * 60);
+  const pct = percentileFor(index);
+  window.__result = {raw, index, percentile: pct, catScores, catMax, answers};
+
+  // Animated count-up for cognitive index (peak-end psychology)
+  const indexEl = document.getElementById('indexReadout');
+  const pctEl   = document.getElementById('percentileReadout');
+  const startVal = Math.max(85, index - 30);
+  const duration = 900;
+  const startTime = performance.now();
+  function countUp(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    // Ease-out cubic
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const displayVal = Math.round(startVal + (index - startVal) * eased);
+    indexEl.textContent = displayVal;
+    if (progress < 1) {
+      requestAnimationFrame(countUp);
+    } else {
+      indexEl.textContent = index;
+      indexEl.classList.add('score-flash');
+      setTimeout(() => indexEl.classList.remove('score-flash'), 400);
+      // Fade in upsell section after score lands
+      setTimeout(() => {
+        const upsell = document.getElementById('upsellSection');
+        if (upsell) upsell.classList.add('visible');
+      }, 350);
+    }
+  }
+  requestAnimationFrame(countUp);
+  pctEl.textContent = pct;
+
+  const x = ((index-85)/60) * 400;
+  const t = x/400;
+  const y = 100 - Math.sin(Math.PI*t) * 90 * Math.exp(-Math.pow((t-0.5)*2.2,2)*0.4);
+  document.getElementById('curveMarker').setAttribute('cx', x.toFixed(1));
+  document.getElementById('curveMarker').setAttribute('cy', Math.max(8,y).toFixed(1));
+
+  const ledger = document.getElementById('ledgerRows');
+  ledger.innerHTML = '';
+  Object.keys(catScores).forEach(cat=>{
+    const row = document.createElement('div');
+    row.className = 'ledger-row';
+    row.innerHTML = `<span class="ledger-cat">${cat}</span><span class="ledger-score">${catScores[cat]} <span class="of">/ ${catMax[cat]}</span></span>`;
+    ledger.appendChild(row);
+  });
+
+  // Render SVG Radar Chart
+  renderRadarChart(catScores, catMax);
+
+  show('screen-result');
+}
+
+function trackEvent(name, meta = {}) {
+  try {
+    console.log("[TELEMETRY]", name, meta);
+    fetch((typeof API_BASE !== "undefined" ? API_BASE : "") + "/api/track", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, meta })
+    }).catch(() => {});
+  } catch(e) {}
+}
+
+function shareResult() {
+  const index = window.__result ? window.__result.index : "";
+  const shareText = `My cognitive index is ${index}! Take the free 5-minute test to see which historical figure thinks like you:`;
+  const shareUrl = "https://iq-test.icu/?utm_source=result_share&utm_medium=social";
+  trackEvent("share_clicked", { index });
+  if (navigator.share) {
+    navigator.share({ title: "IQ·Test Result", text: shareText, url: shareUrl }).catch(() => {});
+  } else {
+    navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
+    const notice = document.getElementById("shareNotice");
+    if (notice) {
+      notice.style.display = "block";
+      setTimeout(() => notice.style.display = "none", 3000);
+    }
+  }
+}
+
+async function submitLead() {
+  const emailInput = document.getElementById("leadEmailInput");
+  const consentCheck = document.getElementById("leadConsentCheck");
+  const mktCheck = document.getElementById("leadMarketingCheck");
+  const errorEl = document.getElementById("leadError");
+  const btn = document.getElementById("leadSubmitBtn");
+  errorEl.style.display = "none";
+  const email = emailInput.value.trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !consentCheck.checked) {
+    errorEl.style.display = "block";
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = "Saving score…";
+  try {
+    const res = await fetch(`${API_BASE}/api/save-result`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        consentGiven: true,
+        marketingOptIn: mktCheck.checked,
+        leadOnly: true,
+        ...window.__result
+      })
+    });
+    if (!res.ok) throw new Error("Lead save failed");
+    const data = await res.json();
+    window.__leadSavedId = data.id;
+    document.getElementById("emailInput").value = email;
+    trackEvent("lead_captured", { email, marketingOptIn: mktCheck.checked, id: data.id });
+    document.getElementById("leadCaptureBox").style.display = "none";
+    const upsell = document.getElementById("upsellSection");
+    if (upsell) {
+      upsell.classList.add("visible");
+      upsell.scrollIntoView({ behavior: "smooth" });
+    }
+  } catch(e) {
+    errorEl.style.display = "block";
+    btn.disabled = false;
+    btn.textContent = "Save Score & View Historical Match →";
+  }
+}
+
+const TIER_PRICE = {basic:'1.99', detailed:'3.99', complete:'6.99'};
+const TIER_CTA = {
+  basic:    'Get my score report \u2014 $1.99',
+  detailed: 'Reveal my historical match \u2014 $3.99',
+  complete: 'Get Complete Report & Certificate \u2014 $6.99'
+};
+
+function onTierChange(){
+  const tier = document.querySelector('input[name="tier"]:checked').value;
+  document.getElementById('tierBasicLabel').classList.toggle('selected', tier==='basic');
+  document.getElementById('tierDetailedLabel').classList.toggle('selected', tier==='detailed');
+  document.getElementById('tierCompleteLabel').classList.toggle('selected', tier==='complete');
+  document.getElementById('checkoutBtn').textContent = TIER_CTA[tier];
+  trackEvent("tier_selected", { tier });
+}
+
+async function startCheckout(){
+  const email = document.getElementById('emailInput').value.trim();
+  const consented = document.getElementById('consentCheck').checked;
+  const tier = document.querySelector('input[name="tier"]:checked').value;
+  const errEl = document.getElementById('checkoutError');
+  errEl.style.display = 'none';
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !consented){
+    errEl.style.display = 'block';
+    return;
+  }
+  const btn = document.getElementById('checkoutBtn');
+  btn.disabled = true; btn.textContent = 'Loading checkout…';
+  trackEvent("checkout_started", { email, tier });
+  try{
+    let id = window.__leadSavedId;
+    if (!id) {
+      const saveRes = await fetch(`${API_BASE}/api/save-result`, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({email, consentGiven:consented, ...window.__result})
+      });
+      if(!saveRes.ok) throw new Error('save failed');
+      const saveData = await saveRes.json();
+      id = saveData.id;
+      window.__leadSavedId = id;
+    }
+
+    const checkoutRes = await fetch(`${API_BASE}/api/checkout`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({id, email, tier})
+    });
+    if(!checkoutRes.ok) throw new Error('checkout failed');
+    const {url} = await checkoutRes.json();
+    window.location.href = url;
+  } catch(e){
+    errEl.style.display = 'block';
+    btn.disabled = false; btn.textContent = `Unlock my result — $${TIER_PRICE[tier]}`;
+  }
+}
+
+// Gift checkout flow is not yet implemented.
+// The broken CTA has been removed from the paid report screen.
+// When gift flow is ready: accept a recipient email, issue a
+// Stripe Checkout for the 'detailed' tier with metadata.gift_recipient,
+// and on webhook completion send the report to that address.
+function startGiftCheckout(){
+  trackEvent("gift_checkout_clicked");
+  window.location.href = "/";
+}
+
+// Interactive FAQ Accordion Trigger
+function toggleFaq(btn) {
+  const item = btn.parentElement;
+  const content = btn.nextElementSibling;
+  
+  const isOpen = item.classList.contains('open');
+  
+  // Close all other items
+  document.querySelectorAll('.faq-item').forEach(otherItem => {
+    if (otherItem !== item) {
+      otherItem.classList.remove('open');
+      otherItem.querySelector('.faq-content').style.maxHeight = null;
+    }
+  });
+  
+  if (isOpen) {
+    item.classList.remove('open');
+    content.style.maxHeight = null;
+  } else {
+    item.classList.add('open');
+    content.style.maxHeight = content.scrollHeight + "px";
+  }
+}
+
+(async function checkReportView(){
+  const params = new URLSearchParams(window.location.search);
+  const reportId = params.get('report');
+  if(!reportId) return;
+  show('screen-report');
+  try{
+    const res = await fetch(`${API_BASE}/api/report?id=${encodeURIComponent(reportId)}`);
+    const data = await res.json();
+    if(data.paid && data.report){
+      document.getElementById('reportBody').innerHTML = `<div style="white-space:pre-wrap;">${data.report}</div>
+      <div class="receipt" style="margin-top:32px; border-color:var(--border-color); text-align:center;">
+        <h3 style="font-family:var(--font-display); font-size:1.1rem; margin-bottom:8px; color:var(--text-primary);">🔗 Share your result</h3>
+        <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:16px;">Know someone who'd find this interesting? Challenge them to take the test.</p>
+        <button class="btn" style="background:rgba(255,255,255,0.06); border:1px solid var(--border-color); color:var(--text-secondary);" onclick="shareResult()">Copy / Share Test Link</button>
+      </div>`;
+      trackEvent("report_viewed", { reportId });
+    } else {
+      document.getElementById('reportBody').textContent = "Payment still processing — refresh in a few seconds, or check your email.";
+    }
+  } catch(e){
+    document.getElementById('reportBody').textContent = "Couldn't load your report. It's also on its way to your inbox.";
+  }
+})();
+</script>
+
+<script>
+(function() {
+  try {
+    if (localStorage.getItem('iq_lang_dismissed')) return;
+    var userLang = (navigator.language || navigator.userLanguage || '').toLowerCase().split('-')[0];
+    var pathParts = window.location.pathname.split('/').filter(Boolean);
+    var currentLoc = (pathParts.length > 0 && pathParts[0].length === 2) ? pathParts[0] : 'en';
+    if (userLang && userLang !== currentLoc && ['de','fr','es','pt','it','nl','ja','ko','zh','ar','hi','tl'].indexOf(userLang) !== -1) {
+      var banner = document.createElement('div');
+      banner.id = 'langSuggestionBanner';
+      banner.style.cssText = 'background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.3); color: #e2e8f0; padding: 10px 16px; text-align: center; font-size: 0.85rem; border-radius: 8px; margin: 12px auto; max-width: 960px; display: flex; justify-content: space-between; align-items: center; gap: 12px;';
+      banner.innerHTML = '<span>This page is available in your language.</span><div style="display:flex;gap:8px;"><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');window.location.href=\'/' + userLang + window.location.pathname.replace(/^\\/[a-z]{2}/,\'\') + '\'" style="background:#0ea5e9;border:none;color:#fff;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.8rem;font-weight:600;">Switch</button><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');this.parentElement.parentElement.remove();" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:#94a3b8;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:0.8rem;">Descartar</button></div>';
+      var main = document.querySelector('main') || document.body;
+      main.insertBefore(banner, main.firstChild);
+    }
+  } catch (_) {}
+})();
+</script>
+</body>
+</html>

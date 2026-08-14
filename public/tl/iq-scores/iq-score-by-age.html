@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="tl" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IQ Score by Age: How Cognitive Abilities Change | IQ Test</title>
+<meta name="description" content="How does IQ change with age? Explore fluid vs. crystallized intelligence, Cattell-Horn-Carroll theory, and how age-based norming groups operate.">
+<link rel="canonical" href="https://iq-test.icu/tl/iq-scores/iq-score-by-age">
+<meta property="og:title" content="IQ Score by Age: How Cognitive Abilities Change | IQ Test">
+<meta property="og:description" content="How does IQ change with age? Explore fluid vs. crystallized intelligence, Cattell-Horn-Carroll theory, and how age-based norming groups operate.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://iq-test.icu/iq-scores/iq-score-by-age">
+<meta property="og:image" content="https://iq-test.icu/og.png">
+<meta property="og:site_name" content="IQ Test">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="IQ Score by Age: How Cognitive Abilities Change | IQ Test">
+<meta name="twitter:description" content="How does IQ change with age? Explore fluid vs. crystallized intelligence, Cattell-Horn-Carroll theory, and how age-based norming groups operate.">
+<meta name="twitter:image" content="https://iq-test.icu/og.png">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" type="image/webp" href="/favicon.webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Fraunces:opsz,wght@9..144,300..700&display=swap" rel="stylesheet">
+<style>
+
+  html { font-size: 17px; }
+  :root {
+    --bg: oklch(0.06 0.002 95);
+    --gold: oklch(0.72 0.12 95);
+    --text: oklch(0.97 0.002 95);
+    --muted: oklch(0.62 0.008 95);
+    --border: oklch(0.18 0.008 95 / 0.7);
+    --bg-card: oklch(0.10 0.006 95 / 0.85);
+    --red: oklch(0.52 0.17 28);
+    --red-hover: oklch(0.58 0.19 28);
+    --red-glow: oklch(0.52 0.17 28 / 0.3);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Fraunces', Georgia, serif;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page { max-width: 760px; margin: 0 auto; padding: 50px 24px 100px; }
+  
+  .breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+  .breadcrumbs a { color: var(--muted); text-decoration: none; }
+  .breadcrumbs a:hover { color: var(--gold); }
+  .breadcrumbs span.sep { opacity: 0.5; }
+  .breadcrumbs span.current { color: var(--gold); }
+
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.9rem, 4.5vw, 2.75rem);
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.25;
+    color: var(--text);
+  }
+  
+  .byline-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .byline-bar a { color: var(--gold); text-decoration: none; }
+  .byline-bar a:hover { text-decoration: underline; }
+
+  .answer-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 22px 24px;
+    margin-bottom: 32px;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: oklch(0.92 0.005 95);
+  }
+  .answer-box strong { color: var(--text); }
+
+  .quick-facts-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0 36px;
+  }
+  .quick-facts-header {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quick-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+  }
+  .fact-item {
+    background: oklch(0.08 0.004 95);
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .fact-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .fact-value { color: var(--text); font-weight: 500; }
+
+  p { color: oklch(0.85 0.005 95); margin-bottom: 20px; font-size: 1rem; }
+  
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 44px;
+    margin-bottom: 16px;
+    color: var(--gold);
+    line-height: 1.35;
+  }
+  
+  h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  ul, ol { margin-left: 22px; margin-bottom: 22px; color: oklch(0.85 0.005 95); }
+  li { margin-bottom: 10px; }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0 36px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.92rem;
+    background: var(--bg-card);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  table.data-table th, table.data-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  table.data-table th {
+    background: oklch(0.12 0.008 95);
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  table.data-table tr:last-child td { border-bottom: none; }
+  table.data-table tr:hover td { background: oklch(0.13 0.009 95); }
+
+  .company-block, .cta-block {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    margin-top: 48px;
+    text-align: center;
+  }
+  .cta-block h3 { margin-top: 0; font-size: 1.3rem; margin-bottom: 12px; }
+  .cta-block p { max-width: 580px; margin: 0 auto 20px; font-size: 0.95rem; }
+
+  .btn {
+    display: inline-block;
+    background: var(--red);
+    color: var(--text);
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 15px 34px;
+    border-radius: 8px;
+    border: 1px solid oklch(0.6 0.17 28);
+    box-shadow: 0 4px 20px var(--red-glow), inset 0 1px 0 rgba(255,255,255,0.15);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  .btn:hover {
+    background: var(--red-hover);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--gold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-outline:hover {
+    background: rgba(201, 162, 75, 0.12);
+    text-decoration: none;
+  }
+
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 24px 0 40px;
+  }
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+  }
+  .faq-q {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .faq-a {
+    color: oklch(0.80 0.006 95);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .figure-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+    margin: 28px 0 40px;
+  }
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    transition: border-color 0.2s ease;
+  }
+  .figure-card:hover { border-color: var(--gold); }
+  .figure-card h3 { margin-top: 0; font-size: 1.1rem; color: var(--gold); margin-bottom: 8px; }
+  .figure-card p { font-size: 0.88rem; margin-bottom: 12px; color: var(--muted); }
+  .figure-card a { font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 600; }
+
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 24px 0 28px;
+  }
+  .filter-pill {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.84rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-pill:hover, .filter-pill.active {
+    background: var(--gold);
+    color: oklch(0.06 0.002 95);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+
+  .interactive-puzzle-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .puzzle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .puzzle-tag {
+    background: oklch(0.15 0.01 95);
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .solution-panel {
+    display: none;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: oklch(0.88 0.005 95);
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+
+  footer {
+    text-align: center;
+    padding: 40px 24px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    line-height: 1.8;
+  }
+  footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
+  footer a:hover { color: var(--gold); }
+
+</style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://iq-test.icu/#organization",
+      "name": "IQ Test",
+      "alternateName": [
+        "IQ·Test",
+        "IQ-Test",
+        "iq-test.icu"
+      ],
+      "url": "https://iq-test.icu/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://iq-test.icu/#logo",
+        "url": "https://iq-test.icu/icon.webp",
+        "width": 512,
+        "height": 512
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "APEX Business Systems Ltd.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Edmonton",
+          "addressRegion": "AB",
+          "addressCountry": "CA"
+        }
+      },
+      "contactPoint": [
+        {
+          "@type": "KontakPoint",
+          "contactType": "customer support",
+          "email": "support@iq-test.icu",
+          "availableLanguage": "English"
+        },
+        {
+          "@type": "KontakPoint",
+          "contactType": "billing support",
+          "email": "billing@iq-test.icu",
+          "availableLanguage": "English"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://iq-test.icu/#website",
+      "url": "https://iq-test.icu/",
+      "name": "IQ Test",
+      "publisher": {
+        "@id": "https://iq-test.icu/#organization"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://iq-test.icu/iq-scores/iq-score-by-age#webpage",
+      "url": "https://iq-test.icu/iq-scores/iq-score-by-age",
+      "name": "IQ Score by Age: How Cognitive Abilities Change | IQ Test",
+      "description": "How does IQ change with age? Explore fluid vs. crystallized intelligence, Cattell-Horn-Carroll theory, and how age-based norming groups operate.",
+      "isPartOf": {
+        "@id": "https://iq-test.icu/#website"
+      },
+      "inLanguage": "en",
+      "datePublished": "2026-07-18T00:00:00-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
+      "breadcrumb": {
+        "@id": "https://iq-test.icu/iq-scores/iq-score-by-age#breadcrumb"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": "https://iq-test.icu/iq-scores/iq-score-by-age#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://iq-test.icu/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "IQ Scores",
+          "item": "https://iq-test.icu/iq-scores/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "IQ Score by Age"
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://iq-test.icu/iq-scores/iq-score-by-age#article",
+      "isPartOf": {
+        "@id": "https://iq-test.icu/iq-scores/iq-score-by-age#webpage"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://iq-test.icu/iq-scores/iq-score-by-age#webpage"
+      },
+      "headline": "IQ Score by Age: Fluid vs. Crystallized Intelligence Lifespan Trajectories",
+      "description": "How does IQ change with age? Explore fluid vs. crystallized intelligence, Cattell-Horn-Carroll theory, and how age-based norming groups operate.",
+      "author": {
+        "@type": "Organization",
+        "name": "APEX Business Systems Ltd.",
+        "url": "https://apexbusiness.systems"
+      },
+      "publisher": {
+        "@id": "https://iq-test.icu/#organization"
+      },
+      "datePublished": "2026-07-18T00:00:00-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
+      "inLanguage": "en",
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Fluid and crystallized intelligence",
+          "sameAs": "https://en.wikipedia.org/wiki/Fluid_and_crystallized_intelligence"
+        },
+        {
+          "@type": "Thing",
+          "name": "Cattell–Horn–Carroll theory",
+          "sameAs": "https://en.wikipedia.org/wiki/Cattell%E2%80%93Horn%E2%80%93Carroll_theory"
+        }
+      ],
+      "citation": [
+        "https://en.wikipedia.org/wiki/Fluid_and_crystallized_intelligence",
+        "https://en.wikipedia.org/wiki/Cattell%E2%80%93Horn%E2%80%93Carroll_theory"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://iq-test.icu/iq-scores/iq-score-by-age#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does your IQ drop as you get older?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Your raw processing speed slows down with age, but because IQ is normed against your same-age peers, your deviation IQ score remains relatively stable throughout adulthood."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which cognitive skills peak latest in life?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Verbal comprehension, vocabulary, and practical wisdom (crystallized intelligence) peak latest, typically between ages 55 and 70."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+  <link rel="alternate" hreflang="en" href="https://iq-test.icu/iq-scores/iq-score-by-age">
+  <link rel="alternate" hreflang="de" href="https://iq-test.icu/de/iq-scores/iq-score-by-age">
+  <link rel="alternate" hreflang="fr" href="https://iq-test.icu/fr/iq-scores/iq-score-by-age">
+  <link rel="alternate" hreflang="es" href="https://iq-test.icu/es/iq-scores/iq-score-by-age">
+  <link rel="alternate" hreflang="pt" href="https://iq-test.icu/pt/iq-scores/iq-score-by-age">
+  <link rel="alternate" hreflang="it" href="https://iq-test.icu/it/iq-scores/iq-score-by-age">
+  <link rel="alternate" hreflang="nl" href="https://iq-test.icu/nl/iq-scores/iq-score-by-age">
+  <link rel="alternate" hreflang="ja" href="https://iq-test.icu/ja/iq-scores/iq-score-by-age">
+  <link rel="alternate" hreflang="ko" href="https://iq-test.icu/ko/iq-scores/iq-score-by-age">
+  <link rel="alternate" hreflang="zh" href="https://iq-test.icu/zh/iq-scores/iq-score-by-age">
+  <link rel="alternate" hreflang="ar" href="https://iq-test.icu/ar/iq-scores/iq-score-by-age">
+  <link rel="alternate" hreflang="hi" href="https://iq-test.icu/hi/iq-scores/iq-score-by-age">
+  <link rel="alternate" hreflang="tl" href="https://iq-test.icu/tl/iq-scores/iq-score-by-age">
+  <link rel="alternate" hreflang="x-default" href="https://iq-test.icu/iq-scores/iq-score-by-age">
+</head>
+<body>
+<div class="page">
+  
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="https://iq-test.icu/">Home</a><span class="sep">/</span> <a href="https://iq-test.icu/iq-scores/">IQ Scores</a><span class="sep">/</span> <span class="current">IQ Score by Age</span>
+    </nav>
+  <h1>IQ Score by Age: How Cognitive Abilities Shift Across Life</h1>
+  
+    <div class="byline-bar">
+      <span>Published: <time datetime="2026-08-14">August 14, 2026</time></span>
+      <span>•</span>
+      <span>Reviewed by: <a href="/about">APEX Business Systems Ltd.</a></span>
+      <span>•</span>
+      <span><a href="/editorial-standards">Pamantayang Pang-editoryal</a></span>
+    </div>
+  
+    <div class="answer-box">
+      Your standardized deviation IQ score remains relatively stable across adulthood because IQ is always calculated relative to your specific age group. However, your underlying cognitive architecture changes significantly: fluid intelligence (processing speed, pattern recognition) peaks in your early twenties, while crystallized intelligence (vocabulary, verbal reasoning) continues expanding into your sixties.
+    </div>
+  
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">📈 Lifespan Cognitive Trajectory</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Fluid Intelligence (Gf) Peak</div>
+          <div class="fact-value">Ages 20 – 25 (Processing speed, matrix reasoning)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Crystallized Intelligence (Gc) Peak</div>
+          <div class="fact-value">Ages 55 – 70 (Vocabulary, accumulated knowledge)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Age Norming Method</div>
+          <div class="fact-value">Calibrated within 5-to-10-year peer cohorts</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Deviation Stability</div>
+          <div class="fact-value">Test-retest correlation r ≈ 0.70–0.80 across adulthood</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>How age-based norming works</h2>
+    <p>When you complete a clinical IQ test like the WAIS-IV, your raw points are not compared against a universal pool of all humans regardless of age. Instead, psychometricians split standardisation samples into age brackets (e.g., 20–24, 25–29, 30–34, up to 85–90). An average performance within your specific age bracket converts to an IQ of 100.</p>
+
+    <h2>Fluid vs. crystallized intelligence across the lifespan</h2>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Cognitive Dimension</th>
+          <th>What It Represents</th>
+          <th>Peak Age Range</th>
+          <th>Lifespan Trajectory</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Fluid Intelligence (Gf)</strong></td>
+          <td>Novel problem solving, nonverbal matrix reasoning, mental rotation</td>
+          <td>Ages 20 – 25</td>
+          <td>Gradual linear decline starting in early 30s</td>
+        </tr>
+        <tr>
+          <td><strong>Processing Speed (Gs)</strong></td>
+          <td>Rapid visual scanning, symbol matching, reaction time</td>
+          <td>Ages 18 – 22</td>
+          <td>Steepest age-related decline</td>
+        </tr>
+        <tr>
+          <td><strong>Crystallized Intelligence (Gc)</strong></td>
+          <td>Vocabulary, verbal comprehension, domain knowledge, analogies</td>
+          <td>Ages 55 – 70</td>
+          <td>Continues rising through middle adulthood; highly resilient</td>
+        </tr>
+        <tr>
+          <td><strong>Working Memory (Gwm)</strong></td>
+          <td>Holding and manipulating information simultaneously in mind</td>
+          <td>Ages 25 – 35</td>
+          <td>Moderate decline in late adulthood</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Why composite IQ scores remain remarkably stable</h2>
+    <p>Because crystallized intelligence rises during the exact decades when fluid processing speed begins to slow down, an individual's overall cognitive performance balances out across their working life. Longitudinal studies (such as the Seattle Longitudinal Study) have shown that intellectual deviation rankings remain remarkably consistent across multiple decades.</p>
+    <p>To explore how specific reasoning domains function, read about <a href="/cognitive-skills/verbal-reasoning">verbal reasoning</a>, <a href="/cognitive-skills/pattern-recognition">pattern recognition</a>, and the <a href="/iq-scores/average-iq">average IQ benchmarks</a>.</p>
+  
+  
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-accordion">
+      
+        <div class="faq-item">
+          <div class="faq-q">Does your IQ drop as you get older?</div>
+          <div class="faq-a">Your raw processing speed slows down with age, but because IQ is normed against your same-age peers, your deviation IQ score remains relatively stable throughout adulthood.</div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Which cognitive skills peak latest in life?</div>
+          <div class="faq-a">Verbal comprehension, vocabulary, and practical wisdom (crystallized intelligence) peak latest, typically between ages 55 and 70.</div>
+        </div>
+    </div>
+  
+  <div class="cta-block">
+    <h3>Discover Your Cognitive Profile</h3>
+    <p>Take the free 16-question cognitive assessment to see your baseline score across four reasoning domains and discover which historical thinker matches your problem-solving style.</p>
+    <a href="/" class="btn">Take the Free Test</a>
+  </div>
+</div>
+
+
+    <div class="lang-switcher-container" style="margin: 20px 0; text-align: center; font-size: 0.85rem;">
+      <nav aria-label="Pumili ng Wika" class="lang-switcher" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 12px; opacity: 0.85;">
+        <a href="https://iq-test.icu/iq-scores/iq-score-by-age" hreflang="en" lang="en" rel="alternate">English</a>
+        <a href="https://iq-test.icu/de/iq-scores/iq-score-by-age" hreflang="de" lang="de" rel="alternate">Deutsch</a>
+        <a href="https://iq-test.icu/fr/iq-scores/iq-score-by-age" hreflang="fr" lang="fr" rel="alternate">Français</a>
+        <a href="https://iq-test.icu/es/iq-scores/iq-score-by-age" hreflang="es" lang="es" rel="alternate">Español</a>
+        <a href="https://iq-test.icu/pt/iq-scores/iq-score-by-age" hreflang="pt" lang="pt" rel="alternate">Português</a>
+        <a href="https://iq-test.icu/it/iq-scores/iq-score-by-age" hreflang="it" lang="it" rel="alternate">Italiano</a>
+        <a href="https://iq-test.icu/nl/iq-scores/iq-score-by-age" hreflang="nl" lang="nl" rel="alternate">Nederlands</a>
+        <a href="https://iq-test.icu/ja/iq-scores/iq-score-by-age" hreflang="ja" lang="ja" rel="alternate">日本語</a>
+        <a href="https://iq-test.icu/ko/iq-scores/iq-score-by-age" hreflang="ko" lang="ko" rel="alternate">한국어</a>
+        <a href="https://iq-test.icu/zh/iq-scores/iq-score-by-age" hreflang="zh" lang="zh-Hans" rel="alternate">简体中文</a>
+        <a href="https://iq-test.icu/ar/iq-scores/iq-score-by-age" hreflang="ar" lang="ar" rel="alternate">العربية</a>
+        <a href="https://iq-test.icu/hi/iq-scores/iq-score-by-age" hreflang="hi" lang="hi" rel="alternate">हिन्दी</a>
+        <a href="https://iq-test.icu/tl/iq-scores/iq-score-by-age" hreflang="tl" lang="tl" rel="alternate" aria-current="page" class="active">Tagalog</a>
+      </nav>
+    </div>
+    <footer>
+  <a href="/">Home</a> &nbsp;&middot;&nbsp;
+  <a href="/iq-scores/">IQ Scores</a> &nbsp;&middot;&nbsp;
+  <a href="/historical-figures-iq">Makasaysayang Tao</a> &nbsp;&middot;&nbsp;
+  <a href="/cognitive-skills/">Reasoning Domains</a> &nbsp;&middot;&nbsp;
+  <a href="/what-is-an-iq-test">Ano ang IQ Test?</a>
+  <br><br>
+  <a href="/free-iq-test-online">Libreng IQ Test Online</a> &nbsp;&middot;&nbsp;
+  <a href="/are-online-iq-tests-accurate">Katumpakan ng Pagsusuri</a> &nbsp;&middot;&nbsp;
+  <a href="/types-of-iq-tests">Uri ng mga Test</a> &nbsp;&middot;&nbsp;
+  <a href="/methodology">Metodolohiya</a> &nbsp;&middot;&nbsp;
+  <a href="/editorial-standards">Pamantayang Pang-editoryal</a>
+  <br><br>
+  <a href="/about">Tungkol sa Amin</a> &nbsp;&middot;&nbsp;
+  <a href="/support">Suporta</a> &nbsp;&middot;&nbsp;
+  <a href="/contact">Kontak</a> &nbsp;&middot;&nbsp;
+  <a href="/privacy">Privacy Policy</a> &nbsp;&middot;&nbsp;
+  <a href="/terms">Mga Tuntunin</a>
+  <br><br>
+  &copy; 2026 APEX Business Systems Ltd. &nbsp;&middot;&nbsp; Edmonton, AB, Canada &nbsp;&middot;&nbsp; <a href="mailto:support@iq-test.icu">support@iq-test.icu</a>
+</footer>
+
+
+<script>
+(function() {
+  try {
+    if (localStorage.getItem('iq_lang_dismissed')) return;
+    var userLang = (navigator.language || navigator.userLanguage || '').toLowerCase().split('-')[0];
+    var pathParts = window.location.pathname.split('/').filter(Boolean);
+    var currentLoc = (pathParts.length > 0 && pathParts[0].length === 2) ? pathParts[0] : 'en';
+    if (userLang && userLang !== currentLoc && ['de','fr','es','pt','it','nl','ja','ko','zh','ar','hi','tl'].indexOf(userLang) !== -1) {
+      var banner = document.createElement('div');
+      banner.id = 'langSuggestionBanner';
+      banner.style.cssText = 'background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.3); color: #e2e8f0; padding: 10px 16px; text-align: center; font-size: 0.85rem; border-radius: 8px; margin: 12px auto; max-width: 960px; display: flex; justify-content: space-between; align-items: center; gap: 12px;';
+      banner.innerHTML = '<span>This page is available in your language.</span><div style="display:flex;gap:8px;"><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');window.location.href=\'/' + userLang + window.location.pathname.replace(/^\\/[a-z]{2}/,\'\') + '\'" style="background:#0ea5e9;border:none;color:#fff;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.8rem;font-weight:600;">Switch</button><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');this.parentElement.parentElement.remove();" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:#94a3b8;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:0.8rem;">Isara</button></div>';
+      var main = document.querySelector('main') || document.body;
+      main.insertBefore(banner, main.firstChild);
+    }
+  } catch (_) {}
+})();
+</script>
+</body>
+</html>

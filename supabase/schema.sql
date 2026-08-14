@@ -60,3 +60,9 @@ alter table sessions add column if not exists recovery_sent boolean not null def
 create index if not exists sessions_recovery_sweep_idx on sessions (created_at)
   where paid = false and recovery_sent = false and marketing_opt_in = true;
 
+-- Migration: i18n locale capture and percentile calibration tracking (APEX-I18N-IQT-2026-08-14-v1.0)
+alter table sessions add column if not exists locale text
+  check (locale in ('en','de','fr','es','pt','it','nl','ja','ko','zh','ar','hi','tl'));
+alter table sessions add column if not exists locale_calibrated boolean not null default false;
+create index if not exists sessions_locale_idx on sessions (locale);
+
