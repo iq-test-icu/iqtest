@@ -3,16 +3,26 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cognitive Test vs. IQ Test: Key Differences Explained | IQ·Test</title>
-<meta name="description" content="What is the difference between a cognitive test and an IQ test? Learn how domain-specific cognitive screenings differ from general intelligence indices.">
+<title>Cognitive Test vs IQ Test: What's the Difference? | IQ Test</title>
+<meta name="description" content="Understand the difference between online cognitive tests and clinical IQ tests: what each measures, how they are scored, and when to use them.">
 <link rel="canonical" href="https://iq-test.icu/cognitive-test-vs-iq-test">
+<meta property="og:title" content="Cognitive Test vs IQ Test: What's the Difference? | IQ Test">
+<meta property="og:description" content="Understand the difference between online cognitive tests and clinical IQ tests: what each measures, how they are scored, and when to use them.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://iq-test.icu/cognitive-test-vs-iq-test">
+<meta property="og:image" content="https://iq-test.icu/og.png">
+<meta property="og:site_name" content="IQ Test">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cognitive Test vs IQ Test: What's the Difference? | IQ Test">
+<meta name="twitter:description" content="Understand the difference between online cognitive tests and clinical IQ tests: what each measures, how they are scored, and when to use them.">
+<meta name="twitter:image" content="https://iq-test.icu/og.png">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="icon" type="image/webp" href="/favicon.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Fraunces:opsz,wght@9..144,300..700&display=swap" rel="stylesheet">
 <style>
-  html {
-    font-size: 17px;
-  }
+
+  html { font-size: 17px; }
   :root {
     --bg: oklch(0.06 0.002 95);
     --gold: oklch(0.72 0.12 95);
@@ -20,6 +30,9 @@
     --muted: oklch(0.62 0.008 95);
     --border: oklch(0.18 0.008 95 / 0.7);
     --bg-card: oklch(0.10 0.006 95 / 0.85);
+    --red: oklch(0.52 0.17 28);
+    --red-hover: oklch(0.58 0.19 28);
+    --red-glow: oklch(0.52 0.17 28 / 0.3);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
@@ -29,114 +42,481 @@
     line-height: 1.75;
     -webkit-font-smoothing: antialiased;
   }
-  .page { max-width: 720px; margin: 0 auto; padding: 60px 24px 100px; }
-  .back {
-    display: inline-block;
-    font-family: 'Fraunces', Georgia, serif;
-    font-size: 0.75rem;
+  .page { max-width: 760px; margin: 0 auto; padding: 50px 24px 100px; }
+  
+  .breadcrumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
     color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    margin-bottom: 48px;
+    margin-bottom: 36px;
   }
-  .back:hover { color: var(--gold); }
+  .breadcrumbs a { color: var(--muted); text-decoration: none; }
+  .breadcrumbs a:hover { color: var(--gold); }
+  .breadcrumbs span.sep { opacity: 0.5; }
+  .breadcrumbs span.current { color: var(--gold); }
+
   h1 {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.9rem, 4.5vw, 2.75rem);
     font-weight: 700;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+    line-height: 1.25;
+    color: var(--text);
   }
-  p { color: oklch(0.85 0.005 95); margin-bottom: 18px; font-size: 1rem; }
+  
+  .byline-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .byline-bar a { color: var(--gold); text-decoration: none; }
+  .byline-bar a:hover { text-decoration: underline; }
+
+  .answer-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    border-radius: 8px;
+    padding: 22px 24px;
+    margin-bottom: 32px;
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: oklch(0.92 0.005 95);
+  }
+  .answer-box strong { color: var(--text); }
+
+  p { color: oklch(0.85 0.005 95); margin-bottom: 20px; font-size: 1rem; }
+  
   h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-top: 44px;
+    margin-bottom: 16px;
+    color: var(--gold);
+    line-height: 1.35;
+  }
+  
+  h3 {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 1.15rem;
     font-weight: 600;
-    margin-top: 40px;
+    margin-top: 28px;
     margin-bottom: 12px;
-    color: var(--gold);
+    color: var(--text);
   }
-  ul, ol { margin-left: 20px; margin-bottom: 18px; color: oklch(0.85 0.005 95); }
-  li { margin-bottom: 8px; }
-  a { color: var(--gold); }
-  .company-block {
+
+  ul, ol { margin-left: 22px; margin-bottom: 22px; color: oklch(0.85 0.005 95); }
+  li { margin-bottom: 10px; }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  
+  table.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 28px 0 36px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.92rem;
+    background: var(--bg-card);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  table.data-table th, table.data-table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  table.data-table th {
+    background: oklch(0.12 0.008 95);
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.03em;
+  }
+  table.data-table tr:last-child td { border-bottom: none; }
+  table.data-table tr:hover td { background: oklch(0.13 0.009 95); }
+
+  .company-block, .cta-block {
     background: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 28px 32px;
-    margin-top: 40px;
-    font-size: 0.9rem;
-    color: oklch(0.78 0.006 95);
+    border-radius: 12px;
+    padding: 32px;
+    margin-top: 48px;
+    text-align: center;
   }
-  .company-block strong { color: var(--text); }
+  .cta-block h3 { margin-top: 0; font-size: 1.3rem; margin-bottom: 12px; }
+  .cta-block p { max-width: 580px; margin: 0 auto 20px; font-size: 0.95rem; }
+
+  .btn {
+    display: inline-block;
+    background: var(--red);
+    color: var(--text);
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 15px 34px;
+    border-radius: 8px;
+    border: 1px solid oklch(0.6 0.17 28);
+    box-shadow: 0 4px 20px var(--red-glow), inset 0 1px 0 rgba(255,255,255,0.15);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  .btn:hover {
+    background: var(--red-hover);
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 24px 0 40px;
+  }
+  .faq-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+  }
+  .faq-q {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .faq-a {
+    color: oklch(0.80 0.006 95);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .figure-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+    margin: 28px 0 40px;
+  }
+  .figure-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    transition: border-color 0.2s ease;
+  }
+  .figure-card:hover { border-color: var(--gold); }
+  .figure-card h3 { margin-top: 0; font-size: 1.1rem; color: var(--gold); margin-bottom: 8px; }
+  .figure-card p { font-size: 0.88rem; margin-bottom: 12px; color: var(--muted); }
+  .figure-card a { font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 600; }
+
   footer {
     text-align: center;
-    padding: 32px 24px;
-    font-size: 0.8rem;
+    padding: 40px 24px;
+    font-size: 0.82rem;
     color: var(--muted);
     border-top: 1px solid var(--border);
+    line-height: 1.8;
   }
   footer a { color: var(--muted); text-decoration: none; margin: 0 8px; }
   footer a:hover { color: var(--gold); }
+
 </style>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://iq-test.icu/#organization",
+      "name": "IQ Test",
+      "alternateName": [
+        "IQ·Test",
+        "IQ-Test",
+        "iq-test.icu"
+      ],
+      "url": "https://iq-test.icu/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://iq-test.icu/#logo",
+        "url": "https://iq-test.icu/icon.webp",
+        "width": 512,
+        "height": 512
+      },
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "APEX Business Systems Ltd.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Edmonton",
+          "addressRegion": "AB",
+          "addressCountry": "CA"
+        }
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer support",
+          "email": "support@iq-test.icu",
+          "availableLanguage": "English"
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "billing support",
+          "email": "billing@iq-test.icu",
+          "availableLanguage": "English"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://iq-test.icu/#website",
+      "url": "https://iq-test.icu/",
+      "name": "IQ Test",
+      "publisher": {
+        "@id": "https://iq-test.icu/#organization"
+      },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://iq-test.icu/cognitive-test-vs-iq-test#webpage",
+      "url": "https://iq-test.icu/cognitive-test-vs-iq-test",
+      "name": "Cognitive Test vs IQ Test: What's the Difference? | IQ Test",
+      "description": "Understand the difference between online cognitive tests and clinical IQ tests: what each measures, how they are scored, and when to use them.",
+      "isPartOf": {
+        "@id": "https://iq-test.icu/#website"
+      },
+      "inLanguage": "en",
+      "datePublished": "2026-07-18T00:00:00-06:00",
+      "dateModified": "2026-08-14T11:18:44-06:00",
+      "breadcrumb": {
+        "@id": "https://iq-test.icu/cognitive-test-vs-iq-test#breadcrumb"
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": "https://iq-test.icu/cognitive-test-vs-iq-test#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://iq-test.icu/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Cognitive Test vs IQ Test"
+        }
+      ]
+    },
+    {
+      "@type": "Article",
+      "@id": "https://iq-test.icu/cognitive-test-vs-iq-test#article",
+      "isPartOf": {
+        "@id": "https://iq-test.icu/cognitive-test-vs-iq-test#webpage"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://iq-test.icu/cognitive-test-vs-iq-test#webpage"
+      },
+      "headline": "Cognitive Test vs. IQ Test: Comprehensive Differences and Comparisons",
+      "description": "Understand the difference between online cognitive tests and clinical IQ tests: what each measures, how they are scored, and when to use them.",
+      "author": {
+        "@type": "Organization",
+        "name": "APEX Business Systems Ltd.",
+        "url": "https://apexbusiness.systems"
+      },
+      "publisher": {
+        "@id": "https://iq-test.icu/#organization"
+      },
+      "datePublished": "2026-07-18T00:00:00-06:00",
+      "dateModified": "2026-08-14T11:18:44-06:00",
+      "inLanguage": "en",
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "Cognitive assessment",
+          "sameAs": "https://en.wikipedia.org/wiki/Cognitive_assessment"
+        },
+        {
+          "@type": "Thing",
+          "name": "Intelligence quotient",
+          "sameAs": "https://en.wikipedia.org/wiki/Intelligence_quotient"
+        }
+      ],
+      "citation": [
+        "https://en.wikipedia.org/wiki/Psychometrics"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://iq-test.icu/cognitive-test-vs-iq-test#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is a cognitive test the exact same thing as an IQ test?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not necessarily. An IQ test is a specific comprehensive battery measuring general intelligence (g), while cognitive tests can evaluate specific isolated functions like working memory or spatial logic."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can an online cognitive test diagnose cognitive conditions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Diagnostic evaluations require in-person proctored testing by a licensed psychologist."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <div class="page">
-  <a class="back" href="/">← Back to IQ·Test</a>
+  
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <a href="https://iq-test.icu/">Home</a><span class="sep">/</span> <span class="current">Cognitive Test vs IQ Test</span>
+    </nav>
+  <h1>Cognitive Test vs. IQ Test: Key Differences Explained</h1>
+  
+    <div class="byline-bar">
+      <span>Published: <time datetime="2026-08-14">August 14, 2026</time></span>
+      <span>•</span>
+      <span>Reviewed by: <a href="/about">APEX Business Systems Ltd.</a></span>
+      <span>•</span>
+      <span><a href="/editorial-standards">Editorial Standards</a></span>
+    </div>
+  
+    <div class="answer-box">
+      A clinical IQ test is a comprehensive, proctored psychological battery (such as the WAIS-IV) administered to measure general intelligence (g) for diagnostic, legal, or placement purposes. A cognitive test is a targeted assessment of specific reasoning functions — such as working memory, pattern logic, or processing speed — used for personal self-insight, skills training, or clinical screening.
+    </div>
+  
+    <h2>Comparing cognitive tests and clinical IQ assessments</h2>
+    <p>While the terms "cognitive test" and "IQ test" are often used interchangeably in everyday conversation, they serve distinct functions in psychology and psychometrics. The comparison table below highlights their key operational differences:</p>
 
-  <h1>Cognitive Test vs. IQ Test: What is the Difference?</h1>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>Evaluation Dimension</th>
+          <th>Clinical IQ Test (e.g. WAIS-IV)</th>
+          <th>Online Cognitive Skills Assessment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Primary Objective</strong></td>
+          <td>Diagnostic evaluation, cognitive deficit assessment, Mensa qualification</td>
+          <td>Personal self-reflection, baseline problem-solving profile, entertainment</td>
+        </tr>
+        <tr>
+          <td><strong>Administration Mode</strong></td>
+          <td>One-on-one proctored by a licensed clinical psychologist</td>
+          <td>Self-administered via web browser</td>
+        </tr>
+        <tr>
+          <td><strong>Testing Duration</strong></td>
+          <td>60 to 120 minutes of multi-battery evaluation</td>
+          <td>5 to 15 minutes of focused puzzle solving</td>
+        </tr>
+        <tr>
+          <td><strong>Subtest Breadth</strong></td>
+          <td>10–15 subtests (oral vocabulary, block design, digit span, matrix reasoning)</td>
+          <td>4 core domains (numerical, verbal, logical, pattern recognition)</td>
+        </tr>
+        <tr>
+          <td><strong>Scoring Benchmark</strong></td>
+          <td>Normed against thousands of demographically matched clinical subjects</td>
+          <td>Calibrated on the 85–145 index scale based on the normal distribution</td>
+        </tr>
+        <tr>
+          <td><strong>Legal & Medical Standing</strong></td>
+          <td>Legally recognized clinical document</td>
+          <td>Informational self-insight only; non-diagnostic</td>
+        </tr>
+      </tbody>
+    </table>
 
-  <p>The terms "cognitive test" and "IQ test" are often used interchangeably. You might see a website refer to its diagnostic tool as an IQ test on one screen and a cognitive ability assessment on the next. While both instruments measure brain function and reasoning capabilities, they are distinct psychological concepts with different objectives, methodologies, and clinical applications.</p>
+    <h2>When to seek a formal clinical IQ test</h2>
+    <p>A formal, supervised clinical assessment from a licensed psychologist is required when you need:</p>
+    <ul>
+      <li>Diagnostic assessment for neurodevelopmental conditions (ADHD, learning differences).</li>
+      <li>Official documentation for school gifted-and-talented placement or disability accommodations.</li>
+      <li>Formal qualification for high-IQ societies like Mensa.</li>
+      <li>Neuropsychological evaluations following head trauma or cognitive changes.</li>
+    </ul>
 
-  <p>If you are trying to understand your own mental performance or evaluating various assessment methods, here is a detailed breakdown of how cognitive tests and IQ tests differ and when each is appropriate.</p>
+    <h2>When an online cognitive skills test is ideal</h2>
+    <p>An online cognitive skills assessment is the ideal tool when you want:</p>
+    <ul>
+      <li>A rapid, engaging look at how your brain approaches novel problem solving.</li>
+      <li>To discover your relative balance across spatial, numerical, verbal, and logical domains.</li>
+      <li>To understand whether your thinking profile aligns with historical innovators like Da Vinci or Newton.</li>
+      <li>A fun, intellectually stimulating mental challenge without high clinical testing fees.</li>
+    </ul>
 
-  <h2>What is an IQ Test?</h2>
-  <p>An Intelligence Quotient (IQ) test is a structured instrument designed to measure an individual's general intelligence factor (referred to as the "g factor" in psychology). Developed by David Wechsler and Lewis Terman, modern IQ scales aim to capture a broad, overall index of an individual's cognitive capacity relative to their age group.</p>
-  <p>An IQ test typically yields a single, standardized composite score (with a mean of 100 and a standard deviation of 15) by combining performance across multiple distinct categories, including:</p>
-  <ul>
-    <li><strong>Verbal Comprehension</strong>: Word reasoning, vocabulary definitions, and conceptual similarities.</li>
-    <li><strong>Working Memory</strong>: The capacity to retain and manipulate numbers or letters in short-term storage (such as digit span tests).</li>
-    <li><strong>Perceptual Reasoning</strong>: Non-verbal visual-spatial problem solving and matrix analysis.</li>
-    <li><strong>Processing Speed</strong>: The speed at which you accurately complete simple scanning and matching tasks.</li>
-  </ul>
-  <p>Clinical IQ tests are extensively standardized to ensure high reliability, meaning they are designed to give consistent scores throughout an individual's adult life under varying circumstances.</p>
+    <h2>Explore related resources</h2>
+    <p>To learn more about cognitive science, explore our guides on <a href="/what-is-an-iq-test">what is an IQ test</a>, <a href="/types-of-iq-tests">types of IQ tests</a>, and <a href="/are-online-iq-tests-accurate">whether online IQ tests are accurate</a>.</p>
+  
+  
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-accordion">
+      
+        <div class="faq-item">
+          <div class="faq-q">Is a cognitive test the exact same thing as an IQ test?</div>
+          <div class="faq-a">Not necessarily. An IQ test is a specific comprehensive battery measuring general intelligence (g), while cognitive tests can evaluate specific isolated functions like working memory or spatial logic.</div>
+        </div>
 
-  <h2>What is a Cognitive Test?</h2>
-  <p>A cognitive test, or cognitive assessment, is a broader category of instrument. Instead of combining scores into a single composite index of "general intelligence," a cognitive test evaluates specific, isolated areas of mental function. These tests are often used in medical, educational, and research settings to screen for impairment, trace recovery, or measure specific performance changes.</p>
-  <p>Cognitive screenings (such as the Montreal Cognitive Assessment or MoCA) are common in clinical neurology to check for changes in brain health, looking at:</p>
-  <ul>
-    <li><strong>Attention and Executive Function</strong>: The ability to organize tasks, plan sequences, and filter distractions.</li>
-    <li><strong>Memory Retrieval</strong>: Short-term recall of words or shapes over specified intervals.</li>
-    <li><strong>Language Processing</strong>: Fluency, naming, and grammar structure.</li>
-    <li><strong>Visuoconstructional Skills</strong>: The physical ability to draw 3D shapes or arrange visual grids.</li>
-  </ul>
-  <p>Unlike IQ scores, which represent a bell-curve standing against the population, many clinical cognitive assessments are scored on a simple point scale (e.g., 0 to 30) where scores above a specific threshold indicate normal cognitive health and scores below suggest impairment.</p>
-
-  <h2>Comparing the Key Differences</h2>
-  <p>The differences can be summarized in three main areas:</p>
-  <ol>
-    <li><strong>Scope</strong>: An IQ test attempts to measure your maximum, overall intellectual capacity (your intellectual ceiling). A cognitive test evaluates specific processing domains (such as short-term memory or executive planning) to confirm if they are functioning correctly.</li>
-    <li><strong>Objective</strong>: IQ tests are used primarily in educational placement, recruitment evaluations, or diagnostics for learning differences. Cognitive tests are used in medical settings to evaluate neurological conditions, stroke recovery, or age-related changes.</li>
-    <li><strong>Stability</strong>: An individual's IQ score is designed to be relatively stable across their lifespan. Cognitive test scores can fluctuate significantly based on health, recovery, fatigue, and medical treatments.</li>
-  </ol>
-
-  <h2>Where does IQ·Test fit?</h2>
-  <p>Our quiz at <a href="/">IQ·Test</a> is an online cognitive quiz. It uses a 16-item structure to examine four specific domains of mental processing: numeric reasoning, verbal comprehension, logical deduction, and spatial pattern recognition. By mapping your raw score to a familiar 85–145 scale modeled on a mean of 100 and SD of 15, we provide a readable and engaging self-insight tool that highlights your relative category strengths without claiming to be a clinical IQ diagnostic.</p>
-
-  <div class="company-block">
-    <strong>Want to check your cognitive style?</strong><br>
-    Our free 5-minute quiz gives you a category breakdown across four key reasoning domains.
-    <br><br>
-    <a href="/" style="font-weight:600;">Take the Cognitive Quiz →</a>
+        <div class="faq-item">
+          <div class="faq-q">Can an online cognitive test diagnose cognitive conditions?</div>
+          <div class="faq-a">No. Diagnostic evaluations require in-person proctored testing by a licensed psychologist.</div>
+        </div>
+    </div>
+  
+  <div class="cta-block">
+    <h3>Discover Your Cognitive Profile</h3>
+    <p>Take the free 16-question cognitive assessment to see your baseline score across four reasoning domains and discover which historical thinker matches your problem-solving style.</p>
+    <a href="/" class="btn">Take the Free Test</a>
   </div>
 </div>
+
 <footer>
-  <a href="/">Home</a>
-  <a href="/about.html">About</a>
-  <a href="/methodology.html">Methodology</a>
-  <a href="/support.html">Support</a>
-  <a href="/privacy.html">Privacy</a>
+  <a href="/">Home</a> &nbsp;&middot;&nbsp;
+  <a href="/iq-scores/">IQ Scores</a> &nbsp;&middot;&nbsp;
+  <a href="/historical-figures-iq">Historical Minds</a> &nbsp;&middot;&nbsp;
+  <a href="/cognitive-skills/">Reasoning Domains</a> &nbsp;&middot;&nbsp;
+  <a href="/what-is-an-iq-test">What is an IQ Test?</a>
   <br><br>
-  &copy; 2026 APEX Business Systems Ltd. &nbsp;·&nbsp; Edmonton, AB
+  <a href="/free-iq-test-online">Free IQ Test Online</a> &nbsp;&middot;&nbsp;
+  <a href="/are-online-iq-tests-accurate">Test Accuracy</a> &nbsp;&middot;&nbsp;
+  <a href="/types-of-iq-tests">Types of Tests</a> &nbsp;&middot;&nbsp;
+  <a href="/methodology">Methodology</a> &nbsp;&middot;&nbsp;
+  <a href="/editorial-standards">Editorial Standards</a>
+  <br><br>
+  <a href="/about">About</a> &nbsp;&middot;&nbsp;
+  <a href="/support">Support</a> &nbsp;&middot;&nbsp;
+  <a href="/contact">Contact</a> &nbsp;&middot;&nbsp;
+  <a href="/privacy">Privacy</a> &nbsp;&middot;&nbsp;
+  <a href="/terms">Terms</a>
+  <br><br>
+  &copy; 2026 APEX Business Systems Ltd. &nbsp;&middot;&nbsp; Edmonton, AB, Canada &nbsp;&middot;&nbsp; <a href="mailto:support@iq-test.icu">support@iq-test.icu</a>
 </footer>
+
 </body>
 </html>
