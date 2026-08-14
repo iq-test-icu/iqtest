@@ -1177,7 +1177,7 @@
   [dir="rtl"] .lang-dropdown { right: auto; left: 0; }
 
 </style>
-    <link rel="alternate" hreflang="en" href="https://iq-test.icu">
+      <link rel="alternate" hreflang="en" href="https://iq-test.icu">
   <link rel="alternate" hreflang="de" href="https://iq-test.icu/de">
   <link rel="alternate" hreflang="fr" href="https://iq-test.icu/fr">
   <link rel="alternate" hreflang="es" href="https://iq-test.icu/es">
@@ -1224,13 +1224,13 @@
       },
       "contactPoint": [
         {
-          "@type": "ContatoPoint",
+          "@type": "ContactPoint",
           "contactType": "customer support",
           "email": "support@iq-test.icu",
           "availableLanguage": "English"
         },
         {
-          "@type": "ContatoPoint",
+          "@type": "ContactPoint",
           "contactType": "billing support",
           "email": "billing@iq-test.icu",
           "availableLanguage": "English"
@@ -1368,7 +1368,7 @@
 
 <!-- Unified genius mural — single panoramic oil painting, four figures, one scene -->
 <div class="mural-container" aria-hidden="true">
-  <img src="mural_bg.webp" class="mural-bg" alt="" draggable="false">
+  <img src="/mural_bg.webp" class="mural-bg" alt="" draggable="false">
   <div class="mural-vignette"></div>
 </div>
 
@@ -1387,7 +1387,7 @@
   </svg>
 </div>
 <div class="wrap">
-        <header>
+          <header>
     <div class="logo-wrap">
       <img src="/wordmark.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;" onerror="this.style.display='none'">
     </div>
@@ -1432,21 +1432,21 @@
         </div>
       </div>
       
-      <div class="eyebrow">Cognitive Assessment</div>
-      <h1 style="text-align:center;">Free IQ Test — See Your Score and the Mind That Matches It</h1>
-      <p style="text-align:center; font-size:0.92rem; color:var(--text-secondary); margin-top:-10px; margin-bottom:18px;">A 16-question cognitive skills test for self-insight and entertainment. Not a clinical or diagnostic IQ assessment.</p>
-      <p class="lead" style="text-align:center;">16 questions. Sobre five minutes. Your score is free the moment you finish. Then decide if you want to know which historical figure you actually think like.</p>
+      <div class="eyebrow">Avaliação Cognitiva</div>
+      <h1 style="text-align:center;">Teste de QI Grátis — Veja Sua Pontuação e a Mente que Combina com Você</h1>
+      <p style="text-align:center; font-size:0.92rem; color:var(--text-secondary); margin-top:-10px; margin-bottom:18px;">Um teste de habilidades cognitivas de 16 perguntas para autoconhecimento e entretenimento. Não é uma avaliação clínica ou diagnóstica de QI.</p>
+      <p class="lead" style="text-align:center;">16 perguntas. Cerca de cinco minutos. Sua pontuação é gratuita assim que terminar. Depois decida se quer saber com qual figura histórica você pensa igual.</p>
       
       <div class="chip-row">
-        <span class="chip"><b>16</b> questions</span>
-        <span class="chip"><b>4</b> categories</span>
-        <span class="chip"><b>5 min</b> average</span>
+        <span class="chip"><b>16</b> perguntas</span>
+        <span class="chip"><b>4</b> categorias</span>
+        <span class="chip"><b>5 min</b> média</span>
       </div>
       
       <div style="text-align:center;">
-        <button class="btn btn-primary" onclick="startTest()">Start the test</button>
+        <button class="btn btn-primary" onclick="startTest()">Iniciar o teste</button>
       </div>
-      <p class="disclaimer" style="text-align:center;">This is a self-insight quiz, not a clinical IQ test. Your score is for personal reflection only. See the FAQ below for full methodology details.</p>
+      <p class="disclaimer" style="text-align:center;">Este é um teste de autoconhecimento, não um teste de QI clínico. Seu resultado é apenas para reflexão pessoal.</p>
     </div>
 
     <div class="info-block" id="content-hub">
@@ -1848,22 +1848,182 @@ setTimeout(dismissSplash, 1400);
 splashEl.addEventListener('click', dismissSplash);
 
 const QUESTIONS = [
-  {cat:"NUMERIC", text:"2, 6, 12, 20, 30, ?", opts:["36","40","42","44"], correct:2},
-  {cat:"NUMERIC", text:"3, 9, 27, 81, ?", opts:["162","216","243","324"], correct:2},
-  {cat:"NUMERIC", text:"1, 4, 9, 16, 25, ?", opts:["30","32","36","49"], correct:2},
-  {cat:"NUMERIC", text:"100, 91, 79, 64, ?", opts:["46","48","50","52"], correct:0},
-  {cat:"VERBAL", text:"Ocean is to Wave as Mountain is to ___", opts:["Rock","Avalanche","Peak","Cliff"], correct:1},
-  {cat:"VERBAL", text:"Author is to Book as Composer is to ___", opts:["Instrument","Symphony","Orchestra","Note"], correct:1},
-  {cat:"VERBAL", text:"Which word does NOT belong: Whisper, Shout, Murmur, Silence", opts:["Whisper","Shout","Murmur","Silence"], correct:3},
-  {cat:"VERBAL", text:"Thermometer is to Temperature as Scale is to ___", opts:["Fish","Weight","Balance","Number"], correct:1},
-  {cat:"LOGIC", text:"All Zeppos are Farbles. Some Farbles are Wickets. Therefore:", opts:["All Zeppos are Wickets","Some Zeppos may be Wickets","No Zeppos are Wickets","All Wickets are Zeppos"], correct:1},
-  {cat:"LOGIC", text:"If it rains, the game is cancelled. The game was NOT cancelled. Therefore:", opts:["It rained","It did not rain","It might have rained","No conclusion possible"], correct:1},
-  {cat:"LOGIC", text:"Five friends sit in a row. Ana is left of Ben. Cid is right of Ben. Who is in the middle?", opts:["Ana","Ben","Cid","Cannot determine"], correct:1},
-  {cat:"LOGIC", text:"A box has more red balls than blue. It has more blue than green. Which is true?", opts:["Green > Red","Red > Green","Green = Red","Cannot determine"], correct:1},
-  {cat:"PATTERN", text:"A, C, F, J, O, ?", opts:["S","T","U","V"], correct:2},
-  {cat:"PATTERN", text:"2, 4, 8, 16, ?, 64", opts:["24","28","32","48"], correct:2},
-  {cat:"PATTERN", text:"AB, DE, GH, JK, ?", opts:["LM","MN","NO","LN"], correct:1},
-  {cat:"PATTERN", text:"1, 1, 2, 3, 5, 8, ?", opts:["11","12","13","14"], correct:2},
+  {
+    "cat": "NUMÉRICO",
+    "text": "2, 6, 12, 20, 30, ?",
+    "opts": [
+      "36",
+      "40",
+      "42",
+      "44"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "NUMÉRICO",
+    "text": "3, 9, 27, 81, ?",
+    "opts": [
+      "162",
+      "216",
+      "243",
+      "324"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "NUMÉRICO",
+    "text": "1, 4, 9, 16, 25, ?",
+    "opts": [
+      "30",
+      "32",
+      "36",
+      "49"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "NUMÉRICO",
+    "text": "100, 91, 79, 64, ?",
+    "opts": [
+      "46",
+      "48",
+      "50",
+      "52"
+    ],
+    "correct": 0
+  },
+  {
+    "cat": "VERBAL",
+    "text": "Oceano está para Onda assim como Montanha está para ___",
+    "opts": [
+      "Rocha",
+      "Avalanche",
+      "Pico",
+      "Penhasco"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "VERBAL",
+    "text": "Autor está para Livro assim como Compositor está para ___",
+    "opts": [
+      "Instrumento",
+      "Sinfonia",
+      "Orquestra",
+      "Nota"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "VERBAL",
+    "text": "Qual palavra NÃO pertence ao grupo: Sussurro, Grito, Murmúrio, Silêncio",
+    "opts": [
+      "Sussurro",
+      "Grito",
+      "Murmúrio",
+      "Silêncio"
+    ],
+    "correct": 3
+  },
+  {
+    "cat": "VERBAL",
+    "text": "Termômetro está para Temperatura assim como Balança está para ___",
+    "opts": [
+      "Peixe",
+      "Peso",
+      "Equilíbrio",
+      "Número"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "LÓGICA",
+    "text": "Todos os Zeppos são Farbles. Alguns Farbles são Wickets. Logo:",
+    "opts": [
+      "Todos os Zeppos são Wickets",
+      "Alguns Zeppos podem ser Wickets",
+      "Nenhum Zeppo é Wicket",
+      "Todos os Wickets são Zeppos"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "LÓGICA",
+    "text": "Se chove, o jogo é cancelado. O jogo NÃO foi cancelado. Logo:",
+    "opts": [
+      "Choveu",
+      "Não choveu",
+      "Pode ter chovido",
+      "Nenhuma conclusão possível"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "LÓGICA",
+    "text": "Cinco amigos sentam em linha. Ana está à esquerda de Ben. Cid está à direita de Ben. Quem está no meio?",
+    "opts": [
+      "Ana",
+      "Ben",
+      "Cid",
+      "Indeterminado"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "LÓGICA",
+    "text": "Uma caixa tem mais bolas vermelhas que azuis. Tem mais azuis que verdes. O que é verdade?",
+    "opts": [
+      "Verdes > Vermelhas",
+      "Vermelhas > Verdes",
+      "Verdes = Vermelhas",
+      "Indeterminado"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "PADRÕES",
+    "text": "A, C, F, J, O, ?",
+    "opts": [
+      "S",
+      "T",
+      "U",
+      "V"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "PADRÕES",
+    "text": "2, 4, 8, 16, ?, 64",
+    "opts": [
+      "24",
+      "28",
+      "32",
+      "48"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "PADRÕES",
+    "text": "AB, DE, GH, JK, ?",
+    "opts": [
+      "LM",
+      "MN",
+      "NO",
+      "LN"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "PADRÕES",
+    "text": "1, 1, 2, 3, 5, 8, ?",
+    "opts": [
+      "11",
+      "12",
+      "13",
+      "14"
+    ],
+    "correct": 2
+  }
 ];
 
 // Percentile lookup calibrated to 16-item raw score distribution.

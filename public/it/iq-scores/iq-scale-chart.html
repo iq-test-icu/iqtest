@@ -626,13 +626,13 @@
       },
       "contactPoint": [
         {
-          "@type": "ContattoPoint",
+          "@type": "ContactPoint",
           "contactType": "customer support",
           "email": "support@iq-test.icu",
           "availableLanguage": "English"
         },
         {
-          "@type": "ContattoPoint",
+          "@type": "ContactPoint",
           "contactType": "billing support",
           "email": "billing@iq-test.icu",
           "availableLanguage": "English"
@@ -679,7 +679,7 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Punteggi QI",
+          "name": "IQ Scores",
           "item": "https://iq-test.icu/iq-scores/"
         },
         {
@@ -1009,7 +1009,7 @@
       });
       navigator.clipboard.writeText(md).then(() => {
         const btn = document.getElementById('copyTableBtn');
-        btn.textContent = "✓ Copiato!";
+        btn.textContent = "✓ Copied!";
         setTimeout(() => { btn.textContent = "📋 Copia Markdown"; }, 2000);
       });
     }

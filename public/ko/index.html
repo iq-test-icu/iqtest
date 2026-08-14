@@ -1177,7 +1177,7 @@
   [dir="rtl"] .lang-dropdown { right: auto; left: 0; }
 
 </style>
-    <link rel="alternate" hreflang="en" href="https://iq-test.icu">
+      <link rel="alternate" hreflang="en" href="https://iq-test.icu">
   <link rel="alternate" hreflang="de" href="https://iq-test.icu/de">
   <link rel="alternate" hreflang="fr" href="https://iq-test.icu/fr">
   <link rel="alternate" hreflang="es" href="https://iq-test.icu/es">
@@ -1224,13 +1224,13 @@
       },
       "contactPoint": [
         {
-          "@type": "문의하기Point",
+          "@type": "ContactPoint",
           "contactType": "customer support",
           "email": "support@iq-test.icu",
           "availableLanguage": "English"
         },
         {
-          "@type": "문의하기Point",
+          "@type": "ContactPoint",
           "contactType": "billing support",
           "email": "billing@iq-test.icu",
           "availableLanguage": "English"
@@ -1368,7 +1368,7 @@
 
 <!-- Unified genius mural — single panoramic oil painting, four figures, one scene -->
 <div class="mural-container" aria-hidden="true">
-  <img src="mural_bg.webp" class="mural-bg" alt="" draggable="false">
+  <img src="/mural_bg.webp" class="mural-bg" alt="" draggable="false">
   <div class="mural-vignette"></div>
 </div>
 
@@ -1387,7 +1387,7 @@
   </svg>
 </div>
 <div class="wrap">
-        <header>
+          <header>
     <div class="logo-wrap">
       <img src="/wordmark.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;" onerror="this.style.display='none'">
     </div>
@@ -1432,21 +1432,21 @@
         </div>
       </div>
       
-      <div class="eyebrow">Cognitive Assessment</div>
-      <h1 style="text-align:center;">Free IQ Test — See Your Score and the Mind That Matches It</h1>
-      <p style="text-align:center; font-size:0.92rem; color:var(--text-secondary); margin-top:-10px; margin-bottom:18px;">A 16-question cognitive skills test for self-insight and entertainment. Not a clinical or diagnostic IQ assessment.</p>
-      <p class="lead" style="text-align:center;">16 questions. 소개 five minutes. Your score is free the moment you finish. Then decide if you want to know which historical figure you actually think like.</p>
+      <div class="eyebrow">인지 능력 평가</div>
+      <h1 style="text-align:center;">무료 IQ 테스트 — 당신의 점수와 일치하는 역사적 인물을 확인하세요</h1>
+      <p style="text-align:center; font-size:0.92rem; color:var(--text-secondary); margin-top:-10px; margin-bottom:18px;">자기 이해와 흥미를 위한 16문항 인지 능력 테스트입니다. 임상적 또는 진단적 IQ 검사가 아닙니다.</p>
+      <p class="lead" style="text-align:center;">16문항. 약 5분 소요. 완료 즉시 무료로 점수가 공개됩니다. 당신의 사고방식이 어떤 역사적 인물과 닮았는지 확인해 보세요.</p>
       
       <div class="chip-row">
-        <span class="chip"><b>16</b> questions</span>
-        <span class="chip"><b>4</b> categories</span>
-        <span class="chip"><b>5 min</b> average</span>
+        <span class="chip"><b>16</b>문항</span>
+        <span class="chip"><b>4</b>개 영역</span>
+        <span class="chip">평균 <b>5분</b></span>
       </div>
       
       <div style="text-align:center;">
-        <button class="btn btn-primary" onclick="startTest()">Start the test</button>
+        <button class="btn btn-primary" onclick="startTest()">테스트 시작하기</button>
       </div>
-      <p class="disclaimer" style="text-align:center;">This is a self-insight quiz, not a clinical IQ test. Your score is for personal reflection only. See the FAQ below for full methodology details.</p>
+      <p class="disclaimer" style="text-align:center;">본 테스트는 자기 탐색용 퀴즈이며 임상 진단용 IQ 검사가 아닙니다. 점수는 개인 참고용입니다.</p>
     </div>
 
     <div class="info-block" id="content-hub">
@@ -1848,22 +1848,182 @@ setTimeout(dismissSplash, 1400);
 splashEl.addEventListener('click', dismissSplash);
 
 const QUESTIONS = [
-  {cat:"NUMERIC", text:"2, 6, 12, 20, 30, ?", opts:["36","40","42","44"], correct:2},
-  {cat:"NUMERIC", text:"3, 9, 27, 81, ?", opts:["162","216","243","324"], correct:2},
-  {cat:"NUMERIC", text:"1, 4, 9, 16, 25, ?", opts:["30","32","36","49"], correct:2},
-  {cat:"NUMERIC", text:"100, 91, 79, 64, ?", opts:["46","48","50","52"], correct:0},
-  {cat:"VERBAL", text:"Ocean is to Wave as Mountain is to ___", opts:["Rock","Avalanche","Peak","Cliff"], correct:1},
-  {cat:"VERBAL", text:"Author is to Book as Composer is to ___", opts:["Instrument","Symphony","Orchestra","Note"], correct:1},
-  {cat:"VERBAL", text:"Which word does NOT belong: Whisper, Shout, Murmur, Silence", opts:["Whisper","Shout","Murmur","Silence"], correct:3},
-  {cat:"VERBAL", text:"Thermometer is to Temperature as Scale is to ___", opts:["Fish","Weight","Balance","Number"], correct:1},
-  {cat:"LOGIC", text:"All Zeppos are Farbles. Some Farbles are Wickets. Therefore:", opts:["All Zeppos are Wickets","Some Zeppos may be Wickets","No Zeppos are Wickets","All Wickets are Zeppos"], correct:1},
-  {cat:"LOGIC", text:"If it rains, the game is cancelled. The game was NOT cancelled. Therefore:", opts:["It rained","It did not rain","It might have rained","No conclusion possible"], correct:1},
-  {cat:"LOGIC", text:"Five friends sit in a row. Ana is left of Ben. Cid is right of Ben. Who is in the middle?", opts:["Ana","Ben","Cid","Cannot determine"], correct:1},
-  {cat:"LOGIC", text:"A box has more red balls than blue. It has more blue than green. Which is true?", opts:["Green > Red","Red > Green","Green = Red","Cannot determine"], correct:1},
-  {cat:"PATTERN", text:"A, C, F, J, O, ?", opts:["S","T","U","V"], correct:2},
-  {cat:"PATTERN", text:"2, 4, 8, 16, ?, 64", opts:["24","28","32","48"], correct:2},
-  {cat:"PATTERN", text:"AB, DE, GH, JK, ?", opts:["LM","MN","NO","LN"], correct:1},
-  {cat:"PATTERN", text:"1, 1, 2, 3, 5, 8, ?", opts:["11","12","13","14"], correct:2},
+  {
+    "cat": "수리 추론",
+    "text": "2, 6, 12, 20, 30, ?",
+    "opts": [
+      "36",
+      "40",
+      "42",
+      "44"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "수리 추론",
+    "text": "3, 9, 27, 81, ?",
+    "opts": [
+      "162",
+      "216",
+      "243",
+      "324"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "수리 추론",
+    "text": "1, 4, 9, 16, 25, ?",
+    "opts": [
+      "30",
+      "32",
+      "36",
+      "49"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "수리 추론",
+    "text": "100, 91, 79, 64, ?",
+    "opts": [
+      "46",
+      "48",
+      "50",
+      "52"
+    ],
+    "correct": 0
+  },
+  {
+    "cat": "언어 추론",
+    "text": "바다와 파도의 관계는 산과 ___의 관계와 같다:",
+    "opts": [
+      "바위",
+      "눈사태",
+      "정상",
+      "절벽"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "언어 추론",
+    "text": "작가와 책의 관계는 작곡가와 ___의 관계와 같다:",
+    "opts": [
+      "악기",
+      "교향곡",
+      "오케스트라",
+      "음표"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "언어 추론",
+    "text": "나머지와 성격이 다른 단어는 무엇인가: 속삭임, 외침, 중얼거림, 침묵",
+    "opts": [
+      "속삭임",
+      "외침",
+      "중얼거림",
+      "침묵"
+    ],
+    "correct": 3
+  },
+  {
+    "cat": "언어 추론",
+    "text": "온도계와 온도의 관계는 저울과 ___의 관계와 같다:",
+    "opts": [
+      "물고기",
+      "무게",
+      "균형",
+      "숫자"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "논리 연역",
+    "text": "모든 제포는 파블이다. 일부 파블은 위켓이다. 따라서:",
+    "opts": [
+      "모든 제포는 위켓이다",
+      "일부 제포는 위켓일 수 있다",
+      "어떤 제포도 위켓이 아니다",
+      "모든 위켓은 제포이다"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "논리 연역",
+    "text": "비가 오면 경기가 취소된다. 경기가 취소되지 않았다. 따라서:",
+    "opts": [
+      "비가 왔다",
+      "비가 오지 않았다",
+      "비가 왔을 수도 있다",
+      "결론을 내릴 수 없다"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "논리 연역",
+    "text": "다섯 친구가 한 줄로 앉아 있다. 아나는 벤의 왼쪽에 있다. 시드는 벤의 오른쪽에 있다. 가운데에 있는 사람은 누구인가?",
+    "opts": [
+      "아나",
+      "벤",
+      "시드",
+      "판단 불가"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "논리 연역",
+    "text": "상자에 파란 공보다 빨간 공이 더 많다. 초록 공보다 파란 공이 더 많다. 사실인 것은?",
+    "opts": [
+      "초록 > 빨강",
+      "빨강 > 초록",
+      "초록 = 빨강",
+      "판단 불가"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "도형 패턴",
+    "text": "A, C, F, J, O, ?",
+    "opts": [
+      "S",
+      "T",
+      "U",
+      "V"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "도형 패턴",
+    "text": "2, 4, 8, 16, ?, 64",
+    "opts": [
+      "24",
+      "28",
+      "32",
+      "48"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "도형 패턴",
+    "text": "AB, DE, GH, JK, ?",
+    "opts": [
+      "LM",
+      "MN",
+      "NO",
+      "LN"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "도형 패턴",
+    "text": "1, 1, 2, 3, 5, 8, ?",
+    "opts": [
+      "11",
+      "12",
+      "13",
+      "14"
+    ],
+    "correct": 2
+  }
 ];
 
 // Percentile lookup calibrated to 16-item raw score distribution.

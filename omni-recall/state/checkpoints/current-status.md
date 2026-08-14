@@ -11,12 +11,14 @@
   - PR #3: Master Semantic SEO elevation (Hub A, Hub B, Hub C, Trust & Utility, JSON-LD schemas, breadcrumbs, Gaussian bell curve visualizer, interactive puzzle solvers)
   - PR #4: 13-locale internationalization engine (EN, DE, FR, ES, PT, IT, NL, JA, KO, ZH, AR, HI, TL), RFC 8058 one-click unsubscribe, CASL sender compliance, zero-drift build pipeline
 - current_elevation:
-  - Persistent header language switcher on all 33 pages across all viewports with centered logo and right-anchored selector.
+  - Fixed relative asset pathing: `<img src="/mural_bg.webp" class="mural-bg">` ensures wallpaper renders on all localized routes (`/es/`, `/de/`, `/fr/`, etc.).
+  - High-accuracy native localization engine (`_i18n/dictionaries.js`) covering full hero card, UI elements, and JavaScript assessment question banks across all 12 non-English locales.
   - Multi-directional semantic backlink mesh & contextual research cluster cross-linking across all 3 hubs.
   - Outbound authoritative academic citation blocks (APA, NCBI, Mensa, Nature Neuroscience, Wikidata).
   - Embeddable external backlink & citation asset widgets on all content pages.
-  - Full omni-recall memory and architecture synchronization.
+  - Omni-recall memory and architecture synchronized.
 - verification_status:
+  - Visual Browser Validation: Verified on `/es/`, `/de/`, `/fr/`, `/ja/`, `/ar/` via DevTools screenshots.
   - Worker test suite: PASSED (3/3 tests)
   - E2E test suite: PASSED (6/6 tests)
   - SEO verification gate: PASSED (492/492 checks)

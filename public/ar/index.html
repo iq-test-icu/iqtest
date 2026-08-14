@@ -1177,7 +1177,7 @@
   [dir="rtl"] .lang-dropdown { right: auto; left: 0; }
 
 </style>
-    <link rel="alternate" hreflang="en" href="https://iq-test.icu">
+      <link rel="alternate" hreflang="en" href="https://iq-test.icu">
   <link rel="alternate" hreflang="de" href="https://iq-test.icu/de">
   <link rel="alternate" hreflang="fr" href="https://iq-test.icu/fr">
   <link rel="alternate" hreflang="es" href="https://iq-test.icu/es">
@@ -1224,13 +1224,13 @@
       },
       "contactPoint": [
         {
-          "@type": "اتصل بناPoint",
+          "@type": "ContactPoint",
           "contactType": "customer support",
           "email": "support@iq-test.icu",
           "availableLanguage": "English"
         },
         {
-          "@type": "اتصل بناPoint",
+          "@type": "ContactPoint",
           "contactType": "billing support",
           "email": "billing@iq-test.icu",
           "availableLanguage": "English"
@@ -1368,7 +1368,7 @@
 
 <!-- Unified genius mural — single panoramic oil painting, four figures, one scene -->
 <div class="mural-container" aria-hidden="true">
-  <img src="mural_bg.webp" class="mural-bg" alt="" draggable="false">
+  <img src="/mural_bg.webp" class="mural-bg" alt="" draggable="false">
   <div class="mural-vignette"></div>
 </div>
 
@@ -1387,7 +1387,7 @@
   </svg>
 </div>
 <div class="wrap">
-        <header>
+          <header>
     <div class="logo-wrap">
       <img src="/wordmark.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;" onerror="this.style.display='none'">
     </div>
@@ -1432,21 +1432,21 @@
         </div>
       </div>
       
-      <div class="eyebrow">Cognitive Assessment</div>
-      <h1 style="text-align:center;">Free IQ Test — See Your Score and the Mind That Matches It</h1>
-      <p style="text-align:center; font-size:0.92rem; color:var(--text-secondary); margin-top:-10px; margin-bottom:18px;">A 16-question cognitive skills test for self-insight and entertainment. Not a clinical or diagnostic IQ assessment.</p>
-      <p class="lead" style="text-align:center;">16 questions. عنا five minutes. Your score is free the moment you finish. Then decide if you want to know which historical figure you actually think like.</p>
+      <div class="eyebrow">التقييم المعرفي</div>
+      <h1 style="text-align:center;">اختبار ذكاء مجاني — اكتشف نتيجتك والعقل التاريخي المطابق لتفكيرك</h1>
+      <p style="text-align:center; font-size:0.92rem; color:var(--text-secondary); margin-top:-10px; margin-bottom:18px;">اختبار للمهارات المعرفية من 16 سؤالاً للبصيرة الذاتية والترفيه. ليس تقييماً إكلينيكياً أو تشخيصياً لنسبة الذكاء.</p>
+      <p class="lead" style="text-align:center;">16 سؤالاً. حوالي خمس دقائق. نتيجتك مجانية بمجرد الانتهاء. ثم اكتشف أي شخصية تاريخية يتطابق أسلوب تفكيرك معها.</p>
       
       <div class="chip-row">
-        <span class="chip"><b>16</b> questions</span>
-        <span class="chip"><b>4</b> categories</span>
-        <span class="chip"><b>5 min</b> average</span>
+        <span class="chip"><b>16</b> سؤالاً</span>
+        <span class="chip"><b>4</b> فئات</span>
+        <span class="chip">متوسط <b>5 دقائق</b></span>
       </div>
       
       <div style="text-align:center;">
-        <button class="btn btn-primary" onclick="startTest()">Start the test</button>
+        <button class="btn btn-primary" onclick="startTest()">ابدأ الاختبار</button>
       </div>
-      <p class="disclaimer" style="text-align:center;">This is a self-insight quiz, not a clinical IQ test. Your score is for personal reflection only. See the FAQ below for full methodology details.</p>
+      <p class="disclaimer" style="text-align:center;">هذا اختبار للرؤية الذاتية وليس اختبار ذكاء سريري. نتيجتك مخصصة للتأمل الشخصي فقط.</p>
     </div>
 
     <div class="info-block" id="content-hub">
@@ -1848,22 +1848,182 @@ setTimeout(dismissSplash, 1400);
 splashEl.addEventListener('click', dismissSplash);
 
 const QUESTIONS = [
-  {cat:"NUMERIC", text:"2, 6, 12, 20, 30, ?", opts:["36","40","42","44"], correct:2},
-  {cat:"NUMERIC", text:"3, 9, 27, 81, ?", opts:["162","216","243","324"], correct:2},
-  {cat:"NUMERIC", text:"1, 4, 9, 16, 25, ?", opts:["30","32","36","49"], correct:2},
-  {cat:"NUMERIC", text:"100, 91, 79, 64, ?", opts:["46","48","50","52"], correct:0},
-  {cat:"VERBAL", text:"Ocean is to Wave as Mountain is to ___", opts:["Rock","Avalanche","Peak","Cliff"], correct:1},
-  {cat:"VERBAL", text:"Author is to Book as Composer is to ___", opts:["Instrument","Symphony","Orchestra","Note"], correct:1},
-  {cat:"VERBAL", text:"Which word does NOT belong: Whisper, Shout, Murmur, Silence", opts:["Whisper","Shout","Murmur","Silence"], correct:3},
-  {cat:"VERBAL", text:"Thermometer is to Temperature as Scale is to ___", opts:["Fish","Weight","Balance","Number"], correct:1},
-  {cat:"LOGIC", text:"All Zeppos are Farbles. Some Farbles are Wickets. Therefore:", opts:["All Zeppos are Wickets","Some Zeppos may be Wickets","No Zeppos are Wickets","All Wickets are Zeppos"], correct:1},
-  {cat:"LOGIC", text:"If it rains, the game is cancelled. The game was NOT cancelled. Therefore:", opts:["It rained","It did not rain","It might have rained","No conclusion possible"], correct:1},
-  {cat:"LOGIC", text:"Five friends sit in a row. Ana is left of Ben. Cid is right of Ben. Who is in the middle?", opts:["Ana","Ben","Cid","Cannot determine"], correct:1},
-  {cat:"LOGIC", text:"A box has more red balls than blue. It has more blue than green. Which is true?", opts:["Green > Red","Red > Green","Green = Red","Cannot determine"], correct:1},
-  {cat:"PATTERN", text:"A, C, F, J, O, ?", opts:["S","T","U","V"], correct:2},
-  {cat:"PATTERN", text:"2, 4, 8, 16, ?, 64", opts:["24","28","32","48"], correct:2},
-  {cat:"PATTERN", text:"AB, DE, GH, JK, ?", opts:["LM","MN","NO","LN"], correct:1},
-  {cat:"PATTERN", text:"1, 1, 2, 3, 5, 8, ?", opts:["11","12","13","14"], correct:2},
+  {
+    "cat": "الاستدلال العددي",
+    "text": "2, 6, 12, 20, 30, ?",
+    "opts": [
+      "36",
+      "40",
+      "42",
+      "44"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "الاستدلال العددي",
+    "text": "3, 9, 27, 81, ?",
+    "opts": [
+      "162",
+      "216",
+      "243",
+      "324"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "الاستدلال العددي",
+    "text": "1, 4, 9, 16, 25, ?",
+    "opts": [
+      "30",
+      "32",
+      "36",
+      "49"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "الاستدلال العددي",
+    "text": "100, 91, 79, 64, ?",
+    "opts": [
+      "46",
+      "48",
+      "50",
+      "52"
+    ],
+    "correct": 0
+  },
+  {
+    "cat": "الاستدلال اللفظي",
+    "text": "المحيط بالنسبة للموجة مثل الجبل بالنسبة إلى ___",
+    "opts": [
+      "الصخر",
+      "الانهيار الجليدي",
+      "القمة",
+      "الجرف"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "الاستدلال اللفظي",
+    "text": "المؤلف بالنسبة للكتاب مثل الملحن بالنسبة إلى ___",
+    "opts": [
+      "الآلة الموسيقية",
+      "السيمفونية",
+      "الأوركسترا",
+      "النوتة"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "الاستدلال اللفظي",
+    "text": "أي كلمة لا تنتمي للمجموعة: همس, صراخ, تمتمة, صمت",
+    "opts": [
+      "همس",
+      "صراخ",
+      "تمتمة",
+      "صمت"
+    ],
+    "correct": 3
+  },
+  {
+    "cat": "الاستدلال اللفظي",
+    "text": "ميزان الحرارة بالنسبة لدرجة الحرارة مثل الميزان بالنسبة إلى ___",
+    "opts": [
+      "السمك",
+      "الوزن",
+      "التوازن",
+      "الرقم"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "الاستنتاج المنطقي",
+    "text": "كل الزيبوس هم فربلز. بعض الفربلز هم ويكيتس. لذلك:",
+    "opts": [
+      "كل الزيبوس هم ويكيتس",
+      "قد يكون بعض الزيبوس ويكيتس",
+      "لا يوجد زيبوس ويكيتس",
+      "كل الويكيتس هم زيبوس"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "الاستنتاج المنطقي",
+    "text": "إذا أمطرت تُلغى المباراة. لم تُلغَ المباراة. لذلك:",
+    "opts": [
+      "أمطرت",
+      "لم تمطر",
+      "ربما أمطرت",
+      "لا يمكن الوصول لاستنتاج"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "الاستنتاج المنطقي",
+    "text": "يجلس خمسة أصدقاء في صف. آنا يسار بن. وسيد يمين بن. من في المنتصف؟",
+    "opts": [
+      "آنا",
+      "بن",
+      "سيد",
+      "لا يمكن التحديد"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "الاستنتاج المنطقي",
+    "text": "صندوق به كرات حمراء أكثر من الزرقاء، وزرقاء أكثر من الخضراء. أي عبارة صحيحة؟",
+    "opts": [
+      "خضراء > حمراء",
+      "حمراء > خضراء",
+      "خضراء = حمراء",
+      "لا يمكن التحديد"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "الأنماط البصرية",
+    "text": "A, C, F, J, O, ?",
+    "opts": [
+      "S",
+      "T",
+      "U",
+      "V"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "الأنماط البصرية",
+    "text": "2, 4, 8, 16, ?, 64",
+    "opts": [
+      "24",
+      "28",
+      "32",
+      "48"
+    ],
+    "correct": 2
+  },
+  {
+    "cat": "الأنماط البصرية",
+    "text": "AB, DE, GH, JK, ?",
+    "opts": [
+      "LM",
+      "MN",
+      "NO",
+      "LN"
+    ],
+    "correct": 1
+  },
+  {
+    "cat": "الأنماط البصرية",
+    "text": "1, 1, 2, 3, 5, 8, ?",
+    "opts": [
+      "11",
+      "12",
+      "13",
+      "14"
+    ],
+    "correct": 2
+  }
 ];
 
 // Percentile lookup calibrated to 16-item raw score distribution.

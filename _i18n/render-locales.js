@@ -1,11 +1,6 @@
-/**
- * Locale Rendering Pipeline (_i18n/render-locales.js)
- * Emits localized public/<locale>/** pages with bidirectional hreflang,
- * language switcher, localized JSON-LD schemas, and RTL/CJK font stacks.
- */
-
 const fs = require('fs');
 const path = require('path');
+const { DICTIONARIES } = require('./dictionaries');
 
 const rootDir = path.resolve(__dirname, '..');
 const publicDir = path.join(rootDir, 'public');
@@ -16,21 +11,17 @@ const locales = JSON.parse(fs.readFileSync(path.join(i18nDir, 'locales.json'), '
 
 // Build bidirectional hreflang tags for a given canonical subpath
 function buildHreflangTags(pageSubPath) {
-  // pageSubPath is like 'iq-scores/what-is-a-good-iq-score' or '' for home
   const cleanSub = pageSubPath.replace(/^\//, '').replace(/\.html$/, '');
   const pathSuffix = cleanSub ? `/${cleanSub}` : '';
   
   const tags = [];
-  // English at root
   tags.push(`  <link rel="alternate" hreflang="en" href="https://iq-test.icu${pathSuffix}">`);
   
-  // All other 12 locales
   for (const loc of locales) {
     if (loc.hreflang === 'en') continue;
     tags.push(`  <link rel="alternate" hreflang="${loc.hreflang}" href="https://iq-test.icu/${loc.hreflang}${pathSuffix}">`);
   }
   
-  // x-default points to root
   tags.push(`  <link rel="alternate" hreflang="x-default" href="https://iq-test.icu${pathSuffix}">`);
   return tags.join('\n');
 }
@@ -78,7 +69,6 @@ const suggestionBannerScript = `
 function renderAllLocales() {
   console.log('Rendering all 12 localized static websites...');
   
-  // Discover all English HTML files in public/ (excluding any existing locale directories)
   const englishHtmlFiles = [];
   function walk(dir) {
     const files = fs.readdirSync(dir);
@@ -86,7 +76,6 @@ function renderAllLocales() {
       const full = path.join(dir, f);
       const rel = path.relative(publicDir, full).replace(/\\/g, '/');
       if (fs.statSync(full).isDirectory()) {
-        // Skip locale directories
         if (locales.some(l => l.hreflang !== 'en' && rel === l.hreflang)) continue;
         walk(full);
       } else if (f.endsWith('.html')) {
@@ -101,6 +90,7 @@ function renderAllLocales() {
     
     const catPath = path.join(catalogDir, `${loc.hreflang}.json`);
     const catalog = fs.existsSync(catPath) ? JSON.parse(fs.readFileSync(catPath, 'utf8')) : {};
+    const dict = DICTIONARIES[loc.hreflang] || null;
     
     for (const relFile of englishHtmlFiles) {
       const srcPath = path.join(publicDir, relFile);
@@ -116,12 +106,17 @@ function renderAllLocales() {
       // 1. Update <html lang="..." dir="...">
       html = html.replace(/<html[^>]*>/i, `<html lang="${loc.lang}" dir="${loc.dir}">`);
 
-      // 2. Self-referencing canonical
+      // 2. Fix all relative asset paths to root absolute
+      html = html.replace(/src="mural_bg\.webp"/g, 'src="/mural_bg.webp"');
+      html = html.replace(/src="wordmark\.webp"/g, 'src="/wordmark.webp"');
+      html = html.replace(/src="icon\.webp"/g, 'src="/icon.webp"');
+
+      // 3. Self-referencing canonical
       const cleanSub = relFile === 'index.html' ? '' : relFile.replace(/\.html$/, '').replace(/\/index$/, '');
       const canonicalUrl = `https://iq-test.icu/${loc.hreflang}${cleanSub ? '/' + cleanSub : ''}`;
       html = html.replace(/<link rel="canonical" href="[^"]*">/i, `<link rel="canonical" href="${canonicalUrl}">`);
 
-      // 3. Inject full bidirectional hreflang set
+      // 4. Inject full bidirectional hreflang set
       const hreflangBlock = buildHreflangTags(cleanSub);
       if (html.includes('<link rel="alternate"')) {
         html = html.replace(/(<link rel="alternate"[^>]*>\s*)+/i, hreflangBlock + '\n');
@@ -129,24 +124,47 @@ function renderAllLocales() {
         html = html.replace('</head>', `${hreflangBlock}\n</head>`);
       }
 
-      // 4. Update robots to noindex during review phase
+      // 5. Update robots to noindex during review phase
       html = html.replace(/<meta name="robots" content="[^"]*">/i, '<meta name="robots" content="noindex, follow">');
 
-      // 5. Update Header Language Switcher for this locale
+      // 6. Update Header Language Switcher for this locale
       html = html.replace(/<span class="lang-current-label">English<\/span>/i, `<span class="lang-current-label">${loc.endonym}</span>`);
       html = html.replace(/(<a href="[^"]*" class="lang-option) active(" hreflang="en")/i, '$1$2');
       const activeLocaleRegex = new RegExp(`(<a href="[^"]*" class="lang-option)(" hreflang="${loc.hreflang}")`, 'i');
       html = html.replace(activeLocaleRegex, '$1 active$2');
 
-      // 6. Inject suggestion banner script
+      // 7. Inject suggestion banner script
       html = html.replace('</body>', `${suggestionBannerScript}\n</body>`);
 
-      // 7. Apply Translations
-      for (const [key, entry] of Object.entries(catalog)) {
-        if (key.startsWith('$') || !entry.t || !entry.src) continue;
-        if (entry.t !== entry.src) {
-          // Safe global string replace
+      // 8. If index.html, apply full rich dictionary localization
+      if (relFile === 'index.html' && dict) {
+        // Localize Hero Section
+        html = html.replace(/<div class="eyebrow">Cognitive Assessment<\/div>/i, `<div class="eyebrow">${dict.heroEyebrow}</div>`);
+        html = html.replace(/<h1 style="text-align:center;">Free IQ Test — See Your Score and the Mind That Matches It<\/h1>/i, `<h1 style="text-align:center;">${dict.heroH1}</h1>`);
+        html = html.replace(/<p style="text-align:center; font-size:0.92rem; color:var\(--text-secondary\); margin-top:-10px; margin-bottom:18px;">A 16-question cognitive skills test for self-insight and entertainment\. Not a clinical or diagnostic IQ assessment\.<\/p>/i, `<p style="text-align:center; font-size:0.92rem; color:var(--text-secondary); margin-top:-10px; margin-bottom:18px;">${dict.heroSubtitle}</p>`);
+        html = html.replace(/<p class="lead" style="text-align:center;">16 questions\. About five minutes\. Your score is free the moment you finish\. Then decide if you want to know which historical figure you actually think like\.<\/p>/i, `<p class="lead" style="text-align:center;">${dict.heroLead}</p>`);
+        html = html.replace(/<span class="chip"><b>16<\/b> questions<\/span>\s*<span class="chip"><b>4<\/b> categories<\/span>\s*<span class="chip"><b>5 min<\/b> average<\/span>/i, `<span class="chip">${dict.chipQuestions}</span>\n        <span class="chip">${dict.chipCategories}</span>\n        <span class="chip">${dict.chipTime}</span>`);
+        html = html.replace(/<button class="btn btn-primary" onclick="startTest\(\)">Start the test<\/button>/i, `<button class="btn btn-primary" onclick="startTest()">${dict.startBtn}</button>`);
+        html = html.replace(/<p class="disclaimer" style="text-align:center;">This is a self-insight quiz, not a clinical IQ test\. Your score is for personal reflection only\. See the FAQ below for full methodology details\.<\/p>/i, `<p class="disclaimer" style="text-align:center;">${dict.heroDisclaimer}</p>`);
+
+        // Localize Question Bank in JavaScript
+        const questionsJs = `const QUESTIONS = ${JSON.stringify(dict.questions, null, 2)};`;
+        html = html.replace(/const QUESTIONS = \[[^\]]*(\{[^\}]*\}[^\]]*)*\];/s, questionsJs);
+      }
+
+      // 9. Apply catalogue translations sorted by longest source phrase first
+      const catalogEntries = Object.entries(catalog)
+        .filter(([k, v]) => !k.startsWith('$') && v.src && v.t && v.src !== v.t)
+        .sort((a, b) => b[1].src.length - a[1].src.length);
+
+      for (const [key, entry] of catalogEntries) {
+        // Perform safe contextual replace
+        if (entry.src.length > 10) {
           html = html.split(entry.src).join(entry.t);
+        } else {
+          // For shorter words (like "About", "Home", "Privacy"), replace only inside HTML tags / links
+          const tagRegex = new RegExp(`(>\\s*)${escapeRegex(entry.src)}(\\s*<)`, 'g');
+          html = html.replace(tagRegex, `$1${entry.t}$2`);
         }
       }
 
@@ -162,6 +180,11 @@ function renderAllLocales() {
     let html = fs.readFileSync(srcPath, 'utf8');
     const cleanSub = relFile === 'index.html' ? '' : relFile.replace(/\.html$/, '').replace(/\/index$/, '');
     
+    // Ensure absolute image paths
+    html = html.replace(/src="mural_bg\.webp"/g, 'src="/mural_bg.webp"');
+    html = html.replace(/src="wordmark\.webp"/g, 'src="/wordmark.webp"');
+    html = html.replace(/src="icon\.webp"/g, 'src="/icon.webp"');
+
     // Inject hreflang
     const hreflangBlock = buildHreflangTags(cleanSub);
     if (html.includes('<link rel="alternate"')) {
@@ -180,4 +203,12 @@ function renderAllLocales() {
   }
 }
 
-renderAllLocales();
+function escapeRegex(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+module.exports = { renderAllLocales };
+
+if (require.main === module) {
+  renderAllLocales();
+}
