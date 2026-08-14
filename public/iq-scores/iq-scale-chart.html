@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IQ Scale Chart: Every Score Range Explained | IQ Test</title>
-<meta name="description" content="Explore the complete IQ scale chart from 55 to 145. Understand bell curve distributions, standard deviations, and exact score-to-percentile conversions.">
+<title>IQ Scale Chart: Bell Curve & Percentile Conversion | IQ Test</title>
+<meta name="description" content="Complete IQ scale chart and bell curve reference. See exact score conversions from 55 to 145, standard deviations, and population percentile rankings.">
 <link rel="canonical" href="https://iq-test.icu/iq-scores/iq-scale-chart">
-<meta property="og:title" content="IQ Scale Chart: Every Score Range Explained | IQ Test">
-<meta property="og:description" content="Explore the complete IQ scale chart from 55 to 145. Understand bell curve distributions, standard deviations, and exact score-to-percentile conversions.">
+<meta property="og:title" content="IQ Scale Chart: Bell Curve & Percentile Conversion | IQ Test">
+<meta property="og:description" content="Complete IQ scale chart and bell curve reference. See exact score conversions from 55 to 145, standard deviations, and population percentile rankings.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://iq-test.icu/iq-scores/iq-scale-chart">
 <meta property="og:image" content="https://iq-test.icu/og.png">
 <meta property="og:site_name" content="IQ Test">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="IQ Scale Chart: Every Score Range Explained | IQ Test">
-<meta name="twitter:description" content="Explore the complete IQ scale chart from 55 to 145. Understand bell curve distributions, standard deviations, and exact score-to-percentile conversions.">
+<meta name="twitter:title" content="IQ Scale Chart: Bell Curve & Percentile Conversion | IQ Test">
+<meta name="twitter:description" content="Complete IQ scale chart and bell curve reference. See exact score conversions from 55 to 145, standard deviations, and population percentile rankings.">
 <meta name="twitter:image" content="https://iq-test.icu/og.png">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="icon" type="image/webp" href="/favicon.webp">
@@ -96,6 +96,39 @@
   }
   .answer-box strong { color: var(--text); }
 
+  .quick-facts-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0 36px;
+  }
+  .quick-facts-header {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quick-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+  }
+  .fact-item {
+    background: oklch(0.08 0.004 95);
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .fact-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .fact-value { color: var(--text); font-weight: 500; }
+
   p { color: oklch(0.85 0.005 95); margin-bottom: 20px; font-size: 1rem; }
   
   h2 {
@@ -171,11 +204,31 @@
     box-shadow: 0 4px 20px var(--red-glow), inset 0 1px 0 rgba(255,255,255,0.15);
     text-decoration: none;
     transition: all 0.2s ease;
+    cursor: pointer;
   }
   .btn:hover {
     background: var(--red-hover);
     text-decoration: none;
     transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--gold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-outline:hover {
+    background: rgba(201, 162, 75, 0.12);
+    text-decoration: none;
   }
 
   .faq-accordion {
@@ -220,6 +273,64 @@
   .figure-card h3 { margin-top: 0; font-size: 1.1rem; color: var(--gold); margin-bottom: 8px; }
   .figure-card p { font-size: 0.88rem; margin-bottom: 12px; color: var(--muted); }
   .figure-card a { font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 600; }
+
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 24px 0 28px;
+  }
+  .filter-pill {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.84rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-pill:hover, .filter-pill.active {
+    background: var(--gold);
+    color: oklch(0.06 0.002 95);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+
+  .interactive-puzzle-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .puzzle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .puzzle-tag {
+    background: oklch(0.15 0.01 95);
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .solution-panel {
+    display: none;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: oklch(0.88 0.005 95);
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
   footer {
     text-align: center;
@@ -294,14 +405,14 @@
       "@type": "WebPage",
       "@id": "https://iq-test.icu/iq-scores/iq-scale-chart#webpage",
       "url": "https://iq-test.icu/iq-scores/iq-scale-chart",
-      "name": "IQ Scale Chart: Every Score Range Explained | IQ Test",
-      "description": "Explore the complete IQ scale chart from 55 to 145. Understand bell curve distributions, standard deviations, and exact score-to-percentile conversions.",
+      "name": "IQ Scale Chart: Bell Curve & Percentile Conversion | IQ Test",
+      "description": "Complete IQ scale chart and bell curve reference. See exact score conversions from 55 to 145, standard deviations, and population percentile rankings.",
       "isPartOf": {
         "@id": "https://iq-test.icu/#website"
       },
       "inLanguage": "en",
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "breadcrumb": {
         "@id": "https://iq-test.icu/iq-scores/iq-scale-chart#breadcrumb"
       }
@@ -339,8 +450,8 @@
       "mainEntityOfPage": {
         "@id": "https://iq-test.icu/iq-scores/iq-scale-chart#webpage"
       },
-      "headline": "IQ Scale Chart: Complete Score-to-Percentile Conversion and Bell Curve",
-      "description": "Explore the complete IQ scale chart from 55 to 145. Understand bell curve distributions, standard deviations, and exact score-to-percentile conversions.",
+      "headline": "IQ Scale Chart: Normal Distribution Curve and Score Conversions",
+      "description": "Complete IQ scale chart and bell curve reference. See exact score conversions from 55 to 145, standard deviations, and population percentile rankings.",
       "author": {
         "@type": "Organization",
         "name": "APEX Business Systems Ltd.",
@@ -350,14 +461,9 @@
         "@id": "https://iq-test.icu/#organization"
       },
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "inLanguage": "en",
       "about": [
-        {
-          "@type": "Thing",
-          "name": "Standard score",
-          "sameAs": "https://en.wikipedia.org/wiki/Standard_score"
-        },
         {
           "@type": "Thing",
           "name": "Normal distribution",
@@ -365,7 +471,7 @@
         }
       ],
       "citation": [
-        "https://en.wikipedia.org/wiki/Intelligence_quotient"
+        "https://en.wikipedia.org/wiki/IQ_classification"
       ]
     },
     {
@@ -374,26 +480,18 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What is the standard deviation on most IQ tests?",
+          "name": "Why is 100 always the center of the IQ scale?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Most modern intelligence tests (such as the WAIS-IV and Cattell Culture Fair) use a standard deviation of 15. The Stanford-Binet Fifth Edition also uses SD 15, while older Stanford-Binet Form L-M used SD 16."
+            "text": "Standardisation norming groups periodically recalibrate the raw score translations so that the mean of the representative general population is defined as 100."
           }
         },
         {
           "@type": "Question",
-          "name": "What percentage of people have an IQ between 85 and 115?",
+          "name": "What is the difference between SD 15 and SD 16?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Exactly 68.26% of the population falls within one standard deviation (85 to 115) on a standard normal distribution curve."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Why do tests stop scoring reliably above 145 or 160?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "At extreme scores (+3 to +4 standard deviations), the population sample size becomes so small that question calibration loses statistical reliability."
+            "text": "Wechsler tests use SD 15 (where 130 is the 98th percentile). Older Stanford-Binet tests used SD 16 (where 132 is the 98th percentile). Both represent the same relative population standing."
           }
         }
       ]
@@ -408,7 +506,7 @@
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <a href="https://iq-test.icu/">Home</a><span class="sep">/</span> <a href="https://iq-test.icu/iq-scores/">IQ Scores</a><span class="sep">/</span> <span class="current">IQ Scale Chart</span>
     </nav>
-  <h1>IQ Scale Chart: Complete Score and Percentile Distribution</h1>
+  <h1>IQ Scale Chart: Normal Distribution and Score Conversions</h1>
   
     <div class="byline-bar">
       <span>Published: <time datetime="2026-08-14">August 14, 2026</time></span>
@@ -419,170 +517,78 @@
     </div>
   
     <div class="answer-box">
-      The IQ scale is calibrated on a standard normal bell curve with a mean of 100 and a standard deviation of 15. The middle 68% of the population scores between 85 and 115, while scores of 130 and above represent the top 2.2% (gifted range). Below is the comprehensive score-to-percentile conversion chart.
+      The standard IQ scale is defined by a normal Gaussian distribution with a mean of 100 and a standard deviation of 15 points. This comprehensive scale chart maps every score from 55 to 145 to its exact mathematical percentile, standard deviation z-score, and population rarity.
     </div>
   
-    <h2>The mathematics of the IQ bell curve</h2>
-    <p>Modern intelligence scales use the <em>deviation IQ</em> method, developed by David Wechsler in 1939. Prior to Wechsler, intelligence was calculated as a "ratio IQ" (mental age divided by chronological age multiplied by 100), which broke down in adulthood. Under deviation IQ, your score represents where your raw performance falls relative to the normal distribution of your age peers.</p>
-    <p>Because the normal distribution is defined by standard mathematical formulas, every IQ score corresponds to an exact percentile rank. A standard deviation (SD) of 15 means:</p>
-    <ul>
-      <li><strong>Mean (100):</strong> Exactly 50% of the population scores above and 50% below.</li>
-      <li><strong>±1 SD (85 to 115):</strong> Contains 68.26% of the population (the broad average range).</li>
-      <li><strong>±2 SD (70 to 130):</strong> Contains 95.44% of the population.</li>
-      <li><strong>±3 SD (55 to 145):</strong> Contains 99.74% of the population.</li>
-    </ul>
+    <h2>The normal distribution bell curve</h2>
+    <p>In psychometrics, intelligence scores follow a bell curve where the highest density of scores occurs at the population center (100). Below is a vector representation of the standard deviation zones:</p>
+    
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:20px; margin:24px 0; text-align:center;">
+      <svg viewBox="0 0 560 180" style="width:100%; max-width:540px; height:auto; display:block; margin:0 auto;" aria-label="Gaussian Normal Distribution Curve">
+        <path d="M 30 160 L 30.0 159.4 L 40.4 159.2 L 50.8 158.9 L 61.3 158.5 L 71.7 157.9 L 82.1 157.0 L 92.5 155.8 L 102.9 154.1 L 113.3 151.7 L 123.8 148.5 L 134.2 144.2 L 144.6 138.6 L 155.0 131.6 L 165.4 122.9 L 175.8 112.5 L 186.3 100.5 L 196.7 87.1 L 207.1 72.8 L 217.5 58.2 L 227.9 44.1 L 238.3 31.4 L 248.8 21.0 L 259.2 13.7 L 269.6 10.0 L 280.0 10.0 L 290.4 13.7 L 300.8 21.0 L 311.3 31.4 L 321.7 44.1 L 332.1 58.2 L 342.5 72.8 L 352.9 87.1 L 363.3 100.5 L 373.8 112.5 L 384.2 122.9 L 394.6 131.6 L 405.0 138.6 L 415.4 144.2 L 425.8 148.5 L 436.3 151.7 L 446.7 154.1 L 457.1 155.8 L 467.5 157.0 L 477.9 157.9 L 488.3 158.5 L 498.8 158.9 L 509.2 159.2 L 519.6 159.4 L 530 160" fill="none" stroke="oklch(0.72 0.12 95)" stroke-width="2.5"></path>
+        <line x1="30" y1="160" x2="530" y2="160" stroke="oklch(0.35 0.008 95)" stroke-width="1.5"></line>
+        <line x1="280" y1="10" x2="280" y2="160" stroke="oklch(0.72 0.12 95)" stroke-dasharray="4 4"></line>
+        <text x="280" y="176" fill="oklch(0.72 0.12 95)" font-family="sans-serif" font-size="12" text-anchor="middle" font-weight="bold">100 (Mean)</text>
+        <text x="186" y="176" fill="oklch(0.62 0.008 95)" font-family="sans-serif" font-size="11" text-anchor="middle">85 (-1σ)</text>
+        <text x="374" y="176" fill="oklch(0.62 0.008 95)" font-family="sans-serif" font-size="11" text-anchor="middle">115 (+1σ)</text>
+        <text x="92" y="176" fill="oklch(0.62 0.008 95)" font-family="sans-serif" font-size="11" text-anchor="middle">70 (-2σ)</text>
+        <text x="468" y="176" fill="oklch(0.62 0.008 95)" font-family="sans-serif" font-size="11" text-anchor="middle">130 (+2σ)</text>
+      </svg>
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:0.82rem; color:var(--muted); margin-top:10px;">Gaussian Normal Distribution (Mean = 100, SD = 15)</div>
+    </div>
 
-    <h2>Complete IQ score-to-percentile conversion table</h2>
-    <p>The table below shows the exact statistical percentile and rarity corresponding to each score in 5-point increments across the standard 55–145 scale (computed from the cumulative normal distribution function):</p>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:36px; margin-bottom:12px;">
+      <h2 style="margin:0;">Detailed conversion table (55 to 145)</h2>
+      <button class="btn-outline" id="copyTableBtn" onclick="copyScaleTable()">📋 Copy Markdown</button>
+    </div>
 
-    <table class="data-table">
+    <table class="data-table" id="scaleChartTable">
       <thead>
         <tr>
-          <th>IQ Score (SD 15)</th>
-          <th>Standard Deviations (z-score)</th>
+          <th>IQ Score</th>
+          <th>Standard Deviation (z)</th>
           <th>Exact Percentile</th>
-          <th>Rarity in Population</th>
+          <th>Rarity Representation</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><strong>145</strong></td>
-          <td>+3.00 SD</td>
-          <td>99.87th percentile</td>
-          <td>1 in 740 people</td>
-        </tr>
-        <tr>
-          <td><strong>140</strong></td>
-          <td>+2.67 SD</td>
-          <td>99.62nd percentile</td>
-          <td>1 in 261 people</td>
-        </tr>
-        <tr>
-          <td><strong>135</strong></td>
-          <td>+2.33 SD</td>
-          <td>99.02nd percentile</td>
-          <td>1 in 102 people</td>
-        </tr>
-        <tr>
-          <td><strong>130</strong></td>
-          <td>+2.00 SD</td>
-          <td>97.72nd percentile</td>
-          <td>1 in 44 people (Mensa threshold)</td>
-        </tr>
-        <tr>
-          <td><strong>125</strong></td>
-          <td>+1.67 SD</td>
-          <td>95.22nd percentile</td>
-          <td>1 in 21 people</td>
-        </tr>
-        <tr>
-          <td><strong>120</strong></td>
-          <td>+1.33 SD</td>
-          <td>90.88th percentile</td>
-          <td>1 in 11 people</td>
-        </tr>
-        <tr>
-          <td><strong>115</strong></td>
-          <td>+1.00 SD</td>
-          <td>84.13th percentile</td>
-          <td>1 in 6.3 people</td>
-        </tr>
-        <tr>
-          <td><strong>110</strong></td>
-          <td>+0.67 SD</td>
-          <td>74.75th percentile</td>
-          <td>1 in 4 people</td>
-        </tr>
-        <tr>
-          <td><strong>105</strong></td>
-          <td>+0.33 SD</td>
-          <td>63.06th percentile</td>
-          <td>1 in 2.7 people</td>
-        </tr>
-        <tr>
-          <td><strong>100</strong></td>
-          <td>0.00 SD (Mean)</td>
-          <td>50.00th percentile</td>
-          <td>1 in 2 people (Exact median)</td>
-        </tr>
-        <tr>
-          <td><strong>95</strong></td>
-          <td>-0.33 SD</td>
-          <td>36.94th percentile</td>
-          <td>Higher than 37% of population</td>
-        </tr>
-        <tr>
-          <td><strong>90</strong></td>
-          <td>-0.67 SD</td>
-          <td>25.25th percentile</td>
-          <td>Higher than 25% of population</td>
-        </tr>
-        <tr>
-          <td><strong>85</strong></td>
-          <td>-1.00 SD</td>
-          <td>15.87th percentile</td>
-          <td>Lower bound of broad average</td>
-        </tr>
-        <tr>
-          <td><strong>80</strong></td>
-          <td>-1.33 SD</td>
-          <td>9.12th percentile</td>
-          <td>Low average range</td>
-        </tr>
-        <tr>
-          <td><strong>75</strong></td>
-          <td>-1.67 SD</td>
-          <td>4.78th percentile</td>
-          <td>Borderline range</td>
-        </tr>
-        <tr>
-          <td><strong>70</strong></td>
-          <td>-2.00 SD</td>
-          <td>2.28th percentile</td>
-          <td>Clinical cut-off benchmark</td>
-        </tr>
-        <tr>
-          <td><strong>65</strong></td>
-          <td>-2.33 SD</td>
-          <td>0.98th percentile</td>
-          <td>Extremely low range</td>
-        </tr>
-        <tr>
-          <td><strong>60</strong></td>
-          <td>-2.67 SD</td>
-          <td>0.38th percentile</td>
-          <td>Extremely low range</td>
-        </tr>
-        <tr>
-          <td><strong>55</strong></td>
-          <td>-3.00 SD</td>
-          <td>0.13th percentile</td>
-          <td>Extremely low range</td>
-        </tr>
+        <tr><td><strong>145</strong></td><td>+3.00 SD</td><td>99.87th percentile</td><td>1 in 740 (Top 0.13%)</td></tr>
+        <tr><td><strong>140</strong></td><td>+2.67 SD</td><td>99.62nd percentile</td><td>1 in 261 (Top 0.38%)</td></tr>
+        <tr><td><strong>135</strong></td><td>+2.33 SD</td><td>99.02nd percentile</td><td>1 in 102 (Top 0.98%)</td></tr>
+        <tr><td><strong>130</strong></td><td>+2.00 SD</td><td>97.72nd percentile</td><td>1 in 44 (Top 2.28% - Mensa)</td></tr>
+        <tr><td><strong>125</strong></td><td>+1.67 SD</td><td>95.22nd percentile</td><td>1 in 21 (Top 4.78%)</td></tr>
+        <tr><td><strong>120</strong></td><td>+1.33 SD</td><td>90.88th percentile</td><td>1 in 11 (Top 9.12%)</td></tr>
+        <tr><td><strong>115</strong></td><td>+1.00 SD</td><td>84.13th percentile</td><td>1 in 6.3 (Top 15.87%)</td></tr>
+        <tr><td><strong>110</strong></td><td>+0.67 SD</td><td>74.75th percentile</td><td>1 in 4.0 (Top 25.25%)</td></tr>
+        <tr><td><strong>105</strong></td><td>+0.33 SD</td><td>63.06th percentile</td><td>1 in 2.7 (Top 36.94%)</td></tr>
+        <tr><td><strong>100</strong></td><td>0.00 SD</td><td>50.00th percentile</td><td>1 in 2.0 (Exact Population Median)</td></tr>
+        <tr><td><strong>95</strong></td><td>-0.33 SD</td><td>36.94th percentile</td><td>Bottom 36.94%</td></tr>
+        <tr><td><strong>90</strong></td><td>-0.67 SD</td><td>25.25th percentile</td><td>Bottom 25.25%</td></tr>
+        <tr><td><strong>85</strong></td><td>-1.00 SD</td><td>15.87th percentile</td><td>Bottom 15.87%</td></tr>
+        <tr><td><strong>80</strong></td><td>-1.33 SD</td><td>9.12th percentile</td><td>Bottom 9.12%</td></tr>
+        <tr><td><strong>75</strong></td><td>-1.67 SD</td><td>4.78th percentile</td><td>Bottom 4.78%</td></tr>
+        <tr><td><strong>70</strong></td><td>-2.00 SD</td><td>2.28th percentile</td><td>Bottom 2.28%</td></tr>
+        <tr><td><strong>65</strong></td><td>-2.33 SD</td><td>0.98th percentile</td><td>Bottom 0.98%</td></tr>
+        <tr><td><strong>60</strong></td><td>-2.67 SD</td><td>0.38th percentile</td><td>Bottom 0.38%</td></tr>
+        <tr><td><strong>55</strong></td><td>-3.00 SD</td><td>0.13th percentile</td><td>Bottom 0.13%</td></tr>
       </tbody>
     </table>
 
-    <h2>How to interpret your placement on the chart</h2>
-    <p>When you complete a cognitive test, placing your score on this chart provides instant context. If you score 120, you are performing in the 91st percentile — meaning your reasoning speed and accuracy on those specific puzzle types exceeded 91 out of 100 people in the reference norm.</p>
-    <p>To convert specific custom scores into exact decimal percentiles, use our <a href="/iq-scores/iq-percentile-calculator">interactive IQ percentile calculator</a>, learn more about <a href="/iq-scores/what-is-a-good-iq-score">what is a good IQ score</a>, or explore the <a href="/iq-scores/high-iq-genius-range">high IQ genius range</a>.</p>
+    <h2>How to calculate your exact percentile</h2>
+    <p>If your score falls between the 5-point increments in this table, you can calculate the exact mathematical placement using our real-time <a href="/iq-scores/iq-percentile-calculator">interactive IQ percentile calculator</a>, or read our overview of the <a href="/iq-scores/high-iq-genius-range">high IQ genius range</a>.</p>
   
   
     <h2>Frequently Asked Questions</h2>
     <div class="faq-accordion">
       
         <div class="faq-item">
-          <div class="faq-q">What is the standard deviation on most IQ tests?</div>
-          <div class="faq-a">Most modern intelligence tests (such as the WAIS-IV and Cattell Culture Fair) use a standard deviation of 15. The Stanford-Binet Fifth Edition also uses SD 15, while older Stanford-Binet Form L-M used SD 16.</div>
+          <div class="faq-q">Why is 100 always the center of the IQ scale?</div>
+          <div class="faq-a">Standardisation norming groups periodically recalibrate the raw score translations so that the mean of the representative general population is defined as 100.</div>
         </div>
 
         <div class="faq-item">
-          <div class="faq-q">What percentage of people have an IQ between 85 and 115?</div>
-          <div class="faq-a">Exactly 68.26% of the population falls within one standard deviation (85 to 115) on a standard normal distribution curve.</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q">Why do tests stop scoring reliably above 145 or 160?</div>
-          <div class="faq-a">At extreme scores (+3 to +4 standard deviations), the population sample size becomes so small that question calibration loses statistical reliability.</div>
+          <div class="faq-q">What is the difference between SD 15 and SD 16?</div>
+          <div class="faq-a">Wechsler tests use SD 15 (where 130 is the 98th percentile). Older Stanford-Binet tests used SD 16 (where 132 is the 98th percentile). Both represent the same relative population standing.</div>
         </div>
     </div>
   
@@ -615,5 +621,21 @@
   &copy; 2026 APEX Business Systems Ltd. &nbsp;&middot;&nbsp; Edmonton, AB, Canada &nbsp;&middot;&nbsp; <a href="mailto:support@iq-test.icu">support@iq-test.icu</a>
 </footer>
 
+  <script>
+    function copyScaleTable() {
+      const table = document.getElementById('scaleChartTable');
+      let md = "| IQ Score | Standard Deviation | Exact Percentile | Rarity |\n| :--- | :--- | :--- | :--- |\n";
+      const rows = table.querySelectorAll('tbody tr');
+      rows.forEach(r => {
+        const cols = [...r.querySelectorAll('td')].map(c => c.textContent.trim());
+        md += "| " + cols.join(" | ") + " |\n";
+      });
+      navigator.clipboard.writeText(md).then(() => {
+        const btn = document.getElementById('copyTableBtn');
+        btn.textContent = "✓ Copied!";
+        setTimeout(() => { btn.textContent = "📋 Copy Markdown"; }, 2000);
+      });
+    }
+  </script>
 </body>
 </html>

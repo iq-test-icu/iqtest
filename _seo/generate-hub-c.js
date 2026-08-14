@@ -1,6 +1,6 @@
 /**
  * HUB C Generator — Cognitive Skills & Reasoning Domains
- * Priority: 3 (Product-Adjacent Link Spine)
+ * Enhanced with Interactive Step-by-Step Logic Breakdown Walkthroughs and Quick Fact Cards
  */
 
 const { buildHtmlPage } = require('./build-seo');
@@ -27,6 +27,28 @@ buildHtmlPage({
   h1: "Logical Reasoning: How It's Tested and Measured",
   answerBlock: "Logical reasoning is the ability to analyse premises, apply systematic rules, and deduce valid conclusions without relying on domain-specific trivia. In cognitive assessments, it is tested through deductive syllogisms, conditional logic rules, and matrix constraints that measure raw fluid problem-solving efficiency.",
   bodyHtml: `
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">💡 Domain Overview: Logical Reasoning</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">CHC Broad Ability</div>
+          <div class="fact-value">Fluid Reasoning (Gf) & Induction (I)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Primary Clinical Subtests</div>
+          <div class="fact-value">WAIS-IV Figure Weights & Matrix Reasoning</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Core Cognitive Demand</div>
+          <div class="fact-value">Working Memory Updating & Rule Compliance</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Historical Mind Archetype</div>
+          <div class="fact-value">Sir Isaac Newton (Axiomatic First Principles)</div>
+        </div>
+      </div>
+    </div>
+
     <h2>What logical reasoning measures in cognitive science</h2>
     <p>In cognitive psychology, logical reasoning represents the structured core of executive function and general fluid intelligence (<em>Gf</em>). Rather than assessing memorised facts or academic vocabulary, logical reasoning measures how effectively your working memory can hold multiple conditional rules, eliminate invalid contradictions, and deduce an airtight conclusion.</p>
     <p>Clinical assessments like the Wechsler Adult Intelligence Scale (WAIS-IV) and the Stanford-Binet Fifth Edition test logical reasoning through subtests such as Figure Weights, Matrix Reasoning, and Arithmetic Logic.</p>
@@ -64,14 +86,30 @@ buildHtmlPage({
       </tbody>
     </table>
 
-    <h2>Worked example: how a logic puzzle is structured</h2>
-    <p>To understand how logical reasoning is evaluated on self-insight cognitive quizzes, consider this representative example (modeled on test principles without leaking live scored items):</p>
-    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:20px; margin:20px 0;">
-      <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">Sample Item: Conditional Deductive Rule</p>
-      <p><em>Rule 1: All squares in the grid are either solid gold or striped.<br>
-      Rule 2: If a square is striped, the circle adjacent to it must be empty.<br>
-      Fact: Circle B is shaded black.</em></p>
-      <p><strong>Conclusion:</strong> Square A (adjacent to Circle B) <em>must</em> be solid gold. Why? Because if Square A were striped, Rule 2 dictates Circle B would be empty. Since Circle B is black, Square A cannot be striped, forcing it to be solid gold.</p>
+    <h2>Interactive logic puzzle walkthrough</h2>
+    <div class="interactive-puzzle-card">
+      <div class="puzzle-header">
+        <span class="puzzle-tag">SAMPLE DEDUCTIVE CHALLENGE</span>
+      </div>
+      <p style="color:var(--text); font-size:1.05rem; line-height:1.6; margin-bottom:14px;">
+        <strong>Premise 1:</strong> All squares in the grid are either solid gold or striped.<br>
+        <strong>Premise 2:</strong> If a square is striped, the circle adjacent to it must be empty.<br>
+        <strong>Given Fact:</strong> Circle B is shaded black.
+      </p>
+      <p><strong>Question:</strong> What can be definitively concluded about Square A (which is adjacent to Circle B)?</p>
+      <button class="btn-outline" onclick="toggleSolution('solLogic', this)">🔍 Reveal Step-by-Step Solution</button>
+      
+      <div id="solLogic" class="solution-panel">
+        <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">✓ Deduction Breakdown (Modus Tollens):</p>
+        <ol style="margin-left:20px; color:var(--text); margin-bottom:12px;">
+          <li>From Premise 2: <em>If Striped(Square A) → Empty(Circle B)</em>.</li>
+          <li>Contrapositive rule: <em>If NOT Empty(Circle B) → NOT Striped(Square A)</em>.</li>
+          <li>Since Circle B is black (NOT empty), Square A cannot be striped.</li>
+          <li>From Premise 1, every square must be either solid gold or striped.</li>
+          <li>Therefore, Square A <strong>must be solid gold</strong>.</li>
+        </ol>
+        <p style="font-size:0.88rem; color:var(--muted); margin-bottom:0;">This demonstrates the elimination of contradictions using conditional contraposition without needing any domain-specific trivia.</p>
+      </div>
     </div>
 
     <h2>How logical reasoning connects to the g factor</h2>
@@ -81,6 +119,19 @@ buildHtmlPage({
     <p>Individuals with high logical reasoning scores excel in careers requiring rigorous rule-based architectures, including software engineering, legal argument construction, financial auditing, scientific modeling, and systems analysis.</p>
     <p>To see how logic interacts with visual and numerical faculties, explore our articles on <a href="/cognitive-skills/numerical-reasoning">numerical reasoning</a>, <a href="/cognitive-skills/pattern-recognition">pattern recognition</a>, and <a href="/what-is-an-iq-test">what is an IQ test</a>.</p>
   `,
+  customScript: `
+  <script>
+    function toggleSolution(id, btn) {
+      const panel = document.getElementById(id);
+      if (panel.style.display === 'block') {
+        panel.style.display = 'none';
+        btn.textContent = '🔍 Reveal Step-by-Step Solution';
+      } else {
+        panel.style.display = 'block';
+        btn.textContent = '▲ Hide Solution';
+      }
+    }
+  </script>`,
   faqs: [
     {
       q: "What is the difference between deductive and inductive logic?",
@@ -118,6 +169,28 @@ buildHtmlPage({
   h1: "Numerical Reasoning: What It Measures and How It's Scored",
   answerBlock: "Numerical reasoning measures your capacity to identify mathematical patterns, deduce progression rules, and perform quantitative problem solving without relying on advanced calculus. Cognitive assessments test this domain through number sequences, proportional logic, and operational matrix grids that measure raw quantitative fluid agility.",
   bodyHtml: `
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">💡 Domain Overview: Numerical Reasoning</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">CHC Broad Ability</div>
+          <div class="fact-value">Quantitative Knowledge (Gq) & Mathematical Ability (A3)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Key Formats</div>
+          <div class="fact-value">Number Series, Operator Grids, Ratio Deduction</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Prerequisites</div>
+          <div class="fact-value">Basic Arithmetic (No Advanced Calculus Required)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Historical Mind Archetype</div>
+          <div class="fact-value">Marie Curie & Isaac Newton (Quantitative Rigour)</div>
+        </div>
+      </div>
+    </div>
+
     <h2>The difference between math knowledge and numerical reasoning</h2>
     <p>A common misconception is that numerical reasoning tests are simply high school math exams. In psychometrics, numerical reasoning does not evaluate whether you have memorised advanced trigonometric formulas or calculus theorems. Instead, it measures <strong>quantitative fluid intelligence (Gq)</strong> — the speed and accuracy with which you can perceive underlying mathematical structures and relationships between quantities.</p>
 
@@ -149,19 +222,44 @@ buildHtmlPage({
       </tbody>
     </table>
 
-    <h2>Worked example: number sequence deduction</h2>
-    <p>Consider this standard style of quantitative sequence puzzle:</p>
-    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:20px; margin:20px 0;">
-      <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">Sample Sequence: 3, 7, 15, 31, 63, ?</p>
-      <p><strong>Step 1:</strong> Look at the differences: +4, +8, +16, +32.<br>
-      <strong>Step 2:</strong> Notice the differences double at each step (2^n).<br>
-      <strong>Step 3:</strong> Next difference is +64. Therefore, 63 + 64 = <strong>127</strong> (or alternatively, each term is 2x + 1).</p>
+    <h2>Interactive number sequence walkthrough</h2>
+    <div class="interactive-puzzle-card">
+      <div class="puzzle-header">
+        <span class="puzzle-tag">SAMPLE NUMBER SEQUENCE CHALLENGE</span>
+      </div>
+      <p style="color:var(--text); font-size:1.15rem; font-weight:700; letter-spacing:0.05em; margin-bottom:14px;">
+        Sequence: 3, 7, 15, 31, 63, [ ? ]
+      </p>
+      <p><strong>Question:</strong> What is the next number in this progression, and what rule governs it?</p>
+      <button class="btn-outline" onclick="toggleSolution('solNum', this)">🔍 Reveal Step-by-Step Solution</button>
+      
+      <div id="solNum" class="solution-panel">
+        <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">✓ Two Valid Solution Paths:</p>
+        <ol style="margin-left:20px; color:var(--text); margin-bottom:12px;">
+          <li><strong>Method 1 (First Differences):</strong> Calculate intervals between terms: 7-3 = +4; 15-7 = +8; 31-15 = +16; 63-31 = +32. Notice the differences double at each step (2^(n+1)). Next interval is +64. 63 + 64 = <strong>127</strong>.</li>
+          <li><strong>Method 2 (Recursive Operation):</strong> Each term is double the previous plus one: x_(n) = 2x_(n-1) + 1. (63 × 2) + 1 = 126 + 1 = <strong>127</strong>.</li>
+        </ol>
+        <p style="font-size:0.88rem; color:var(--muted); margin-bottom:0;">Both methods converge on 127, demonstrating how multiple quantitative reasoning paths verify the same underlying mathematical structure.</p>
+      </div>
     </div>
 
     <h2>Why numerical reasoning is central to cognitive profiling</h2>
     <p>Quantitative reasoning reflects high working memory capacity and mental agility. Individuals who score strongly in numerical reasoning excel in quantitative finance, engineering, economic analysis, and algorithmic design.</p>
     <p>To see how your numerical skills integrate with other reasoning modes, explore our guides to <a href="/cognitive-skills/logical-reasoning">logical reasoning</a>, <a href="/cognitive-skills/pattern-recognition">pattern recognition</a>, and <a href="/iq-scores/what-is-a-good-iq-score">IQ score benchmarks</a>.</p>
   `,
+  customScript: `
+  <script>
+    function toggleSolution(id, btn) {
+      const panel = document.getElementById(id);
+      if (panel.style.display === 'block') {
+        panel.style.display = 'none';
+        btn.textContent = '🔍 Reveal Step-by-Step Solution';
+      } else {
+        panel.style.display = 'block';
+        btn.textContent = '▲ Hide Solution';
+      }
+    }
+  </script>`,
   faqs: [
     {
       q: "Do I need advanced math to do well on numerical reasoning tests?",
@@ -199,6 +297,28 @@ buildHtmlPage({
   h1: "Verbal Reasoning: What It Is and How It Is Scored",
   answerBlock: "Verbal reasoning evaluates your ability to understand complex conceptual language, identify semantic relationships between words, and evaluate logical arguments expressed in text. In psychometrics, it reflects crystallised intelligence (Gc) and verbal comprehension, evaluating how effectively you manipulate abstract ideas through vocabulary.",
   bodyHtml: `
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">💡 Domain Overview: Verbal Reasoning</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">CHC Broad Ability</div>
+          <div class="fact-value">Crystallized Intelligence (Gc) & Comprehension-Knowledge</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Primary Clinical Battery</div>
+          <div class="fact-value">WAIS-IV Verbal Comprehension Index (VCI)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Core Ability</div>
+          <div class="fact-value">Abstract Semantic Analogies & Conceptual Classification</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Lifespan Trajectory</div>
+          <div class="fact-value">Expands and stabilizes across adulthood into late life</div>
+        </div>
+      </div>
+    </div>
+
     <h2>Understanding verbal reasoning in psychometrics</h2>
     <p>Verbal reasoning is the primary measure of <strong>crystallised intelligence (Gc)</strong> and linguistic comprehension. On clinical batteries like the WAIS-IV, the Verbal Comprehension Index (VCI) includes subtests such as Similarities (conceptual abstract analogies), Vocabulary, and Information.</p>
     <p>A strong verbal reasoning score indicates not merely a large vocabulary, but the ability to discern subtle shades of meaning, categorise abstract concepts, and evaluate the truth-value of textual statements.</p>
@@ -231,17 +351,45 @@ buildHtmlPage({
       </tbody>
     </table>
 
-    <h2>Worked example: verbal analogy deduction</h2>
-    <p>Consider this standard analogy structure:</p>
-    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:20px; margin:20px 0;">
-      <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">Sample Analogy: OMNISCIENT is to KNOWLEDGE as OMNIPOTENT is to ?</p>
-      <p><strong>Analysis:</strong> <em>Omniscient</em> means having all knowledge. The relationship is an entity possessing an infinite degree of the noun. <em>Omnipotent</em> means having all power. Therefore, the missing concept is <strong>POWER</strong>.</p>
+    <h2>Interactive verbal analogy walkthrough</h2>
+    <div class="interactive-puzzle-card">
+      <div class="puzzle-header">
+        <span class="puzzle-tag">SAMPLE CONCEPTUAL ANALOGY</span>
+      </div>
+      <p style="color:var(--text); font-size:1.1rem; font-weight:600; margin-bottom:14px;">
+        OMNISCIENT : KNOWLEDGE :: OMNIPOTENT : [ ? ]
+      </p>
+      <p><strong>Question:</strong> Complete the analogy by identifying the corresponding concept and underlying relational rule.</p>
+      <button class="btn-outline" onclick="toggleSolution('solVerb', this)">🔍 Reveal Step-by-Step Solution</button>
+      
+      <div id="solVerb" class="solution-panel">
+        <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">✓ Semantic Relationship Analysis:</p>
+        <ol style="margin-left:20px; color:var(--text); margin-bottom:12px;">
+          <li><em>Omniscient</em> is derived from Latin (<em>omnis</em> = all, <em>scire</em> = to know). It defines an entity possessing an infinite or all-encompassing measure of knowledge.</li>
+          <li><em>Omnipotent</em> is derived from Latin (<em>omnis</em> = all, <em>potens</em> = powerful). It defines an entity possessing all power.</li>
+          <li>Therefore, the corresponding missing noun is <strong>POWER</strong>.</li>
+        </ol>
+        <p style="font-size:0.88rem; color:var(--muted); margin-bottom:0;">Verbal analogies test your capacity to isolate the precise grammatical and semantic relationship linking the first pair, then project that identical transformation onto the second pair.</p>
+      </div>
     </div>
 
     <h2>Why verbal ability remains stable across adulthood</h2>
     <p>Unlike raw processing speed, verbal reasoning is a crystallised ability that typically remains robust and often continues to improve well into late middle age and retirement. It is highly predictive of success in law, journalism, executive leadership, and academic scholarship.</p>
     <p>To learn how verbal skills contrast with nonverbal visual abilities, read our guide to <a href="/cognitive-skills/pattern-recognition">pattern recognition</a> and explore <a href="/cognitive-test-vs-iq-test">cognitive tests vs. IQ tests</a>.</p>
   `,
+  customScript: `
+  <script>
+    function toggleSolution(id, btn) {
+      const panel = document.getElementById(id);
+      if (panel.style.display === 'block') {
+        panel.style.display = 'none';
+        btn.textContent = '🔍 Reveal Step-by-Step Solution';
+      } else {
+        panel.style.display = 'block';
+        btn.textContent = '▲ Hide Solution';
+      }
+    }
+  </script>`,
   faqs: [
     {
       q: "Does verbal reasoning depend heavily on native English fluency?",
@@ -280,6 +428,28 @@ buildHtmlPage({
   h1: "Pattern Recognition: The Core of Nonverbal Intelligence",
   answerBlock: "Pattern recognition is the capacity to identify visual, spatial, and geometric rules within unfamiliar matrix arrays without relying on language or prior cultural knowledge. In psychometrics, it is regarded as the cleanest measure of raw fluid intelligence (Gf) and general intelligence (g).",
   bodyHtml: `
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">💡 Domain Overview: Nonverbal Pattern Recognition</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">CHC Broad Ability</div>
+          <div class="fact-value">Fluid Intelligence (Gf) & Visual Processing (Gv)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Gold Standard Instrument</div>
+          <div class="fact-value">Raven's Progressive Matrices (1936 to Present)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Cultural Neutrality</div>
+          <div class="fact-value">Language-Independent / Culture-Fair</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Historical Mind Archetype</div>
+          <div class="fact-value">Leonardo da Vinci & Nikola Tesla (Spatial Simulation)</div>
+        </div>
+      </div>
+    </div>
+
     <h2>Why matrix reasoning is the gold standard for fluid IQ</h2>
     <p>In 1936, British psychologist John C. Raven developed <strong>Raven's Progressive Matrices</strong> to create a culturally neutral assessment of abstract cognitive ability. By presenting problems as 3x3 grids of geometric shapes with a missing piece, the test eliminated language barriers, educational disparities, and reading speed advantages.</p>
     <p>Today, every premier clinical test (including the WAIS-IV Perceptual Reasoning Index and the Reynolds Intellectual Assessment Scales) features matrix reasoning as a foundational subtest for measuring nonverbal fluid intelligence (<em>Gf</em>).</p>
@@ -318,19 +488,47 @@ buildHtmlPage({
       </tbody>
     </table>
 
-    <h2>Worked example: progressive matrix deduction</h2>
-    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:20px; margin:20px 0;">
-      <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">Sample Matrix Transformation</p>
-      <p><em>Row 1: Circle with 1 dot → Circle with 2 dots → Circle with 3 dots<br>
-      Row 2: Square with 1 dot → Square with 2 dots → Square with 3 dots<br>
-      Row 3: Triangle with 1 dot → Triangle with 2 dots → [ ? ]</em></p>
-      <p><strong>Solution:</strong> The shape rule maintains the row geometry (Triangle), while the element rule adds 1 dot per column. The missing piece is a <strong>Triangle with 3 dots</strong>.</p>
+    <h2>Interactive progressive matrix walkthrough</h2>
+    <div class="interactive-puzzle-card">
+      <div class="puzzle-header">
+        <span class="puzzle-tag">SAMPLE 3x3 MATRIX DEDUCTION</span>
+      </div>
+      <p style="color:var(--text); font-size:1.05rem; line-height:1.6; margin-bottom:14px;">
+        <strong>Row 1:</strong> Circle with 1 dot &nbsp;→&nbsp; Circle with 2 dots &nbsp;→&nbsp; Circle with 3 dots<br>
+        <strong>Row 2:</strong> Square with 1 dot &nbsp;→&nbsp; Square with 2 dots &nbsp;→&nbsp; Square with 3 dots<br>
+        <strong>Row 3:</strong> Triangle with 1 dot &nbsp;→&nbsp; Triangle with 2 dots &nbsp;→&nbsp; <strong>[ ? ]</strong>
+      </p>
+      <p><strong>Question:</strong> What geometric figure and dot configuration completes Row 3?</p>
+      <button class="btn-outline" onclick="toggleSolution('solPat', this)">🔍 Reveal Step-by-Step Solution</button>
+      
+      <div id="solPat" class="solution-panel">
+        <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">✓ Multi-Variable Matrix Decomposition:</p>
+        <ol style="margin-left:20px; color:var(--text); margin-bottom:12px;">
+          <li><strong>Row Shape Invariance:</strong> Each row maintains its defining geometry (Row 1 = Circle, Row 2 = Square, Row 3 = Triangle).</li>
+          <li><strong>Column Dot Count Progression:</strong> Column 1 has 1 dot, Column 2 has 2 dots, Column 3 has 3 dots.</li>
+          <li>Combining Row 3 (Triangle) with Column 3 (3 dots) produces the unique valid answer: <strong>Triangle with 3 dots</strong>.</li>
+        </ol>
+        <p style="font-size:0.88rem; color:var(--muted); margin-bottom:0;">On advanced matrix items, multiple simultaneous rules (such as 90° clockwise rotation combined with overlay subtraction) operate concurrently.</p>
+      </div>
     </div>
 
     <h2>Why pattern recognition matters in real life</h2>
     <p>High pattern recognition ability enables individuals to spot systemic anomalies in complex data, detect cybersecurity threats, interpret medical scans, formulate financial trading algorithms, and innovate across engineering disciplines.</p>
     <p>To see how pattern recognition matches the thinking styles of history's greatest innovators, read our study of <a href="/historical-figures/leonardo-da-vinci-iq">Leonardo da Vinci's mind</a> or explore <a href="/cognitive-skills/logical-reasoning">logical reasoning</a>.</p>
   `,
+  customScript: `
+  <script>
+    function toggleSolution(id, btn) {
+      const panel = document.getElementById(id);
+      if (panel.style.display === 'block') {
+        panel.style.display = 'none';
+        btn.textContent = '🔍 Reveal Step-by-Step Solution';
+      } else {
+        panel.style.display = 'block';
+        btn.textContent = '▲ Hide Solution';
+      }
+    }
+  </script>`,
   faqs: [
     {
       q: "Why are matrix tests called 'culture-fair'?",
@@ -351,7 +549,7 @@ buildHtmlPage({
 buildHtmlPage({
   relPath: 'cognitive-skills/index.html',
   title: 'Reasoning Domains: The Four Core Cognitive Skills | IQ Test',
-  description: 'Explore the four core reasoning domains measured in cognitive assessments: logical reasoning, numerical deduction, verbal comprehension, and pattern recognition.',
+  description: 'Explore the four core reasoning domains: logical deduction, numerical reasoning, verbal skills, and nonverbal pattern recognition.',
   canonical: 'https://iq-test.icu/cognitive-skills/',
   breadcrumbs: [
     { name: 'Home', url: 'https://iq-test.icu/' },

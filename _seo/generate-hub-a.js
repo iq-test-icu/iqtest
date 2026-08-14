@@ -1,6 +1,6 @@
 /**
- * HUB A Generator — IQ Scores, Ranges, Calibration & Interactive Calculator
- * Priority: 2 (Volume & Tool Asset)
+ * HUB A Generator — IQ Scores & Psychometric Distribution
+ * Enhanced with Dynamic Gaussian Normal Curve SVG, Interactive Slider, and Quick Facts
  */
 
 const { buildHtmlPage } = require('./build-seo');
@@ -8,8 +8,8 @@ const { buildHtmlPage } = require('./build-seo');
 // T4.8 — /iq-scores/what-is-a-good-iq-score
 buildHtmlPage({
   relPath: 'iq-scores/what-is-a-good-iq-score.html',
-  title: 'What Is a Good IQ Score? Ranges Explained | IQ Test',
-  description: 'A good IQ score is generally 110 or above, placing you in the top 25 percent. Here is what every range from 70 to 145 means — and what it cannot tell you.',
+  title: 'What Is a Good IQ Score? Score Ranges & Percentiles | IQ Test',
+  description: 'What is considered a good IQ score? Explore standard deviation ranges, Wechsler classifications, population percentiles, and what IQ numbers mean.',
   canonical: 'https://iq-test.icu/iq-scores/what-is-a-good-iq-score',
   breadcrumbs: [
     { name: 'Home', url: 'https://iq-test.icu/' },
@@ -17,114 +17,118 @@ buildHtmlPage({
     { name: 'What Is a Good IQ Score?' }
   ],
   article: {
-    headline: 'What Is a Good IQ Score? Ranges and Classifications Explained',
+    headline: 'What Is a Good IQ Score? Score Ranges and Population Percentiles',
     about: [
       { "@type": "Thing", "name": "Intelligence quotient", "sameAs": "https://en.wikipedia.org/wiki/Intelligence_quotient" },
-      { "@type": "Thing", "name": "Wechsler Adult Intelligence Scale", "sameAs": "https://en.wikipedia.org/wiki/Wechsler_Adult_Intelligence_Scale" },
-      { "@type": "Thing", "name": "Normal distribution", "sameAs": "https://en.wikipedia.org/wiki/Normal_distribution" }
+      { "@type": "Thing", "name": "Standard deviation", "sameAs": "https://en.wikipedia.org/wiki/Standard_deviation" },
+      { "@type": "Thing", "name": "Wechsler Adult Intelligence Scale", "sameAs": "https://en.wikipedia.org/wiki/Wechsler_Adult_Intelligence_Scale" }
     ],
     citation: [
       "https://en.wikipedia.org/wiki/Wechsler_Adult_Intelligence_Scale",
-      "https://en.wikipedia.org/wiki/Normal_distribution"
+      "https://en.wikipedia.org/wiki/IQ_classification"
     ]
   },
-  h1: 'What Is a Good IQ Score? Ranges and Meaning Explained',
-  answerBlock: 'A score of 100 is exactly average by design, because IQ scales are standardised to a mean of 100 with a standard deviation of 15. Scores from 90 to 109 are considered average, 110 to 119 high average, and 120 to 129 superior. Roughly two percent of people score 130 or above.',
+  h1: 'What Is a Good IQ Score? Ranges, Percentiles, and Meaning',
+  answerBlock: 'A good IQ score is generally considered to be 115 or higher, placing you above the 84th percentile of the population (more than one standard deviation above the mean of 100). Scores between 90 and 109 represent average cognitive ability, while a score of 130 or higher enters the top 2% (gifted range).',
   bodyHtml: `
-    <h2>Understanding what an IQ number actually represents</h2>
-    <p>When people ask what constitutes a "good" IQ score, they are usually asking how their cognitive performance compares to the general population. In modern psychometrics, intelligence scores are not percentage grades or absolute tallies of knowledge. Instead, they are <em>deviation scores</em> that describe an individual's relative statistical position along a standard bell curve.</p>
-    <p>Every major standardised intelligence battery — including the Wechsler Adult Intelligence Scale (WAIS-IV) and Stanford–Binet Intelligence Scales (SB5) — sets the population mean to 100 with a standard deviation of 15. Because human cognitive test scores follow a normal Gaussian distribution, approximately 68% of all individuals fall within one standard deviation of the mean (between 85 and 115), and 95% fall within two standard deviations (between 70 and 130).</p>
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">📊 Quick Reference: Wechsler IQ Classification</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Population Average</div>
+          <div class="fact-value">IQ 100 (50th Percentile)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Above Average Threshold</div>
+          <div class="fact-value">IQ 115+ (Top 16%)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Superior / Gifted</div>
+          <div class="fact-value">IQ 130+ (Top 2.2%)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Standard Deviation</div>
+          <div class="fact-value">15 Points (Wechsler / WAIS-IV)</div>
+        </div>
+      </div>
+    </div>
 
-    <h2>Standard IQ score ranges and Wechsler classifications</h2>
-    <p>The table below outlines the traditional psychometric score bands established by David Wechsler, their corresponding percentile ranks, and their statistical share of the population on a standard mean-100 / SD-15 scale:</p>
+    <h2>Understanding the standard normal curve in IQ testing</h2>
+    <p>Modern intelligence tests do not calculate mental age divided by chronological age. Instead, they use <strong>deviation scoring</strong> based on a Gaussian normal distribution. The test is standardised so that the population mean is exactly 100 and the standard deviation (SD) is 15 points.</p>
+    <p>Because human cognitive traits distribute symmetrically, roughly 68.2% of all individuals score within one standard deviation of the mean (between 85 and 115). Approximately 95.4% score within two standard deviations (between 70 and 130).</p>
 
+    <h2>Wechsler classification table</h2>
     <table class="data-table">
       <thead>
         <tr>
-          <th>Score Range</th>
-          <th>Wechsler Classification</th>
-          <th>Approx. Percentile</th>
-          <th>Share of Population</th>
+          <th>IQ Score Range</th>
+          <th>Standard Classification</th>
+          <th>Population Percentile</th>
+          <th>Approximate Frequency</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>130 and above</strong></td>
-          <td>Very Superior (Gifted)</td>
+          <td>Very Superior / Gifted</td>
           <td>98th percentile and above</td>
-          <td>~2.2%</td>
+          <td>1 in 44 people (2.28%)</td>
         </tr>
         <tr>
           <td><strong>120 – 129</strong></td>
           <td>Superior</td>
           <td>91st to 97th percentile</td>
-          <td>~6.7%</td>
+          <td>1 in 15 people (6.7%)</td>
         </tr>
         <tr>
           <td><strong>110 – 119</strong></td>
           <td>High Average</td>
           <td>75th to 90th percentile</td>
-          <td>~16.1%</td>
+          <td>1 in 6 people (16.1%)</td>
         </tr>
         <tr>
           <td><strong>90 – 109</strong></td>
-          <td>Average (Normal)</td>
+          <td>Average</td>
           <td>25th to 74th percentile</td>
-          <td>~50.0%</td>
+          <td>1 in 2 people (50.0%)</td>
         </tr>
         <tr>
           <td><strong>80 – 89</strong></td>
           <td>Low Average</td>
           <td>9th to 24th percentile</td>
-          <td>~16.1%</td>
+          <td>1 in 6 people (16.1%)</td>
         </tr>
         <tr>
           <td><strong>70 – 79</strong></td>
           <td>Borderline</td>
           <td>2nd to 8th percentile</td>
-          <td>~6.7%</td>
+          <td>1 in 15 people (6.7%)</td>
         </tr>
         <tr>
           <td><strong>Below 70</strong></td>
           <td>Extremely Low</td>
           <td>Below 2nd percentile</td>
-          <td>~2.2%</td>
+          <td>1 in 44 people (2.28%)</td>
         </tr>
       </tbody>
     </table>
-    <p><em>Note: These descriptive labels originate from published Wechsler psychometric norms and the mathematical properties of the normal distribution.</em></p>
 
-    <h2>What determines whether a score is 'good'?</h2>
-    <p>From a psychometric perspective, any score within the average band (90 to 109) is completely normal and represents the cognitive capacity required to succeed in virtually all professional, academic, and daily pursuits. Scores of 110 or above (High Average and Superior) place an individual in the top quarter of the population, reflecting strong problem-solving and analytical reasoning efficiency.</p>
-    <p>However, an IQ score is always contextual and depends on several critical factors:</p>
-    <ol>
-      <li><strong>Age Norming:</strong> Raw scores are always compared against an individual's specific age peer group. A 25-year-old and a 60-year-old who solve different numbers of items can receive the exact same IQ score of 115 because each is evaluated against their own age cohort.</li>
-      <li><strong>Subtest Profile vs. Composite Score:</strong> Two people with identical Full-Scale IQ scores of 115 can have vastly different cognitive strengths. One may excel in <a href="/cognitive-skills/verbal-reasoning">verbal reasoning</a> while the other dominates in <a href="/cognitive-skills/pattern-recognition">visual pattern recognition</a>.</li>
-      <li><strong>Testing Environment & Administration:</strong> Clinical evaluations take 60 to 90 minutes under strict supervision. Short online quizzes provide valuable self-reflection and baseline estimates but do not replace clinical diagnostics.</li>
-    </ol>
-
-    <h2>What an IQ score does not measure</h2>
-    <p>Psychologists emphasise that an intelligence score measures specific facets of cognitive efficiency — primarily fluid reasoning, working memory, processing speed, and verbal comprehension. It does not measure:</p>
-    <ul>
-      <li><strong>Emotional Intelligence (EQ):</strong> Empathy, social perception, communication, and interpersonal leadership.</li>
-      <li><strong>Creativity and Divergent Thinking:</strong> The ability to generate novel ideas and cross-disciplinary innovations.</li>
-      <li><strong>Practical Wisdom and Domain Expertise:</strong> Years of specialised professional knowledge and practical problem solving.</li>
-      <li><strong>Grit, Motivation, and Conscientiousness:</strong> Long-term persistence, which empirical research shows is often a stronger predictor of lifetime achievement than raw IQ points.</li>
-    </ul>
-    <p>To see how different cognitive tests are administered, read our detailed comparison of <a href="/types-of-iq-tests">types of IQ tests</a>, review our <a href="/iq-scores/iq-scale-chart">full IQ scale chart</a>, or check your score using our <a href="/iq-scores/iq-percentile-calculator">interactive IQ percentile calculator</a>.</p>
+    <h2>What does a 'good' IQ score actually predict?</h2>
+    <p>Psychometric research over the past century demonstrates that higher cognitive test scores correlate moderately to strongly with academic achievement, complex problem-solving performance, and occupational training success. However, an IQ score is not a comprehensive measure of human value, emotional intelligence, creativity, grit, or ethical judgment.</p>
+    <p>To see how your score translates to exact statistical percentages, use our interactive <a href="/iq-scores/iq-percentile-calculator">IQ percentile calculator</a> or examine the complete <a href="/iq-scores/iq-scale-chart">IQ scale chart</a>.</p>
   `,
   faqs: [
     {
-      q: "Is an IQ score of 115 considered good?",
-      a: "Yes. An IQ of 115 falls into the 'High Average' category, placing you at the 84th percentile — higher than approximately 84% of the general population."
+      q: "Is 115 considered a good IQ score?",
+      a: "Yes. An IQ of 115 is one standard deviation above the mean, placing you in the 84th percentile (top 16% of the population)."
     },
     {
-      q: "What is the average IQ score for adults?",
-      a: "The average score is exactly 100 by mathematical definition, with a normal range spanning from 90 to 109 (covering 50% of the population)."
+      q: "What IQ is required for Mensa membership?",
+      a: "Mensa requires a score at or above the 98th percentile, which corresponds to an IQ of 130 on the standard Wechsler scale (SD 15) or 132 on the Stanford-Binet scale (SD 16)."
     },
     {
-      q: "Can an online test give me a clinical IQ score?",
-      a: "No. Online tests are self-insight tools. Clinical IQ scores require one-on-one administration by a licensed psychologist using standardized instruments like the WAIS-IV."
+      q: "Can an online test give you an official clinical score?",
+      a: "No. Online cognitive assessments provide self-insight and relative index scores for entertainment and learning, but official clinical diagnoses require in-person administration by a licensed psychologist."
     }
   ]
 });
@@ -132,8 +136,8 @@ buildHtmlPage({
 // T4.9 — /iq-scores/iq-scale-chart
 buildHtmlPage({
   relPath: 'iq-scores/iq-scale-chart.html',
-  title: 'IQ Scale Chart: Every Score Range Explained | IQ Test',
-  description: 'Explore the complete IQ scale chart from 55 to 145. Understand bell curve distributions, standard deviations, and exact score-to-percentile conversions.',
+  title: 'IQ Scale Chart: Bell Curve & Percentile Conversion | IQ Test',
+  description: 'Complete IQ scale chart and bell curve reference. See exact score conversions from 55 to 145, standard deviations, and population percentile rankings.',
   canonical: 'https://iq-test.icu/iq-scores/iq-scale-chart',
   breadcrumbs: [
     { name: 'Home', url: 'https://iq-test.icu/' },
@@ -141,172 +145,97 @@ buildHtmlPage({
     { name: 'IQ Scale Chart' }
   ],
   article: {
-    headline: 'IQ Scale Chart: Complete Score-to-Percentile Conversion and Bell Curve',
+    headline: 'IQ Scale Chart: Normal Distribution Curve and Score Conversions',
     about: [
-      { "@type": "Thing", "name": "Standard score", "sameAs": "https://en.wikipedia.org/wiki/Standard_score" },
       { "@type": "Thing", "name": "Normal distribution", "sameAs": "https://en.wikipedia.org/wiki/Normal_distribution" }
     ],
-    citation: ["https://en.wikipedia.org/wiki/Intelligence_quotient"]
+    citation: ["https://en.wikipedia.org/wiki/IQ_classification"]
   },
-  h1: 'IQ Scale Chart: Complete Score and Percentile Distribution',
-  answerBlock: 'The IQ scale is calibrated on a standard normal bell curve with a mean of 100 and a standard deviation of 15. The middle 68% of the population scores between 85 and 115, while scores of 130 and above represent the top 2.2% (gifted range). Below is the comprehensive score-to-percentile conversion chart.',
+  h1: 'IQ Scale Chart: Normal Distribution and Score Conversions',
+  answerBlock: 'The standard IQ scale is defined by a normal Gaussian distribution with a mean of 100 and a standard deviation of 15 points. This comprehensive scale chart maps every score from 55 to 145 to its exact mathematical percentile, standard deviation z-score, and population rarity.',
   bodyHtml: `
-    <h2>The mathematics of the IQ bell curve</h2>
-    <p>Modern intelligence scales use the <em>deviation IQ</em> method, developed by David Wechsler in 1939. Prior to Wechsler, intelligence was calculated as a "ratio IQ" (mental age divided by chronological age multiplied by 100), which broke down in adulthood. Under deviation IQ, your score represents where your raw performance falls relative to the normal distribution of your age peers.</p>
-    <p>Because the normal distribution is defined by standard mathematical formulas, every IQ score corresponds to an exact percentile rank. A standard deviation (SD) of 15 means:</p>
-    <ul>
-      <li><strong>Mean (100):</strong> Exactly 50% of the population scores above and 50% below.</li>
-      <li><strong>±1 SD (85 to 115):</strong> Contains 68.26% of the population (the broad average range).</li>
-      <li><strong>±2 SD (70 to 130):</strong> Contains 95.44% of the population.</li>
-      <li><strong>±3 SD (55 to 145):</strong> Contains 99.74% of the population.</li>
-    </ul>
+    <h2>The normal distribution bell curve</h2>
+    <p>In psychometrics, intelligence scores follow a bell curve where the highest density of scores occurs at the population center (100). Below is a vector representation of the standard deviation zones:</p>
+    
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:10px; padding:20px; margin:24px 0; text-align:center;">
+      <svg viewBox="0 0 560 180" style="width:100%; max-width:540px; height:auto; display:block; margin:0 auto;" aria-label="Gaussian Normal Distribution Curve">
+        <path d="M 30 160 L 30.0 159.4 L 40.4 159.2 L 50.8 158.9 L 61.3 158.5 L 71.7 157.9 L 82.1 157.0 L 92.5 155.8 L 102.9 154.1 L 113.3 151.7 L 123.8 148.5 L 134.2 144.2 L 144.6 138.6 L 155.0 131.6 L 165.4 122.9 L 175.8 112.5 L 186.3 100.5 L 196.7 87.1 L 207.1 72.8 L 217.5 58.2 L 227.9 44.1 L 238.3 31.4 L 248.8 21.0 L 259.2 13.7 L 269.6 10.0 L 280.0 10.0 L 290.4 13.7 L 300.8 21.0 L 311.3 31.4 L 321.7 44.1 L 332.1 58.2 L 342.5 72.8 L 352.9 87.1 L 363.3 100.5 L 373.8 112.5 L 384.2 122.9 L 394.6 131.6 L 405.0 138.6 L 415.4 144.2 L 425.8 148.5 L 436.3 151.7 L 446.7 154.1 L 457.1 155.8 L 467.5 157.0 L 477.9 157.9 L 488.3 158.5 L 498.8 158.9 L 509.2 159.2 L 519.6 159.4 L 530 160" fill="none" stroke="oklch(0.72 0.12 95)" stroke-width="2.5"></path>
+        <line x1="30" y1="160" x2="530" y2="160" stroke="oklch(0.35 0.008 95)" stroke-width="1.5"></line>
+        <line x1="280" y1="10" x2="280" y2="160" stroke="oklch(0.72 0.12 95)" stroke-dasharray="4 4"></line>
+        <text x="280" y="176" fill="oklch(0.72 0.12 95)" font-family="sans-serif" font-size="12" text-anchor="middle" font-weight="bold">100 (Mean)</text>
+        <text x="186" y="176" fill="oklch(0.62 0.008 95)" font-family="sans-serif" font-size="11" text-anchor="middle">85 (-1σ)</text>
+        <text x="374" y="176" fill="oklch(0.62 0.008 95)" font-family="sans-serif" font-size="11" text-anchor="middle">115 (+1σ)</text>
+        <text x="92" y="176" fill="oklch(0.62 0.008 95)" font-family="sans-serif" font-size="11" text-anchor="middle">70 (-2σ)</text>
+        <text x="468" y="176" fill="oklch(0.62 0.008 95)" font-family="sans-serif" font-size="11" text-anchor="middle">130 (+2σ)</text>
+      </svg>
+      <div style="font-family:'Space Grotesk',sans-serif; font-size:0.82rem; color:var(--muted); margin-top:10px;">Gaussian Normal Distribution (Mean = 100, SD = 15)</div>
+    </div>
 
-    <h2>Complete IQ score-to-percentile conversion table</h2>
-    <p>The table below shows the exact statistical percentile and rarity corresponding to each score in 5-point increments across the standard 55–145 scale (computed from the cumulative normal distribution function):</p>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:36px; margin-bottom:12px;">
+      <h2 style="margin:0;">Detailed conversion table (55 to 145)</h2>
+      <button class="btn-outline" id="copyTableBtn" onclick="copyScaleTable()">📋 Copy Markdown</button>
+    </div>
 
-    <table class="data-table">
+    <table class="data-table" id="scaleChartTable">
       <thead>
         <tr>
-          <th>IQ Score (SD 15)</th>
-          <th>Standard Deviations (z-score)</th>
+          <th>IQ Score</th>
+          <th>Standard Deviation (z)</th>
           <th>Exact Percentile</th>
-          <th>Rarity in Population</th>
+          <th>Rarity Representation</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><strong>145</strong></td>
-          <td>+3.00 SD</td>
-          <td>99.87th percentile</td>
-          <td>1 in 740 people</td>
-        </tr>
-        <tr>
-          <td><strong>140</strong></td>
-          <td>+2.67 SD</td>
-          <td>99.62nd percentile</td>
-          <td>1 in 261 people</td>
-        </tr>
-        <tr>
-          <td><strong>135</strong></td>
-          <td>+2.33 SD</td>
-          <td>99.02nd percentile</td>
-          <td>1 in 102 people</td>
-        </tr>
-        <tr>
-          <td><strong>130</strong></td>
-          <td>+2.00 SD</td>
-          <td>97.72nd percentile</td>
-          <td>1 in 44 people (Mensa threshold)</td>
-        </tr>
-        <tr>
-          <td><strong>125</strong></td>
-          <td>+1.67 SD</td>
-          <td>95.22nd percentile</td>
-          <td>1 in 21 people</td>
-        </tr>
-        <tr>
-          <td><strong>120</strong></td>
-          <td>+1.33 SD</td>
-          <td>90.88th percentile</td>
-          <td>1 in 11 people</td>
-        </tr>
-        <tr>
-          <td><strong>115</strong></td>
-          <td>+1.00 SD</td>
-          <td>84.13th percentile</td>
-          <td>1 in 6.3 people</td>
-        </tr>
-        <tr>
-          <td><strong>110</strong></td>
-          <td>+0.67 SD</td>
-          <td>74.75th percentile</td>
-          <td>1 in 4 people</td>
-        </tr>
-        <tr>
-          <td><strong>105</strong></td>
-          <td>+0.33 SD</td>
-          <td>63.06th percentile</td>
-          <td>1 in 2.7 people</td>
-        </tr>
-        <tr>
-          <td><strong>100</strong></td>
-          <td>0.00 SD (Mean)</td>
-          <td>50.00th percentile</td>
-          <td>1 in 2 people (Exact median)</td>
-        </tr>
-        <tr>
-          <td><strong>95</strong></td>
-          <td>-0.33 SD</td>
-          <td>36.94th percentile</td>
-          <td>Higher than 37% of population</td>
-        </tr>
-        <tr>
-          <td><strong>90</strong></td>
-          <td>-0.67 SD</td>
-          <td>25.25th percentile</td>
-          <td>Higher than 25% of population</td>
-        </tr>
-        <tr>
-          <td><strong>85</strong></td>
-          <td>-1.00 SD</td>
-          <td>15.87th percentile</td>
-          <td>Lower bound of broad average</td>
-        </tr>
-        <tr>
-          <td><strong>80</strong></td>
-          <td>-1.33 SD</td>
-          <td>9.12th percentile</td>
-          <td>Low average range</td>
-        </tr>
-        <tr>
-          <td><strong>75</strong></td>
-          <td>-1.67 SD</td>
-          <td>4.78th percentile</td>
-          <td>Borderline range</td>
-        </tr>
-        <tr>
-          <td><strong>70</strong></td>
-          <td>-2.00 SD</td>
-          <td>2.28th percentile</td>
-          <td>Clinical cut-off benchmark</td>
-        </tr>
-        <tr>
-          <td><strong>65</strong></td>
-          <td>-2.33 SD</td>
-          <td>0.98th percentile</td>
-          <td>Extremely low range</td>
-        </tr>
-        <tr>
-          <td><strong>60</strong></td>
-          <td>-2.67 SD</td>
-          <td>0.38th percentile</td>
-          <td>Extremely low range</td>
-        </tr>
-        <tr>
-          <td><strong>55</strong></td>
-          <td>-3.00 SD</td>
-          <td>0.13th percentile</td>
-          <td>Extremely low range</td>
-        </tr>
+        <tr><td><strong>145</strong></td><td>+3.00 SD</td><td>99.87th percentile</td><td>1 in 740 (Top 0.13%)</td></tr>
+        <tr><td><strong>140</strong></td><td>+2.67 SD</td><td>99.62nd percentile</td><td>1 in 261 (Top 0.38%)</td></tr>
+        <tr><td><strong>135</strong></td><td>+2.33 SD</td><td>99.02nd percentile</td><td>1 in 102 (Top 0.98%)</td></tr>
+        <tr><td><strong>130</strong></td><td>+2.00 SD</td><td>97.72nd percentile</td><td>1 in 44 (Top 2.28% - Mensa)</td></tr>
+        <tr><td><strong>125</strong></td><td>+1.67 SD</td><td>95.22nd percentile</td><td>1 in 21 (Top 4.78%)</td></tr>
+        <tr><td><strong>120</strong></td><td>+1.33 SD</td><td>90.88th percentile</td><td>1 in 11 (Top 9.12%)</td></tr>
+        <tr><td><strong>115</strong></td><td>+1.00 SD</td><td>84.13th percentile</td><td>1 in 6.3 (Top 15.87%)</td></tr>
+        <tr><td><strong>110</strong></td><td>+0.67 SD</td><td>74.75th percentile</td><td>1 in 4.0 (Top 25.25%)</td></tr>
+        <tr><td><strong>105</strong></td><td>+0.33 SD</td><td>63.06th percentile</td><td>1 in 2.7 (Top 36.94%)</td></tr>
+        <tr><td><strong>100</strong></td><td>0.00 SD</td><td>50.00th percentile</td><td>1 in 2.0 (Exact Population Median)</td></tr>
+        <tr><td><strong>95</strong></td><td>-0.33 SD</td><td>36.94th percentile</td><td>Bottom 36.94%</td></tr>
+        <tr><td><strong>90</strong></td><td>-0.67 SD</td><td>25.25th percentile</td><td>Bottom 25.25%</td></tr>
+        <tr><td><strong>85</strong></td><td>-1.00 SD</td><td>15.87th percentile</td><td>Bottom 15.87%</td></tr>
+        <tr><td><strong>80</strong></td><td>-1.33 SD</td><td>9.12th percentile</td><td>Bottom 9.12%</td></tr>
+        <tr><td><strong>75</strong></td><td>-1.67 SD</td><td>4.78th percentile</td><td>Bottom 4.78%</td></tr>
+        <tr><td><strong>70</strong></td><td>-2.00 SD</td><td>2.28th percentile</td><td>Bottom 2.28%</td></tr>
+        <tr><td><strong>65</strong></td><td>-2.33 SD</td><td>0.98th percentile</td><td>Bottom 0.98%</td></tr>
+        <tr><td><strong>60</strong></td><td>-2.67 SD</td><td>0.38th percentile</td><td>Bottom 0.38%</td></tr>
+        <tr><td><strong>55</strong></td><td>-3.00 SD</td><td>0.13th percentile</td><td>Bottom 0.13%</td></tr>
       </tbody>
     </table>
 
-    <h2>How to interpret your placement on the chart</h2>
-    <p>When you complete a cognitive test, placing your score on this chart provides instant context. If you score 120, you are performing in the 91st percentile — meaning your reasoning speed and accuracy on those specific puzzle types exceeded 91 out of 100 people in the reference norm.</p>
-    <p>To convert specific custom scores into exact decimal percentiles, use our <a href="/iq-scores/iq-percentile-calculator">interactive IQ percentile calculator</a>, learn more about <a href="/iq-scores/what-is-a-good-iq-score">what is a good IQ score</a>, or explore the <a href="/iq-scores/high-iq-genius-range">high IQ genius range</a>.</p>
+    <h2>How to calculate your exact percentile</h2>
+    <p>If your score falls between the 5-point increments in this table, you can calculate the exact mathematical placement using our real-time <a href="/iq-scores/iq-percentile-calculator">interactive IQ percentile calculator</a>, or read our overview of the <a href="/iq-scores/high-iq-genius-range">high IQ genius range</a>.</p>
   `,
+  customScript: `
+  <script>
+    function copyScaleTable() {
+      const table = document.getElementById('scaleChartTable');
+      let md = "| IQ Score | Standard Deviation | Exact Percentile | Rarity |\\n| :--- | :--- | :--- | :--- |\\n";
+      const rows = table.querySelectorAll('tbody tr');
+      rows.forEach(r => {
+        const cols = [...r.querySelectorAll('td')].map(c => c.textContent.trim());
+        md += "| " + cols.join(" | ") + " |\\n";
+      });
+      navigator.clipboard.writeText(md).then(() => {
+        const btn = document.getElementById('copyTableBtn');
+        btn.textContent = "✓ Copied!";
+        setTimeout(() => { btn.textContent = "📋 Copy Markdown"; }, 2000);
+      });
+    }
+  </script>`,
   faqs: [
     {
-      q: "What is the standard deviation on most IQ tests?",
-      a: "Most modern intelligence tests (such as the WAIS-IV and Cattell Culture Fair) use a standard deviation of 15. The Stanford-Binet Fifth Edition also uses SD 15, while older Stanford-Binet Form L-M used SD 16."
+      q: "Why is 100 always the center of the IQ scale?",
+      a: "Standardisation norming groups periodically recalibrate the raw score translations so that the mean of the representative general population is defined as 100."
     },
     {
-      q: "What percentage of people have an IQ between 85 and 115?",
-      a: "Exactly 68.26% of the population falls within one standard deviation (85 to 115) on a standard normal distribution curve."
-    },
-    {
-      q: "Why do tests stop scoring reliably above 145 or 160?",
-      a: "At extreme scores (+3 to +4 standard deviations), the population sample size becomes so small that question calibration loses statistical reliability."
+      q: "What is the difference between SD 15 and SD 16?",
+      a: "Wechsler tests use SD 15 (where 130 is the 98th percentile). Older Stanford-Binet tests used SD 16 (where 132 is the 98th percentile). Both represent the same relative population standing."
     }
   ]
 });
@@ -314,8 +243,8 @@ buildHtmlPage({
 // T4.10 — /iq-scores/average-iq
 buildHtmlPage({
   relPath: 'iq-scores/average-iq.html',
-  title: 'What Is the Average IQ Score? Normal Ranges | IQ Test',
-  description: 'What is the average IQ score? Learn why 100 is the mean by definition, how standard deviation works, and why scores are calibrated over time.',
+  title: 'Average IQ Score: Meaning, Norms & Flynn Effect | IQ Test',
+  description: 'What is the average IQ score? Learn why 100 is the mathematical benchmark, how the Flynn effect influences scoring, and how populations are normed.',
   canonical: 'https://iq-test.icu/iq-scores/average-iq',
   breadcrumbs: [
     { name: 'Home', url: 'https://iq-test.icu/' },
@@ -323,76 +252,61 @@ buildHtmlPage({
     { name: 'Average IQ' }
   ],
   article: {
-    headline: 'What Is the Average IQ Score? Standardization and the Flynn Effect',
+    headline: 'Average IQ Score: Definition, Norming, and the Flynn Effect',
     about: [
-      { "@type": "Thing", "name": "Flynn effect", "sameAs": "https://en.wikipedia.org/wiki/Flynn_effect" },
-      { "@type": "Thing", "name": "Psychometrics", "sameAs": "https://en.wikipedia.org/wiki/Psychometrics" }
+      { "@type": "Thing", "name": "Flynn effect", "sameAs": "https://en.wikipedia.org/wiki/Flynn_effect" }
     ],
-    citation: ["https://en.wikipedia.org/wiki/Flynn_effect", "https://en.wikipedia.org/wiki/Intelligence_quotient"]
+    citation: ["https://en.wikipedia.org/wiki/Flynn_effect"]
   },
-  h1: 'What Is the Average IQ Score? Meaning and Normal Range',
-  answerBlock: 'The average IQ score is 100. This is true by construction rather than by discovery: IQ tests are periodically re-standardised so that the mean of the reference population is set to 100 with a standard deviation of 15. Roughly 68 percent of people score between 85 and 115.',
+  h1: 'Average IQ Score: Definition, Norms, and the Flynn Effect',
+  answerBlock: 'The average IQ score by definition is exactly 100, with a standard deviation of 15. In modern psychometric testing, the average range is defined as scores between 90 and 109, which encompasses approximately 50% of the entire human population under the standard normal distribution curve.',
   bodyHtml: `
-    <h2>Why 100 is always the average IQ by definition</h2>
-    <p>Many people assume that an average IQ of 100 is a natural discovery — like the boiling point of water or the speed of light. In reality, 100 is a mathematical convention established by psychometric design. When psychologists create a new edition of an intelligence test, they administer the raw items to a large, demographically representative sample of the population. They then mathematically scale the raw results so that the median and mean of that population sample land precisely on 100.</p>
-    <p>Because of this calibration, an IQ score is not a fixed unit of absolute measurement. It is a relative rank-order benchmark showing where you sit relative to contemporary peers.</p>
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">📌 Population Intelligence Baselines</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Exact Mean / Median</div>
+          <div class="fact-value">IQ 100.0</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Normal Range (50% of people)</div>
+          <div class="fact-value">IQ 90 to 109</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Broad Average (68% of people)</div>
+          <div class="fact-value">IQ 85 to 115 (±1 SD)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Flynn Effect Rate</div>
+          <div class="fact-value">~3 Raw Points per Decade</div>
+        </div>
+      </div>
+    </div>
 
-    <h2>The normal range: what 'average' looks like in practice</h2>
-    <p>On standard deviation-15 scales (such as the WAIS-IV and SB5), the average category spans scores from 90 to 109, encompassing exactly half the global population:</p>
+    <h2>Why 100 is always the average IQ</h2>
+    <p>A frequent point of confusion is whether the population's average IQ can rise to 105 or fall to 95. In psychometrics, the answer is no: <strong>100 is not a raw score, but a calibrated benchmark.</strong> When test publishers like Pearson standardise a new edition of the WAIS, they administer the test to thousands of individuals representing census demographics, and adjust the scoring tables so that the sample average is anchored at 100.</p>
+
+    <h2>The Flynn effect: why tests must be renormed</h2>
+    <p>In 1984, political scientist James Flynn documented that raw performance on cognitive tests had been rising steadily by approximately 3 IQ points per decade throughout the 20th century across industrialised nations. This phenomenon, known as the <strong>Flynn effect</strong>, means that if an average person from 2026 took an IQ test standardized in 1950, they would score significantly higher than 100.</p>
+    
+    <h2>What drives changes in raw cognitive performance?</h2>
     <ul>
-      <li><strong>Core Average (90 – 109):</strong> Covers 50% of people (25th to 74th percentile). Individuals in this range possess the cognitive capabilities needed for secondary and higher education, complex workplace problem solving, and adaptive daily functioning.</li>
-      <li><strong>Broad Normal Range (85 – 115):</strong> Covers 68.2% of people (within 1 standard deviation). Most individuals you interact with on a daily basis score inside this band.</li>
+      <li><strong>Improved Nutrition and Health:</strong> Eradication of childhood infectious diseases and better prenatal care.</li>
+      <li><strong>Cognitive Complexity in Work:</strong> Modern careers require abstract problem solving, software interaction, and symbolic logic.</li>
+      <li><strong>Visual-Spatial Media Exposure:</strong> Proliferation of digital interfaces and visual media training nonverbal reasoning.</li>
     </ul>
 
-    <h2>The Flynn Effect: why average scores drift over time</h2>
-    <p>In the 1980s, political scientist and psychometrician James R. Flynn discovered a remarkable phenomenon: across the 20th century, raw scores on intelligence tests increased steadily at a rate of roughly 3 IQ points per decade in developed nations. This trend is known worldwide as the <strong>Flynn effect</strong>.</p>
-    <p>If a person in 1990 took an IQ test normed in 1950 without re-calibration, their raw performance would score around 112 instead of 100. The gain was largest on nonverbal tests of abstract problem solving, such as <a href="/cognitive-skills/pattern-recognition">Raven's Progressive Matrices</a>.</p>
-
-    <h2>Why psychometricians re-standardise tests</h2>
-    <p>Because human populations gradually improved at solving abstract visual puzzles due to expanded formal education, visual media, improved childhood nutrition, and technology immersion, test publishers must periodically re-standardise their tests every 10 to 15 years. Re-standardisation resets the average back to 100, ensuring the scale maintains its normative meaning.</p>
-
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Factor</th>
-          <th>Impact on Average IQ</th>
-          <th>Psychometric Solution</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Generational Score Drift (Flynn Effect)</td>
-          <td>Raw test performance increases ~3 points per decade</td>
-          <td>Periodic test re-norming with fresh demographic samples</td>
-        </tr>
-        <tr>
-          <td>Age-Related Cognitive Shifts</td>
-          <td>Fluid reasoning naturally shifts across adulthood</td>
-          <td>Age-normed scoring tables for each age group</td>
-        </tr>
-        <tr>
-          <td>Cultural & Linguistic Differences</td>
-          <td>Language familiarity affects verbal subtests</td>
-          <td>Culture-fair nonverbal testing matrices</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h2>Explore related cognitive guides</h2>
-    <p>To see the full distribution of scores across the population, review our <a href="/iq-scores/iq-scale-chart">complete IQ scale chart</a>, read about <a href="/iq-scores/iq-score-by-age">how IQ changes with age</a>, or learn <a href="/iq-scores/what-is-a-good-iq-score">what qualifies as a good IQ score</a>.</p>
+    <h2>Explore related score resources</h2>
+    <p>To see how deviation scoring translates across demographics, explore our guide on <a href="/iq-scores/iq-score-by-age">IQ scores by age</a> and examine the <a href="/iq-scores/what-is-a-good-iq-score">good IQ score benchmarks</a>.</p>
   `,
   faqs: [
     {
-      q: "Can the average IQ of a population ever be 105 or 95?",
-      a: "No. By definition, a standardised IQ test is calibrated so that the average of the reference population is set to 100."
+      q: "Can you raise your IQ score over time?",
+      a: "While raw cognitive test familiarity and education improve performance, your relative deviation score among peers of the same age remains relatively stable in adulthood."
     },
     {
-      q: "What is the Flynn effect?",
-      a: "The Flynn effect is the documented historical rise in raw intelligence test scores over the 20th century, averaging about 3 IQ points per decade, which requires tests to be periodically re-standardized."
-    },
-    {
-      q: "What score is considered normal on our cognitive quiz?",
-      a: "Scores between 90 and 109 represent the standard normal range on our 85–145 cognitive index scale, matching the standard psychometric distribution."
+      q: "What percentage of the population has an average IQ?",
+      a: "Approximately 50% score in the average range (90–109), and 68.2% score within the broad average range of 85–115."
     }
   ]
 });
@@ -400,111 +314,103 @@ buildHtmlPage({
 // T4.11 — /iq-scores/iq-percentile-calculator
 buildHtmlPage({
   relPath: 'iq-scores/iq-percentile-calculator.html',
-  title: 'IQ Percentile Calculator — Score to Percentile | IQ Test',
-  description: 'Convert any IQ score (55–145) to its exact population percentile. Fast, client-side calculator based on the standard normal distribution curve.',
+  title: 'IQ Percentile Calculator: Normal Distribution | IQ Test',
+  description: 'Calculate your exact IQ percentile and population rarity in real time. Features live Gaussian bell curve visualization with Abramowitz-Stegun accuracy.',
   canonical: 'https://iq-test.icu/iq-scores/iq-percentile-calculator',
   breadcrumbs: [
     { name: 'Home', url: 'https://iq-test.icu/' },
     { name: 'IQ Scores', url: 'https://iq-test.icu/iq-scores/' },
-    { name: 'IQ Percentile Calculator' }
+    { name: 'Percentile Calculator' }
   ],
   article: {
-    headline: 'IQ Percentile Calculator: Normal Cumulative Distribution Conversion',
+    headline: 'Interactive IQ Percentile Calculator and Population Bell Curve',
     about: [
-      { "@type": "Thing", "name": "Percentile", "sameAs": "https://en.wikipedia.org/wiki/Percentile" },
       { "@type": "Thing", "name": "Cumulative distribution function", "sameAs": "https://en.wikipedia.org/wiki/Cumulative_distribution_function" }
     ],
-    citation: ["https://en.wikipedia.org/wiki/Standard_score"]
+    citation: ["https://en.wikipedia.org/wiki/Cumulative_distribution_function"]
   },
-  h1: 'IQ Percentile Calculator: Score to Percentile Conversion',
-  answerBlock: 'Use this interactive calculator to convert any IQ score on a standard mean-100 / SD-15 scale into its exact population percentile and rarity ranking. An IQ of 100 corresponds to the 50th percentile (exact median), 115 to the 84th percentile, and 130 to the 98th percentile.',
+  h1: 'Interactive IQ Percentile Calculator and Bell Curve',
+  answerBlock: 'Use this interactive calculator to convert any IQ score on the standard deviation 15 scale into its exact population percentile, z-score, and rarity ranking. The tool uses the Abramowitz and Stegun polynomial approximation of the Gaussian cumulative distribution function, accurate to within 0.01 percentile points.',
   bodyHtml: `
-    <!-- Interactive Calculator UI (Vanilla JS, Zero Dependencies, Progressive Enhancement) -->
-    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:28px 24px; margin:28px 0 36px;">
-      <h3 style="margin-top:0; color:var(--gold); font-size:1.25rem;">Interactive Score Calculator</h3>
-      <p style="font-size:0.92rem; color:var(--muted); margin-bottom:20px;">Enter an IQ score between 55 and 145 to compute its exact percentile and population rarity:</p>
+    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:12px; padding:28px; margin:28px 0;">
+      <h2 style="margin-top:0; font-size:1.3rem; margin-bottom:14px;">Calculate Your Percentile Rank</h2>
       
-      <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-bottom:24px;">
-        <label for="iqInput" style="font-family:'Space Grotesk',sans-serif; font-size:0.95rem; font-weight:600;">IQ Score (Mean 100, SD 15):</label>
-        <input type="number" id="iqInput" min="55" max="145" value="115" style="background:rgba(255,255,255,0.06); border:1px solid var(--border); border-radius:6px; color:var(--text); font-family:'Space Grotesk',sans-serif; font-size:1.1rem; padding:8px 14px; width:100px; text-align:center;">
-        <button id="calcBtn" class="btn" style="padding:10px 22px; font-size:0.9rem;">Calculate</button>
+      <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-bottom:20px;">
+        <label for="iqInput" style="font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:600; color:var(--text);">Enter IQ Score (55–145):</label>
+        <input type="number" id="iqInput" min="55" max="145" value="100" style="background:oklch(0.06 0.002 95); color:var(--gold); font-family:'Space Grotesk',sans-serif; font-size:1.3rem; font-weight:700; padding:10px 18px; border-radius:8px; border:1px solid var(--border); width:130px; text-align:center;">
+        <button id="calcBtn" class="btn" style="padding:10px 24px; font-size:0.95rem;">Update Chart</button>
       </div>
 
-      <div id="calcOutput" style="background:rgba(0,0,0,0.3); border:1px solid var(--border); border-radius:8px; padding:20px; text-align:center;">
-        <div style="font-family:'Space Grotesk',sans-serif; font-size:0.9rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.05em;">Estimated Placement</div>
-        <div id="resPercentile" style="font-family:'Space Grotesk',sans-serif; font-size:2.2rem; font-weight:700; color:var(--gold); margin:6px 0;">84.1th Percentile</div>
-        <div id="resRarity" style="font-size:0.95rem; color:var(--text);">Higher than approximately 84 out of 100 people (1 in 6.3 people)</div>
-        <div id="resClassification" style="font-size:0.85rem; color:var(--muted); margin-top:8px;">Wechsler Classification: High Average (+1.00 SD)</div>
+      <div style="margin-bottom:24px;">
+        <input type="range" id="iqSlider" min="55" max="145" value="100" style="width:100%; accent-color:oklch(0.72 0.12 95); cursor:pointer;">
+        <div style="display:flex; justify-content:space-between; font-family:'Space Grotesk',sans-serif; font-size:0.75rem; color:var(--muted); margin-top:4px;">
+          <span>55 (-3σ)</span>
+          <span>70 (-2σ)</span>
+          <span>85 (-1σ)</span>
+          <span>100 (Mean)</span>
+          <span>115 (+1σ)</span>
+          <span>130 (+2σ)</span>
+          <span>145 (+3σ)</span>
+        </div>
+      </div>
+
+      <!-- Live Dynamic Bell Curve SVG -->
+      <div style="background:oklch(0.06 0.002 95); border:1px solid var(--border); border-radius:10px; padding:18px; margin-bottom:24px;">
+        <svg id="bellCurveSvg" viewBox="0 0 560 190" style="width:100%; height:auto; display:block;" aria-label="Dynamic Gaussian Bell Curve Visualizer">
+          <!-- Shaded Area Path -->
+          <path id="svgShadePath" d="" fill="oklch(0.72 0.12 95 / 0.28)"></path>
+          <!-- Outer Curve Path -->
+          <path id="svgCurvePath" d="" fill="none" stroke="oklch(0.72 0.12 95)" stroke-width="2.5"></path>
+          <!-- Baseline -->
+          <line x1="30" y1="160" x2="530" y2="160" stroke="oklch(0.35 0.008 95)" stroke-width="1.5"></line>
+          <!-- Center Mean Line -->
+          <line x1="280" y1="20" x2="280" y2="160" stroke="oklch(0.45 0.008 95)" stroke-dasharray="3 3"></line>
+          <!-- Interactive Indicator Line -->
+          <line id="svgIndicatorLine" x1="280" y1="20" x2="280" y2="160" stroke="var(--red)" stroke-width="2.5"></line>
+          <circle id="svgIndicatorDot" cx="280" cy="20" r="4.5" fill="var(--red)"></circle>
+          <!-- Labels -->
+          <text x="280" y="176" fill="oklch(0.62 0.008 95)" font-family="sans-serif" font-size="11" text-anchor="middle">100 (μ)</text>
+          <text x="374" y="176" fill="oklch(0.62 0.008 95)" font-family="sans-serif" font-size="11" text-anchor="middle">+1σ (115)</text>
+          <text x="468" y="176" fill="oklch(0.62 0.008 95)" font-family="sans-serif" font-size="11" text-anchor="middle">+2σ (130)</text>
+          <text x="186" y="176" fill="oklch(0.62 0.008 95)" font-family="sans-serif" font-size="11" text-anchor="middle">-1σ (85)</text>
+          <text x="92" y="176" fill="oklch(0.62 0.008 95)" font-family="sans-serif" font-size="11" text-anchor="middle">-2σ (70)</text>
+        </svg>
+      </div>
+
+      <div id="calcResults" style="background:oklch(0.08 0.004 95); border:1px solid var(--border); border-radius:8px; padding:20px; font-family:'Space Grotesk',sans-serif;">
+        <div style="font-size:0.85rem; color:var(--muted); margin-bottom:4px;">POPULATION PERCENTILE RANK</div>
+        <div id="resPercentile" style="font-size:2rem; font-weight:700; color:var(--gold); margin-bottom:8px;">50.0th Percentile</div>
+        <div id="resRarity" style="font-size:1rem; color:var(--text); margin-bottom:6px;">Exact population median (higher than 50 out of 100 people)</div>
+        <div id="resClassification" style="font-size:0.9rem; color:var(--muted);">Wechsler Classification: Average (0.00 SD)</div>
       </div>
     </div>
 
-    <h2>How the percentile calculation works</h2>
-    <p>This calculator computes percentiles directly from the standard normal cumulative distribution function (CDF) using the formula:</p>
-    <p style="text-align:center; font-family:'Space Grotesk',sans-serif; font-size:1.1rem; color:var(--gold); padding:12px; background:var(--bg-card); border-radius:6px;">
-      z = (IQ - 100) / 15
+    <h2>How the normal CDF algorithm calculates percentiles</h2>
+    <p>In statistical psychometrics, the probability density function (PDF) for a standard normal distribution is given by:</p>
+    <p style="text-align:center; font-family:'Space Grotesk',sans-serif; color:var(--gold); font-size:1.1rem; margin:16px 0;">
+      <em>f(z) = (1 / √(2π)) · e^(-z² / 2)</em>
     </p>
-    <p>Where <em>z</em> is the standard deviation score. The percentile represents the area under the Gaussian bell curve to the left of <em>z</em>. For client-side computation, we implement the high-precision Abramowitz and Stegun rational polynomial approximation, ensuring mathematical accuracy to within 0.01 percentile points without requiring external libraries.</p>
+    <p>Where <em>z = (Score - 100) / 15</em>. To find the cumulative percentile, our engine calculates the integral of this function from -∞ to <em>z</em> using the Abramowitz and Stegun rational approximation (Formula 26.2.17), achieving maximum error |ε(x)| < 7.5 × 10⁻⁸.</p>
 
-    <h2>Reference percentile conversion table</h2>
-    <p>If you prefer a static reference, the table below highlights standard benchmark conversions:</p>
-
+    <h2>Reference benchmark percentiles</h2>
     <table class="data-table">
       <thead>
         <tr>
-          <th>IQ Score (SD 15)</th>
-          <th>z-Score</th>
-          <th>Population Percentile</th>
-          <th>Rarity Description</th>
+          <th>IQ Score</th>
+          <th>Z-Score</th>
+          <th>Percentile</th>
+          <th>Population Standing</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td><strong>145</strong></td>
-          <td>+3.00</td>
-          <td>99.87th</td>
-          <td>Top 0.1% (1 in 740)</td>
-        </tr>
-        <tr>
-          <td><strong>130</strong></td>
-          <td>+2.00</td>
-          <td>97.72nd</td>
-          <td>Top 2.3% (Mensa cutoff)</td>
-        </tr>
-        <tr>
-          <td><strong>120</strong></td>
-          <td>+1.33</td>
-          <td>90.88th</td>
-          <td>Top 9% (Superior)</td>
-        </tr>
-        <tr>
-          <td><strong>115</strong></td>
-          <td>+1.00</td>
-          <td>84.13th</td>
-          <td>Top 16% (High Average)</td>
-        </tr>
-        <tr>
-          <td><strong>100</strong></td>
-          <td>0.00</td>
-          <td>50.00th</td>
-          <td>Exact Population Median</td>
-        </tr>
-        <tr>
-          <td><strong>85</strong></td>
-          <td>-1.00</td>
-          <td>15.87th</td>
-          <td>Lower 16%</td>
-        </tr>
-        <tr>
-          <td><strong>70</strong></td>
-          <td>-2.00</td>
-          <td>2.28th</td>
-          <td>Bottom 2.3%</td>
-        </tr>
+        <tr><td><strong>145</strong></td><td>+3.00</td><td>99.87th</td><td>Top 0.13% (1 in 740)</td></tr>
+        <tr><td><strong>130</strong></td><td>+2.00</td><td>97.72nd</td><td>Top 2.28% (Mensa cutoff)</td></tr>
+        <tr><td><strong>115</strong></td><td>+1.00</td><td>84.13th</td><td>Top 15.87% (High Average)</td></tr>
+        <tr><td><strong>100</strong></td><td>0.00</td><td>50.00th</td><td>Exact Median (50 out of 100)</td></tr>
+        <tr><td><strong>85</strong></td><td>-1.00</td><td>15.87th</td><td>Bottom 15.87%</td></tr>
+        <tr><td><strong>70</strong></td><td>-2.00</td><td>2.28th</td><td>Bottom 2.28%</td></tr>
       </tbody>
     </table>
-
-    <h2>Explore more score resources</h2>
-    <p>To learn more about cognitive benchmarks, see our <a href="/iq-scores/what-is-a-good-iq-score">guide to good IQ scores</a>, browse the <a href="/iq-scores/iq-scale-chart">full IQ scale chart</a>, or examine <a href="/iq-scores/average-iq">average IQ metrics</a>.</p>
   `,
   customScript: `
   <script>
@@ -512,7 +418,6 @@ buildHtmlPage({
       if (z === 0) return 0.5;
       const sign = z < 0 ? -1 : 1;
       const x = Math.abs(z);
-      // Abramowitz & Stegun formula 26.2.17
       const p = 0.2316419;
       const b1 = 0.319381530;
       const b2 = -0.356563782;
@@ -536,12 +441,53 @@ buildHtmlPage({
       return "Extremely Low";
     }
 
+    function updateBellCurve(score) {
+      const minScore = 52, maxScore = 148, baselineY = 160, topY = 20;
+      function scoreToX(s) { return 30 + ((s - minScore) / (maxScore - minScore)) * 500; }
+      function pdf(z) { return (1 / Math.sqrt(2 * Math.PI)) * Math.exp(-0.5 * z * z); }
+      const maxPdf = pdf(0);
+      function scoreToY(s) {
+        const z = (s - 100) / 15;
+        return baselineY - (pdf(z) / maxPdf) * (baselineY - topY);
+      }
+
+      let curvePath = "M " + scoreToX(minScore) + " " + baselineY;
+      let shadePath = "M " + scoreToX(minScore) + " " + baselineY;
+
+      for (let s = minScore; s <= maxScore; s += 1) {
+        const x = scoreToX(s).toFixed(1);
+        const y = scoreToY(s).toFixed(1);
+        curvePath += " L " + x + " " + y;
+        if (s <= score) {
+          shadePath += " L " + x + " " + y;
+        }
+      }
+
+      const scoreX = scoreToX(score).toFixed(1);
+      const scoreY = scoreToY(score).toFixed(1);
+      shadePath += " L " + scoreX + " " + baselineY + " Z";
+
+      document.getElementById('svgCurvePath').setAttribute('d', curvePath);
+      document.getElementById('svgShadePath').setAttribute('d', shadePath);
+      
+      const line = document.getElementById('svgIndicatorLine');
+      line.setAttribute('x1', scoreX);
+      line.setAttribute('x2', scoreX);
+      line.setAttribute('y1', scoreY);
+      line.setAttribute('y2', baselineY);
+
+      const dot = document.getElementById('svgIndicatorDot');
+      dot.setAttribute('cx', scoreX);
+      dot.setAttribute('cy', scoreY);
+    }
+
     function calculate() {
       const input = document.getElementById('iqInput');
       let score = parseFloat(input.value);
       if (isNaN(score) || score < 55) score = 55;
       if (score > 145) score = 145;
       input.value = score;
+      document.getElementById('iqSlider').value = score;
 
       const z = (score - 100) / 15;
       const cdf = normalCdf(z);
@@ -559,12 +505,19 @@ buildHtmlPage({
       document.getElementById('resPercentile').textContent = pct + "th Percentile";
       document.getElementById('resRarity').textContent = rarityText;
       document.getElementById('resClassification').textContent = "Wechsler Classification: " + getClassification(score) + " (" + (z >= 0 ? "+" : "") + z.toFixed(2) + " SD)";
+      
+      updateBellCurve(score);
     }
 
     document.getElementById('calcBtn').addEventListener('click', calculate);
     document.getElementById('iqInput').addEventListener('input', calculate);
-  </script>
-  `,
+    document.getElementById('iqSlider').addEventListener('input', function() {
+      document.getElementById('iqInput').value = this.value;
+      calculate();
+    });
+
+    calculate();
+  </script>`,
   faqs: [
     {
       q: "How accurate is this percentile calculation?",
@@ -584,8 +537,8 @@ buildHtmlPage({
 // T4.12 — /iq-scores/high-iq-genius-range
 buildHtmlPage({
   relPath: 'iq-scores/high-iq-genius-range.html',
-  title: 'What IQ Is Considered Genius? Scores Explained | IQ Test',
-  description: 'What score qualifies as a genius IQ? Learn why genius is not a clinical term, how the top 2% is defined, and how Mensa thresholds are measured.',
+  title: 'High IQ & Genius Range: Scores, Cutoffs & Mensa | IQ Test',
+  description: 'What IQ score qualifies as genius? Understand gifted cutoffs, Mensa qualifying scores (SD 15 vs SD 16), and the statistical limits of high-IQ tests.',
   canonical: 'https://iq-test.icu/iq-scores/high-iq-genius-range',
   breadcrumbs: [
     { name: 'Home', url: 'https://iq-test.icu/' },
@@ -593,85 +546,93 @@ buildHtmlPage({
     { name: 'High IQ & Genius Range' }
   ],
   article: {
-    headline: 'What IQ Is Considered Genius? Psychometric Realities and High-IQ Societies',
+    headline: 'High IQ and Genius Range: Score Cutoffs, Mensa, and Rarity',
     about: [
       { "@type": "Thing", "name": "Genius", "sameAs": "https://en.wikipedia.org/wiki/Genius" },
       { "@type": "Organization", "name": "Mensa International", "sameAs": "https://en.wikipedia.org/wiki/Mensa_International" }
     ],
-    citation: ["https://en.wikipedia.org/wiki/Mensa_International", "https://en.wikipedia.org/wiki/Wechsler_Adult_Intelligence_Scale"]
+    citation: ["https://en.wikipedia.org/wiki/Mensa_International"]
   },
-  h1: 'What IQ Is Considered Genius? High IQ Scores Explained',
-  answerBlock: "In clinical psychometrics, \"genius\" is not a formal diagnostic term. Modern intelligence tests classify scores of 130 and above as \"Very Superior\" or \"Gifted\" (the top 2.2% of the population on an SD-15 scale). High-IQ societies like Mensa require a verified score at or above the 98th percentile (IQ 130 on SD 15 or 132 on SD 16).",
+  h1: 'High IQ and Genius Range: Cutoffs, Societies, and Rarity',
+  answerBlock: 'In modern psychometrics, there is no official clinical diagnosis called "genius." However, an IQ score of 130 or higher (the top 2.28% of the population, or +2.00 standard deviations) is classified as Very Superior or Gifted, and serves as the standard entrance criterion for high-IQ societies like Mensa.',
   bodyHtml: `
-    <h2>The difference between 'gifted' and 'genius'</h2>
-    <p>While popular culture frequently uses "genius" to describe anyone with an IQ over 140, contemporary psychologists avoid the term in clinical reports. In the early 20th century, psychologist Lewis Terman (creator of the Stanford–Binet test) labeled scores above 140 as "near genius or genius." However, modern psychometric batteries (including the WAIS-IV and SB5) replaced these subjective labels with standardized statistical classifications such as <em>Very Superior</em> or <em>Extremely High</em>.</p>
-    <p>True genius is generally understood by psychologists to require not just high fluid intelligence, but a rare combination of exceptional creativity, domain mastery, and transformative real-world productivity.</p>
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">🏆 High-IQ Societies & Cutoffs</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Mensa Cutoff (Top 2%)</div>
+          <div class="fact-value">IQ 130 (SD 15) / 132 (SD 16)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Intertel (Top 1%)</div>
+          <div class="fact-value">IQ 135 (SD 15)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Triple Nine Society (Top 0.1%)</div>
+          <div class="fact-value">IQ 146 (SD 15) / 149 (SD 16)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Mega Society (Top 0.0001%)</div>
+          <div class="fact-value">IQ 171 (1 in a million, experimental)</div>
+        </div>
+      </div>
+    </div>
 
-    <h2>Standard deviation differences: SD 15 vs SD 16</h2>
-    <p>A common point of confusion when discussing high-IQ thresholds is the standard deviation (SD) of the test. Different intelligence tests use slightly different standard deviation scales:</p>
-    <ul>
-      <li><strong>Wechsler Scales & Modern Tests (SD 15):</strong> The 98th percentile cutoff is an IQ of <strong>130</strong> (+2.00 SD).</li>
-      <li><strong>Stanford-Binet Form L-M & Older Tests (SD 16):</strong> The 98th percentile cutoff is an IQ of <strong>132</strong> (+2.00 SD).</li>
-      <li><strong>Cattell Culture Fair (SD 24):</strong> The 98th percentile cutoff is an IQ of <strong>148</strong> (+2.00 SD).</li>
-    </ul>
-    <p>An IQ of 148 on Cattell represents the exact same rarity (the top 2%) as an IQ of 130 on the WAIS-IV. Stating an IQ score without specifying the standard deviation is statistically incomplete.</p>
+    <h2>Why clinical psychometrics avoids the term 'genius'</h2>
+    <p>While early 20th-century psychologists like Lewis Terman used "genius" for scores above 140, contemporary clinical psychology has abandoned the label. Scientific consensus recognizes that transformative genius requires an interplay of domain-specific expertise, immense persistence, creative divergence, and cultural timing — attributes that cannot be measured by a 60-minute standardized IQ test.</p>
 
-    <h2>High-IQ society qualification thresholds</h2>
-    <p>Various international high-IQ societies select members based strictly on standardized percentile thresholds:</p>
+    <h2>The statistical limits of testing extreme high IQ</h2>
+    <p>Scores above 145 (+3 SD) or 160 (+4 SD) encounter severe psychometric ceilings. Because norming samples typically encompass a few thousand individuals, there are not enough test subjects at +4 SD (1 in 31,500 people) to reliably calibrate individual item discrimination.</p>
 
+    <h2>Comparing high-IQ score ranges</h2>
     <table class="data-table">
       <thead>
         <tr>
-          <th>Society</th>
-          <th>Percentile Threshold</th>
-          <th>IQ Equivalent (SD 15)</th>
-          <th>Population Rarity</th>
+          <th>IQ Range (SD 15)</th>
+          <th>Classification</th>
+          <th>Percentile</th>
+          <th>High-IQ Society Equivalent</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>Mensa International</strong></td>
-          <td>98th percentile</td>
-          <td>130 (SD 15) / 132 (SD 16)</td>
-          <td>Top 1 in 50 people (2%)</td>
+          <td><strong>130 – 134</strong></td>
+          <td>Moderately Gifted</td>
+          <td>98th to 98.9th percentile</td>
+          <td>Mensa International</td>
         </tr>
         <tr>
-          <td><strong>Intertel</strong></td>
-          <td>99th percentile</td>
-          <td>135 (SD 15) / 137 (SD 16)</td>
-          <td>Top 1 in 100 people (1%)</td>
+          <td><strong>135 – 144</strong></td>
+          <td>Highly Gifted</td>
+          <td>99.0th to 99.8th percentile</td>
+          <td>Intertel</td>
         </tr>
         <tr>
-          <td><strong>Triple Nine Society</strong></td>
-          <td>99.9th percentile</td>
-          <td>146 (SD 15) / 149 (SD 16)</td>
-          <td>Top 1 in 1,000 people (0.1%)</td>
+          <td><strong>145 – 159</strong></td>
+          <td>Exceptionally Gifted</td>
+          <td>99.87th to 99.996th percentile</td>
+          <td>Triple Nine Society / Prometheus</td>
         </tr>
         <tr>
-          <td><strong>Prometheus Society</strong></td>
-          <td>99.997th percentile</td>
-          <td>160 (SD 15) / 164 (SD 16)</td>
-          <td>Top 1 in 30,000 people (0.003%)</td>
+          <td><strong>160+</strong></td>
+          <td>Profoundly Gifted</td>
+          <td>99.997th percentile and above</td>
+          <td>Mega Society / Epimetheus</td>
         </tr>
       </tbody>
     </table>
 
-    <h2>Does a high IQ guarantee exceptional success?</h2>
-    <p>Psychological research — including Lewis Terman's longitudinal study of 1,500 high-IQ children and subsequent work by researchers like David Lubinski and Camilla Benbow (Study of Mathematically Precocious Youth) — demonstrates that high cognitive ability provides a substantial advantage in academic learning speed and complex technical fields. However, beyond an IQ of approximately 120, non-cognitive factors such as emotional resilience, task commitment, creativity, and social intelligence become equally decisive in determining long-term creative and professional impact.</p>
-    <p>To explore how cognitive strengths are distributed, see our guide on <a href="/iq-scores/what-is-a-good-iq-score">what is a good IQ score</a>, check our <a href="/iq-scores/iq-scale-chart">IQ scale chart</a>, or read how history's greatest minds approached problems on our <a href="/historical-figures-iq">historical figures IQ hub</a>.</p>
+    <h2>Learn more about cognitive potential</h2>
+    <p>To explore how historical thinkers demonstrated extraordinary reasoning, visit our directory of <a href="/historical-figures-iq">historical figures' IQ estimates</a> or analyze the <a href="/iq-scores/what-is-a-good-iq-score">good IQ score benchmarks</a>.</p>
   `,
   faqs: [
     {
-      q: "What IQ score is required to join Mensa?",
-      a: "Mensa requires a score at or above the 98th percentile on an approved, supervised intelligence test. This corresponds to an IQ of 130 on an SD-15 test (like the WAIS-IV) or 132 on an SD-16 test."
+      q: "Can you be a genius with an average IQ score?",
+      a: "Yes. Groundbreaking achievements in literature, art, and entrepreneurship frequently stem from domain mastery, creative originality, and grit rather than outlier IQ scores."
     },
     {
-      q: "Is genius defined as an IQ of 140?",
-      a: "Lewis Terman used 140 as a cutoff in 1916, but modern clinical psychometrics does not use 'genius' as an official category, preferring terms like 'Very Superior' (130+)."
-    },
-    {
-      q: "Why do some people claim IQs over 200?",
-      a: "Scores over 160 are generally childhood ratio scores, non-standardized estimates, or Internet quiz claims that lack clinical standardisation."
+      q: "What is the highest verified score on standard tests?",
+      a: "Most modern clinical adult batteries (such as the WAIS-IV) cap their deviation score calculation at 160."
     }
   ]
 });
@@ -679,8 +640,8 @@ buildHtmlPage({
 // T4.13 — /iq-scores/iq-score-by-age
 buildHtmlPage({
   relPath: 'iq-scores/iq-score-by-age.html',
-  title: 'Does IQ Change With Age? Scores by Age Explained | IQ Test',
-  description: 'Does your IQ change as you get older? Discover how IQ tests are age-normed and the difference between fluid reasoning and crystallised knowledge over time.',
+  title: 'IQ Score by Age: How Cognitive Abilities Change | IQ Test',
+  description: 'How does IQ change with age? Explore fluid vs. crystallized intelligence, Cattell-Horn-Carroll theory, and how age-based norming groups operate.',
   canonical: 'https://iq-test.icu/iq-scores/iq-score-by-age',
   breadcrumbs: [
     { name: 'Home', url: 'https://iq-test.icu/' },
@@ -688,86 +649,94 @@ buildHtmlPage({
     { name: 'IQ Score by Age' }
   ],
   article: {
-    headline: 'Does IQ Change With Age? Age-Norming and Cattell-Horn-Carroll Theory',
+    headline: 'IQ Score by Age: Fluid vs. Crystallized Intelligence Lifespan Trajectories',
     about: [
       { "@type": "Thing", "name": "Fluid and crystallized intelligence", "sameAs": "https://en.wikipedia.org/wiki/Fluid_and_crystallized_intelligence" },
-      { "@type": "Thing", "name": "Cattell%E2%80%93Horn%E2%80%93Carroll_theory", "sameAs": "https://en.wikipedia.org/wiki/Cattell%E2%80%93Horn%E2%80%93Carroll_theory" }
+      { "@type": "Thing", "name": "Cattell–Horn–Carroll theory", "sameAs": "https://en.wikipedia.org/wiki/Cattell%E2%80%93Horn%E2%80%93Carroll_theory" }
     ],
-    citation: ["https://en.wikipedia.org/wiki/Fluid_and_crystallized_intelligence"]
+    citation: [
+      "https://en.wikipedia.org/wiki/Fluid_and_crystallized_intelligence",
+      "https://en.wikipedia.org/wiki/Cattell%E2%80%93Horn%E2%80%93Carroll_theory"
+    ]
   },
-  h1: 'Does IQ Change With Age? Cognitive Trajectories Explained',
-  answerBlock: "Your overall IQ score remains relatively stable throughout adulthood because IQ tests are age-normed by design — your raw performance is always compared against peers in your exact age bracket. What does change across your lifespan is the balance between fluid reasoning (which peaks in early adulthood) and crystallised intelligence (which remains stable or grows into your 60s).",
+  h1: 'IQ Score by Age: How Cognitive Abilities Shift Across Life',
+  answerBlock: 'Your standardized deviation IQ score remains relatively stable across adulthood because IQ is always calculated relative to your specific age group. However, your underlying cognitive architecture changes significantly: fluid intelligence (processing speed, pattern recognition) peaks in your early twenties, while crystallized intelligence (vocabulary, verbal reasoning) continues expanding into your sixties.',
   bodyHtml: `
-    <h2>How age norming keeps average IQ at 100 at every age</h2>
-    <p>A fundamental misconception about intelligence is that older adults should receive lower IQ scores because raw processing speed naturally slows down with age. In reality, modern intelligence tests use <strong>age-normed lookup tables</strong>.</p>
-    <p>When a 20-year-old and a 65-year-old take the WAIS-IV, their raw point totals are evaluated against separate normative tables derived from their respective age groups. If a 65-year-old performs at the 75th percentile for 65-year-olds, their IQ score is 110. An average score is always 100 for every age group by construction.</p>
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">📈 Lifespan Cognitive Trajectory</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Fluid Intelligence (Gf) Peak</div>
+          <div class="fact-value">Ages 20 – 25 (Processing speed, matrix reasoning)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Crystallized Intelligence (Gc) Peak</div>
+          <div class="fact-value">Ages 55 – 70 (Vocabulary, accumulated knowledge)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Age Norming Method</div>
+          <div class="fact-value">Calibrated within 5-to-10-year peer cohorts</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Deviation Stability</div>
+          <div class="fact-value">Test-retest correlation r ≈ 0.70–0.80 across adulthood</div>
+        </div>
+      </div>
+    </div>
 
-    <h2>Fluid vs. crystallised intelligence across the lifespan</h2>
-    <p>According to Cattell–Horn–Carroll (CHC) theory — the most empirically validated framework in cognitive psychology — human intelligence divides into two primary broad abilities with distinct developmental trajectories:</p>
+    <h2>How age-based norming works</h2>
+    <p>When you complete a clinical IQ test like the WAIS-IV, your raw points are not compared against a universal pool of all humans regardless of age. Instead, psychometricians split standardisation samples into age brackets (e.g., 20–24, 25–29, 30–34, up to 85–90). An average performance within your specific age bracket converts to an IQ of 100.</p>
 
+    <h2>Fluid vs. crystallized intelligence across the lifespan</h2>
     <table class="data-table">
       <thead>
         <tr>
-          <th>Cognitive Ability</th>
-          <th>Definition & Examples</th>
+          <th>Cognitive Dimension</th>
+          <th>What It Represents</th>
+          <th>Peak Age Range</th>
           <th>Lifespan Trajectory</th>
-          <th>Peak Performance Age</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>Fluid Intelligence (Gf)</strong></td>
-          <td>Novel problem-solving, abstract pattern recognition, spatial deduction, working memory</td>
-          <td>Rises rapidly through childhood and adolescence; gradual decline starting in mid-to-late 20s</td>
-          <td>Ages 18 – 25</td>
-        </tr>
-        <tr>
-          <td><strong>Crystallised Intelligence (Gc)</strong></td>
-          <td>Accumulated vocabulary, general knowledge, verbal comprehension, domain expertise</td>
-          <td>Steadily increases through adulthood; remains stable or continues rising into late adulthood</td>
-          <td>Ages 50 – 70</td>
+          <td>Novel problem solving, nonverbal matrix reasoning, mental rotation</td>
+          <td>Ages 20 – 25</td>
+          <td>Gradual linear decline starting in early 30s</td>
         </tr>
         <tr>
           <td><strong>Processing Speed (Gs)</strong></td>
-          <td>Visual scanning speed, rapid perceptual comparisons</td>
-          <td>Peaks earliest; steady gradual decline throughout adult life</td>
+          <td>Rapid visual scanning, symbol matching, reaction time</td>
           <td>Ages 18 – 22</td>
+          <td>Steepest age-related decline</td>
         </tr>
         <tr>
-          <td><strong>Quantitative Reasoning (Gq)</strong></td>
-          <td>Mathematical deduction, numerical operations</td>
-          <td>Maintained through middle adulthood; dependent on ongoing usage</td>
-          <td>Ages 30 – 50</td>
+          <td><strong>Crystallized Intelligence (Gc)</strong></td>
+          <td>Vocabulary, verbal comprehension, domain knowledge, analogies</td>
+          <td>Ages 55 – 70</td>
+          <td>Continues rising through middle adulthood; highly resilient</td>
+        </tr>
+        <tr>
+          <td><strong>Working Memory (Gwm)</strong></td>
+          <td>Holding and manipulating information simultaneously in mind</td>
+          <td>Ages 25 – 35</td>
+          <td>Moderate decline in late adulthood</td>
         </tr>
       </tbody>
     </table>
 
-    <h2>Why cognitive stability is high in adulthood</h2>
-    <p>Longitudinal studies (such as the famous Lothian Birth Cohort studies in Scotland, which tested participants at age 11 and again at age 70, 79, and 90) have revealed that intelligence rankings are remarkably stable across the human lifespan. An individual who scored in the top 10% of their peers at age 11 is overwhelmingly likely to score in the top 10% of their peers at age 75.</p>
-
-    <h2>What you can do to maintain cognitive performance</h2>
-    <p>While fluid processing speed naturally changes, cognitive resilience and brain plasticity in older adulthood are heavily supported by evidence-based lifestyle factors:</p>
-    <ol>
-      <li><strong>Cardiovascular Health:</strong> Regular aerobic exercise preserves cerebral blood flow and white matter integrity.</li>
-      <li><strong>Novel Cognitive Challenges:</strong> Learning new languages, complex instruments, or unfamiliar skills engages neurogenesis and synaptic remodeling.</li>
-      <li><strong>Social & Intellectual Engagement:</strong> Active discussions, collaborative problem solving, and complex hobbies buffer against age-related cognitive decline.</li>
-    </ol>
-
-    <h2>Explore related cognitive guides</h2>
-    <p>To learn more about specific reasoning domains, explore our guides on <a href="/cognitive-skills/verbal-reasoning">verbal reasoning</a>, <a href="/cognitive-skills/pattern-recognition">pattern recognition</a>, or check our <a href="/iq-scores/average-iq">average IQ overview</a>.</p>
+    <h2>Why composite IQ scores remain remarkably stable</h2>
+    <p>Because crystallized intelligence rises during the exact decades when fluid processing speed begins to slow down, an individual's overall cognitive performance balances out across their working life. Longitudinal studies (such as the Seattle Longitudinal Study) have shown that intellectual deviation rankings remain remarkably consistent across multiple decades.</p>
+    <p>To explore how specific reasoning domains function, read about <a href="/cognitive-skills/verbal-reasoning">verbal reasoning</a>, <a href="/cognitive-skills/pattern-recognition">pattern recognition</a>, and the <a href="/iq-scores/average-iq">average IQ benchmarks</a>.</p>
   `,
   faqs: [
     {
-      q: "Does IQ naturally drop as you get older?",
-      a: "No, your age-normed IQ score remains largely stable because your performance is always compared to people in your own age bracket."
+      q: "Does your IQ drop as you get older?",
+      a: "Your raw processing speed slows down with age, but because IQ is normed against your same-age peers, your deviation IQ score remains relatively stable throughout adulthood."
     },
     {
-      q: "Which cognitive skills stay strong the longest?",
-      a: "Crystallised intelligence — including vocabulary, verbal comprehension, and accumulated domain knowledge — typically remains stable or improves well into your 60s and 70s."
-    },
-    {
-      q: "At what age does fluid intelligence peak?",
-      a: "Fluid intelligence (abstract puzzle solving, processing speed, and working memory) typically reaches its biological peak between ages 18 and 25."
+      q: "Which cognitive skills peak latest in life?",
+      a: "Verbal comprehension, vocabulary, and practical wisdom (crystallized intelligence) peak latest, typically between ages 55 and 70."
     }
   ]
 });
@@ -775,64 +744,64 @@ buildHtmlPage({
 // Hub A Index — /iq-scores/ (public/iq-scores/index.html)
 buildHtmlPage({
   relPath: 'iq-scores/index.html',
-  title: 'IQ Score Guide: Scales, Ranges & Percentiles | IQ Test',
-  description: 'Complete guide to IQ scores, normal distribution charts, genius thresholds, age trajectories, and score-to-percentile calculations.',
+  title: 'IQ Scores & Scale Guide: Ranges & Percentiles | IQ Test',
+  description: 'Understand IQ scores, bell curve charts, percentiles, Wechsler classifications, and age trajectories in our comprehensive psychometrics guide.',
   canonical: 'https://iq-test.icu/iq-scores/',
   breadcrumbs: [
     { name: 'Home', url: 'https://iq-test.icu/' },
     { name: 'IQ Scores' }
   ],
   article: {
-    headline: 'IQ Score Guide: Complete Overview of Cognitive Scales and Benchmarks',
+    headline: 'IQ Scores & Psychometric Distribution: Complete Reference Guide',
     about: [
       { "@type": "Thing", "name": "Intelligence quotient", "sameAs": "https://en.wikipedia.org/wiki/Intelligence_quotient" }
     ]
   },
-  h1: 'IQ Score Guide: Scales, Ranges, and Percentiles',
-  answerBlock: 'Welcome to the complete IQ score guide. Explore how modern intelligence scores are calibrated against the normal distribution, what constitutes a good score, how percentiles are computed, and how cognitive performance shifts across the human lifespan.',
+  h1: 'IQ Scores & Scale Guide: Understanding Cognitive Metrics',
+  answerBlock: 'Welcome to the definitive IQ scores guide. Explore the psychometric mechanics of deviation scoring, population percentiles, Gaussian normal distributions, and high-IQ classifications across our comprehensive collection of articles and interactive calculators designed for self-insight and educational discovery.',
   bodyHtml: `
-    <h2>Explore our IQ score guides</h2>
+    <h2>Explore our IQ score resources</h2>
     <div class="figure-grid">
       <div class="figure-card">
         <h3><a href="/iq-scores/what-is-a-good-iq-score">What Is a Good IQ Score?</a></h3>
-        <p>Learn what scores from 70 to 145 mean, examine Wechsler classifications, and understand what IQ can and cannot measure.</p>
+        <p>Learn standard deviation ranges, Wechsler classifications, and what score ranges mean in daily life.</p>
         <a href="/iq-scores/what-is-a-good-iq-score">Read Guide →</a>
       </div>
       <div class="figure-card">
-        <h3><a href="/iq-scores/iq-scale-chart">IQ Scale Chart</a></h3>
-        <p>View the complete bell curve distribution and score-to-percentile conversion table in 5-point increments from 55 to 145.</p>
+        <h3><a href="/iq-scores/iq-scale-chart">Full IQ Scale Chart</a></h3>
+        <p>Complete normal distribution conversion table mapping scores 55–145 to exact percentiles and rarity.</p>
         <a href="/iq-scores/iq-scale-chart">View Chart →</a>
       </div>
       <div class="figure-card">
-        <h3><a href="/iq-scores/average-iq">Average IQ Score</a></h3>
-        <p>Discover why 100 is the mean by construction, how tests are re-standardised, and what the Flynn effect reveals.</p>
-        <a href="/iq-scores/average-iq">Learn More →</a>
+        <h3><a href="/iq-scores/iq-percentile-calculator">Interactive Percentile Calculator</a></h3>
+        <p>Interactive tool calculating exact percentiles with real-time Gaussian normal curve visualization.</p>
+        <a href="/iq-scores/iq-percentile-calculator">Use Calculator →</a>
       </div>
       <div class="figure-card">
-        <h3><a href="/iq-scores/iq-percentile-calculator">Percentile Calculator</a></h3>
-        <p>Interactive client-side calculator to convert any IQ score into its exact population percentile and rarity ranking.</p>
-        <a href="/iq-scores/iq-percentile-calculator">Open Calculator →</a>
+        <h3><a href="/iq-scores/average-iq">Average IQ & Flynn Effect</a></h3>
+        <p>Understand why 100 is the mathematical benchmark and how population scores shift over decades.</p>
+        <a href="/iq-scores/average-iq">Explore Norms →</a>
       </div>
       <div class="figure-card">
         <h3><a href="/iq-scores/high-iq-genius-range">High IQ & Genius Range</a></h3>
-        <p>Understand the 98th percentile cutoff, Mensa qualification thresholds, and the difference between SD 15 and SD 16.</p>
-        <a href="/iq-scores/high-iq-genius-range">Explore Genius Range →</a>
+        <p>Mensa cutoffs, gifted score tiers, and the statistical limits of testing extreme cognitive performance.</p>
+        <a href="/iq-scores/high-iq-genius-range">Read Analysis →</a>
       </div>
       <div class="figure-card">
         <h3><a href="/iq-scores/iq-score-by-age">IQ Score by Age</a></h3>
-        <p>Learn how tests are age-normed and explore the trajectories of fluid reasoning and crystallised knowledge over a lifetime.</p>
-        <a href="/iq-scores/iq-score-by-age">Read Age Analysis →</a>
+        <p>Fluid vs. crystallized intelligence trajectories across childhood, adulthood, and retirement.</p>
+        <a href="/iq-scores/iq-score-by-age">Learn Trajectories →</a>
       </div>
     </div>
   `,
   faqs: [
     {
-      q: "What is the average IQ score?",
-      a: "The average score is 100 by design, with a standard deviation of 15."
+      q: "What is the standard deviation on modern IQ tests?",
+      a: "Most contemporary clinical assessments (such as the WAIS-IV) use a standard deviation of 15 points with a mean of 100."
     },
     {
-      q: "Where can I calculate my exact IQ percentile?",
-      a: "Use our interactive IQ Percentile Calculator to convert any score between 55 and 145 to its exact percentile."
+      q: "What percentile represents a score of 130?",
+      a: "An IQ of 130 represents the 97.72nd percentile (top 2.28% of the population), meeting the entrance threshold for Mensa."
     }
   ]
 });

@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Does IQ Change With Age? Scores by Age Explained | IQ Test</title>
-<meta name="description" content="Does your IQ change as you get older? Discover how IQ tests are age-normed and the difference between fluid reasoning and crystallised knowledge over time.">
+<title>IQ Score by Age: How Cognitive Abilities Change | IQ Test</title>
+<meta name="description" content="How does IQ change with age? Explore fluid vs. crystallized intelligence, Cattell-Horn-Carroll theory, and how age-based norming groups operate.">
 <link rel="canonical" href="https://iq-test.icu/iq-scores/iq-score-by-age">
-<meta property="og:title" content="Does IQ Change With Age? Scores by Age Explained | IQ Test">
-<meta property="og:description" content="Does your IQ change as you get older? Discover how IQ tests are age-normed and the difference between fluid reasoning and crystallised knowledge over time.">
+<meta property="og:title" content="IQ Score by Age: How Cognitive Abilities Change | IQ Test">
+<meta property="og:description" content="How does IQ change with age? Explore fluid vs. crystallized intelligence, Cattell-Horn-Carroll theory, and how age-based norming groups operate.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://iq-test.icu/iq-scores/iq-score-by-age">
 <meta property="og:image" content="https://iq-test.icu/og.png">
 <meta property="og:site_name" content="IQ Test">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Does IQ Change With Age? Scores by Age Explained | IQ Test">
-<meta name="twitter:description" content="Does your IQ change as you get older? Discover how IQ tests are age-normed and the difference between fluid reasoning and crystallised knowledge over time.">
+<meta name="twitter:title" content="IQ Score by Age: How Cognitive Abilities Change | IQ Test">
+<meta name="twitter:description" content="How does IQ change with age? Explore fluid vs. crystallized intelligence, Cattell-Horn-Carroll theory, and how age-based norming groups operate.">
 <meta name="twitter:image" content="https://iq-test.icu/og.png">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="icon" type="image/webp" href="/favicon.webp">
@@ -96,6 +96,39 @@
   }
   .answer-box strong { color: var(--text); }
 
+  .quick-facts-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0 36px;
+  }
+  .quick-facts-header {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quick-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+  }
+  .fact-item {
+    background: oklch(0.08 0.004 95);
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .fact-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .fact-value { color: var(--text); font-weight: 500; }
+
   p { color: oklch(0.85 0.005 95); margin-bottom: 20px; font-size: 1rem; }
   
   h2 {
@@ -171,11 +204,31 @@
     box-shadow: 0 4px 20px var(--red-glow), inset 0 1px 0 rgba(255,255,255,0.15);
     text-decoration: none;
     transition: all 0.2s ease;
+    cursor: pointer;
   }
   .btn:hover {
     background: var(--red-hover);
     text-decoration: none;
     transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--gold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-outline:hover {
+    background: rgba(201, 162, 75, 0.12);
+    text-decoration: none;
   }
 
   .faq-accordion {
@@ -220,6 +273,64 @@
   .figure-card h3 { margin-top: 0; font-size: 1.1rem; color: var(--gold); margin-bottom: 8px; }
   .figure-card p { font-size: 0.88rem; margin-bottom: 12px; color: var(--muted); }
   .figure-card a { font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 600; }
+
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 24px 0 28px;
+  }
+  .filter-pill {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.84rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-pill:hover, .filter-pill.active {
+    background: var(--gold);
+    color: oklch(0.06 0.002 95);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+
+  .interactive-puzzle-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .puzzle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .puzzle-tag {
+    background: oklch(0.15 0.01 95);
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .solution-panel {
+    display: none;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: oklch(0.88 0.005 95);
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
   footer {
     text-align: center;
@@ -294,14 +405,14 @@
       "@type": "WebPage",
       "@id": "https://iq-test.icu/iq-scores/iq-score-by-age#webpage",
       "url": "https://iq-test.icu/iq-scores/iq-score-by-age",
-      "name": "Does IQ Change With Age? Scores by Age Explained | IQ Test",
-      "description": "Does your IQ change as you get older? Discover how IQ tests are age-normed and the difference between fluid reasoning and crystallised knowledge over time.",
+      "name": "IQ Score by Age: How Cognitive Abilities Change | IQ Test",
+      "description": "How does IQ change with age? Explore fluid vs. crystallized intelligence, Cattell-Horn-Carroll theory, and how age-based norming groups operate.",
       "isPartOf": {
         "@id": "https://iq-test.icu/#website"
       },
       "inLanguage": "en",
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "breadcrumb": {
         "@id": "https://iq-test.icu/iq-scores/iq-score-by-age#breadcrumb"
       }
@@ -339,8 +450,8 @@
       "mainEntityOfPage": {
         "@id": "https://iq-test.icu/iq-scores/iq-score-by-age#webpage"
       },
-      "headline": "Does IQ Change With Age? Age-Norming and Cattell-Horn-Carroll Theory",
-      "description": "Does your IQ change as you get older? Discover how IQ tests are age-normed and the difference between fluid reasoning and crystallised knowledge over time.",
+      "headline": "IQ Score by Age: Fluid vs. Crystallized Intelligence Lifespan Trajectories",
+      "description": "How does IQ change with age? Explore fluid vs. crystallized intelligence, Cattell-Horn-Carroll theory, and how age-based norming groups operate.",
       "author": {
         "@type": "Organization",
         "name": "APEX Business Systems Ltd.",
@@ -350,7 +461,7 @@
         "@id": "https://iq-test.icu/#organization"
       },
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "inLanguage": "en",
       "about": [
         {
@@ -360,12 +471,13 @@
         },
         {
           "@type": "Thing",
-          "name": "Cattell%E2%80%93Horn%E2%80%93Carroll_theory",
+          "name": "Cattell–Horn–Carroll theory",
           "sameAs": "https://en.wikipedia.org/wiki/Cattell%E2%80%93Horn%E2%80%93Carroll_theory"
         }
       ],
       "citation": [
-        "https://en.wikipedia.org/wiki/Fluid_and_crystallized_intelligence"
+        "https://en.wikipedia.org/wiki/Fluid_and_crystallized_intelligence",
+        "https://en.wikipedia.org/wiki/Cattell%E2%80%93Horn%E2%80%93Carroll_theory"
       ]
     },
     {
@@ -374,26 +486,18 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Does IQ naturally drop as you get older?",
+          "name": "Does your IQ drop as you get older?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No, your age-normed IQ score remains largely stable because your performance is always compared to people in your own age bracket."
+            "text": "Your raw processing speed slows down with age, but because IQ is normed against your same-age peers, your deviation IQ score remains relatively stable throughout adulthood."
           }
         },
         {
           "@type": "Question",
-          "name": "Which cognitive skills stay strong the longest?",
+          "name": "Which cognitive skills peak latest in life?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Crystallised intelligence — including vocabulary, verbal comprehension, and accumulated domain knowledge — typically remains stable or improves well into your 60s and 70s."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "At what age does fluid intelligence peak?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Fluid intelligence (abstract puzzle solving, processing speed, and working memory) typically reaches its biological peak between ages 18 and 25."
+            "text": "Verbal comprehension, vocabulary, and practical wisdom (crystallized intelligence) peak latest, typically between ages 55 and 70."
           }
         }
       ]
@@ -408,7 +512,7 @@
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <a href="https://iq-test.icu/">Home</a><span class="sep">/</span> <a href="https://iq-test.icu/iq-scores/">IQ Scores</a><span class="sep">/</span> <span class="current">IQ Score by Age</span>
     </nav>
-  <h1>Does IQ Change With Age? Cognitive Trajectories Explained</h1>
+  <h1>IQ Score by Age: How Cognitive Abilities Shift Across Life</h1>
   
     <div class="byline-bar">
       <span>Published: <time datetime="2026-08-14">August 14, 2026</time></span>
@@ -419,84 +523,88 @@
     </div>
   
     <div class="answer-box">
-      Your overall IQ score remains relatively stable throughout adulthood because IQ tests are age-normed by design — your raw performance is always compared against peers in your exact age bracket. What does change across your lifespan is the balance between fluid reasoning (which peaks in early adulthood) and crystallised intelligence (which remains stable or grows into your 60s).
+      Your standardized deviation IQ score remains relatively stable across adulthood because IQ is always calculated relative to your specific age group. However, your underlying cognitive architecture changes significantly: fluid intelligence (processing speed, pattern recognition) peaks in your early twenties, while crystallized intelligence (vocabulary, verbal reasoning) continues expanding into your sixties.
     </div>
   
-    <h2>How age norming keeps average IQ at 100 at every age</h2>
-    <p>A fundamental misconception about intelligence is that older adults should receive lower IQ scores because raw processing speed naturally slows down with age. In reality, modern intelligence tests use <strong>age-normed lookup tables</strong>.</p>
-    <p>When a 20-year-old and a 65-year-old take the WAIS-IV, their raw point totals are evaluated against separate normative tables derived from their respective age groups. If a 65-year-old performs at the 75th percentile for 65-year-olds, their IQ score is 110. An average score is always 100 for every age group by construction.</p>
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">📈 Lifespan Cognitive Trajectory</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Fluid Intelligence (Gf) Peak</div>
+          <div class="fact-value">Ages 20 – 25 (Processing speed, matrix reasoning)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Crystallized Intelligence (Gc) Peak</div>
+          <div class="fact-value">Ages 55 – 70 (Vocabulary, accumulated knowledge)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Age Norming Method</div>
+          <div class="fact-value">Calibrated within 5-to-10-year peer cohorts</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Deviation Stability</div>
+          <div class="fact-value">Test-retest correlation r ≈ 0.70–0.80 across adulthood</div>
+        </div>
+      </div>
+    </div>
 
-    <h2>Fluid vs. crystallised intelligence across the lifespan</h2>
-    <p>According to Cattell–Horn–Carroll (CHC) theory — the most empirically validated framework in cognitive psychology — human intelligence divides into two primary broad abilities with distinct developmental trajectories:</p>
+    <h2>How age-based norming works</h2>
+    <p>When you complete a clinical IQ test like the WAIS-IV, your raw points are not compared against a universal pool of all humans regardless of age. Instead, psychometricians split standardisation samples into age brackets (e.g., 20–24, 25–29, 30–34, up to 85–90). An average performance within your specific age bracket converts to an IQ of 100.</p>
 
+    <h2>Fluid vs. crystallized intelligence across the lifespan</h2>
     <table class="data-table">
       <thead>
         <tr>
-          <th>Cognitive Ability</th>
-          <th>Definition & Examples</th>
+          <th>Cognitive Dimension</th>
+          <th>What It Represents</th>
+          <th>Peak Age Range</th>
           <th>Lifespan Trajectory</th>
-          <th>Peak Performance Age</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>Fluid Intelligence (Gf)</strong></td>
-          <td>Novel problem-solving, abstract pattern recognition, spatial deduction, working memory</td>
-          <td>Rises rapidly through childhood and adolescence; gradual decline starting in mid-to-late 20s</td>
-          <td>Ages 18 – 25</td>
-        </tr>
-        <tr>
-          <td><strong>Crystallised Intelligence (Gc)</strong></td>
-          <td>Accumulated vocabulary, general knowledge, verbal comprehension, domain expertise</td>
-          <td>Steadily increases through adulthood; remains stable or continues rising into late adulthood</td>
-          <td>Ages 50 – 70</td>
+          <td>Novel problem solving, nonverbal matrix reasoning, mental rotation</td>
+          <td>Ages 20 – 25</td>
+          <td>Gradual linear decline starting in early 30s</td>
         </tr>
         <tr>
           <td><strong>Processing Speed (Gs)</strong></td>
-          <td>Visual scanning speed, rapid perceptual comparisons</td>
-          <td>Peaks earliest; steady gradual decline throughout adult life</td>
+          <td>Rapid visual scanning, symbol matching, reaction time</td>
           <td>Ages 18 – 22</td>
+          <td>Steepest age-related decline</td>
         </tr>
         <tr>
-          <td><strong>Quantitative Reasoning (Gq)</strong></td>
-          <td>Mathematical deduction, numerical operations</td>
-          <td>Maintained through middle adulthood; dependent on ongoing usage</td>
-          <td>Ages 30 – 50</td>
+          <td><strong>Crystallized Intelligence (Gc)</strong></td>
+          <td>Vocabulary, verbal comprehension, domain knowledge, analogies</td>
+          <td>Ages 55 – 70</td>
+          <td>Continues rising through middle adulthood; highly resilient</td>
+        </tr>
+        <tr>
+          <td><strong>Working Memory (Gwm)</strong></td>
+          <td>Holding and manipulating information simultaneously in mind</td>
+          <td>Ages 25 – 35</td>
+          <td>Moderate decline in late adulthood</td>
         </tr>
       </tbody>
     </table>
 
-    <h2>Why cognitive stability is high in adulthood</h2>
-    <p>Longitudinal studies (such as the famous Lothian Birth Cohort studies in Scotland, which tested participants at age 11 and again at age 70, 79, and 90) have revealed that intelligence rankings are remarkably stable across the human lifespan. An individual who scored in the top 10% of their peers at age 11 is overwhelmingly likely to score in the top 10% of their peers at age 75.</p>
-
-    <h2>What you can do to maintain cognitive performance</h2>
-    <p>While fluid processing speed naturally changes, cognitive resilience and brain plasticity in older adulthood are heavily supported by evidence-based lifestyle factors:</p>
-    <ol>
-      <li><strong>Cardiovascular Health:</strong> Regular aerobic exercise preserves cerebral blood flow and white matter integrity.</li>
-      <li><strong>Novel Cognitive Challenges:</strong> Learning new languages, complex instruments, or unfamiliar skills engages neurogenesis and synaptic remodeling.</li>
-      <li><strong>Social & Intellectual Engagement:</strong> Active discussions, collaborative problem solving, and complex hobbies buffer against age-related cognitive decline.</li>
-    </ol>
-
-    <h2>Explore related cognitive guides</h2>
-    <p>To learn more about specific reasoning domains, explore our guides on <a href="/cognitive-skills/verbal-reasoning">verbal reasoning</a>, <a href="/cognitive-skills/pattern-recognition">pattern recognition</a>, or check our <a href="/iq-scores/average-iq">average IQ overview</a>.</p>
+    <h2>Why composite IQ scores remain remarkably stable</h2>
+    <p>Because crystallized intelligence rises during the exact decades when fluid processing speed begins to slow down, an individual's overall cognitive performance balances out across their working life. Longitudinal studies (such as the Seattle Longitudinal Study) have shown that intellectual deviation rankings remain remarkably consistent across multiple decades.</p>
+    <p>To explore how specific reasoning domains function, read about <a href="/cognitive-skills/verbal-reasoning">verbal reasoning</a>, <a href="/cognitive-skills/pattern-recognition">pattern recognition</a>, and the <a href="/iq-scores/average-iq">average IQ benchmarks</a>.</p>
   
   
     <h2>Frequently Asked Questions</h2>
     <div class="faq-accordion">
       
         <div class="faq-item">
-          <div class="faq-q">Does IQ naturally drop as you get older?</div>
-          <div class="faq-a">No, your age-normed IQ score remains largely stable because your performance is always compared to people in your own age bracket.</div>
+          <div class="faq-q">Does your IQ drop as you get older?</div>
+          <div class="faq-a">Your raw processing speed slows down with age, but because IQ is normed against your same-age peers, your deviation IQ score remains relatively stable throughout adulthood.</div>
         </div>
 
         <div class="faq-item">
-          <div class="faq-q">Which cognitive skills stay strong the longest?</div>
-          <div class="faq-a">Crystallised intelligence — including vocabulary, verbal comprehension, and accumulated domain knowledge — typically remains stable or improves well into your 60s and 70s.</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q">At what age does fluid intelligence peak?</div>
-          <div class="faq-a">Fluid intelligence (abstract puzzle solving, processing speed, and working memory) typically reaches its biological peak between ages 18 and 25.</div>
+          <div class="faq-q">Which cognitive skills peak latest in life?</div>
+          <div class="faq-a">Verbal comprehension, vocabulary, and practical wisdom (crystallized intelligence) peak latest, typically between ages 55 and 70.</div>
         </div>
     </div>
   

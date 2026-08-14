@@ -4,17 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reasoning Domains: The Four Core Cognitive Skills | IQ Test</title>
-<meta name="description" content="Explore the four core reasoning domains measured in cognitive assessments: logical reasoning, numerical deduction, verbal comprehension, and pattern recognition.">
+<meta name="description" content="Explore the four core reasoning domains: logical deduction, numerical reasoning, verbal skills, and nonverbal pattern recognition.">
 <link rel="canonical" href="https://iq-test.icu/cognitive-skills/">
 <meta property="og:title" content="Reasoning Domains: The Four Core Cognitive Skills | IQ Test">
-<meta property="og:description" content="Explore the four core reasoning domains measured in cognitive assessments: logical reasoning, numerical deduction, verbal comprehension, and pattern recognition.">
+<meta property="og:description" content="Explore the four core reasoning domains: logical deduction, numerical reasoning, verbal skills, and nonverbal pattern recognition.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://iq-test.icu/cognitive-skills/">
 <meta property="og:image" content="https://iq-test.icu/og.png">
 <meta property="og:site_name" content="IQ Test">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Reasoning Domains: The Four Core Cognitive Skills | IQ Test">
-<meta name="twitter:description" content="Explore the four core reasoning domains measured in cognitive assessments: logical reasoning, numerical deduction, verbal comprehension, and pattern recognition.">
+<meta name="twitter:description" content="Explore the four core reasoning domains: logical deduction, numerical reasoning, verbal skills, and nonverbal pattern recognition.">
 <meta name="twitter:image" content="https://iq-test.icu/og.png">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="icon" type="image/webp" href="/favicon.webp">
@@ -96,6 +96,39 @@
   }
   .answer-box strong { color: var(--text); }
 
+  .quick-facts-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0 36px;
+  }
+  .quick-facts-header {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quick-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+  }
+  .fact-item {
+    background: oklch(0.08 0.004 95);
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .fact-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .fact-value { color: var(--text); font-weight: 500; }
+
   p { color: oklch(0.85 0.005 95); margin-bottom: 20px; font-size: 1rem; }
   
   h2 {
@@ -171,11 +204,31 @@
     box-shadow: 0 4px 20px var(--red-glow), inset 0 1px 0 rgba(255,255,255,0.15);
     text-decoration: none;
     transition: all 0.2s ease;
+    cursor: pointer;
   }
   .btn:hover {
     background: var(--red-hover);
     text-decoration: none;
     transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--gold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-outline:hover {
+    background: rgba(201, 162, 75, 0.12);
+    text-decoration: none;
   }
 
   .faq-accordion {
@@ -220,6 +273,64 @@
   .figure-card h3 { margin-top: 0; font-size: 1.1rem; color: var(--gold); margin-bottom: 8px; }
   .figure-card p { font-size: 0.88rem; margin-bottom: 12px; color: var(--muted); }
   .figure-card a { font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 600; }
+
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 24px 0 28px;
+  }
+  .filter-pill {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.84rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-pill:hover, .filter-pill.active {
+    background: var(--gold);
+    color: oklch(0.06 0.002 95);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+
+  .interactive-puzzle-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .puzzle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .puzzle-tag {
+    background: oklch(0.15 0.01 95);
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .solution-panel {
+    display: none;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: oklch(0.88 0.005 95);
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
   footer {
     text-align: center;
@@ -295,13 +406,13 @@
       "@id": "https://iq-test.icu/cognitive-skills/#webpage",
       "url": "https://iq-test.icu/cognitive-skills/",
       "name": "Reasoning Domains: The Four Core Cognitive Skills | IQ Test",
-      "description": "Explore the four core reasoning domains measured in cognitive assessments: logical reasoning, numerical deduction, verbal comprehension, and pattern recognition.",
+      "description": "Explore the four core reasoning domains: logical deduction, numerical reasoning, verbal skills, and nonverbal pattern recognition.",
       "isPartOf": {
         "@id": "https://iq-test.icu/#website"
       },
       "inLanguage": "en",
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "breadcrumb": {
         "@id": "https://iq-test.icu/cognitive-skills/#breadcrumb"
       }
@@ -334,7 +445,7 @@
         "@id": "https://iq-test.icu/cognitive-skills/#webpage"
       },
       "headline": "Reasoning Domains: Overview of the Four Core Cognitive Pillars",
-      "description": "Explore the four core reasoning domains measured in cognitive assessments: logical reasoning, numerical deduction, verbal comprehension, and pattern recognition.",
+      "description": "Explore the four core reasoning domains: logical deduction, numerical reasoning, verbal skills, and nonverbal pattern recognition.",
       "author": {
         "@type": "Organization",
         "name": "APEX Business Systems Ltd.",
@@ -344,7 +455,7 @@
         "@id": "https://iq-test.icu/#organization"
       },
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "inLanguage": "en",
       "about": [
         {

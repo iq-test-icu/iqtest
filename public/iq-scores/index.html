@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IQ Score Guide: Scales, Ranges & Percentiles | IQ Test</title>
-<meta name="description" content="Complete guide to IQ scores, normal distribution charts, genius thresholds, age trajectories, and score-to-percentile calculations.">
+<title>IQ Scores & Scale Guide: Ranges & Percentiles | IQ Test</title>
+<meta name="description" content="Understand IQ scores, bell curve charts, percentiles, Wechsler classifications, and age trajectories in our comprehensive psychometrics guide.">
 <link rel="canonical" href="https://iq-test.icu/iq-scores/">
-<meta property="og:title" content="IQ Score Guide: Scales, Ranges & Percentiles | IQ Test">
-<meta property="og:description" content="Complete guide to IQ scores, normal distribution charts, genius thresholds, age trajectories, and score-to-percentile calculations.">
+<meta property="og:title" content="IQ Scores & Scale Guide: Ranges & Percentiles | IQ Test">
+<meta property="og:description" content="Understand IQ scores, bell curve charts, percentiles, Wechsler classifications, and age trajectories in our comprehensive psychometrics guide.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://iq-test.icu/iq-scores/">
 <meta property="og:image" content="https://iq-test.icu/og.png">
 <meta property="og:site_name" content="IQ Test">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="IQ Score Guide: Scales, Ranges & Percentiles | IQ Test">
-<meta name="twitter:description" content="Complete guide to IQ scores, normal distribution charts, genius thresholds, age trajectories, and score-to-percentile calculations.">
+<meta name="twitter:title" content="IQ Scores & Scale Guide: Ranges & Percentiles | IQ Test">
+<meta name="twitter:description" content="Understand IQ scores, bell curve charts, percentiles, Wechsler classifications, and age trajectories in our comprehensive psychometrics guide.">
 <meta name="twitter:image" content="https://iq-test.icu/og.png">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="icon" type="image/webp" href="/favicon.webp">
@@ -96,6 +96,39 @@
   }
   .answer-box strong { color: var(--text); }
 
+  .quick-facts-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0 36px;
+  }
+  .quick-facts-header {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quick-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+  }
+  .fact-item {
+    background: oklch(0.08 0.004 95);
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .fact-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .fact-value { color: var(--text); font-weight: 500; }
+
   p { color: oklch(0.85 0.005 95); margin-bottom: 20px; font-size: 1rem; }
   
   h2 {
@@ -171,11 +204,31 @@
     box-shadow: 0 4px 20px var(--red-glow), inset 0 1px 0 rgba(255,255,255,0.15);
     text-decoration: none;
     transition: all 0.2s ease;
+    cursor: pointer;
   }
   .btn:hover {
     background: var(--red-hover);
     text-decoration: none;
     transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--gold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-outline:hover {
+    background: rgba(201, 162, 75, 0.12);
+    text-decoration: none;
   }
 
   .faq-accordion {
@@ -220,6 +273,64 @@
   .figure-card h3 { margin-top: 0; font-size: 1.1rem; color: var(--gold); margin-bottom: 8px; }
   .figure-card p { font-size: 0.88rem; margin-bottom: 12px; color: var(--muted); }
   .figure-card a { font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 600; }
+
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 24px 0 28px;
+  }
+  .filter-pill {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.84rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-pill:hover, .filter-pill.active {
+    background: var(--gold);
+    color: oklch(0.06 0.002 95);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+
+  .interactive-puzzle-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .puzzle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .puzzle-tag {
+    background: oklch(0.15 0.01 95);
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .solution-panel {
+    display: none;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: oklch(0.88 0.005 95);
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
   footer {
     text-align: center;
@@ -294,14 +405,14 @@
       "@type": "WebPage",
       "@id": "https://iq-test.icu/iq-scores/#webpage",
       "url": "https://iq-test.icu/iq-scores/",
-      "name": "IQ Score Guide: Scales, Ranges & Percentiles | IQ Test",
-      "description": "Complete guide to IQ scores, normal distribution charts, genius thresholds, age trajectories, and score-to-percentile calculations.",
+      "name": "IQ Scores & Scale Guide: Ranges & Percentiles | IQ Test",
+      "description": "Understand IQ scores, bell curve charts, percentiles, Wechsler classifications, and age trajectories in our comprehensive psychometrics guide.",
       "isPartOf": {
         "@id": "https://iq-test.icu/#website"
       },
       "inLanguage": "en",
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "breadcrumb": {
         "@id": "https://iq-test.icu/iq-scores/#breadcrumb"
       }
@@ -333,8 +444,8 @@
       "mainEntityOfPage": {
         "@id": "https://iq-test.icu/iq-scores/#webpage"
       },
-      "headline": "IQ Score Guide: Complete Overview of Cognitive Scales and Benchmarks",
-      "description": "Complete guide to IQ scores, normal distribution charts, genius thresholds, age trajectories, and score-to-percentile calculations.",
+      "headline": "IQ Scores & Psychometric Distribution: Complete Reference Guide",
+      "description": "Understand IQ scores, bell curve charts, percentiles, Wechsler classifications, and age trajectories in our comprehensive psychometrics guide.",
       "author": {
         "@type": "Organization",
         "name": "APEX Business Systems Ltd.",
@@ -344,7 +455,7 @@
         "@id": "https://iq-test.icu/#organization"
       },
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "inLanguage": "en",
       "about": [
         {
@@ -360,18 +471,18 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "What is the average IQ score?",
+          "name": "What is the standard deviation on modern IQ tests?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The average score is 100 by design, with a standard deviation of 15."
+            "text": "Most contemporary clinical assessments (such as the WAIS-IV) use a standard deviation of 15 points with a mean of 100."
           }
         },
         {
           "@type": "Question",
-          "name": "Where can I calculate my exact IQ percentile?",
+          "name": "What percentile represents a score of 130?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Use our interactive IQ Percentile Calculator to convert any score between 55 and 145 to its exact percentile."
+            "text": "An IQ of 130 represents the 97.72nd percentile (top 2.28% of the population), meeting the entrance threshold for Mensa."
           }
         }
       ]
@@ -386,7 +497,7 @@
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <a href="https://iq-test.icu/">Home</a><span class="sep">/</span> <span class="current">IQ Scores</span>
     </nav>
-  <h1>IQ Score Guide: Scales, Ranges, and Percentiles</h1>
+  <h1>IQ Scores & Scale Guide: Understanding Cognitive Metrics</h1>
   
     <div class="byline-bar">
       <span>Published: <time datetime="2026-08-14">August 14, 2026</time></span>
@@ -397,40 +508,40 @@
     </div>
   
     <div class="answer-box">
-      Welcome to the complete IQ score guide. Explore how modern intelligence scores are calibrated against the normal distribution, what constitutes a good score, how percentiles are computed, and how cognitive performance shifts across the human lifespan.
+      Welcome to the definitive IQ scores guide. Explore the psychometric mechanics of deviation scoring, population percentiles, Gaussian normal distributions, and high-IQ classifications across our comprehensive collection of articles and interactive calculators designed for self-insight and educational discovery.
     </div>
   
-    <h2>Explore our IQ score guides</h2>
+    <h2>Explore our IQ score resources</h2>
     <div class="figure-grid">
       <div class="figure-card">
         <h3><a href="/iq-scores/what-is-a-good-iq-score">What Is a Good IQ Score?</a></h3>
-        <p>Learn what scores from 70 to 145 mean, examine Wechsler classifications, and understand what IQ can and cannot measure.</p>
+        <p>Learn standard deviation ranges, Wechsler classifications, and what score ranges mean in daily life.</p>
         <a href="/iq-scores/what-is-a-good-iq-score">Read Guide →</a>
       </div>
       <div class="figure-card">
-        <h3><a href="/iq-scores/iq-scale-chart">IQ Scale Chart</a></h3>
-        <p>View the complete bell curve distribution and score-to-percentile conversion table in 5-point increments from 55 to 145.</p>
+        <h3><a href="/iq-scores/iq-scale-chart">Full IQ Scale Chart</a></h3>
+        <p>Complete normal distribution conversion table mapping scores 55–145 to exact percentiles and rarity.</p>
         <a href="/iq-scores/iq-scale-chart">View Chart →</a>
       </div>
       <div class="figure-card">
-        <h3><a href="/iq-scores/average-iq">Average IQ Score</a></h3>
-        <p>Discover why 100 is the mean by construction, how tests are re-standardised, and what the Flynn effect reveals.</p>
-        <a href="/iq-scores/average-iq">Learn More →</a>
+        <h3><a href="/iq-scores/iq-percentile-calculator">Interactive Percentile Calculator</a></h3>
+        <p>Interactive tool calculating exact percentiles with real-time Gaussian normal curve visualization.</p>
+        <a href="/iq-scores/iq-percentile-calculator">Use Calculator →</a>
       </div>
       <div class="figure-card">
-        <h3><a href="/iq-scores/iq-percentile-calculator">Percentile Calculator</a></h3>
-        <p>Interactive client-side calculator to convert any IQ score into its exact population percentile and rarity ranking.</p>
-        <a href="/iq-scores/iq-percentile-calculator">Open Calculator →</a>
+        <h3><a href="/iq-scores/average-iq">Average IQ & Flynn Effect</a></h3>
+        <p>Understand why 100 is the mathematical benchmark and how population scores shift over decades.</p>
+        <a href="/iq-scores/average-iq">Explore Norms →</a>
       </div>
       <div class="figure-card">
         <h3><a href="/iq-scores/high-iq-genius-range">High IQ & Genius Range</a></h3>
-        <p>Understand the 98th percentile cutoff, Mensa qualification thresholds, and the difference between SD 15 and SD 16.</p>
-        <a href="/iq-scores/high-iq-genius-range">Explore Genius Range →</a>
+        <p>Mensa cutoffs, gifted score tiers, and the statistical limits of testing extreme cognitive performance.</p>
+        <a href="/iq-scores/high-iq-genius-range">Read Analysis →</a>
       </div>
       <div class="figure-card">
         <h3><a href="/iq-scores/iq-score-by-age">IQ Score by Age</a></h3>
-        <p>Learn how tests are age-normed and explore the trajectories of fluid reasoning and crystallised knowledge over a lifetime.</p>
-        <a href="/iq-scores/iq-score-by-age">Read Age Analysis →</a>
+        <p>Fluid vs. crystallized intelligence trajectories across childhood, adulthood, and retirement.</p>
+        <a href="/iq-scores/iq-score-by-age">Learn Trajectories →</a>
       </div>
     </div>
   
@@ -439,13 +550,13 @@
     <div class="faq-accordion">
       
         <div class="faq-item">
-          <div class="faq-q">What is the average IQ score?</div>
-          <div class="faq-a">The average score is 100 by design, with a standard deviation of 15.</div>
+          <div class="faq-q">What is the standard deviation on modern IQ tests?</div>
+          <div class="faq-a">Most contemporary clinical assessments (such as the WAIS-IV) use a standard deviation of 15 points with a mean of 100.</div>
         </div>
 
         <div class="faq-item">
-          <div class="faq-q">Where can I calculate my exact IQ percentile?</div>
-          <div class="faq-a">Use our interactive IQ Percentile Calculator to convert any score between 55 and 145 to its exact percentile.</div>
+          <div class="faq-q">What percentile represents a score of 130?</div>
+          <div class="faq-a">An IQ of 130 represents the 97.72nd percentile (top 2.28% of the population), meeting the entrance threshold for Mensa.</div>
         </div>
     </div>
   

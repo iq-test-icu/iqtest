@@ -96,6 +96,39 @@
   }
   .answer-box strong { color: var(--text); }
 
+  .quick-facts-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0 36px;
+  }
+  .quick-facts-header {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quick-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+  }
+  .fact-item {
+    background: oklch(0.08 0.004 95);
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .fact-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .fact-value { color: var(--text); font-weight: 500; }
+
   p { color: oklch(0.85 0.005 95); margin-bottom: 20px; font-size: 1rem; }
   
   h2 {
@@ -171,11 +204,31 @@
     box-shadow: 0 4px 20px var(--red-glow), inset 0 1px 0 rgba(255,255,255,0.15);
     text-decoration: none;
     transition: all 0.2s ease;
+    cursor: pointer;
   }
   .btn:hover {
     background: var(--red-hover);
     text-decoration: none;
     transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--gold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-outline:hover {
+    background: rgba(201, 162, 75, 0.12);
+    text-decoration: none;
   }
 
   .faq-accordion {
@@ -220,6 +273,64 @@
   .figure-card h3 { margin-top: 0; font-size: 1.1rem; color: var(--gold); margin-bottom: 8px; }
   .figure-card p { font-size: 0.88rem; margin-bottom: 12px; color: var(--muted); }
   .figure-card a { font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 600; }
+
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 24px 0 28px;
+  }
+  .filter-pill {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.84rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-pill:hover, .filter-pill.active {
+    background: var(--gold);
+    color: oklch(0.06 0.002 95);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+
+  .interactive-puzzle-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .puzzle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .puzzle-tag {
+    background: oklch(0.15 0.01 95);
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .solution-panel {
+    display: none;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: oklch(0.88 0.005 95);
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
   footer {
     text-align: center;
@@ -301,7 +412,7 @@
       },
       "inLanguage": "en",
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "breadcrumb": {
         "@id": "https://iq-test.icu/cognitive-skills/pattern-recognition#breadcrumb"
       }
@@ -350,7 +461,7 @@
         "@id": "https://iq-test.icu/#organization"
       },
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "inLanguage": "en",
       "about": [
         {
@@ -422,6 +533,28 @@
       Pattern recognition is the capacity to identify visual, spatial, and geometric rules within unfamiliar matrix arrays without relying on language or prior cultural knowledge. In psychometrics, it is regarded as the cleanest measure of raw fluid intelligence (Gf) and general intelligence (g).
     </div>
   
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">💡 Domain Overview: Nonverbal Pattern Recognition</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">CHC Broad Ability</div>
+          <div class="fact-value">Fluid Intelligence (Gf) & Visual Processing (Gv)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Gold Standard Instrument</div>
+          <div class="fact-value">Raven's Progressive Matrices (1936 to Present)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Cultural Neutrality</div>
+          <div class="fact-value">Language-Independent / Culture-Fair</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Historical Mind Archetype</div>
+          <div class="fact-value">Leonardo da Vinci & Nikola Tesla (Spatial Simulation)</div>
+        </div>
+      </div>
+    </div>
+
     <h2>Why matrix reasoning is the gold standard for fluid IQ</h2>
     <p>In 1936, British psychologist John C. Raven developed <strong>Raven's Progressive Matrices</strong> to create a culturally neutral assessment of abstract cognitive ability. By presenting problems as 3x3 grids of geometric shapes with a missing piece, the test eliminated language barriers, educational disparities, and reading speed advantages.</p>
     <p>Today, every premier clinical test (including the WAIS-IV Perceptual Reasoning Index and the Reynolds Intellectual Assessment Scales) features matrix reasoning as a foundational subtest for measuring nonverbal fluid intelligence (<em>Gf</em>).</p>
@@ -460,13 +593,28 @@
       </tbody>
     </table>
 
-    <h2>Worked example: progressive matrix deduction</h2>
-    <div style="background:var(--bg-card); border:1px solid var(--border); border-radius:8px; padding:20px; margin:20px 0;">
-      <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">Sample Matrix Transformation</p>
-      <p><em>Row 1: Circle with 1 dot → Circle with 2 dots → Circle with 3 dots<br>
-      Row 2: Square with 1 dot → Square with 2 dots → Square with 3 dots<br>
-      Row 3: Triangle with 1 dot → Triangle with 2 dots → [ ? ]</em></p>
-      <p><strong>Solution:</strong> The shape rule maintains the row geometry (Triangle), while the element rule adds 1 dot per column. The missing piece is a <strong>Triangle with 3 dots</strong>.</p>
+    <h2>Interactive progressive matrix walkthrough</h2>
+    <div class="interactive-puzzle-card">
+      <div class="puzzle-header">
+        <span class="puzzle-tag">SAMPLE 3x3 MATRIX DEDUCTION</span>
+      </div>
+      <p style="color:var(--text); font-size:1.05rem; line-height:1.6; margin-bottom:14px;">
+        <strong>Row 1:</strong> Circle with 1 dot &nbsp;→&nbsp; Circle with 2 dots &nbsp;→&nbsp; Circle with 3 dots<br>
+        <strong>Row 2:</strong> Square with 1 dot &nbsp;→&nbsp; Square with 2 dots &nbsp;→&nbsp; Square with 3 dots<br>
+        <strong>Row 3:</strong> Triangle with 1 dot &nbsp;→&nbsp; Triangle with 2 dots &nbsp;→&nbsp; <strong>[ ? ]</strong>
+      </p>
+      <p><strong>Question:</strong> What geometric figure and dot configuration completes Row 3?</p>
+      <button class="btn-outline" onclick="toggleSolution('solPat', this)">🔍 Reveal Step-by-Step Solution</button>
+      
+      <div id="solPat" class="solution-panel">
+        <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">✓ Multi-Variable Matrix Decomposition:</p>
+        <ol style="margin-left:20px; color:var(--text); margin-bottom:12px;">
+          <li><strong>Row Shape Invariance:</strong> Each row maintains its defining geometry (Row 1 = Circle, Row 2 = Square, Row 3 = Triangle).</li>
+          <li><strong>Column Dot Count Progression:</strong> Column 1 has 1 dot, Column 2 has 2 dots, Column 3 has 3 dots.</li>
+          <li>Combining Row 3 (Triangle) with Column 3 (3 dots) produces the unique valid answer: <strong>Triangle with 3 dots</strong>.</li>
+        </ol>
+        <p style="font-size:0.88rem; color:var(--muted); margin-bottom:0;">On advanced matrix items, multiple simultaneous rules (such as 90° clockwise rotation combined with overlay subtraction) operate concurrently.</p>
+      </div>
     </div>
 
     <h2>Why pattern recognition matters in real life</h2>
@@ -522,5 +670,17 @@
   &copy; 2026 APEX Business Systems Ltd. &nbsp;&middot;&nbsp; Edmonton, AB, Canada &nbsp;&middot;&nbsp; <a href="mailto:support@iq-test.icu">support@iq-test.icu</a>
 </footer>
 
+  <script>
+    function toggleSolution(id, btn) {
+      const panel = document.getElementById(id);
+      if (panel.style.display === 'block') {
+        panel.style.display = 'none';
+        btn.textContent = '🔍 Reveal Step-by-Step Solution';
+      } else {
+        panel.style.display = 'block';
+        btn.textContent = '▲ Hide Solution';
+      }
+    }
+  </script>
 </body>
 </html>

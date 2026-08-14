@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What Is the Average IQ Score? Normal Ranges | IQ Test</title>
-<meta name="description" content="What is the average IQ score? Learn why 100 is the mean by definition, how standard deviation works, and why scores are calibrated over time.">
+<title>Average IQ Score: Meaning, Norms & Flynn Effect | IQ Test</title>
+<meta name="description" content="What is the average IQ score? Learn why 100 is the mathematical benchmark, how the Flynn effect influences scoring, and how populations are normed.">
 <link rel="canonical" href="https://iq-test.icu/iq-scores/average-iq">
-<meta property="og:title" content="What Is the Average IQ Score? Normal Ranges | IQ Test">
-<meta property="og:description" content="What is the average IQ score? Learn why 100 is the mean by definition, how standard deviation works, and why scores are calibrated over time.">
+<meta property="og:title" content="Average IQ Score: Meaning, Norms & Flynn Effect | IQ Test">
+<meta property="og:description" content="What is the average IQ score? Learn why 100 is the mathematical benchmark, how the Flynn effect influences scoring, and how populations are normed.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://iq-test.icu/iq-scores/average-iq">
 <meta property="og:image" content="https://iq-test.icu/og.png">
 <meta property="og:site_name" content="IQ Test">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="What Is the Average IQ Score? Normal Ranges | IQ Test">
-<meta name="twitter:description" content="What is the average IQ score? Learn why 100 is the mean by definition, how standard deviation works, and why scores are calibrated over time.">
+<meta name="twitter:title" content="Average IQ Score: Meaning, Norms & Flynn Effect | IQ Test">
+<meta name="twitter:description" content="What is the average IQ score? Learn why 100 is the mathematical benchmark, how the Flynn effect influences scoring, and how populations are normed.">
 <meta name="twitter:image" content="https://iq-test.icu/og.png">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
 <link rel="icon" type="image/webp" href="/favicon.webp">
@@ -96,6 +96,39 @@
   }
   .answer-box strong { color: var(--text); }
 
+  .quick-facts-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0 36px;
+  }
+  .quick-facts-header {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quick-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+  }
+  .fact-item {
+    background: oklch(0.08 0.004 95);
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .fact-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .fact-value { color: var(--text); font-weight: 500; }
+
   p { color: oklch(0.85 0.005 95); margin-bottom: 20px; font-size: 1rem; }
   
   h2 {
@@ -171,11 +204,31 @@
     box-shadow: 0 4px 20px var(--red-glow), inset 0 1px 0 rgba(255,255,255,0.15);
     text-decoration: none;
     transition: all 0.2s ease;
+    cursor: pointer;
   }
   .btn:hover {
     background: var(--red-hover);
     text-decoration: none;
     transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--gold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-outline:hover {
+    background: rgba(201, 162, 75, 0.12);
+    text-decoration: none;
   }
 
   .faq-accordion {
@@ -220,6 +273,64 @@
   .figure-card h3 { margin-top: 0; font-size: 1.1rem; color: var(--gold); margin-bottom: 8px; }
   .figure-card p { font-size: 0.88rem; margin-bottom: 12px; color: var(--muted); }
   .figure-card a { font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 600; }
+
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 24px 0 28px;
+  }
+  .filter-pill {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.84rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-pill:hover, .filter-pill.active {
+    background: var(--gold);
+    color: oklch(0.06 0.002 95);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+
+  .interactive-puzzle-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .puzzle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .puzzle-tag {
+    background: oklch(0.15 0.01 95);
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .solution-panel {
+    display: none;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: oklch(0.88 0.005 95);
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
   footer {
     text-align: center;
@@ -294,14 +405,14 @@
       "@type": "WebPage",
       "@id": "https://iq-test.icu/iq-scores/average-iq#webpage",
       "url": "https://iq-test.icu/iq-scores/average-iq",
-      "name": "What Is the Average IQ Score? Normal Ranges | IQ Test",
-      "description": "What is the average IQ score? Learn why 100 is the mean by definition, how standard deviation works, and why scores are calibrated over time.",
+      "name": "Average IQ Score: Meaning, Norms & Flynn Effect | IQ Test",
+      "description": "What is the average IQ score? Learn why 100 is the mathematical benchmark, how the Flynn effect influences scoring, and how populations are normed.",
       "isPartOf": {
         "@id": "https://iq-test.icu/#website"
       },
       "inLanguage": "en",
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "breadcrumb": {
         "@id": "https://iq-test.icu/iq-scores/average-iq#breadcrumb"
       }
@@ -339,8 +450,8 @@
       "mainEntityOfPage": {
         "@id": "https://iq-test.icu/iq-scores/average-iq#webpage"
       },
-      "headline": "What Is the Average IQ Score? Standardization and the Flynn Effect",
-      "description": "What is the average IQ score? Learn why 100 is the mean by definition, how standard deviation works, and why scores are calibrated over time.",
+      "headline": "Average IQ Score: Definition, Norming, and the Flynn Effect",
+      "description": "What is the average IQ score? Learn why 100 is the mathematical benchmark, how the Flynn effect influences scoring, and how populations are normed.",
       "author": {
         "@type": "Organization",
         "name": "APEX Business Systems Ltd.",
@@ -350,23 +461,17 @@
         "@id": "https://iq-test.icu/#organization"
       },
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "inLanguage": "en",
       "about": [
         {
           "@type": "Thing",
           "name": "Flynn effect",
           "sameAs": "https://en.wikipedia.org/wiki/Flynn_effect"
-        },
-        {
-          "@type": "Thing",
-          "name": "Psychometrics",
-          "sameAs": "https://en.wikipedia.org/wiki/Psychometrics"
         }
       ],
       "citation": [
-        "https://en.wikipedia.org/wiki/Flynn_effect",
-        "https://en.wikipedia.org/wiki/Intelligence_quotient"
+        "https://en.wikipedia.org/wiki/Flynn_effect"
       ]
     },
     {
@@ -375,26 +480,18 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Can the average IQ of a population ever be 105 or 95?",
+          "name": "Can you raise your IQ score over time?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "No. By definition, a standardised IQ test is calibrated so that the average of the reference population is set to 100."
+            "text": "While raw cognitive test familiarity and education improve performance, your relative deviation score among peers of the same age remains relatively stable in adulthood."
           }
         },
         {
           "@type": "Question",
-          "name": "What is the Flynn effect?",
+          "name": "What percentage of the population has an average IQ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The Flynn effect is the documented historical rise in raw intelligence test scores over the 20th century, averaging about 3 IQ points per decade, which requires tests to be periodically re-standardized."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What score is considered normal on our cognitive quiz?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Scores between 90 and 109 represent the standard normal range on our 85–145 cognitive index scale, matching the standard psychometric distribution."
+            "text": "Approximately 50% score in the average range (90–109), and 68.2% score within the broad average range of 85–115."
           }
         }
       ]
@@ -409,7 +506,7 @@
     <nav class="breadcrumbs" aria-label="Breadcrumb">
       <a href="https://iq-test.icu/">Home</a><span class="sep">/</span> <a href="https://iq-test.icu/iq-scores/">IQ Scores</a><span class="sep">/</span> <span class="current">Average IQ</span>
     </nav>
-  <h1>What Is the Average IQ Score? Meaning and Normal Range</h1>
+  <h1>Average IQ Score: Definition, Norms, and the Flynn Effect</h1>
   
     <div class="byline-bar">
       <span>Published: <time datetime="2026-08-14">August 14, 2026</time></span>
@@ -420,74 +517,59 @@
     </div>
   
     <div class="answer-box">
-      The average IQ score is 100. This is true by construction rather than by discovery: IQ tests are periodically re-standardised so that the mean of the reference population is set to 100 with a standard deviation of 15. Roughly 68 percent of people score between 85 and 115.
+      The average IQ score by definition is exactly 100, with a standard deviation of 15. In modern psychometric testing, the average range is defined as scores between 90 and 109, which encompasses approximately 50% of the entire human population under the standard normal distribution curve.
     </div>
   
-    <h2>Why 100 is always the average IQ by definition</h2>
-    <p>Many people assume that an average IQ of 100 is a natural discovery — like the boiling point of water or the speed of light. In reality, 100 is a mathematical convention established by psychometric design. When psychologists create a new edition of an intelligence test, they administer the raw items to a large, demographically representative sample of the population. They then mathematically scale the raw results so that the median and mean of that population sample land precisely on 100.</p>
-    <p>Because of this calibration, an IQ score is not a fixed unit of absolute measurement. It is a relative rank-order benchmark showing where you sit relative to contemporary peers.</p>
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">📌 Population Intelligence Baselines</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Exact Mean / Median</div>
+          <div class="fact-value">IQ 100.0</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Normal Range (50% of people)</div>
+          <div class="fact-value">IQ 90 to 109</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Broad Average (68% of people)</div>
+          <div class="fact-value">IQ 85 to 115 (±1 SD)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Flynn Effect Rate</div>
+          <div class="fact-value">~3 Raw Points per Decade</div>
+        </div>
+      </div>
+    </div>
 
-    <h2>The normal range: what 'average' looks like in practice</h2>
-    <p>On standard deviation-15 scales (such as the WAIS-IV and SB5), the average category spans scores from 90 to 109, encompassing exactly half the global population:</p>
+    <h2>Why 100 is always the average IQ</h2>
+    <p>A frequent point of confusion is whether the population's average IQ can rise to 105 or fall to 95. In psychometrics, the answer is no: <strong>100 is not a raw score, but a calibrated benchmark.</strong> When test publishers like Pearson standardise a new edition of the WAIS, they administer the test to thousands of individuals representing census demographics, and adjust the scoring tables so that the sample average is anchored at 100.</p>
+
+    <h2>The Flynn effect: why tests must be renormed</h2>
+    <p>In 1984, political scientist James Flynn documented that raw performance on cognitive tests had been rising steadily by approximately 3 IQ points per decade throughout the 20th century across industrialised nations. This phenomenon, known as the <strong>Flynn effect</strong>, means that if an average person from 2026 took an IQ test standardized in 1950, they would score significantly higher than 100.</p>
+    
+    <h2>What drives changes in raw cognitive performance?</h2>
     <ul>
-      <li><strong>Core Average (90 – 109):</strong> Covers 50% of people (25th to 74th percentile). Individuals in this range possess the cognitive capabilities needed for secondary and higher education, complex workplace problem solving, and adaptive daily functioning.</li>
-      <li><strong>Broad Normal Range (85 – 115):</strong> Covers 68.2% of people (within 1 standard deviation). Most individuals you interact with on a daily basis score inside this band.</li>
+      <li><strong>Improved Nutrition and Health:</strong> Eradication of childhood infectious diseases and better prenatal care.</li>
+      <li><strong>Cognitive Complexity in Work:</strong> Modern careers require abstract problem solving, software interaction, and symbolic logic.</li>
+      <li><strong>Visual-Spatial Media Exposure:</strong> Proliferation of digital interfaces and visual media training nonverbal reasoning.</li>
     </ul>
 
-    <h2>The Flynn Effect: why average scores drift over time</h2>
-    <p>In the 1980s, political scientist and psychometrician James R. Flynn discovered a remarkable phenomenon: across the 20th century, raw scores on intelligence tests increased steadily at a rate of roughly 3 IQ points per decade in developed nations. This trend is known worldwide as the <strong>Flynn effect</strong>.</p>
-    <p>If a person in 1990 took an IQ test normed in 1950 without re-calibration, their raw performance would score around 112 instead of 100. The gain was largest on nonverbal tests of abstract problem solving, such as <a href="/cognitive-skills/pattern-recognition">Raven's Progressive Matrices</a>.</p>
-
-    <h2>Why psychometricians re-standardise tests</h2>
-    <p>Because human populations gradually improved at solving abstract visual puzzles due to expanded formal education, visual media, improved childhood nutrition, and technology immersion, test publishers must periodically re-standardise their tests every 10 to 15 years. Re-standardisation resets the average back to 100, ensuring the scale maintains its normative meaning.</p>
-
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>Factor</th>
-          <th>Impact on Average IQ</th>
-          <th>Psychometric Solution</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Generational Score Drift (Flynn Effect)</td>
-          <td>Raw test performance increases ~3 points per decade</td>
-          <td>Periodic test re-norming with fresh demographic samples</td>
-        </tr>
-        <tr>
-          <td>Age-Related Cognitive Shifts</td>
-          <td>Fluid reasoning naturally shifts across adulthood</td>
-          <td>Age-normed scoring tables for each age group</td>
-        </tr>
-        <tr>
-          <td>Cultural & Linguistic Differences</td>
-          <td>Language familiarity affects verbal subtests</td>
-          <td>Culture-fair nonverbal testing matrices</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h2>Explore related cognitive guides</h2>
-    <p>To see the full distribution of scores across the population, review our <a href="/iq-scores/iq-scale-chart">complete IQ scale chart</a>, read about <a href="/iq-scores/iq-score-by-age">how IQ changes with age</a>, or learn <a href="/iq-scores/what-is-a-good-iq-score">what qualifies as a good IQ score</a>.</p>
+    <h2>Explore related score resources</h2>
+    <p>To see how deviation scoring translates across demographics, explore our guide on <a href="/iq-scores/iq-score-by-age">IQ scores by age</a> and examine the <a href="/iq-scores/what-is-a-good-iq-score">good IQ score benchmarks</a>.</p>
   
   
     <h2>Frequently Asked Questions</h2>
     <div class="faq-accordion">
       
         <div class="faq-item">
-          <div class="faq-q">Can the average IQ of a population ever be 105 or 95?</div>
-          <div class="faq-a">No. By definition, a standardised IQ test is calibrated so that the average of the reference population is set to 100.</div>
+          <div class="faq-q">Can you raise your IQ score over time?</div>
+          <div class="faq-a">While raw cognitive test familiarity and education improve performance, your relative deviation score among peers of the same age remains relatively stable in adulthood.</div>
         </div>
 
         <div class="faq-item">
-          <div class="faq-q">What is the Flynn effect?</div>
-          <div class="faq-a">The Flynn effect is the documented historical rise in raw intelligence test scores over the 20th century, averaging about 3 IQ points per decade, which requires tests to be periodically re-standardized.</div>
-        </div>
-
-        <div class="faq-item">
-          <div class="faq-q">What score is considered normal on our cognitive quiz?</div>
-          <div class="faq-a">Scores between 90 and 109 represent the standard normal range on our 85–145 cognitive index scale, matching the standard psychometric distribution.</div>
+          <div class="faq-q">What percentage of the population has an average IQ?</div>
+          <div class="faq-a">Approximately 50% score in the average range (90–109), and 68.2% score within the broad average range of 85–115.</div>
         </div>
     </div>
   

@@ -1,6 +1,6 @@
 /**
  * HUB B Generator — Historical Figures & Cognitive Matching
- * Priority: 1 (The Moat)
+ * Enhanced with Cognitive Profile Snapshot Cards and Interactive Style Filter
  */
 
 const { buildHtmlPage } = require('./build-seo');
@@ -31,6 +31,28 @@ buildHtmlPage({
   h1: "Albert Einstein's IQ Score: Estimate, Not Measurement",
   answerBlock: "Albert Einstein never took a modern IQ test. The figure of 160 that circulates widely is a retrospective estimate, not a recorded score, and no primary source documents Einstein sitting any standardised intelligence assessment. What is documented is the reasoning style behind his work: visual-spatial thought experiments combined with abstract mathematical modelling.",
   bodyHtml: `
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">🧠 Cognitive Profile Snapshot: Albert Einstein</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Lifespan & Field</div>
+          <div class="fact-value">1879–1955 · Theoretical Physics</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Psychometric Status</div>
+          <div class="fact-value">Never Tested (Posthumous Estimate: 160)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Dominant Cognitive Mode</div>
+          <div class="fact-value">Visual Gedankenexperimente & Invariance</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Major Breakthroughs</div>
+          <div class="fact-value">Special & General Relativity, Photoelectric Effect</div>
+        </div>
+      </div>
+    </div>
+
     <h2>Did Einstein ever take an IQ test?</h2>
     <p>There is no historical record of Albert Einstein ever taking an intelligence test. Modern psychometric testing was in its earliest infancy during Einstein's formative years. The first practical intelligence scale, created by Alfred Binet and Théodore Simon, was published in France in 1905 — the exact same year Einstein published his four groundbreaking <em>Annus Mirabilis</em> papers on the photoelectric effect, Brownian motion, special relativity, and mass-energy equivalence.</p>
     <p>Standardised adult intelligence batteries like David Wechsler's Bellevue test did not appear until 1939. By that time, Einstein was already a globally renowned theoretical physicist at the Institute for Advanced Study in Princeton. He had no practical reason or interest in sitting for a formal psychometric examination.</p>
@@ -126,6 +148,28 @@ buildHtmlPage({
   h1: "Leonardo da Vinci's IQ: The Anatomy of a Polymath's Mind",
   answerBlock: "Leonardo da Vinci lived centuries before the invention of intelligence testing, meaning any claim that his IQ was 180, 200, or 220 is purely speculative. No test record exists. His documented genius lay in cross-domain analogical synthesis — seamlessly transferring anatomical insights into mechanical engineering, optics, and painting.",
   bodyHtml: `
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">🧠 Cognitive Profile Snapshot: Leonardo da Vinci</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Lifespan & Era</div>
+          <div class="fact-value">1452–1519 · Italian Renaissance Polymath</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Psychometric Status</div>
+          <div class="fact-value">Never Tested (Cox 1926 Estimate: 180)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Dominant Cognitive Mode</div>
+          <div class="fact-value">Cross-Domain Analogical Synthesis & Observation</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Major Notebook Studies</div>
+          <div class="fact-value">Anatomy, Fluid Dynamics, Aeronautics, Optics</div>
+        </div>
+      </div>
+    </div>
+
     <h2>Did Leonardo da Vinci ever take an IQ test?</h2>
     <p>No. Leonardo da Vinci lived from 1452 to 1519 during the Italian Renaissance, more than 380 years before the development of psychometrics and intelligence testing. Any specific numerical score attributed to Da Vinci is an estimate generated centuries after his death.</p>
     <p>In her landmark 1926 study <em>The Early Mental Traits of Three Hundred Geniuses</em>, psychologist Catharine Cox assigned Leonardo an estimated childhood IQ of 135 and an adult IQ of 180. Subsequent popular accounts inflated this estimate to 200 or 220 without any new psychometric evidence.</p>
@@ -214,6 +258,28 @@ buildHtmlPage({
   h1: "Nikola Tesla's IQ: The Power of Internal Simulation",
   answerBlock: "Nikola Tesla never took a formal IQ test during his lifetime, and the popular figures of 160 to 200 attributed to him are retrospective estimates. What historical records and his own writings document is an extraordinary faculty for internal eidetic visualisation, allowing him to construct, test, and troubleshoot complex alternating current machines entirely in his mind.",
   bodyHtml: `
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">🧠 Cognitive Profile Snapshot: Nikola Tesla</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Lifespan & Field</div>
+          <div class="fact-value">1856–1943 · Electrical & Mechanical Engineering</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Psychometric Status</div>
+          <div class="fact-value">Never Tested (Posthumous Estimates: 160–200)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Dominant Cognitive Mode</div>
+          <div class="fact-value">Eidetic Visualisation & Internal Mental Simulation</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Major Patents</div>
+          <div class="fact-value">Polyphase AC Power, Induction Motor, Tesla Coil</div>
+        </div>
+      </div>
+    </div>
+
     <h2>The truth about Nikola Tesla's IQ claims</h2>
     <p>Popular online articles routinely claim that Nikola Tesla possessed an IQ between 160 and 200. However, Tesla (1856–1943) was never administered a clinical IQ test. Intelligence testing in the late 19th and early 20th centuries focused primarily on school-age children in France and the United States, not professional electrical engineers working in private laboratories.</p>
     <p>Posthumous estimates of Tesla's IQ reflect his prolific output of over 300 patents, including the rotating magnetic field, polyphase alternating current (AC) power distribution systems, the Tesla coil, and early radio transmission principles.</p>
@@ -300,6 +366,28 @@ buildHtmlPage({
   h1: "Marie Curie's IQ: Empirical Rigour and Two Nobel Prizes",
   answerBlock: "Marie Curie was never administered an IQ test, making the frequently quoted estimates of 180 to 185 speculative. Her documented cognitive legacy is the most formidable empirical track record in scientific history: the only person to win Nobel Prizes in two distinct scientific fields (Physics and Chemistry), driven by meticulous experimental discipline and inductive clarity.",
   bodyHtml: `
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">🧠 Cognitive Profile Snapshot: Marie Curie</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Lifespan & Field</div>
+          <div class="fact-value">1867–1934 · Physics & Radiochemistry</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Psychometric Status</div>
+          <div class="fact-value">Never Tested (Posthumous Estimates: 180–185)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Dominant Cognitive Mode</div>
+          <div class="fact-value">Meticulous Inductive Precision & Quantitative Fractionation</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Nobel Distinctions</div>
+          <div class="fact-value">Nobel in Physics (1903) & Nobel in Chemistry (1911)</div>
+        </div>
+      </div>
+    </div>
+
     <h2>The truth regarding Marie Curie's IQ estimates</h2>
     <p>Popular rankings often assign Marie Skłodowska Curie (1867–1934) an estimated IQ of 180 or 185. As with Einstein and Tesla, this number has no clinical basis — Curie never sat for a psychometric assessment. Standardised testing for adults had not been developed when Curie conducted her foundational radiation research in Paris in the late 1890s.</p>
     <p>Retrospective biographers assign Curie high estimates because of her unmatched academic velocity: finishing top of her class in physics at the Sorbonne in 1893, second in mathematics in 1894, and discovering two new chemical elements (polonium and radium) by 1898.</p>
@@ -386,6 +474,28 @@ buildHtmlPage({
   h1: "Isaac Newton's IQ: Mathematical Synthesis from First Principles",
   answerBlock: "Sir Isaac Newton lived in the 17th and 18th centuries, hundreds of years before intelligence testing was invented, so no verified IQ score exists. The popular estimates of 190 to 200 derive from Catharine Cox's 1926 retrospective study, reflecting Newton's single-handed creation of infinitesimal calculus, classical mechanics, and the universal law of gravitation.",
   bodyHtml: `
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">🧠 Cognitive Profile Snapshot: Sir Isaac Newton</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Lifespan & Field</div>
+          <div class="fact-value">1642–1727 · Mathematics, Physics, Astronomy</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Psychometric Status</div>
+          <div class="fact-value">Never Tested (Cox 1926 Estimate: 190)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Dominant Cognitive Mode</div>
+          <div class="fact-value">Axiomatic Deduction & Infinitesimal Calculus</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Magnum Opus</div>
+          <div class="fact-value">Philosophiæ Naturalis Principia Mathematica (1687)</div>
+        </div>
+      </div>
+    </div>
+
     <h2>Where Newton's estimated IQ of 190 originated</h2>
     <p>Sir Isaac Newton (1642–1727) lived during the Scientific Revolution. In 1926, psychologist Catharine Cox Miles estimated Newton's childhood IQ at 130 and his adult IQ at 190 in Volume II of Terman's <em>Genetic Studies of Genius</em>. Cox based her evaluation on Newton's early mechanical inventions (water clocks, windmills, sundials), his swift mastery of Cartesian geometry, and his explosive burst of discovery during the 1665–1666 Great Plague of London.</p>
     <p>While 190 is often cited as fact today, it is an academic estimate designed to quantify the sheer density of Newton's intellectual breakthroughs, not a test score.</p>
@@ -472,6 +582,28 @@ buildHtmlPage({
   h1: "Stephen Hawking's IQ: Abstract Reasoning Under Physical Constraint",
   answerBlock: "Stephen Hawking never revealed an official IQ score and famously dismissed the obsession with numerical ratings in a 2004 interview, stating that people who boast about their IQs are losers. The popular score of 160 attributed to Hawking is an estimate based on his theoretical breakthroughs in singularity theorems and Hawking radiation.",
   bodyHtml: `
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">🧠 Cognitive Profile Snapshot: Stephen Hawking</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Lifespan & Chair</div>
+          <div class="fact-value">1942–2018 · Lucasian Professor of Mathematics</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Psychometric Status</div>
+          <div class="fact-value">Never Disclosed / Dismissed ("Losers boast about IQ")</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Dominant Cognitive Mode</div>
+          <div class="fact-value">High-Dimensional Topological & Geometric Visualization</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Key Discoveries</div>
+          <div class="fact-value">Hawking Radiation, Penrose-Hawking Singularity Theorems</div>
+        </div>
+      </div>
+    </div>
+
     <h2>What Stephen Hawking actually said about IQ tests</h2>
     <p>In December 2004, a reporter for <em>The New York Times</em> asked theoretical physicist Stephen Hawking (1942–2018) what his IQ score was. Hawking's response was characteristically blunt and insightful:</p>
     <blockquote style="background:var(--bg-card); border-left:4px solid var(--gold); padding:16px 20px; margin:20px 0; font-style:italic; color:var(--text);">
@@ -564,6 +696,28 @@ buildHtmlPage({
   h1: "The Highest IQ in History: What the Records Actually Show",
   answerBlock: "There is no verified record of the highest IQ ever measured. Guinness World Records retired its \"highest IQ\" category in 1990 because the claims could not be reliably compared across different tests and scoring scales. The famous figures attached to historical names are estimates, self-reports, or childhood extrapolations — not standardised measurements.",
   bodyHtml: `
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">📜 Psychometric Record Status: Extreme IQs</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Official Guinness Category</div>
+          <div class="fact-value">Retired in 1990 (Unstandardized / Incomparable)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Clinical WAIS-IV Ceiling</div>
+          <div class="fact-value">IQ 160 (99.997th Percentile, +4 SD)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">William Sidis (Claimed 250+)</div>
+          <div class="fact-value">Publicity Extrapolation; Never Tested as Adult</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Marilyn vos Savant (228)</div>
+          <div class="fact-value">Childhood Ratio Score; Incomparable to Deviation IQ</div>
+        </div>
+      </div>
+    </div>
+
     <h2>Why there is no official 'highest IQ' record</h2>
     <p>From the mid-1980s until 1990, the <em>Guinness Book of World Records</em> listed high-IQ category holders, featuring scores ranging from 190 to 228. However, Guinness formally retired the category in 1990 after consulting leading psychometricians. The reason was clear: extreme high-IQ scores are statistically unstandardised and impossible to compare across different testing instruments.</p>
     <p>On modern deviation IQ scales (such as the WAIS-IV with a mean of 100 and a standard deviation of 15), a score of 160 represents +4 standard deviations above the mean. Mathematically, this corresponds to roughly the 99.997th percentile, or about 1 in 31,500 people. Standardisation normative samples are simply too small to measure scores at +5 or +6 standard deviations (175–190+) with any statistical reliability.</p>
@@ -641,6 +795,116 @@ buildHtmlPage({
     {
       q: "What is the highest possible score on a modern clinical IQ test?",
       a: "Most modern clinical instruments (like the WAIS-IV) cap their standard scoring scale at an IQ of 160 (the 99.997th percentile) due to standardisation limits."
+    }
+  ]
+});
+
+// Hub B Index — /historical-figures-iq (public/historical-figures-iq.html)
+buildHtmlPage({
+  relPath: 'historical-figures-iq.html',
+  title: 'Historical Figures IQ: Estimates & Thinking Styles | IQ Test',
+  description: 'What were the IQ scores of Einstein, Da Vinci, Tesla, and Curie? Discover the truth behind historical IQ estimates and explore documented cognitive styles.',
+  canonical: 'https://iq-test.icu/historical-figures-iq',
+  breadcrumbs: [
+    { name: 'Home', url: 'https://iq-test.icu/' },
+    { name: 'Historical Minds' }
+  ],
+  article: {
+    headline: 'Historical Figures IQ Scores: Estimates, Methodologies, and Cognitive Profiles',
+    about: [
+      { "@type": "Thing", "name": "Intelligence quotient", "sameAs": "https://en.wikipedia.org/wiki/Intelligence_quotient" }
+    ],
+    citation: ["https://en.wikipedia.org/wiki/Genetic_Studies_of_Genius"]
+  },
+  h1: 'Historical Figures IQ: Estimates and Cognitive Styles',
+  answerBlock: 'No major historical figure — including Albert Einstein, Leonardo da Vinci, Nikola Tesla, or Isaac Newton — ever took a modern standardised IQ test. All widely circulated figures are posthumous estimates, not recorded scores. This hub explores where those estimates came from and examines the documented problem-solving styles behind history’s greatest minds.',
+  bodyHtml: `
+    <h2>The history of estimating historical IQs</h2>
+    <p>In 1926, psychologist Catharine Cox published a foundational study in retrospective historiometry: <em>The Early Mental Traits of Three Hundred Geniuses</em>. By analyzing biographical writings, childhood intellectual milestones, and correspondence from individuals living between 1450 and 1850, Cox and her team assigned estimated childhood and adult IQ scores to quantify their historical impact.</p>
+    <p>While Cox's methodology was an impressive academic effort, contemporary psychometricians emphasize that estimating historical scores is not clinically valid. A true IQ score requires a standardised, timed examination scored against a representative peer group.</p>
+
+    <h2>Explore historical cognitive profiles</h2>
+    <p>Filter historical figures by their primary cognitive problem-solving modality:</p>
+    
+    <div class="filter-pills">
+      <button class="filter-pill active" onclick="filterThinkers('all', this)">All Thinkers (7)</button>
+      <button class="filter-pill" onclick="filterThinkers('visual', this)">Visual-Spatial & Simulation</button>
+      <button class="filter-pill" onclick="filterThinkers('logic', this)">Deductive Logic</button>
+      <button class="filter-pill" onclick="filterThinkers('empirical', this)">Empirical Science</button>
+      <button class="filter-pill" onclick="filterThinkers('polymath', this)">Polymathic Synthesis</button>
+    </div>
+
+    <div class="figure-grid" id="thinkersGrid">
+      <div class="figure-card" data-category="visual">
+        <h3><a href="/historical-figures/albert-einstein-iq">Albert Einstein (Est. 160)</a></h3>
+        <p>Master of visual-spatial Gedankenexperimente and conceptual invariance principles.</p>
+        <a href="/historical-figures/albert-einstein-iq">Read Cognitive Profile →</a>
+      </div>
+
+      <div class="figure-card" data-category="polymath">
+        <h3><a href="/historical-figures/leonardo-da-vinci-iq">Leonardo da Vinci (Est. 180–200)</a></h3>
+        <p>The ultimate polymath: cross-domain analogical synthesis and hyper-detailed observation.</p>
+        <a href="/historical-figures/leonardo-da-vinci-iq">Read Cognitive Profile →</a>
+      </div>
+
+      <div class="figure-card" data-category="visual">
+        <h3><a href="/historical-figures/nikola-tesla-iq">Nikola Tesla (Est. 160–200)</a></h3>
+        <p>Eidetic visualization and complete internal mental simulation of AC machinery.</p>
+        <a href="/historical-figures/nikola-tesla-iq">Read Cognitive Profile →</a>
+      </div>
+
+      <div class="figure-card" data-category="empirical">
+        <h3><a href="/historical-figures/marie-curie-iq">Marie Curie (Est. 180–185)</a></h3>
+        <p>Meticulous experimental precision and inductive rigor; only dual-science Nobel laureate.</p>
+        <a href="/historical-figures/marie-curie-iq">Read Cognitive Profile →</a>
+      </div>
+
+      <div class="figure-card" data-category="logic">
+        <h3><a href="/historical-figures/isaac-newton-iq">Isaac Newton (Est. 190)</a></h3>
+        <p>Axiomatic first-principles deduction; invented infinitesimal calculus and classical mechanics.</p>
+        <a href="/historical-figures/isaac-newton-iq">Read Cognitive Profile →</a>
+      </div>
+
+      <div class="figure-card" data-category="visual">
+        <h3><a href="/historical-figures/stephen-hawking-iq">Stephen Hawking (Est. 160)</a></h3>
+        <p>High-dimensional topological visualization of curved spacetime and black hole physics.</p>
+        <a href="/historical-figures/stephen-hawking-iq">Read Cognitive Profile →</a>
+      </div>
+
+      <div class="figure-card" data-category="all">
+        <h3><a href="/historical-figures/highest-iq-in-history">The Highest IQ in History</a></h3>
+        <p>Why Guinness retired the category and what the records actually show about Sidis, Tao, and others.</p>
+        <a href="/historical-figures/highest-iq-in-history">Read the Analysis →</a>
+      </div>
+    </div>
+
+    <h2>How our assessment matches your cognitive style</h2>
+    <p>Our 16-question cognitive assessment analyzes your relative performance across four distinct reasoning domains: numeric logic, verbal reasoning, deductive analysis, and visual pattern recognition. Rather than claiming to measure a clinical IQ, we compare your relative strengths to the documented thinking habits of these iconic innovators.</p>
+    <p>To learn more about cognitive benchmarks, browse our <a href="/iq-scores/">IQ scores reference guide</a> and explore <a href="/cognitive-skills/">the four reasoning domains</a>.</p>
+  `,
+  customScript: `
+  <script>
+    function filterThinkers(category, btn) {
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const cards = document.querySelectorAll('#thinkersGrid .figure-card');
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category || card.getAttribute('data-category') === 'all') {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>`,
+  faqs: [
+    {
+      q: "Did any of these historical figures ever take an IQ test?",
+      a: "No. Standardised adult intelligence testing was developed after their formative scientific work had already been completed."
+    },
+    {
+      q: "How does our cognitive match work?",
+      a: "Our optional Deep Report maps your strongest sub-score domain against the documented problem-solving methods of historical figures."
     }
   ]
 });

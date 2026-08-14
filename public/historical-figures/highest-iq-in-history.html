@@ -96,6 +96,39 @@
   }
   .answer-box strong { color: var(--text); }
 
+  .quick-facts-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0 36px;
+  }
+  .quick-facts-header {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .quick-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.88rem;
+  }
+  .fact-item {
+    background: oklch(0.08 0.004 95);
+    padding: 12px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+  }
+  .fact-label { color: var(--muted); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+  .fact-value { color: var(--text); font-weight: 500; }
+
   p { color: oklch(0.85 0.005 95); margin-bottom: 20px; font-size: 1rem; }
   
   h2 {
@@ -171,11 +204,31 @@
     box-shadow: 0 4px 20px var(--red-glow), inset 0 1px 0 rgba(255,255,255,0.15);
     text-decoration: none;
     transition: all 0.2s ease;
+    cursor: pointer;
   }
   .btn:hover {
     background: var(--red-hover);
     text-decoration: none;
     transform: translateY(-2px);
+  }
+
+  .btn-outline {
+    display: inline-block;
+    background: transparent;
+    color: var(--gold);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 8px 18px;
+    border-radius: 6px;
+    border: 1px solid var(--gold);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .btn-outline:hover {
+    background: rgba(201, 162, 75, 0.12);
+    text-decoration: none;
   }
 
   .faq-accordion {
@@ -220,6 +273,64 @@
   .figure-card h3 { margin-top: 0; font-size: 1.1rem; color: var(--gold); margin-bottom: 8px; }
   .figure-card p { font-size: 0.88rem; margin-bottom: 12px; color: var(--muted); }
   .figure-card a { font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; font-weight: 600; }
+
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 24px 0 28px;
+  }
+  .filter-pill {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.84rem;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  .filter-pill:hover, .filter-pill.active {
+    background: var(--gold);
+    color: oklch(0.06 0.002 95);
+    border-color: var(--gold);
+    font-weight: 600;
+  }
+
+  .interactive-puzzle-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .puzzle-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .puzzle-tag {
+    background: oklch(0.15 0.01 95);
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+  .solution-panel {
+    display: none;
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border);
+    font-size: 0.95rem;
+    color: oklch(0.88 0.005 95);
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
 
   footer {
     text-align: center;
@@ -301,7 +412,7 @@
       },
       "inLanguage": "en",
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "breadcrumb": {
         "@id": "https://iq-test.icu/historical-figures/highest-iq-in-history#breadcrumb"
       }
@@ -350,7 +461,7 @@
         "@id": "https://iq-test.icu/#organization"
       },
       "datePublished": "2026-07-18T00:00:00-06:00",
-      "dateModified": "2026-08-14T11:18:44-06:00",
+      "dateModified": "2026-08-14T12:25:00-06:00",
       "inLanguage": "en",
       "about": [
         {
@@ -423,6 +534,28 @@
       There is no verified record of the highest IQ ever measured. Guinness World Records retired its "highest IQ" category in 1990 because the claims could not be reliably compared across different tests and scoring scales. The famous figures attached to historical names are estimates, self-reports, or childhood extrapolations — not standardised measurements.
     </div>
   
+    <div class="quick-facts-card">
+      <div class="quick-facts-header">📜 Psychometric Record Status: Extreme IQs</div>
+      <div class="quick-facts-grid">
+        <div class="fact-item">
+          <div class="fact-label">Official Guinness Category</div>
+          <div class="fact-value">Retired in 1990 (Unstandardized / Incomparable)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Clinical WAIS-IV Ceiling</div>
+          <div class="fact-value">IQ 160 (99.997th Percentile, +4 SD)</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">William Sidis (Claimed 250+)</div>
+          <div class="fact-value">Publicity Extrapolation; Never Tested as Adult</div>
+        </div>
+        <div class="fact-item">
+          <div class="fact-label">Marilyn vos Savant (228)</div>
+          <div class="fact-value">Childhood Ratio Score; Incomparable to Deviation IQ</div>
+        </div>
+      </div>
+    </div>
+
     <h2>Why there is no official 'highest IQ' record</h2>
     <p>From the mid-1980s until 1990, the <em>Guinness Book of World Records</em> listed high-IQ category holders, featuring scores ranging from 190 to 228. However, Guinness formally retired the category in 1990 after consulting leading psychometricians. The reason was clear: extreme high-IQ scores are statistically unstandardised and impossible to compare across different testing instruments.</p>
     <p>On modern deviation IQ scales (such as the WAIS-IV with a mean of 100 and a standard deviation of 15), a score of 160 represents +4 standard deviations above the mean. Mathematically, this corresponds to roughly the 99.997th percentile, or about 1 in 31,500 people. Standardisation normative samples are simply too small to measure scores at +5 or +6 standard deviations (175–190+) with any statistical reliability.</p>
