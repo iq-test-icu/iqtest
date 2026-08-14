@@ -1,0 +1,27 @@
+{
+  "de": {
+    "title": "Kognitive Diagnostik und Normen im deutschsprachigen Raum",
+    "content": "Im deutschsprachigen Raum (Deutschland, Österreich, Schweiz) basiert die standardisierte Intelligenzdiagnostik vorwiegend auf den adaptierten Versionen der Wechsler-Skalen (wie dem WIE/HAWIE-IV) sowie institutionsspezifischen Instrumenten. Mensa in Deutschland e.V. setzt für die Mitgliedschaft ein standardisiertes Testergebnis ab einem IQ von 130 voraus (oberste 2 % der Normalverteilung).",
+    "citations": ["https://www.mensa.de/ueber-mensa/wie-wird-man-mitglied/"]
+  },
+  "fr": {
+    "title": "Évaluation cognitive et normes en francophonie",
+    "content": "En France, en Belgique et en Suisse romande, l'évaluation psychométrique clinique utilise principalement la WAIS-IV adaptée aux normes francophones. Mensa France et les associations pour personnes à haut potentiel (HPI) retiennent le seuil du 98e centile (QI standard ≥ 130 avec écart-type 15).",
+    "citations": ["https://mensa-france.net/adhesion/"]
+  },
+  "es": {
+    "title": "Diagnóstico psicométrico y baremos en el mundo hispanohablante",
+    "content": "En España y Latinoamérica, la evaluación cognitiva se estructura habitualmente en torno a la adaptación española de la escala WAIS-IV (TEA Ediciones/Pearson) y matrices de Raven. Mensa España establece el criterio de acceso en el percentil 98 (CI ≥ 131 en escala con desviación estándar 15).",
+    "citations": ["https://www.mensa.es/ingreso/"]
+  },
+  "ja": {
+    "title": "日本における知能検査と評価基準",
+    "content": "日本の臨床および教育現場では、日本版WAIS-IVに加えて独自に標準化された「田中ビネー知能検査V」が広く活用されています。JAPAN MENSAへの入会基準は、全人口の上位2%（知能指数130以上、SD 15基準）と定められています。",
+    "citations": ["https://mensa.jp/join/"]
+  },
+  "ar": {
+    "title": "التقييم المعرفي والمعايير في العالم العربي",
+    "content": "تُستخدم في العالم العربي النسخ المعربة والمقننة من مقياس فيكسلر لذكاء البالغين (WAIS) ومصفوفات رافن المتتابعة لتقييم القدرات المعرفية. تشترط جمعية منسا العالمية في فروعها بالمنطقة تحقيق نسبة ذكاء تقع ضمن أعلى 2% من المجتمع.",
+    "citations": ["https://www.mensa.org/mensa-mena/"]
+  }
+}

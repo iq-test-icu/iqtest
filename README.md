@@ -13,11 +13,13 @@ A modern, high-performance cognitive skills self-insight assessment platform. Bu
 ---
 
 ## Key Features
-- **16-Question Assessment**: Evaluates Verbal, Numeric, Logic, and Pattern Recognition domains.
-- **Bubble Answer Sheet Theme**: A clean, paper-textured layout with responsive UI elements and interactive visual charts (including an SVG radar chart of score breakdowns).
-- **Secure API Validation**: 10KB payload limits, client IP rate-limiting, and payload validation.
-- **Structured Funnel Tracking**: Event logging for user session registration, checkout flows, and email fulfillment.
-- **Privacy & Compliance**: Server-stamped consent logs compliant with PIPEDA and CASL.
+- **16-Question Assessment**: Evaluates Verbal, Numeric, Logic, and Pattern Recognition domains with script-neutral, homonym-free items.
+- **Bubble Answer Sheet Theme**: A clean, luxury paper-textured layout with responsive UI elements and interactive visual charts (including dynamic SVG radar and Gaussian bell curve charts).
+- **Persistent Header Language Switcher**: Persistent language switcher anchored to the top right of the header with centered brand logo across Desktop, Tablet, and Mobile viewports.
+- **13-Locale Internationalization Engine (`_i18n/`)**: Full static translation and routing across 13 languages (English, German, French, Spanish, Portuguese, Italian, Dutch, Japanese, Korean, Simplified Chinese, Arabic [RTL], Hindi, Tagalog) with bidirectional `hreflang` tags and XML sitemap index.
+- **Semantic SEO Multi-Hub Architecture (`_seo/`)**: 33 canonical pages with structured JSON-LD schemas, breadcrumb navigation, interactive puzzle step solvers, and calibrated title/description budgets.
+- **RFC 8058 & CASL Compliance**: `POST /api/unsubscribe` one-click unsubscription endpoint, safe unsubscription confirmation page, and bounded recovery email lookbacks with sender physical address disclosure.
+- **Zero Generator Drift**: Deterministic build pipeline verified by `_seo/verify-all.js` (492 checks) and `_i18n/verify-i18n.js` (185 checks).
 
 ---
 

@@ -1,0 +1,298 @@
+{
+  "$meta": {
+    "locale": "ko",
+    "sourceLocale": "en",
+    "engine": "groq/llama-3.3-70b-versatile",
+    "generatedAt": "2026-08-14T22:05:13.645Z",
+    "reviewStatus": "machine",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "nav.home": {
+    "src": "Home",
+    "t": "홈",
+    "ctx": "Main navigation label: Home",
+    "srcHash": "3a78695388b38b5c",
+    "status": "reviewed"
+  },
+  "nav.iq_scores": {
+    "src": "IQ Scores",
+    "t": "IQ 점수",
+    "ctx": "Main navigation label: IQ Scores Guide",
+    "srcHash": "724d309cdd72e8cd",
+    "status": "reviewed"
+  },
+  "nav.historical_minds": {
+    "src": "Historical Minds",
+    "t": "역사적 인물",
+    "ctx": "Main navigation label: Historical Minds",
+    "srcHash": "9f45064500f6fbb5",
+    "status": "reviewed"
+  },
+  "nav.reasoning_domains": {
+    "src": "Reasoning Domains",
+    "t": "추론 영역",
+    "ctx": "Main navigation label: Reasoning Domains",
+    "srcHash": "88df6030df59da53",
+    "status": "reviewed"
+  },
+  "nav.what_is_iq_test": {
+    "src": "What is an IQ Test?",
+    "t": "IQ 테스트란?",
+    "ctx": "Main navigation label: What is an IQ Test",
+    "srcHash": "22d32047f81ee5c2",
+    "status": "reviewed"
+  },
+  "nav.free_test": {
+    "src": "Free IQ Test Online",
+    "t": "무료 온라인 IQ 테스트",
+    "ctx": "Footer navigation link: Free IQ Test Online",
+    "srcHash": "6db7310f9e4301c2",
+    "status": "reviewed"
+  },
+  "nav.accuracy": {
+    "src": "Test Accuracy",
+    "t": "정확도 안내",
+    "ctx": "Footer navigation link: Test Accuracy",
+    "srcHash": "63c750b752acd802",
+    "status": "reviewed"
+  },
+  "nav.types": {
+    "src": "Types of Tests",
+    "t": "테스트 종류",
+    "ctx": "Footer navigation link: Types of Tests",
+    "srcHash": "ff73af077f16d468",
+    "status": "reviewed"
+  },
+  "nav.methodology": {
+    "src": "Methodology",
+    "t": "측정 방법론",
+    "ctx": "Footer navigation link: Methodology",
+    "srcHash": "f26d07e6b71e4259",
+    "status": "reviewed"
+  },
+  "nav.editorial_standards": {
+    "src": "Editorial Standards",
+    "t": "편집 기준",
+    "ctx": "Footer navigation link: Editorial Standards",
+    "srcHash": "6ad622be8ad16a4c",
+    "status": "reviewed"
+  },
+  "nav.about": {
+    "src": "About",
+    "t": "소개",
+    "ctx": "Footer navigation link: About",
+    "srcHash": "4efca0d10c5feb8e",
+    "status": "reviewed"
+  },
+  "nav.support": {
+    "src": "Support",
+    "t": "고객지원",
+    "ctx": "Footer navigation link: Support",
+    "srcHash": "be91940b79f46910",
+    "status": "reviewed"
+  },
+  "nav.contact": {
+    "src": "Contact",
+    "t": "문의하기",
+    "ctx": "Footer navigation link: Contact",
+    "srcHash": "2b5c3d26721ae9c3",
+    "status": "reviewed"
+  },
+  "nav.privacy": {
+    "src": "Privacy",
+    "t": "개인정보처리방침",
+    "ctx": "Footer navigation link: Privacy",
+    "srcHash": "54a57c3147c49f33",
+    "status": "reviewed"
+  },
+  "nav.terms": {
+    "src": "Terms",
+    "t": "이용약관",
+    "ctx": "Footer navigation link: Terms",
+    "srcHash": "ede5489964834a51",
+    "status": "reviewed"
+  },
+  "footer.copyright": {
+    "src": "© 2026 APEX Business Systems Ltd. · Edmonton, AB",
+    "t": "© 2026 APEX Business Systems Ltd. · Edmonton, AB",
+    "ctx": "Footer copyright line",
+    "srcHash": "e224940b20bf410b",
+    "status": "reviewed"
+  },
+  "footer.editorial_byline": {
+    "src": "Reviewed by APEX Business Systems Ltd., Edmonton, Alberta",
+    "t": "검토: APEX Business Systems Ltd., 캐나다 앨버타",
+    "ctx": "Editorial standards byline link",
+    "srcHash": "ac7ebafb1b52e7ae",
+    "status": "reviewed"
+  },
+  "footer.disclaimer": {
+    "src": "This assessment is designed for self-insight and personal discovery. It is not a clinical diagnostic instrument.",
+    "t": "본 평가는 자기 성찰 및 개인적 발견을 위해 고안되었습니다. 임상 진단용 검사가 아닙니다.",
+    "ctx": "Mandatory non-clinical disclaimer footer",
+    "srcHash": "22a0967abd3e0639",
+    "status": "reviewed"
+  },
+  "switcher.label": {
+    "src": "Select Language",
+    "t": "언어 선택",
+    "ctx": "aria-label for language switcher navigation",
+    "srcHash": "2d8f9954cb33c25b",
+    "status": "reviewed"
+  },
+  "banner.suggestion": {
+    "src": "This page is also available in {language}.",
+    "t": "이 페이지는 한국어로도 제공됩니다.",
+    "ctx": "Proactive locale suggestion banner text",
+    "srcHash": "78a43d59f344bdbc",
+    "status": "reviewed"
+  },
+  "banner.switch_btn": {
+    "src": "Switch to {language}",
+    "t": "한국어로 전환",
+    "ctx": "Button to switch language on banner",
+    "srcHash": "e74b4e0cb2ca0462",
+    "status": "reviewed"
+  },
+  "banner.dismiss": {
+    "src": "Dismiss",
+    "t": "닫기",
+    "ctx": "Dismiss button label for locale banner",
+    "srcHash": "48845bff334a50a5",
+    "status": "reviewed"
+  },
+  "calc.title": {
+    "src": "Calculate Your Percentile Rank",
+    "t": "백분위 순위 계산기",
+    "ctx": "Calculator widget heading",
+    "srcHash": "76dab23ed259a6f7",
+    "status": "reviewed"
+  },
+  "calc.label_input": {
+    "src": "Enter IQ Score (55–145):",
+    "t": "IQ 점수 입력 (55–145):",
+    "ctx": "Calculator score input label",
+    "srcHash": "b75dbd13abc576db",
+    "status": "reviewed"
+  },
+  "calc.btn_update": {
+    "src": "Update Chart",
+    "t": "차트 업데이트",
+    "ctx": "Calculator button label",
+    "srcHash": "95a396738913e1ce",
+    "status": "reviewed"
+  },
+  "calc.results_header": {
+    "src": "POPULATION PERCENTILE RANK",
+    "t": "인구 백분위 순위",
+    "ctx": "Calculator results title",
+    "srcHash": "a89a3dc4af1b8c19",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_median": {
+    "src": "Exact population median (higher than 50% of the population, 1 in 2 people)",
+    "t": "인구 정확한 중앙값 (인구의 50%보다 높음, 2명 중 1명)",
+    "ctx": "Calculator rarity text for IQ 100",
+    "srcHash": "e34cc9a38d2679c4",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_high": {
+    "src": "Higher than approximately {pct} out of 100 people (1 in {oneIn} people)",
+    "t": "100명 중 약 {pct}명보다 높음 ({oneIn}명 중 1명)",
+    "ctx": "Calculator rarity text above mean",
+    "srcHash": "8b8fc144b3574435",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_low": {
+    "src": "Lower than approximately {pct} out of 100 people (1 in {oneIn} people)",
+    "t": "100명 중 약 {pct}명보다 낮음 ({oneIn}명 중 1명)",
+    "ctx": "Calculator rarity text below mean",
+    "srcHash": "a69986c329d951bd",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_top_tail": {
+    "src": "Top 0.13% of the population (approximately 1 in 740 people)",
+    "t": "상위 0.13% 인구 (약 740명 중 1명)",
+    "ctx": "Calculator rarity text for IQ >= 145",
+    "srcHash": "8c2c103ea2841730",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_bottom_tail": {
+    "src": "Bottom 0.13% of the population (approximately 1 in 740 people)",
+    "t": "하위 0.13% 인구 (약 740명 중 1명)",
+    "ctx": "Calculator rarity text for IQ <= 55",
+    "srcHash": "f32b7139ab25641f",
+    "status": "reviewed"
+  },
+  "calc.wechsler_prefix": {
+    "src": "Wechsler Classification: {classification} ({sd} SD)",
+    "t": "웩슬러 분류: {classification} ({sd} SD)",
+    "ctx": "Calculator classification label",
+    "srcHash": "8b7a204a774780e0",
+    "status": "reviewed"
+  },
+  "filter.all": {
+    "src": "All Thinkers (7)",
+    "t": "전체 인물 (7)",
+    "ctx": "Filter pill label: All Thinkers",
+    "srcHash": "2428f0911824cb6b",
+    "status": "reviewed"
+  },
+  "filter.visual": {
+    "src": "Visual-Spatial & Simulation",
+    "t": "시공간 및 시뮬레이션",
+    "ctx": "Filter pill label: Visual-Spatial",
+    "srcHash": "32cf056602e62129",
+    "status": "reviewed"
+  },
+  "filter.logic": {
+    "src": "Deductive Logic",
+    "t": "연역적 논리",
+    "ctx": "Filter pill label: Deductive Logic",
+    "srcHash": "b55d42cb8e86f037",
+    "status": "reviewed"
+  },
+  "filter.empirical": {
+    "src": "Empirical Science",
+    "t": "실증 과학",
+    "ctx": "Filter pill label: Empirical Science",
+    "srcHash": "c4d7f04e866ba6ad",
+    "status": "reviewed"
+  },
+  "filter.polymath": {
+    "src": "Polymathic Synthesis",
+    "t": "박학다식 융합",
+    "ctx": "Filter pill label: Polymathic Synthesis",
+    "srcHash": "43c0b4d92d583270",
+    "status": "reviewed"
+  },
+  "puzzle.reveal_btn": {
+    "src": "🔍 Reveal Step-by-Step Solution",
+    "t": "🔍 단계별 해설 보기",
+    "ctx": "Interactive puzzle reveal button",
+    "srcHash": "50b8b87ca2d8eb0d",
+    "status": "reviewed"
+  },
+  "puzzle.hide_btn": {
+    "src": "▲ Hide Solution",
+    "t": "▲ 해설 숨기기",
+    "ctx": "Interactive puzzle hide button",
+    "srcHash": "a5c5d1a86aad2190",
+    "status": "reviewed"
+  },
+  "table.copy_md": {
+    "src": "📋 Copy Markdown",
+    "t": "📋 마크다운 복사",
+    "ctx": "Table copy button label",
+    "srcHash": "cef61aed677dc831",
+    "status": "reviewed"
+  },
+  "table.copied": {
+    "src": "✓ Copied!",
+    "t": "✓ 복사 완료!",
+    "ctx": "Table copied confirmation state",
+    "srcHash": "4e45a91772b8f5dd",
+    "status": "reviewed"
+  }
+}

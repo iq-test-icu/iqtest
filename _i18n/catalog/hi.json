@@ -1,0 +1,298 @@
+{
+  "$meta": {
+    "locale": "hi",
+    "sourceLocale": "en",
+    "engine": "groq/llama-3.3-70b-versatile",
+    "generatedAt": "2026-08-14T22:05:13.955Z",
+    "reviewStatus": "machine",
+    "reviewedBy": null,
+    "reviewedAt": null
+  },
+  "nav.home": {
+    "src": "Home",
+    "t": "मुख्य पृष्ठ",
+    "ctx": "Main navigation label: Home",
+    "srcHash": "3a78695388b38b5c",
+    "status": "reviewed"
+  },
+  "nav.iq_scores": {
+    "src": "IQ Scores",
+    "t": "आईक्यू स्कोर",
+    "ctx": "Main navigation label: IQ Scores Guide",
+    "srcHash": "724d309cdd72e8cd",
+    "status": "reviewed"
+  },
+  "nav.historical_minds": {
+    "src": "Historical Minds",
+    "t": "ऐतिहासिक विचारक",
+    "ctx": "Main navigation label: Historical Minds",
+    "srcHash": "9f45064500f6fbb5",
+    "status": "reviewed"
+  },
+  "nav.reasoning_domains": {
+    "src": "Reasoning Domains",
+    "t": "तर्क क्षेत्र",
+    "ctx": "Main navigation label: Reasoning Domains",
+    "srcHash": "88df6030df59da53",
+    "status": "reviewed"
+  },
+  "nav.what_is_iq_test": {
+    "src": "What is an IQ Test?",
+    "t": "आईक्यू टेस्ट क्या है?",
+    "ctx": "Main navigation label: What is an IQ Test",
+    "srcHash": "22d32047f81ee5c2",
+    "status": "reviewed"
+  },
+  "nav.free_test": {
+    "src": "Free IQ Test Online",
+    "t": "मुफ्त ऑनलाइन आईक्यू टेस्ट",
+    "ctx": "Footer navigation link: Free IQ Test Online",
+    "srcHash": "6db7310f9e4301c2",
+    "status": "reviewed"
+  },
+  "nav.accuracy": {
+    "src": "Test Accuracy",
+    "t": "सटीकता",
+    "ctx": "Footer navigation link: Test Accuracy",
+    "srcHash": "63c750b752acd802",
+    "status": "reviewed"
+  },
+  "nav.types": {
+    "src": "Types of Tests",
+    "t": "परीक्षण के प्रकार",
+    "ctx": "Footer navigation link: Types of Tests",
+    "srcHash": "ff73af077f16d468",
+    "status": "reviewed"
+  },
+  "nav.methodology": {
+    "src": "Methodology",
+    "t": "पद्धति",
+    "ctx": "Footer navigation link: Methodology",
+    "srcHash": "f26d07e6b71e4259",
+    "status": "reviewed"
+  },
+  "nav.editorial_standards": {
+    "src": "Editorial Standards",
+    "t": "संपादकीय मानक",
+    "ctx": "Footer navigation link: Editorial Standards",
+    "srcHash": "6ad622be8ad16a4c",
+    "status": "reviewed"
+  },
+  "nav.about": {
+    "src": "About",
+    "t": "हमारे बारे में",
+    "ctx": "Footer navigation link: About",
+    "srcHash": "4efca0d10c5feb8e",
+    "status": "reviewed"
+  },
+  "nav.support": {
+    "src": "Support",
+    "t": "सहायता",
+    "ctx": "Footer navigation link: Support",
+    "srcHash": "be91940b79f46910",
+    "status": "reviewed"
+  },
+  "nav.contact": {
+    "src": "Contact",
+    "t": "संपर्क",
+    "ctx": "Footer navigation link: Contact",
+    "srcHash": "2b5c3d26721ae9c3",
+    "status": "reviewed"
+  },
+  "nav.privacy": {
+    "src": "Privacy",
+    "t": "गोपनीयता नीति",
+    "ctx": "Footer navigation link: Privacy",
+    "srcHash": "54a57c3147c49f33",
+    "status": "reviewed"
+  },
+  "nav.terms": {
+    "src": "Terms",
+    "t": "नियम एवं शर्तें",
+    "ctx": "Footer navigation link: Terms",
+    "srcHash": "ede5489964834a51",
+    "status": "reviewed"
+  },
+  "footer.copyright": {
+    "src": "© 2026 APEX Business Systems Ltd. · Edmonton, AB",
+    "t": "© 2026 APEX Business Systems Ltd. · Edmonton, AB",
+    "ctx": "Footer copyright line",
+    "srcHash": "e224940b20bf410b",
+    "status": "reviewed"
+  },
+  "footer.editorial_byline": {
+    "src": "Reviewed by APEX Business Systems Ltd., Edmonton, Alberta",
+    "t": "समीक्षित: APEX Business Systems Ltd., एडमोंटन, कनाडा",
+    "ctx": "Editorial standards byline link",
+    "srcHash": "ac7ebafb1b52e7ae",
+    "status": "reviewed"
+  },
+  "footer.disclaimer": {
+    "src": "This assessment is designed for self-insight and personal discovery. It is not a clinical diagnostic instrument.",
+    "t": "यह मूल्यांकन आत्म-समझ और व्यक्तिगत खोज के लिए है। यह कोई नैदानिक या चिकित्सकीय परीक्षण नहीं है।",
+    "ctx": "Mandatory non-clinical disclaimer footer",
+    "srcHash": "22a0967abd3e0639",
+    "status": "reviewed"
+  },
+  "switcher.label": {
+    "src": "Select Language",
+    "t": "भाषा चुनें",
+    "ctx": "aria-label for language switcher navigation",
+    "srcHash": "2d8f9954cb33c25b",
+    "status": "reviewed"
+  },
+  "banner.suggestion": {
+    "src": "This page is also available in {language}.",
+    "t": "यह पृष्ठ हिन्दी में भी उपलब्ध है।",
+    "ctx": "Proactive locale suggestion banner text",
+    "srcHash": "78a43d59f344bdbc",
+    "status": "reviewed"
+  },
+  "banner.switch_btn": {
+    "src": "Switch to {language}",
+    "t": "हिन्दी में बदलें",
+    "ctx": "Button to switch language on banner",
+    "srcHash": "e74b4e0cb2ca0462",
+    "status": "reviewed"
+  },
+  "banner.dismiss": {
+    "src": "Dismiss",
+    "t": "बंद करें",
+    "ctx": "Dismiss button label for locale banner",
+    "srcHash": "48845bff334a50a5",
+    "status": "reviewed"
+  },
+  "calc.title": {
+    "src": "Calculate Your Percentile Rank",
+    "t": "अपना पर्सेंटाइल रैंक जानें",
+    "ctx": "Calculator widget heading",
+    "srcHash": "76dab23ed259a6f7",
+    "status": "reviewed"
+  },
+  "calc.label_input": {
+    "src": "Enter IQ Score (55–145):",
+    "t": "आईक्यू स्कोर दर्ज करें (55–145):",
+    "ctx": "Calculator score input label",
+    "srcHash": "b75dbd13abc576db",
+    "status": "reviewed"
+  },
+  "calc.btn_update": {
+    "src": "Update Chart",
+    "t": "चार्ट अपडेट करें",
+    "ctx": "Calculator button label",
+    "srcHash": "95a396738913e1ce",
+    "status": "reviewed"
+  },
+  "calc.results_header": {
+    "src": "POPULATION PERCENTILE RANK",
+    "t": "जनसंख्या पर्सेंटाइल रैंक",
+    "ctx": "Calculator results title",
+    "srcHash": "a89a3dc4af1b8c19",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_median": {
+    "src": "Exact population median (higher than 50% of the population, 1 in 2 people)",
+    "t": "सटीक जनसंख्या माध्यिका (50% लोगों से अधिक, 2 में से 1 व्यक्ति)",
+    "ctx": "Calculator rarity text for IQ 100",
+    "srcHash": "e34cc9a38d2679c4",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_high": {
+    "src": "Higher than approximately {pct} out of 100 people (1 in {oneIn} people)",
+    "t": "लगभग 100 में से {pct} लोगों से अधिक ({oneIn} में से 1 व्यक्ति)",
+    "ctx": "Calculator rarity text above mean",
+    "srcHash": "8b8fc144b3574435",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_low": {
+    "src": "Lower than approximately {pct} out of 100 people (1 in {oneIn} people)",
+    "t": "लगभग 100 में से {pct} लोगों से कम ({oneIn} में से 1 व्यक्ति)",
+    "ctx": "Calculator rarity text below mean",
+    "srcHash": "a69986c329d951bd",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_top_tail": {
+    "src": "Top 0.13% of the population (approximately 1 in 740 people)",
+    "t": "शीर्ष 0.13% जनसंख्या (लगभग 740 में से 1 व्यक्ति)",
+    "ctx": "Calculator rarity text for IQ >= 145",
+    "srcHash": "8c2c103ea2841730",
+    "status": "reviewed"
+  },
+  "calc.res_rarity_bottom_tail": {
+    "src": "Bottom 0.13% of the population (approximately 1 in 740 people)",
+    "t": "निचला 0.13% जनसंख्या (लगभग 740 में से 1 व्यक्ति)",
+    "ctx": "Calculator rarity text for IQ <= 55",
+    "srcHash": "f32b7139ab25641f",
+    "status": "reviewed"
+  },
+  "calc.wechsler_prefix": {
+    "src": "Wechsler Classification: {classification} ({sd} SD)",
+    "t": "वेक्सलर वर्गीकरण: {classification} ({sd} मानक विचलन)",
+    "ctx": "Calculator classification label",
+    "srcHash": "8b7a204a774780e0",
+    "status": "reviewed"
+  },
+  "filter.all": {
+    "src": "All Thinkers (7)",
+    "t": "सभी विचारक (7)",
+    "ctx": "Filter pill label: All Thinkers",
+    "srcHash": "2428f0911824cb6b",
+    "status": "reviewed"
+  },
+  "filter.visual": {
+    "src": "Visual-Spatial & Simulation",
+    "t": "स्थानिक-दृश्य एवं सिमुलेशन",
+    "ctx": "Filter pill label: Visual-Spatial",
+    "srcHash": "32cf056602e62129",
+    "status": "reviewed"
+  },
+  "filter.logic": {
+    "src": "Deductive Logic",
+    "t": "निगमनात्मक तर्क",
+    "ctx": "Filter pill label: Deductive Logic",
+    "srcHash": "b55d42cb8e86f037",
+    "status": "reviewed"
+  },
+  "filter.empirical": {
+    "src": "Empirical Science",
+    "t": "अनुभवजन्य विज्ञान",
+    "ctx": "Filter pill label: Empirical Science",
+    "srcHash": "c4d7f04e866ba6ad",
+    "status": "reviewed"
+  },
+  "filter.polymath": {
+    "src": "Polymathic Synthesis",
+    "t": "बहुविज्ञानी समन्वय",
+    "ctx": "Filter pill label: Polymathic Synthesis",
+    "srcHash": "43c0b4d92d583270",
+    "status": "reviewed"
+  },
+  "puzzle.reveal_btn": {
+    "src": "🔍 Reveal Step-by-Step Solution",
+    "t": "🔍 चरण-दर-चरण समाधान देखें",
+    "ctx": "Interactive puzzle reveal button",
+    "srcHash": "50b8b87ca2d8eb0d",
+    "status": "reviewed"
+  },
+  "puzzle.hide_btn": {
+    "src": "▲ Hide Solution",
+    "t": "▲ समाधान छिपाएं",
+    "ctx": "Interactive puzzle hide button",
+    "srcHash": "a5c5d1a86aad2190",
+    "status": "reviewed"
+  },
+  "table.copy_md": {
+    "src": "📋 Copy Markdown",
+    "t": "📋 Markdown कॉपी करें",
+    "ctx": "Table copy button label",
+    "srcHash": "cef61aed677dc831",
+    "status": "reviewed"
+  },
+  "table.copied": {
+    "src": "✓ Copied!",
+    "t": "✓ कॉपी हो गया!",
+    "ctx": "Table copied confirmation state",
+    "srcHash": "4e45a91772b8f5dd",
+    "status": "reviewed"
+  }
+}

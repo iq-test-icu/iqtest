@@ -1,0 +1,47 @@
+{
+  "de": {
+    "iq-scores/what-is-a-good-iq-score": {
+      "primary": { "q": "IQ Skala", "source": "Google Trends & Semrush DE", "checkedAt": "2026-08-14" },
+      "secondary": [{ "q": "IQ Tabelle", "source": "Google Search DE" }],
+      "titleTarget": "IQ Skala & Werte: Was ist ein guter IQ-Wert?",
+      "h1Target": "IQ Skala: Was bedeutet Ihr IQ-Wert?",
+      "notes": "German searchers heavily favor scale/table framing over literal question framing."
+    }
+  },
+  "fr": {
+    "iq-scores/what-is-a-good-iq-score": {
+      "primary": { "q": "Échelle QI", "source": "Google Trends & Semrush FR", "checkedAt": "2026-08-14" },
+      "secondary": [{ "q": "Score de QI moyen", "source": "Google Search FR" }],
+      "titleTarget": "Échelle QI: Qu'est-ce qu'un bon score de QI ?",
+      "h1Target": "Échelle de QI: Comprendre votre score",
+      "notes": "French searches cluster around échelle de QI and score moyen."
+    }
+  },
+  "es": {
+    "iq-scores/what-is-a-good-iq-score": {
+      "primary": { "q": "Escala de CI", "source": "Google Trends & Semrush ES", "checkedAt": "2026-08-14" },
+      "secondary": [{ "q": "Coeficiente intelectual normal", "source": "Google Search ES" }],
+      "titleTarget": "Escala de CI: ¿Qué es un buen coeficiente?",
+      "h1Target": "Escala de CI: Tabla y clasificación de puntuaciones",
+      "notes": "Spanish search volume is highest for Escala de CI and Coeficiente intelectual normal."
+    }
+  },
+  "ja": {
+    "iq-scores/what-is-a-good-iq-score": {
+      "primary": { "q": "IQ 平均", "source": "Google Search JP & Yahoo Japan", "checkedAt": "2026-08-14" },
+      "secondary": [{ "q": "IQ 目安", "source": "Google Search JP" }],
+      "titleTarget": "IQの平均と目安：高いスコアの基準",
+      "h1Target": "IQの平均と目安：知能指数の基準",
+      "notes": "Japanese users search for benchmark/average (平均/目安) rather than good score."
+    }
+  },
+  "ar": {
+    "iq-scores/what-is-a-good-iq-score": {
+      "primary": { "q": "معدل الذكاء الطبيعي", "source": "Google Trends MENA", "checkedAt": "2026-08-14" },
+      "secondary": [{ "q": "درجات الذكاء", "source": "Google Search AR" }],
+      "titleTarget": "معدل الذكاء الطبيعي: ما هي درجات الذكاء الجيدة؟",
+      "h1Target": "معدل الذكاء الطبيعي ومستويات درجات الذكاء",
+      "notes": "Arabic search patterns target natural/average intelligence rates."
+    }
+  }
+}

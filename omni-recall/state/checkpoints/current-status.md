@@ -1,0 +1,19 @@
+# Current Status: iq-test.icu
+
+- date: 2026-08-14
+- property: https://iq-test.icu (APEX Business Systems Ltd., Edmonton, AB, Canada)
+- repository: iq-test-icu/iqtest
+- deployment_surface: Cloudflare Pages (Static Frontend) + Cloudflare Worker (/api/*) + Supabase + Stripe + Resend
+- active_branch: feat/persistent-header-language-switcher-and-docs
+- merged_prs:
+  - PR #1: Core funnel, assessment engine, Stripe webhook, Resend report delivery
+  - PR #2: Psychometric item bank, tiered PDF generation, session scoring calibration
+  - PR #3: Master Semantic SEO elevation (Hub A, Hub B, Hub C, Trust & Utility, JSON-LD schemas, breadcrumbs, Gaussian bell curve visualizer, interactive puzzle solvers)
+  - PR #4: 13-locale internationalization engine (EN, DE, FR, ES, PT, IT, NL, JA, KO, ZH, AR, HI, TL), RFC 8058 one-click unsubscribe, CASL sender compliance, zero-drift build pipeline
+- current_elevation: Persistent header language switcher on all 33 pages across all viewports (Desktop, Tablet, Mobile) with centered brand logo and far-right floating selector, full omni-recall synchronization
+- verification_status:
+  - Worker test suite: PASSED (3/3 tests)
+  - E2E test suite: PASSED (6/6 tests)
+  - SEO verification gate: PASSED (492/492 checks)
+  - i18n verification gate: PASSED (185/185 checks)
+- generator_drift: ZERO (100% byte-for-byte fidelity)

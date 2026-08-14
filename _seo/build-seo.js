@@ -233,9 +233,132 @@ const COMMON_STYLES = `
     margin-bottom: 36px;
   }
   .breadcrumbs a { color: var(--muted); text-decoration: none; }
-  .breadcrumbs a:hover { color: var(--gold); }
-  .breadcrumbs span.sep { opacity: 0.5; }
-  .breadcrumbs span.current { color: var(--gold); }
+  /* === PERSISTENT SITE HEADER & LANGUAGE SWITCHER === */
+  .site-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: oklch(0.06 0.002 95 / 0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 10px 20px;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .site-header-inner {
+    position: relative;
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 36px;
+  }
+  .site-logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    margin: 0 auto;
+  }
+  .header-lang-wrapper {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1000;
+  }
+  .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: oklch(0.12 0.008 95 / 0.9);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+  }
+  .lang-btn:hover, .lang-btn:focus-visible {
+    border-color: var(--gold);
+    background: oklch(0.16 0.01 95);
+    color: var(--gold);
+    outline: none;
+  }
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 280px;
+    max-height: 420px;
+    overflow-y: auto;
+    background: oklch(0.09 0.005 95 / 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.6);
+    padding: 12px;
+    z-index: 1001;
+  }
+  .lang-dropdown[hidden] {
+    display: none;
+  }
+  .lang-dropdown-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin-bottom: 8px;
+    padding: 0 6px;
+  }
+  .lang-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    color: var(--text);
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    transition: all 0.15s ease;
+  }
+  .lang-option:hover {
+    background: oklch(0.18 0.01 95 / 0.8);
+    color: var(--gold);
+  }
+  .lang-option.active {
+    background: oklch(0.72 0.12 95 / 0.15);
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .lang-code {
+    font-size: 0.68rem;
+    font-weight: 700;
+    opacity: 0.6;
+    background: rgba(255,255,255,0.06);
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+
+  /* Scoped RTL support */
+  [dir="rtl"] .site-header-inner { direction: rtl; }
+  [dir="rtl"] .lang-dropdown { right: auto; left: 0; }
+  [dir="rtl"] .lang-option { direction: rtl; }
 
   h1 {
     font-family: 'Space Grotesk', sans-serif;
@@ -522,6 +645,57 @@ const COMMON_STYLES = `
   footer a:hover { color: var(--gold); }
 `;
 
+function buildHeaderSwitcher(currentLocale = 'en', canonicalUrl = '') {
+  let subPath = '';
+  try {
+    const urlObj = new URL(canonicalUrl);
+    subPath = urlObj.pathname.replace(/^\/[a-z]{2}(\/|$)/, '$1').replace(/^\//, '');
+  } catch (_) {}
+  const pathSuffix = subPath ? `/${subPath}` : '';
+
+  const localesList = [
+    { code: 'en', name: 'English', endonym: 'English', href: `https://iq-test.icu${pathSuffix}` },
+    { code: 'de', name: 'German', endonym: 'Deutsch', href: `https://iq-test.icu/de${pathSuffix}` },
+    { code: 'fr', name: 'French', endonym: 'Français', href: `https://iq-test.icu/fr${pathSuffix}` },
+    { code: 'es', name: 'Spanish', endonym: 'Español', href: `https://iq-test.icu/es${pathSuffix}` },
+    { code: 'pt', name: 'Portuguese', endonym: 'Português', href: `https://iq-test.icu/pt${pathSuffix}` },
+    { code: 'it', name: 'Italian', endonym: 'Italiano', href: `https://iq-test.icu/it${pathSuffix}` },
+    { code: 'nl', name: 'Dutch', endonym: 'Nederlands', href: `https://iq-test.icu/nl${pathSuffix}` },
+    { code: 'ja', name: 'Japanese', endonym: '日本語', href: `https://iq-test.icu/ja${pathSuffix}` },
+    { code: 'ko', name: 'Korean', endonym: '한국어', href: `https://iq-test.icu/ko${pathSuffix}` },
+    { code: 'zh', name: 'Chinese', endonym: '简体中文', href: `https://iq-test.icu/zh${pathSuffix}` },
+    { code: 'ar', name: 'Arabic', endonym: 'العربية', href: `https://iq-test.icu/ar${pathSuffix}` },
+    { code: 'hi', name: 'Hindi', endonym: 'हिन्दी', href: `https://iq-test.icu/hi${pathSuffix}` },
+    { code: 'tl', name: 'Tagalog', endonym: 'Tagalog', href: `https://iq-test.icu/tl${pathSuffix}` }
+  ];
+
+  const currentObj = localesList.find(l => l.code === currentLocale) || localesList[0];
+
+  return `
+<header class="site-header" id="siteHeader">
+  <div class="site-header-inner">
+    <a href="/" class="site-logo-link" aria-label="IQ Test Home">
+      <img src="/wordmark.webp" alt="IQ·Test" style="height:28px; width:auto; display:block;" onerror="this.style.display='none'">
+    </a>
+    <div class="header-lang-wrapper" id="headerLangWrapper">
+      <button class="lang-btn" id="headerLangBtn" aria-expanded="false" aria-haspopup="true" aria-controls="headerLangDropdown" onclick="toggleHeaderLangMenu(event)">
+        <span class="globe-icon" aria-hidden="true">🌐</span>
+        <span class="lang-current-label">${currentObj.endonym}</span>
+        <svg class="chevron-icon" aria-hidden="true" viewBox="0 0 16 16" width="12" height="12"><path fill="currentColor" d="M3.2 5.2a.75.75 0 0 1 1.06 0L8 8.94l3.74-3.74a.75.75 0 1 1 1.06 1.06l-4.27 4.27a.75.75 0 0 1-1.06 0L3.2 6.26a.75.75 0 0 1 0-1.06z"/></svg>
+      </button>
+      <nav id="headerLangDropdown" class="lang-dropdown" aria-label="Language Selector" hidden>
+        <div class="lang-dropdown-inner">
+          <div class="lang-dropdown-title">Select Language / Sprache wählen</div>
+          <div class="lang-grid">
+            ${localesList.map(l => `<a href="${l.href}" class="lang-option${l.code === currentLocale ? ' active' : ''}" hreflang="${l.code}" lang="${l.code}"><span class="lang-code">${l.code.toUpperCase()}</span> ${l.endonym}</a>`).join('\n            ')}
+          </div>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>`;
+}
+
 function buildHtmlPage({
   relPath,
   title,
@@ -579,6 +753,43 @@ function buildHtmlPage({
         </div>`).join('\n')}
     </div>` : '';
 
+  const headerHtml = buildHeaderSwitcher('en', canonical);
+
+  const headerScript = `
+<script>
+function toggleHeaderLangMenu(e) {
+  if (e) e.stopPropagation();
+  var btn = document.getElementById('headerLangBtn');
+  var menu = document.getElementById('headerLangDropdown');
+  if (!btn || !menu) return;
+  var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', !isExpanded);
+  menu.hidden = isExpanded;
+}
+document.addEventListener('click', function(e) {
+  var wrapper = document.getElementById('headerLangWrapper');
+  if (wrapper && !wrapper.contains(e.target)) {
+    var btn = document.getElementById('headerLangBtn');
+    var menu = document.getElementById('headerLangDropdown');
+    if (btn && menu) {
+      btn.setAttribute('aria-expanded', 'false');
+      menu.hidden = true;
+    }
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    var btn = document.getElementById('headerLangBtn');
+    var menu = document.getElementById('headerLangDropdown');
+    if (btn && menu) {
+      btn.setAttribute('aria-expanded', 'false');
+      menu.hidden = true;
+      btn.focus();
+    }
+  }
+});
+</script>`;
+
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -610,6 +821,7 @@ ${jsonLd}
 </script>
 </head>
 <body>
+${headerHtml}
 <div class="page">
   ${breadcrumbsHtml}
   <h1>${h1}</h1>
@@ -647,6 +859,7 @@ ${jsonLd}
   &copy; 2026 APEX Business Systems Ltd. &nbsp;&middot;&nbsp; Edmonton, AB, Canada &nbsp;&middot;&nbsp; <a href="mailto:support@iq-test.icu">support@iq-test.icu</a>
 </footer>
 ${customScript}
+${headerScript}
 </body>
 </html>
 `;

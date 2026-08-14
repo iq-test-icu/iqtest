@@ -88,7 +88,199 @@ if (html.includes(heroOldH1)) {
 }
 
 // 5. Update secondary H1 on report screen to div so single H1 rule is strictly respected
-html = html.replace(/<h1 id="reportHeadline">Your full report<\/h1>/i, '<div class="report-headline" id="reportHeadline" style="font-family:var(--font-display); font-size:1.8rem; font-weight:700; color:var(--text-primary); margin-bottom:12px;">Your full report</div>');
+html = html.replace(/<h1 style="text-align:center;" id="resH1">/gi, '<div style="text-align:center; font-size:1.8rem; font-weight:700; color:var(--text); margin-bottom:12px;" id="resH1">');
+html = html.replace(/<\/h1>(\s*<p class="lead" style="text-align:center;" id="resSubtitle">)/gi, '</div>$1');
+
+// 6. Add Header Language Switcher Styles and Markup
+const indexSwitcherStyles = `
+  /* === HEADER LANGUAGE SWITCHER === */
+  header {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative !important;
+    width: 100% !important;
+    max-width: 960px;
+    margin: 0 auto 20px;
+    padding: 10px 16px;
+  }
+  .logo-wrap {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 0 auto !important;
+  }
+  .header-lang-wrapper {
+    position: absolute !important;
+    right: 16px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 1000;
+  }
+  .lang-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: oklch(0.12 0.008 95 / 0.9);
+    border: 1px solid var(--border, rgba(255,255,255,0.15));
+    color: var(--text, #fff);
+    padding: 6px 14px;
+    border-radius: 9999px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+  }
+  .lang-btn:hover, .lang-btn:focus-visible {
+    border-color: #C9A24B;
+    background: oklch(0.16 0.01 95);
+    color: #C9A24B;
+    outline: none;
+  }
+  .lang-dropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 280px;
+    max-height: 420px;
+    overflow-y: auto;
+    background: oklch(0.09 0.005 95 / 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border, rgba(255,255,255,0.15));
+    border-radius: 12px;
+    box-shadow: 0 16px 36px rgba(0,0,0,0.6);
+    padding: 12px;
+    z-index: 1001;
+  }
+  .lang-dropdown[hidden] {
+    display: none;
+  }
+  .lang-dropdown-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-secondary, #94a3b8);
+    margin-bottom: 8px;
+    padding: 0 6px;
+  }
+  .lang-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4px;
+  }
+  .lang-option {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    color: var(--text, #e2e8f0);
+    text-decoration: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.8rem;
+    transition: all 0.15s ease;
+  }
+  .lang-option:hover {
+    background: oklch(0.18 0.01 95 / 0.8);
+    color: #C9A24B;
+  }
+  .lang-option.active {
+    background: rgba(201, 162, 75, 0.15);
+    color: #C9A24B;
+    font-weight: 600;
+  }
+  .lang-code {
+    font-size: 0.68rem;
+    font-weight: 700;
+    opacity: 0.6;
+    background: rgba(255,255,255,0.06);
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+  [dir="rtl"] .lang-dropdown { right: auto; left: 0; }
+`;
+
+if (!html.includes('/* === HEADER LANGUAGE SWITCHER === */')) {
+  html = html.replace('</style>', `${indexSwitcherStyles}\n</style>`);
+}
+
+const headerSwitcherMarkup = `  <header>
+    <div class="logo-wrap">
+      <img src="/wordmark.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;" onerror="this.style.display='none'">
+    </div>
+    <div class="header-lang-wrapper" id="headerLangWrapper">
+      <button class="lang-btn" id="headerLangBtn" aria-expanded="false" aria-haspopup="true" aria-controls="headerLangDropdown" onclick="toggleHeaderLangMenu(event)">
+        <span class="globe-icon" aria-hidden="true">🌐</span>
+        <span class="lang-current-label">English</span>
+        <svg class="chevron-icon" aria-hidden="true" viewBox="0 0 16 16" width="12" height="12"><path fill="currentColor" d="M3.2 5.2a.75.75 0 0 1 1.06 0L8 8.94l3.74-3.74a.75.75 0 1 1 1.06 1.06l-4.27 4.27a.75.75 0 0 1-1.06 0L3.2 6.26a.75.75 0 0 1 0-1.06z"/></svg>
+      </button>
+      <nav id="headerLangDropdown" class="lang-dropdown" aria-label="Language Selector" hidden>
+        <div class="lang-dropdown-inner">
+          <div class="lang-dropdown-title">Select Language</div>
+          <div class="lang-grid">
+            <a href="/" class="lang-option active" hreflang="en" lang="en"><span class="lang-code">EN</span> English</a>
+            <a href="/de/" class="lang-option" hreflang="de" lang="de"><span class="lang-code">DE</span> Deutsch</a>
+            <a href="/fr/" class="lang-option" hreflang="fr" lang="fr"><span class="lang-code">FR</span> Français</a>
+            <a href="/es/" class="lang-option" hreflang="es" lang="es"><span class="lang-code">ES</span> Español</a>
+            <a href="/pt/" class="lang-option" hreflang="pt" lang="pt"><span class="lang-code">PT</span> Português</a>
+            <a href="/it/" class="lang-option" hreflang="it" lang="it"><span class="lang-code">IT</span> Italiano</a>
+            <a href="/nl/" class="lang-option" hreflang="nl" lang="nl"><span class="lang-code">NL</span> Nederlands</a>
+            <a href="/ja/" class="lang-option" hreflang="ja" lang="ja"><span class="lang-code">JA</span> 日本語</a>
+            <a href="/ko/" class="lang-option" hreflang="ko" lang="ko"><span class="lang-code">KO</span> 한국어</a>
+            <a href="/zh/" class="lang-option" hreflang="zh-Hans" lang="zh-Hans"><span class="lang-code">ZH</span> 简体中文</a>
+            <a href="/ar/" class="lang-option" hreflang="ar" lang="ar"><span class="lang-code">AR</span> العربية</a>
+            <a href="/hi/" class="lang-option" hreflang="hi" lang="hi"><span class="lang-code">HI</span> हिन्दी</a>
+            <a href="/tl/" class="lang-option" hreflang="tl" lang="tl"><span class="lang-code">TL</span> Tagalog</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>`;
+
+html = html.replace(/<header>[\s\S]*?<\/header>/i, headerSwitcherMarkup);
+
+const indexHeaderScript = `
+<script>
+function toggleHeaderLangMenu(e) {
+  if (e) e.stopPropagation();
+  var btn = document.getElementById('headerLangBtn');
+  var menu = document.getElementById('headerLangDropdown');
+  if (!btn || !menu) return;
+  var isExpanded = btn.getAttribute('aria-expanded') === 'true';
+  btn.setAttribute('aria-expanded', !isExpanded);
+  menu.hidden = isExpanded;
+}
+document.addEventListener('click', function(e) {
+  var wrapper = document.getElementById('headerLangWrapper');
+  if (wrapper && !wrapper.contains(e.target)) {
+    var btn = document.getElementById('headerLangBtn');
+    var menu = document.getElementById('headerLangDropdown');
+    if (btn && menu) {
+      btn.setAttribute('aria-expanded', 'false');
+      menu.hidden = true;
+    }
+  }
+});
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    var btn = document.getElementById('headerLangBtn');
+    var menu = document.getElementById('headerLangDropdown');
+    if (btn && menu) {
+      btn.setAttribute('aria-expanded', 'false');
+      menu.hidden = true;
+      btn.focus();
+    }
+  }
+});
+</script>`;
+
+if (!html.includes('function toggleHeaderLangMenu')) {
+  html = html.replace('</body>', `${indexHeaderScript}\n</body>`);
+}
 
 // 6. Update and expand #content-hub with the required 4 depth sections and verbatim FAQs
 const contentHubReplacement = `<div class="info-block" id="content-hub">
