@@ -591,7 +591,7 @@
         OMNISCIENT : KNOWLEDGE :: OMNIPOTENT : [ ? ]
       </p>
       <p><strong>Question:</strong> Complete the analogy by identifying the corresponding concept and underlying relational rule.</p>
-      <button class="btn-outline" onclick="toggleSolution('solVerb', this)">🔍 Reveal Step-by-Step Solution</button>
+      <button class="btn-outline" aria-expanded="false" aria-controls="solVerb" onclick="toggleSolution('solVerb', this)">🔍 Reveal Step-by-Step Solution</button>
       
       <div id="solVerb" class="solution-panel">
         <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">✓ Semantic Relationship Analysis:</p>
@@ -660,13 +660,10 @@
   <script>
     function toggleSolution(id, btn) {
       const panel = document.getElementById(id);
-      if (panel.style.display === 'block') {
-        panel.style.display = 'none';
-        btn.textContent = '🔍 Reveal Step-by-Step Solution';
-      } else {
-        panel.style.display = 'block';
-        btn.textContent = '▲ Hide Solution';
-      }
+      const isOpening = panel.style.display !== 'block';
+      panel.style.display = isOpening ? 'block' : 'none';
+      btn.textContent = isOpening ? '▲ Hide Solution' : '🔍 Reveal Step-by-Step Solution';
+      btn.setAttribute('aria-expanded', isOpening ? 'true' : 'false');
     }
   </script>
 </body>

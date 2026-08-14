@@ -264,7 +264,7 @@ const newFooterContent = `  <footer>
     </div>
   </footer>`;
 
-html = html.replace(/<footer>[\s\S]*?<\/footer>/i, newFooterContent);
+html = html.replace(/[ \t]*<footer>[\s\S]*?<\/footer>/i, newFooterContent);
 
 fs.writeFileSync(indexPath, html, 'utf8');
 console.log('Homepage (public/index.html) successfully upgraded.');

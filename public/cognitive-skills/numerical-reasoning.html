@@ -590,7 +590,7 @@
         Sequence: 3, 7, 15, 31, 63, [ ? ]
       </p>
       <p><strong>Question:</strong> What is the next number in this progression, and what rule governs it?</p>
-      <button class="btn-outline" onclick="toggleSolution('solNum', this)">🔍 Reveal Step-by-Step Solution</button>
+      <button class="btn-outline" aria-expanded="false" aria-controls="solNum" onclick="toggleSolution('solNum', this)">🔍 Reveal Step-by-Step Solution</button>
       
       <div id="solNum" class="solution-panel">
         <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">✓ Two Valid Solution Paths:</p>
@@ -658,13 +658,10 @@
   <script>
     function toggleSolution(id, btn) {
       const panel = document.getElementById(id);
-      if (panel.style.display === 'block') {
-        panel.style.display = 'none';
-        btn.textContent = '🔍 Reveal Step-by-Step Solution';
-      } else {
-        panel.style.display = 'block';
-        btn.textContent = '▲ Hide Solution';
-      }
+      const isOpening = panel.style.display !== 'block';
+      panel.style.display = isOpening ? 'block' : 'none';
+      btn.textContent = isOpening ? '▲ Hide Solution' : '🔍 Reveal Step-by-Step Solution';
+      btn.setAttribute('aria-expanded', isOpening ? 'true' : 'false');
     }
   </script>
 </body>

@@ -185,13 +185,34 @@ assertCheck(sitemapUrls.length >= 28, `Sitemap has complete entity cluster cover
 assertCheck(fs.existsSync(path.join(publicDir, 'historical-figures-iq.html')), '/historical-figures-iq exists as Hub B canonical');
 
 // ── GATE G6: Constitutional Close-Out ─────────────────────────────────────────
-console.log(`\n--- [GATE G6: CONSTITUTIONAL CLOSE-OUT] ---`);
+console.log(`\n--- [GATE G6: CONSTITUTIONAL CLOSE-OUT & INTERACTIVE ASSET INTEGRITY] ---`);
 
 for (const filePath of allHtmlFiles) {
   const rel = path.relative(publicDir, filePath).replace(/\\/g, '/');
   const html = fs.readFileSync(filePath, 'utf8');
 
   assertCheck(!html.includes('{{') && !html.includes('TODO') && !html.includes('Lorem ipsum'), `${rel} has zero unresolved tokens or TODO placeholders`);
+}
+
+// Check interactive assets in shipped HTML
+const histHubHtml = fs.readFileSync(path.join(publicDir, 'historical-figures-iq.html'), 'utf8');
+assertCheck(histHubHtml.includes('class="filter-pill'), 'historical-figures-iq.html ships active class="filter-pill" buttons');
+assertCheck(histHubHtml.includes('filterThinkers'), 'historical-figures-iq.html ships filterThinkers() JS engine');
+
+const calcHtml = fs.readFileSync(path.join(publicDir, 'iq-scores', 'iq-percentile-calculator.html'), 'utf8');
+assertCheck(calcHtml.includes('role="img"'), 'iq-percentile-calculator.html bell curve SVG has role="img"');
+assertCheck(calcHtml.includes('aria-live="polite"'), 'iq-percentile-calculator.html has aria-live="polite" on calculation results');
+assertCheck(calcHtml.includes('updateBellCurve'), 'iq-percentile-calculator.html ships updateBellCurve() Gaussian visualizer');
+
+const logicHtml = fs.readFileSync(path.join(publicDir, 'cognitive-skills', 'logical-reasoning.html'), 'utf8');
+assertCheck(logicHtml.includes('aria-controls="solLogic"'), 'logical-reasoning.html ships step-by-step logic solver with aria-controls');
+
+// Generator Drift Gate
+try {
+  const gitStatus = execSync('git status --porcelain public/', { cwd: rootDir, encoding: 'utf8' }).trim();
+  assertCheck(gitStatus === '', 'Zero Generator Drift — Committed public/ matches generator output byte-for-byte');
+} catch (err) {
+  assertCheck(false, 'Zero Generator Drift', err.message);
 }
 
 console.log(`\n==================================================================`);
@@ -203,3 +224,4 @@ if (errors.length > 0) {
 console.log(`==================================================================\n`);
 
 process.exit(failedChecks > 0 ? 1 : 0);
+

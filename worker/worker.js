@@ -112,7 +112,7 @@ export default {
           });
         }
 
-        if (url.pathname !== "/api/webhook") {
+        if (url.pathname !== "/api/webhook" && url.pathname !== "/api/unsubscribe") {
           try {
             body = JSON.parse(rawBody);
           } catch (err) {
@@ -122,7 +122,7 @@ export default {
             });
           }
         } else {
-          // Pass rawBody for signature checking in webhook
+          // Pass rawBody for signature checking in webhook / unsubscribe
           req.rawBody = rawBody;
         }
       }
@@ -145,8 +145,8 @@ export default {
         return await handleWebhook(req, env, cors);
       if (url.pathname === "/api/report" && req.method === "GET")
         return await handleGetReport(url, env, cors);
-      if (url.pathname === "/api/unsubscribe" && req.method === "GET")
-        return await handleUnsubscribe(url, env, cors);
+      if (url.pathname === "/api/unsubscribe" && (req.method === "GET" || req.method === "POST"))
+        return await handleUnsubscribe(req, url, env, cors);
 
       return new Response("Not found", { status: 404, headers: cors });
     } catch (err) {
@@ -195,17 +195,18 @@ async function sbSelect(env, id) {
   return rows[0] || null;
 }
 
-/** Rows eligible for the recovery sweep — mirrors sessions_recovery_sweep_idx
- *  in supabase/schema.sql exactly, so the query stays index-backed. */
-async function sbSelectRecoveryCandidates(env, cutoffIso, limit) {
-  const params = new URLSearchParams({
-    paid:             "eq.false",
-    recovery_sent:    "eq.false",
-    marketing_opt_in: "eq.true",
-    created_at:       `lt.${cutoffIso}`,
-    select:           "id,email,cognitive_index,percentile_estimate",
-    limit:            String(limit),
-  });
+/** Rows eligible for the recovery sweep — bounded between minIso and maxIso
+ *  to ensure no accidental backfilling of historical leads. */
+async function sbSelectRecoveryCandidates(env, minIso, maxIso, limit) {
+  const params = new URLSearchParams();
+  params.append("paid", "eq.false");
+  params.append("recovery_sent", "eq.false");
+  params.append("marketing_opt_in", "eq.true");
+  params.append("created_at", `gte.${minIso}`);
+  params.append("created_at", `lt.${maxIso}`);
+  params.append("select", "id,email,cognitive_index,percentile_estimate");
+  params.append("limit", String(limit));
+
   const res = await fetch(`${env.SUPABASE_URL}/rest/v1/sessions?${params.toString()}`, {
     headers: {
       apikey:        env.SUPABASE_SERVICE_KEY,
@@ -381,21 +382,26 @@ async function handleGetReport(url, env, cors) {
   return json({ paid: row.paid, report: row.report || null, tier: row.tier || null }, 200, cors);
 }
 
-/** GET /api/unsubscribe?id=<uuid>
- *  One-click CASL unsubscribe — sets marketing_opt_in=false. Always returns a
- *  friendly HTML confirmation, even for an invalid/missing id, so the link
- *  never surfaces a broken page or leaks whether an id exists.
+/** GET/POST /api/unsubscribe?id=<uuid>
+ *  One-click CASL / RFC 8058 unsubscribe — sets marketing_opt_in=false.
+ *  Handles RFC 8058 POST from email clients and GET from browser links.
  */
-async function handleUnsubscribe(url, env, cors) {
+async function handleUnsubscribe(req, url, env, cors) {
   const id = url.searchParams.get("id");
   if (isUuid(id)) {
     try {
       await sbUpdate(env, id, { marketing_opt_in: false });
-      logEvent(env, "unsubscribed", { sessionId: id, status: "success" });
+      logEvent(env, "unsubscribed", { sessionId: id, status: "success", method: req.method });
     } catch (err) {
       logEvent(env, "unsubscribe_failed", { sessionId: id, status: "failed", errorCode: err.message });
     }
   }
+
+  // RFC 8058 One-Click POST request from email clients
+  if (req.method === "POST") {
+    return json({ ok: true, message: "unsubscribed" }, 200, cors);
+  }
+
   const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Unsubscribed | IQ·Test</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
 <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; background:#0d0d0d; color:#eee; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; text-align:center; padding:24px;">
@@ -655,11 +661,13 @@ async function sendReportEmail(env, to, report, index, tier) {
  * the rest of the batch or the next scheduled run.
  */
 async function handleRecoverySweep(env) {
-  const cutoff = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
+  // Safe bounded lookback window: Leads between 48 hours and 14 days old (prevents backfill mass-emailing)
+  const maxCutoff = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
+  const minCutoff = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
 
   let candidates;
   try {
-    candidates = await sbSelectRecoveryCandidates(env, cutoff, 200);
+    candidates = await sbSelectRecoveryCandidates(env, minCutoff, maxCutoff, 200);
   } catch (err) {
     logEvent(env, "recovery_sweep_query_failed", { status: "failed", errorCode: err.message });
     return;
@@ -697,12 +705,14 @@ If you'd like the full percentile breakdown, or the written reasoning analysis a
 
 ${reportUrl}
 
-No pressure — if you're not interested, no action needed. You're getting this because you opted in to occasional cognitive-science content when you took the test.
+No pressure — if you're not interested, no action needed.
 
-Unsubscribe from these emails: ${unsubUrl}
-
-— IQ·Test
-iq-test.icu`;
+---
+Consent Scope & Sender Identification (CASL Compliance):
+You received this message because you completed the cognitive assessment at iq-test.icu and opted in to receive occasional cognitive-science content.
+Sender: APEX Business Systems Ltd. · Edmonton, AB, Canada
+Unsubscribe instantly: ${unsubUrl}
+`;
 
   const html = `
     <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; line-height:1.6; color:#1a1a1a; max-width:600px; margin:0 auto; padding:24px; background-color:#ffffff; border:1px solid #eaeaea; border-radius:12px;">
@@ -718,9 +728,9 @@ iq-test.icu`;
       </div>
       <div style="margin-top:32px; border-top:1px solid #eaeaea; padding-top:16px; font-size:12px; color:#888888; text-align:center; line-height:1.5;">
         This is a self-insight quiz, not a clinical IQ test.<br>
-        &copy; 2026 APEX Business Systems Ltd. &nbsp;&middot;&nbsp; Edmonton, AB<br>
-        <a href="https://iq-test.icu" style="color:#B49048; text-decoration:none;">iq-test.icu</a> &nbsp;&middot;&nbsp;
-        <a href="${unsubUrl}" style="color:#888888;">Unsubscribe</a>
+        You received this email because you opted in to occasional cognitive-science content when taking the assessment on <a href="https://iq-test.icu" style="color:#B49048; text-decoration:none;">iq-test.icu</a>.<br>
+        &copy; 2026 APEX Business Systems Ltd. &nbsp;&middot;&nbsp; Edmonton, AB, Canada<br>
+        <a href="${unsubUrl}" style="color:#888888; text-decoration:underline;">One-Click Unsubscribe</a>
       </div>
     </div>
   `;

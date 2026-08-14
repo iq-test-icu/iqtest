@@ -8,7 +8,7 @@ const { buildHtmlPage } = require('./build-seo');
 // T4.8 — /iq-scores/what-is-a-good-iq-score
 buildHtmlPage({
   relPath: 'iq-scores/what-is-a-good-iq-score.html',
-  title: 'What Is a Good IQ Score? Score Ranges & Percentiles | IQ Test',
+  title: 'What Is a Good IQ Score? Ranges & Percentiles | IQ Test',
   description: 'What is considered a good IQ score? Explore standard deviation ranges, Wechsler classifications, population percentiles, and what IQ numbers mean.',
   canonical: 'https://iq-test.icu/iq-scores/what-is-a-good-iq-score',
   breadcrumbs: [
@@ -356,7 +356,7 @@ buildHtmlPage({
 
       <!-- Live Dynamic Bell Curve SVG -->
       <div style="background:oklch(0.06 0.002 95); border:1px solid var(--border); border-radius:10px; padding:18px; margin-bottom:24px;">
-        <svg id="bellCurveSvg" viewBox="0 0 560 190" style="width:100%; height:auto; display:block;" aria-label="Dynamic Gaussian Bell Curve Visualizer">
+        <svg id="bellCurveSvg" role="img" viewBox="0 0 560 190" style="width:100%; height:auto; display:block;" aria-label="Gaussian Normal Distribution Curve">
           <!-- Shaded Area Path -->
           <path id="svgShadePath" d="" fill="oklch(0.72 0.12 95 / 0.28)"></path>
           <!-- Outer Curve Path -->
@@ -377,10 +377,10 @@ buildHtmlPage({
         </svg>
       </div>
 
-      <div id="calcResults" style="background:oklch(0.08 0.004 95); border:1px solid var(--border); border-radius:8px; padding:20px; font-family:'Space Grotesk',sans-serif;">
+      <div id="calcResults" aria-live="polite" style="background:oklch(0.08 0.004 95); border:1px solid var(--border); border-radius:8px; padding:20px; font-family:'Space Grotesk',sans-serif;">
         <div style="font-size:0.85rem; color:var(--muted); margin-bottom:4px;">POPULATION PERCENTILE RANK</div>
-        <div id="resPercentile" style="font-size:2rem; font-weight:700; color:var(--gold); margin-bottom:8px;">50.0th Percentile</div>
-        <div id="resRarity" style="font-size:1rem; color:var(--text); margin-bottom:6px;">Exact population median (higher than 50 out of 100 people)</div>
+        <div id="resPercentile" aria-live="polite" style="font-size:2rem; font-weight:700; color:var(--gold); margin-bottom:8px;">50.0th Percentile</div>
+        <div id="resRarity" aria-live="polite" style="font-size:1rem; color:var(--text); margin-bottom:6px;">Exact population median (higher than 50% of the population, 1 in 2 people)</div>
         <div id="resClassification" style="font-size:0.9rem; color:var(--muted);">Wechsler Classification: Average (0.00 SD)</div>
       </div>
     </div>
@@ -495,11 +495,31 @@ buildHtmlPage({
       
       let rarityText = "";
       if (score >= 100) {
-        const oneIn = (1.0 / (1.0 - cdf)).toFixed(1);
-        rarityText = "Higher than approximately " + Math.round(cdf * 100) + " out of 100 people (1 in " + (oneIn < 2 ? "2" : oneIn) + " people)";
+        const topPct = (1.0 - cdf) * 100;
+        const oneIn = topPct > 0 ? 100 / topPct : 1000;
+        const oneInFormatted = oneIn >= 100 ? Math.round(oneIn) : oneIn >= 10 ? oneIn.toFixed(0) : oneIn.toFixed(1);
+        if (score >= 145) {
+          rarityText = "Top 0.13% of the population (approximately 1 in 740 people)";
+        } else if (score >= 130) {
+          rarityText = "Higher than " + (cdf * 100).toFixed(1) + "% of the population (top " + topPct.toFixed(1) + "%, 1 in " + oneInFormatted + " people)";
+        } else if (score === 100) {
+          rarityText = "Exact population median (higher than 50% of the population, 1 in 2 people)";
+        } else {
+          const outOf100 = Math.min(99, Math.floor(cdf * 100));
+          rarityText = "Higher than approximately " + outOf100 + " out of 100 people (1 in " + oneInFormatted + " people)";
+        }
       } else {
-        const lowerThan = ((1.0 - cdf) * 100).toFixed(1);
-        rarityText = "Lower than approximately " + Math.round(lowerThan) + " out of 100 people in the population";
+        const bottomPct = cdf * 100;
+        const oneInBottom = bottomPct > 0 ? 100 / bottomPct : 1000;
+        const oneInFormatted = oneInBottom >= 100 ? Math.round(oneInBottom) : oneInBottom >= 10 ? oneInBottom.toFixed(0) : oneInBottom.toFixed(1);
+        if (score <= 55) {
+          rarityText = "Bottom 0.13% of the population (approximately 1 in 740 people)";
+        } else if (score <= 70) {
+          rarityText = "Lower than " + ((1.0 - cdf) * 100).toFixed(1) + "% of the population (bottom " + bottomPct.toFixed(1) + "%, 1 in " + oneInFormatted + " people)";
+        } else {
+          const outOf100 = Math.min(99, Math.floor((1.0 - cdf) * 100));
+          rarityText = "Lower than approximately " + outOf100 + " out of 100 people (1 in " + oneInFormatted + " people)";
+        }
       }
 
       document.getElementById('resPercentile').textContent = pct + "th Percentile";
@@ -757,7 +777,7 @@ buildHtmlPage({
       { "@type": "Thing", "name": "Intelligence quotient", "sameAs": "https://en.wikipedia.org/wiki/Intelligence_quotient" }
     ]
   },
-  h1: 'IQ Scores & Scale Guide: Understanding Cognitive Metrics',
+  h1: 'IQ Scores & Scale Analysis: Understanding Cognitive Metrics',
   answerBlock: 'Welcome to the definitive IQ scores guide. Explore the psychometric mechanics of deviation scoring, population percentiles, Gaussian normal distributions, and high-IQ classifications across our comprehensive collection of articles and interactive calculators designed for self-insight and educational discovery.',
   bodyHtml: `
     <h2>Explore our IQ score resources</h2>

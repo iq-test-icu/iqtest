@@ -102,6 +102,18 @@ async function testUnsubscribeValidIdPatchesRow() {
     assert.strictEqual(res.status, 200, "Unsubscribe should return 200");
     assert.strictEqual(patchedRow.marketing_opt_in, false, "marketing_opt_in should be patched to false");
     console.log("✓ GET /api/unsubscribe?id=<valid_uuid> sets marketing_opt_in=false");
+
+    // Test RFC 8058 POST One-Click Unsubscribe
+    const postReq = new Request(`https://iq-test.icu/api/unsubscribe?id=${validUuid}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: "List-Unsubscribe=One-Click"
+    });
+    const postRes = await worker.fetch(postReq, mockEnv);
+    assert.strictEqual(postRes.status, 200, "RFC 8058 POST unsubscribe should return 200");
+    const jsonRes = await postRes.json();
+    assert.strictEqual(jsonRes.ok, true, "Response json ok should be true");
+    console.log("✓ POST /api/unsubscribe?id=<valid_uuid> (RFC 8058) sets marketing_opt_in=false and returns 200 { ok: true }");
   } finally {
     globalThis.fetch = originalFetch;
   }

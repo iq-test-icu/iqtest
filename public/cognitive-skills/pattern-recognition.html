@@ -604,7 +604,7 @@
         <strong>Row 3:</strong> Triangle with 1 dot &nbsp;→&nbsp; Triangle with 2 dots &nbsp;→&nbsp; <strong>[ ? ]</strong>
       </p>
       <p><strong>Question:</strong> What geometric figure and dot configuration completes Row 3?</p>
-      <button class="btn-outline" onclick="toggleSolution('solPat', this)">🔍 Reveal Step-by-Step Solution</button>
+      <button class="btn-outline" aria-expanded="false" aria-controls="solPat" onclick="toggleSolution('solPat', this)">🔍 Reveal Step-by-Step Solution</button>
       
       <div id="solPat" class="solution-panel">
         <p style="color:var(--gold); font-weight:600; margin-bottom:8px;">✓ Multi-Variable Matrix Decomposition:</p>
@@ -673,13 +673,10 @@
   <script>
     function toggleSolution(id, btn) {
       const panel = document.getElementById(id);
-      if (panel.style.display === 'block') {
-        panel.style.display = 'none';
-        btn.textContent = '🔍 Reveal Step-by-Step Solution';
-      } else {
-        panel.style.display = 'block';
-        btn.textContent = '▲ Hide Solution';
-      }
+      const isOpening = panel.style.display !== 'block';
+      panel.style.display = isOpening ? 'block' : 'none';
+      btn.textContent = isOpening ? '▲ Hide Solution' : '🔍 Reveal Step-by-Step Solution';
+      btn.setAttribute('aria-expanded', isOpening ? 'true' : 'false');
     }
   </script>
 </body>
