@@ -4,21 +4,23 @@
 - property: https://iq-test.icu (APEX Business Systems Ltd., Edmonton, AB, Canada)
 - repository: iq-test-icu/iqtest
 - deployment_surface: Cloudflare Pages (Static Frontend) + Cloudflare Worker (/api/*) + Supabase + Stripe + Resend
-- active_branch: feat/persistent-header-language-switcher-and-docs
+- active_branch: feat/full-multilingual-content-hub-localization
 - merged_prs:
   - PR #1: Core funnel, assessment engine, Stripe webhook, Resend report delivery
   - PR #2: Psychometric item bank, tiered PDF generation, session scoring calibration
   - PR #3: Master Semantic SEO elevation (Hub A, Hub B, Hub C, Trust & Utility, JSON-LD schemas, breadcrumbs, Gaussian bell curve visualizer, interactive puzzle solvers)
   - PR #4: 13-locale internationalization engine (EN, DE, FR, ES, PT, IT, NL, JA, KO, ZH, AR, HI, TL), RFC 8058 one-click unsubscribe, CASL sender compliance, zero-drift build pipeline
+  - PR #5: Persistent header language switcher with centered logo & 13-locale routing
+  - PR #6: Fix relative background wallpaper path, full dictionary-based localization, and resolve git commit divergence
 - current_elevation:
-  - Fixed relative asset pathing: `<img src="/mural_bg.webp" class="mural-bg">` ensures wallpaper renders on all localized routes (`/es/`, `/de/`, `/fr/`, etc.).
+  - Full multi-section `#content-hub` localization (`_i18n/content-hub-locales.js`) across all 12 non-English locales (Self-Insight, Gaussian score tables, 4 CHC reasoning domains, historical figures, clinical distinctions, 6 accordion FAQs, related research cards, and academic citations).
   - High-accuracy native localization engine (`_i18n/dictionaries.js`) covering full hero card, UI elements, and JavaScript assessment question banks across all 12 non-English locales.
   - Multi-directional semantic backlink mesh & contextual research cluster cross-linking across all 3 hubs.
   - Outbound authoritative academic citation blocks (APA, NCBI, Mensa, Nature Neuroscience, Wikidata).
   - Embeddable external backlink & citation asset widgets on all content pages.
   - Omni-recall memory and architecture synchronized.
 - verification_status:
-  - Visual Browser Validation: Verified on `/es/`, `/de/`, `/fr/`, `/ja/`, `/ar/` via DevTools screenshots.
+  - Visual Browser Validation: Verified on `/es/`, `/de/`, `/fr/`, `/ja/`, `/ar/` via DevTools screenshots with 100% target language content.
   - Worker test suite: PASSED (3/3 tests)
   - E2E test suite: PASSED (6/6 tests)
   - SEO verification gate: PASSED (492/492 checks)
