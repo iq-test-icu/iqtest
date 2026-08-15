@@ -136,7 +136,7 @@ function renderAllLocales() {
       // 7. Inject suggestion banner script
       html = html.replace('</body>', `${suggestionBannerScript}\n</body>`);
 
-      // 8. If index.html, apply full rich dictionary localization
+      // 8. If index.html, apply full rich dictionary localization & content hub translation
       if (relFile === 'index.html' && dict) {
         // Localize Hero Section
         html = html.replace(/<div class="eyebrow">Cognitive Assessment<\/div>/i, `<div class="eyebrow">${dict.heroEyebrow}</div>`);
@@ -146,6 +146,13 @@ function renderAllLocales() {
         html = html.replace(/<span class="chip"><b>16<\/b> questions<\/span>\s*<span class="chip"><b>4<\/b> categories<\/span>\s*<span class="chip"><b>5 min<\/b> average<\/span>/i, `<span class="chip">${dict.chipQuestions}</span>\n        <span class="chip">${dict.chipCategories}</span>\n        <span class="chip">${dict.chipTime}</span>`);
         html = html.replace(/<button class="btn btn-primary" onclick="startTest\(\)">Start the test<\/button>/i, `<button class="btn btn-primary" onclick="startTest()">${dict.startBtn}</button>`);
         html = html.replace(/<p class="disclaimer" style="text-align:center;">This is a self-insight quiz, not a clinical IQ test\. Your score is for personal reflection only\. See the FAQ below for full methodology details\.<\/p>/i, `<p class="disclaimer" style="text-align:center;">${dict.heroDisclaimer}</p>`);
+
+        // Localize entire #content-hub
+        const { getContentHubHtml } = require('./content-hub-locales');
+        const hubHtml = getContentHubHtml(loc.hreflang);
+        if (hubHtml) {
+          html = html.replace(/<div class="info-block" id="content-hub">[\s\S]*?<\/div>\s*<\/section>/i, `${hubHtml}\n  </section>`);
+        }
 
         // Localize Question Bank in JavaScript
         const questionsJs = `const QUESTIONS = ${JSON.stringify(dict.questions, null, 2)};`;
