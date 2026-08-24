@@ -25,6 +25,8 @@
 const PRICE_CENTS   = { basic: 199, detailed: 399, complete: 699 };
 const PRODUCT_NAME  = { basic: "IQ·Test Basic Result", detailed: "IQ·Test Detailed Result", complete: "IQ·Test Complete Report + Printable Certificate" };
 const VALID_TIERS   = new Set(["basic", "detailed", "complete"]);
+const VALID_EVENTS  = new Set(["page_view", "quiz_started", "quiz_completed_free"]);
+const VALID_LOCALES = new Set(["en", "de", "es", "fr", "it", "ja", "ko", "nl", "pl", "pt", "ru", "tr", "zh"]);
 
 // ── CORS ─────────────────────────────────────────────────────────────────────
 const corsHeaders = (origin) => ({
@@ -56,7 +58,7 @@ function isRateLimited(ip) {
   return false;
 }
 
-function logEvent(env, eventName, { sessionId = null, tier = null, status, errorCode = null, email = null, ip = null } = {}) {
+function logEvent(env, eventName, { sessionId = null, tier = null, status, errorCode = null, email = null, ip = null, meta = null } = {}) {
   const logObj = {
     timestamp: new Date().toISOString(),
     event_name: eventName,
@@ -68,7 +70,27 @@ function logEvent(env, eventName, { sessionId = null, tier = null, status, error
   };
   if (email) logObj.email = email;
   if (ip) logObj.ip = ip;
+  if (meta) logObj.meta = meta;
   console.log(JSON.stringify(logObj));
+
+  // Async fail-safe persistence to Supabase events table
+  if (env.SUPABASE_URL && env.SUPABASE_SERVICE_KEY) {
+    const row = {
+      event_name: eventName,
+      session_id: sessionId ? String(sessionId) : null,
+      tier: tier || null,
+      status: status || null,
+      error_code: errorCode || null,
+      environment: env.ENVIRONMENT || "production",
+    };
+    if (email) row.email = email;
+    if (ip) row.ip = ip;
+    if (meta) row.meta = meta;
+
+    sbInsert(env, "events", row).catch(err => {
+      console.error("Async event logging to Supabase failed:", err);
+    });
+  }
 }
 
 function validateEmail(email) {
@@ -127,6 +149,10 @@ export default {
         });
       }
 
+      if (url.pathname === "/api/track" && req.method === "POST")
+        return await handleTrack(body, env, cors);
+      if (url.pathname === "/api/stats" && req.method === "GET")
+        return await handleStats(env, cors);
       if (url.pathname === "/api/save-result" && req.method === "POST")
         return await handleSaveResult(body, env, cors);
       if (url.pathname === "/api/checkout" && req.method === "POST")
@@ -194,6 +220,73 @@ async function sbUpdate(env, id, patch) {
 }
 
 // ── Handlers ─────────────────────────────────────────────────────────────────
+
+/** POST /api/track
+ *  body: { event: "page_view" | "quiz_started" | "quiz_completed_free", locale?: string }
+ *  -> { ok: true }
+ */
+async function handleTrack(body, env, cors) {
+  if (!body || typeof body.event !== "string" || !VALID_EVENTS.has(body.event)) {
+    return json({ error: "invalid_event" }, 400, cors);
+  }
+  const safeLocale = (typeof body.locale === "string" && VALID_LOCALES.has(body.locale.toLowerCase()))
+    ? body.locale.toLowerCase()
+    : "en";
+
+  // Strict PII constraint: meta contains only safe validated locale
+  logEvent(env, body.event, { status: "success", meta: { locale: safeLocale } });
+  return json({ ok: true }, 200, cors);
+}
+
+/** GET /api/stats
+ *  -> { reportsGenerated: number }
+ */
+async function handleStats(env, cors) {
+  try {
+    const res = await fetch(
+      `${env.SUPABASE_URL}/rest/v1/events?event_name=eq.report_generated&select=count`,
+      {
+        headers: {
+          apikey:        env.SUPABASE_SERVICE_KEY,
+          Authorization: `Bearer ${env.SUPABASE_SERVICE_KEY}`,
+          Prefer:        "count=exact",
+        },
+      }
+    );
+    let count = 0;
+    if (res.ok) {
+      const range = res.headers.get("content-range");
+      if (range && range.includes("/")) {
+        const parts = range.split("/");
+        const parsed = parseInt(parts[1], 10);
+        if (!isNaN(parsed)) count = parsed;
+      } else {
+        const rows = await res.json();
+        if (Array.isArray(rows) && rows.length > 0 && typeof rows[0].count === "number") {
+          count = rows[0].count;
+        }
+      }
+    }
+    return new Response(JSON.stringify({ reportsGenerated: count }), {
+      status: 200,
+      headers: {
+        ...cors,
+        "Content-Type": "application/json",
+        "Cache-Control": "public, max-age=300",
+      },
+    });
+  } catch (err) {
+    console.error("Failed to fetch stats:", err);
+    return new Response(JSON.stringify({ reportsGenerated: 0 }), {
+      status: 200,
+      headers: {
+        ...cors,
+        "Content-Type": "application/json",
+        "Cache-Control": "public, max-age=60",
+      },
+    });
+  }
+}
 
 /** POST /api/save-result
  *  body: { email, consentGiven, marketingOptIn, leadOnly, raw, index, percentile, catScores, catMax, answers }

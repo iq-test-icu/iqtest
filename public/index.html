@@ -26,9 +26,9 @@
 <meta name="geo.placename" content="Edmonton, Alberta, Canada">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <link rel="icon" type="image/webp" href="/favicon.webp">
-<link rel="apple-touch-icon" href="/icon.webp">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Fraunces:opsz,wght@9..144,300..700&display=swap" rel="stylesheet">
+<!-- Preload primary self-hosted fonts -->
+<link rel="preload" href="/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -133,6 +133,40 @@
 }
 </script>
 <style>
+  /* Self-hosted Typography (zero external network dependency) */
+  @font-face {
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('/fonts/space-grotesk-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('/fonts/space-grotesk-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'Fraunces';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('/fonts/fraunces-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Fraunces';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('/fonts/fraunces-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+
   html {
     font-size: 17px;
   }
@@ -1120,6 +1154,22 @@
     100% { transform: scale(2.5); opacity: 0; }
   }
 
+  /* Live report counter badge (P0-2) */
+  .live-counter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(201, 162, 75, 0.08);
+    color: var(--gold);
+    border: 1px solid var(--border-gold);
+    padding: 4px 14px;
+    border-radius: 100px;
+    font-size: 0.76rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
   /* Phase 5: CRO Additions */
   .tier-badge {
     display: inline-block;
@@ -1270,8 +1320,17 @@
         <span class="chip"><b>5 min</b> average</span>
       </div>
       
+      <!-- Session Resume Banner (P1-1) -->
+      <div id="resumeBanner" style="display:none; background:rgba(201,162,75,0.08); border:1px solid var(--border-gold); border-radius:10px; padding:14px 18px; margin: 18px 0; text-align:center;">
+        <p id="resumeText" style="font-size:0.88rem; color:var(--text-primary); margin-bottom:10px; font-weight:500;"></p>
+        <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-primary" style="padding:8px 18px; font-size:0.85rem;" onclick="resumeTest()">Continue test &rarr;</button>
+          <button class="btn" style="background:rgba(255,255,255,0.04); border:1px solid var(--border-color); color:var(--text-muted); padding:8px 14px; font-size:0.85rem;" onclick="startTest(true)">Start fresh</button>
+        </div>
+      </div>
+
       <div style="text-align:center;">
-        <button class="btn btn-primary" onclick="startTest()">Start the test</button>
+        <button class="btn btn-primary" onclick="startTest(false)">Start the test</button>
       </div>
       <p class="disclaimer" style="text-align:center;">This is a self-insight quiz, not a clinical IQ test. Your score is for personal reflection only. See the FAQ below for full methodology details.</p>
     </div>
@@ -1444,6 +1503,9 @@
         </div>
 
         <div class="receipt">
+          <div id="liveReportCounter" style="display:none; text-align:center; margin-bottom:18px;">
+            <span class="live-counter-tag"><span id="reportsCountNum">0</span> reports generated</span>
+          </div>
           <h2 style="margin-bottom:8px;">Choose your report tier</h2>
           <p class="lead" style="font-size:0.9rem; margin-bottom:20px; color:var(--text-secondary);">One-time payment. No subscription trap. Delivered by email in &lt;60 seconds.</p>
           
@@ -1578,13 +1640,89 @@ function percentileFor(index){
 let current = 0;
 let answers = [];
 
+function trackFunnel(eventName) {
+  try {
+    fetch(`${API_BASE}/api/track`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event: eventName })
+    }).catch(() => {});
+  } catch(e) {}
+}
+
+function saveSession(){
+  try {
+    localStorage.setItem('iqtest_session', JSON.stringify({
+      answers,
+      currentIndex: current,
+      startedAt: window.__quizStartedAt || Date.now()
+    }));
+  } catch(e) {}
+}
+
+function clearSession(){
+  try {
+    localStorage.removeItem('iqtest_session');
+    const resumeBanner = document.getElementById('resumeBanner');
+    if (resumeBanner) resumeBanner.style.display = 'none';
+  } catch(e) {}
+}
+
+function checkSavedSession(){
+  try {
+    const raw = localStorage.getItem('iqtest_session');
+    if (!raw) return;
+    const saved = JSON.parse(raw);
+    const isRecent = saved.startedAt && (Date.now() - saved.startedAt < 24 * 60 * 60 * 1000);
+    if (isRecent && Array.isArray(saved.answers) && saved.answers.length > 0 && typeof saved.currentIndex === 'number' && saved.currentIndex < QUESTIONS.length) {
+      current = saved.currentIndex;
+      answers = saved.answers;
+      window.__quizStartedAt = saved.startedAt;
+      
+      const resumeBanner = document.getElementById('resumeBanner');
+      const resumeText = document.getElementById('resumeText');
+      if (resumeBanner && resumeText) {
+        resumeText.textContent = `You have an unfinished test (Question ${current + 1} of ${QUESTIONS.length}).`;
+        resumeBanner.style.display = 'block';
+      }
+    }
+  } catch(e) {
+    clearSession();
+  }
+}
+
+async function fetchStats() {
+  try {
+    const res = await fetch(`${API_BASE}/api/stats`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data && typeof data.reportsGenerated === 'number' && data.reportsGenerated >= 10) {
+      const counterEl = document.getElementById('liveReportCounter');
+      const countNumEl = document.getElementById('reportsCountNum');
+      if (counterEl && countNumEl) {
+        countNumEl.textContent = data.reportsGenerated.toLocaleString();
+        counterEl.style.display = 'block';
+      }
+    }
+  } catch (e) {}
+}
+
 function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-function startTest(){
+function startTest(restart = false){
+  if (restart) clearSession();
   current = 0; answers = [];
+  window.__quizStartedAt = Date.now();
+  saveSession();
+  trackFunnel("quiz_started");
+  show('screen-test');
+  renderQuestion();
+}
+
+function resumeTest(){
   show('screen-test');
   renderQuestion();
 }
@@ -1613,7 +1751,7 @@ function renderQuestion(){
   });
 }
 
-// â”€â”€ Keyboard navigation (1-4 or A-D selects answer; Enter auto-advances on selection) â”€â”€
+// ── Keyboard navigation (1-4 or A-D selects answer; Enter auto-advances on selection) ──
 document.addEventListener('keydown', e => {
   const screen = document.querySelector('.screen.active');
   if (!screen || screen.id !== 'screen-test') return;
@@ -1630,6 +1768,7 @@ document.addEventListener('keydown', e => {
 function selectAnswer(i){
   answers[current] = i;
   current++;
+  saveSession();
   if(current < QUESTIONS.length){
     renderQuestion();
   } else {
@@ -1716,6 +1855,8 @@ function renderRadarChart(scores, maxScores) {
 }
 
 function finishTest(){
+  clearSession();
+  trackFunnel("quiz_completed_free");
   const catScores = {NUMERIC:0, VERBAL:0, LOGIC:0, PATTERN:0};
   const catMax = {NUMERIC:0, VERBAL:0, LOGIC:0, PATTERN:0};
   let raw = 0;
@@ -1947,6 +2088,13 @@ function toggleFaq(btn) {
     document.getElementById('reportBody').textContent = "Couldn't load your report. It's also on its way to your inbox.";
   }
 })();
+
+// ── Initial page load lifecycle (P0-1, P0-2, P1-1) ──
+document.addEventListener('DOMContentLoaded', () => {
+  trackFunnel('page_view');
+  checkSavedSession();
+  fetchStats();
+});
 </script>
 </body>
 </html>
