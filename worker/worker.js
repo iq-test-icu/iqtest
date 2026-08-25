@@ -160,6 +160,8 @@ export default {
         return await handleTrack(body, env, cors);
       if (url.pathname === "/api/stats" && req.method === "GET")
         return await handleStats(env, cors);
+      if (url.pathname === "/api/badge" && req.method === "GET")
+        return handleBadge(url, env, cors);
       if (url.pathname === "/api/save-result" && req.method === "POST")
         return await handleSaveResult(body, env, cors);
       if (url.pathname === "/api/track" && req.method === "POST")
@@ -325,6 +327,55 @@ async function handleStats(env, cors) {
       },
     });
   }
+}
+
+function percentileForScore(score) {
+  const z = (score - 100) / 15;
+  const t = 1.0 / (1.0 + 0.2316419 * Math.abs(z));
+  const d = 0.3989423 * Math.exp(-z * z / 2.0);
+  let p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
+  if (z > 0) p = 1.0 - p;
+  return Math.min(99, Math.max(1, Math.round(p * 100)));
+}
+
+/** GET /api/badge?score=130&pct=98
+ *  -> dynamic SVG score badge for embeddable backlinks
+ */
+function handleBadge(url, env, cors) {
+  const scoreParam = parseInt(url.searchParams.get("score") || "100", 10);
+  const score = isNaN(scoreParam) ? 100 : Math.max(70, Math.min(160, scoreParam));
+  const pctParam = parseInt(url.searchParams.get("pct") || "", 10);
+  const pct = !isNaN(pctParam) ? Math.max(1, Math.min(99, pctParam)) : percentileForScore(score);
+  const topPercent = Math.max(1, 100 - pct);
+
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="280" height="48" viewBox="0 0 280 48" fill="none" role="img" aria-label="Verified Cognitive Index Score ${score}">
+  <defs>
+    <linearGradient id="gGold" x1="0" y1="0" x2="280" y2="48" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#241E15"/>
+      <stop offset="1" stop-color="#121110"/>
+    </linearGradient>
+    <linearGradient id="gAccent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F3C363"/>
+      <stop offset="1" stop-color="#D4932A"/>
+    </linearGradient>
+  </defs>
+  <rect width="280" height="48" rx="8" fill="url(#gGold)" stroke="#4A3F2C" stroke-width="1.5"/>
+  <circle cx="24" cy="24" r="12" fill="#E5A93C" fill-opacity="0.12" stroke="#E5A93C" stroke-width="1.2"/>
+  <path d="M19 24.5L22.5 28L29 20.5" stroke="#E5A93C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="44" y="20" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="10" font-weight="700" fill="#E5A93C" letter-spacing="1">VERIFIED COGNITIVE INDEX</text>
+  <text x="44" y="35" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="13" font-weight="600" fill="#F4F4F5">Score: ${score} · Top ${topPercent}%</text>
+  <rect x="222" y="11" width="46" height="26" rx="5" fill="url(#gAccent)"/>
+  <text x="245" y="28" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="12" font-weight="800" fill="#121110" text-anchor="middle">${score}</text>
+</svg>`;
+
+  return new Response(svg, {
+    status: 200,
+    headers: {
+      ...cors,
+      "Content-Type": "image/svg+xml",
+      "Cache-Control": "public, max-age=86400, s-maxage=86400",
+    },
+  });
 }
 
 /** POST /api/save-result

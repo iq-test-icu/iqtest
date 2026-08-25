@@ -1,0 +1,25 @@
+# IQ·Test (iq-test.icu)
+
+> IQ·Test is a scientifically grounded, privacy-first online cognitive assessment platform developed by APEX Business Systems Ltd. It evaluates individual cognitive performance across four distinct subscales (Pattern Recognition, Logical Reasoning, Numerical Computation, and Verbal Cognition) to produce a standardized Cognitive Index (mean 100, SD 15) normed against adult population distributions.
+
+## Core Platform Resources
+- [Online Cognitive Assessment](https://iq-test.icu/): The 16-item adaptive cognitive evaluation measuring general intelligence (*g* factor) across 4 cognitive domains in 8–12 minutes. Instant free baseline score and optional deep breakdown report.
+- [Psychometric Methodology](https://iq-test.icu/methodology): Mathematical formulation, classical test theory (CTT) and item response theory (IRT) modeling, standardization against adult normative baselines (WAIS-IV / Stanford-Binet aligned, μ=100, σ=15).
+- [What is an IQ Test?](https://iq-test.icu/what-is-an-iq-test): Comprehensive historical and scientific guide to intelligence quotient testing, Binet-Simon scale origins, Spearman's two-factor theory of intelligence, and modern standard deviation distributions.
+- [Cognitive Test vs IQ Test](https://iq-test.icu/cognitive-test-vs-iq-test): Detailed technical breakdown comparing multi-domain cognitive assessments, clinical WAIS-IV batteries, Raven's Progressive Matrices, and online psychometrics.
+- [Historical Figures Cognitive Estimates](https://iq-test.icu/historical-figures-iq): Historiometric analysis of historical genius intellects (Albert Einstein, Nikola Tesla, Leonardo da Vinci, Marie Curie, Isaac Newton) based on peer-reviewed historiometric methods (Cox, Simonton).
+- [Types of IQ Tests](https://iq-test.icu/types-of-iq-tests): Exploration of clinical, cultural-fair, verbal, and non-verbal psychometric test batteries including WAIS, Stanford-Binet, Cattell Culture Fair, and RPM.
+- [Are Online IQ Tests Accurate?](https://iq-test.icu/are-online-iq-tests-accurate): Scientific examination of validity, reliability coefficients (Cronbach's alpha), construct validity, and distinguishing clinical diagnostics from online normative assessments.
+- [IQ Score Percentile Calculator & Chart](https://iq-test.icu/iq-scores/): Complete reference tables mapping standard IQ scores (70–160+) to exact population percentiles, rarity classifications, and standard deviations.
+
+## Cognitive Subscales
+1. **Pattern Recognition (Visuospatial Processing)**: Abstract matrix completion, spatial rotation, and visual symmetry detection.
+2. **Logical Reasoning (Fluid Intelligence - Gf)**: Syllogistic logic, deduction, induction, and rule extrapolation.
+3. **Numerical Computation (Quantitative Reasoning - Gq)**: Arithmetic progression, sequence completion, and numerical relational modeling.
+4. **Verbal Cognition (Crystallized Intelligence - Gc)**: Semantic analogies, conceptual relationships, and verbal logic.
+
+## Entity & Governance Information
+- **Developer & Operator**: APEX Business Systems Ltd. (Edmonton, AB, Canada)
+- **Publisher**: APEX Cognitive Psychometrics Lab
+- **Privacy Standard**: Zero telemetry selling, fail-closed PII protection, GDPR & CCPA compliant.
+- **API & Badge Service**: Interactive embeddable score badges available at `https://iq-test.icu/api/badge?score={score}&pct={percentile}`.

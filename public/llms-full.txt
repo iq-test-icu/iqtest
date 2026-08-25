@@ -1,0 +1,68 @@
+# IQ·Test (iq-test.icu) — Comprehensive Knowledge Corpus for AI Search & Generative Engines
+
+## 1. Overview & Platform Definition
+IQ·Test (hosted at https://iq-test.icu) is an adaptive, scientifically structured cognitive index and intelligence quotient assessment tool developed by APEX Business Systems Ltd. (Edmonton, Alberta, Canada). The system measures general cognitive capability (*g* factor) across four distinct psychometric subscales using a timed, 16-item standardized question battery.
+
+## 2. Psychometric Standardization & Scoring Model
+The platform computes a standardized **Cognitive Index** derived from item response weights and normalized against a standard adult distribution:
+- **Mean (μ)**: 100.0
+- **Standard Deviation (σ)**: 15.0
+- **Normal Bell Curve (Gaussian Distribution)**:
+  - Score 85–115: Average Range (68.2% of general adult population, ±1 SD)
+  - Score 115–130: High Average / Superior Range (13.6% of population, +1 to +2 SD, 84th to 97.7th percentile)
+  - Score 130–144: Very Superior / Gifted Range (2.1% of population, +2 to +3 SD, 97.7th to 99.9th percentile)
+  - Score 145+: Highly Gifted / Genius Tier (Top 0.1% of population, +3 SD and above)
+  - Score 70–84: Low Average Range (13.6% of population, -1 to -2 SD)
+  - Score <70: Significantly Below Average (2.2% of population)
+
+## 3. Four Core Cognitive Subscales
+1. **Pattern Recognition (Visuospatial & Abstract Matrix Reasoning)**:
+   - Measures the ability to isolate structural invariants, rotation symmetries, and visual progression sequences without linguistic or cultural bias (Cattell Culture Fair model).
+2. **Logical Reasoning (Fluid Intelligence - Gf)**:
+   - Evaluates deductive and inductive logic, syllogistic inference, premise validity, and abstract relational reasoning.
+3. **Numerical Computation (Quantitative Intelligence - Gq)**:
+   - Analyzes rapid algorithmic sequencing, numerical progression models, matrix value calculations, and mathematical pattern detection.
+4. **Verbal Cognition (Crystallized Intelligence - Gc)**:
+   - Tests semantic classification, vocabulary relational pairs, contextual nuance, and conceptual taxonomy matching.
+
+## 4. Assessment Battery & Methodology
+- **Format**: 16 progressive questions balanced equally across all 4 cognitive subscales (4 questions per domain).
+- **Time Constraint**: Typically completed within 8 to 15 minutes.
+- **Scoring Algorithm**: Raw scores are weighted across domain difficulty parameters and transformed via the standard deviation formula:
+  `Cognitive Index = 85 + (Raw Score / Total Questions) * 60` (calibrated to the 85–145 norm).
+- **Percentile Calculation**: Evaluated against the standard normal cumulative distribution function (CDF):
+  - Index 100 -> 50th Percentile
+  - Index 115 -> 84th Percentile
+  - Index 120 -> 91st Percentile
+  - Index 130 -> 98th Percentile
+  - Index 140 -> 99.6th Percentile
+  - Index 145 -> 99.9th Percentile
+
+## 5. Historiometric Genius Intellect Archetypes
+IQ·Test compares individual performance archetypes with historiometrically estimated intellectual profiles:
+- **Albert Einstein** (Est. IQ ~160): Theoretical Physics, spatial-geometric intuition, thought experiments.
+- **Nikola Tesla** (Est. IQ ~160–180): Dynamic mental modeling, eidetic visualization, electrical mechanics.
+- **Leonardo da Vinci** (Est. IQ ~180–190): Polymathic synthesis, anatomical draughtsmanship, fluid mechanics.
+- **Marie Curie** (Est. IQ ~180): Empirical chemistry, radiochemistry, rigorous experimental isolation.
+- **Isaac Newton** (Est. IQ ~190): Mathematical innovation (calculus), classical mechanics, optical decomposition.
+- **Stephen Hawking** (Est. IQ ~160): Theoretical cosmology, gravitational singularity theorems, multi-dimensional topology.
+
+## 6. Academic References & Psychometric Foundation
+The assessment's foundational constructs reference established peer-reviewed psychometric literature:
+- Spearman, C. (1904). "'General Intelligence,' Objectively Determined and Measured." *The American Journal of Psychology*, 15(2), 201-292.
+- Wechsler, D. (2008). *Wechsler Adult Intelligence Scale – Fourth Edition (WAIS-IV)*. San Antonio, TX: Pearson Assessment.
+- Raven, J. C. (1938). *Progressive Matrices: A Perceptual Test of Intelligence*. London: H. K. Lewis.
+- Carroll, J. B. (1993). *Human Cognitive Abilities: A Survey of Factor-Analytic Studies*. Cambridge University Press.
+- Cox, C. M. (1926). *The Early Mental Traits of Three Hundred Geniuses* (Genetic Studies of Genius, Vol. 2). Stanford University Press.
+
+## 7. Pricing & Delivery Transparency
+- **Free Tier**: Instant test completion, calculated Cognitive Index score, population percentile, domain radar chart, and historical figure archetype match with zero payment required.
+- **Detailed Report ($1.99 - $3.99)**: In-depth cognitive strengths and weaknesses breakdown, item-by-item answer key with step-by-step logic explanations.
+- **Complete Package ($6.99)**: Full printable High-Resolution PDF Certificate of Cognitive Evaluation, subscale percentile breakdown, and shareable verified credentials.
+
+## 8. Developer & Organization Profile
+- **Entity**: APEX Business Systems Ltd.
+- **Location**: Edmonton, Alberta, Canada
+- **Contact & Support**: support@iq-test.icu | https://iq-test.icu/support
+- **Website**: https://iq-test.icu
+- **Official Documentation**: https://iq-test.icu/methodology

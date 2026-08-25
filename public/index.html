@@ -1933,6 +1933,22 @@
           <button class="btn btn-primary" style="width:100%;" onclick="startCheckout()" id="checkoutBtn">Reveal my historical match &mdash; $3.99</button>
           <p class="disclaimer" style="font-size:0.75rem; text-align:center; margin-top:12px; font-weight:600; color:var(--text-secondary);">🔒 One-time payment. No subscription. No surprise charges. Processed securely by Stripe.</p>
         </div>
+
+        <!-- Backlink Multiplier: Embeddable Score Badge Widget -->
+        <div class="badge-embed-box" style="margin-top:28px; padding:20px 22px; background:rgba(201,162,75,0.06); border:1px solid var(--border-gold); border-radius:12px; text-align:left;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+            <h3 style="font-size:0.98rem; font-family:var(--font-display); color:var(--gold); margin:0; font-weight:600;">🏷️ Embed Your Verified Score Badge</h3>
+            <span style="font-size:0.72rem; color:var(--text-muted); background:rgba(255,255,255,0.05); padding:2px 8px; border-radius:4px;">Free Embed</span>
+          </div>
+          <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:14px; line-height:1.5;">Showcase your verified cognitive evaluation on your personal website, blog, or GitHub profile:</p>
+          <div id="badgePreviewContainer" style="margin-bottom:14px; text-align:center; padding:12px; background:rgba(0,0,0,0.3); border-radius:8px;">
+            <img id="badgePreviewImg" src="/api/badge?score=100&pct=50" alt="Verified Cognitive Index Badge" style="max-width:100%; height:auto; display:inline-block;" onerror="this.style.display='none'">
+          </div>
+          <div style="position:relative;">
+            <textarea id="badgeEmbedCode" readonly style="width:100%; height:58px; background:rgba(0,0,0,0.5); border:1px solid var(--border-color); color:var(--text-primary); font-family:monospace; font-size:0.73rem; padding:8px 10px; border-radius:6px; resize:none; box-sizing:border-box;"><a href="https://iq-test.icu" target="_blank" rel="noopener"><img src="https://iq-test.icu/api/badge?score=100&pct=50" alt="Verified Cognitive Index | IQ·Test" /></a></textarea>
+            <button onclick="copyBadgeEmbed()" id="copyBadgeBtn" class="btn" style="position:absolute; right:8px; bottom:10px; padding:5px 12px; font-size:0.75rem; background:var(--gold); color:#121110; font-weight:700; border-radius:4px; border:none; cursor:pointer;">Copy HTML</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -2326,7 +2342,39 @@ function finishTest(){
   // Render SVG Radar Chart
   renderRadarChart(catScores, catMax);
 
+  // Update Embed Badge Box
+  try {
+    const badgeImg = document.getElementById('badgePreviewImg');
+    const badgeCode = document.getElementById('badgeEmbedCode');
+    if (badgeImg && badgeCode) {
+      const badgeUrl = `https://iq-test.icu/api/badge?score=${index}&pct=${pct}`;
+      badgeImg.src = badgeUrl;
+      badgeCode.value = `<a href="https://iq-test.icu" target="_blank" rel="noopener" title="Verified Cognitive Assessment | IQ·Test"><img src="${badgeUrl}" alt="Verified Cognitive Index: ${index} | IQ·Test" /></a>`;
+    }
+  } catch(e) {}
+
   show('screen-result');
+}
+
+function copyBadgeEmbed() {
+  const el = document.getElementById('badgeEmbedCode');
+  if (!el) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(el.value).then(() => {
+      const btn = document.getElementById('copyBadgeBtn');
+      if (btn) {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = orig, 2000);
+      }
+    }).catch(() => {
+      el.select();
+      document.execCommand('copy');
+    });
+  } else {
+    el.select();
+    document.execCommand('copy');
+  }
 }
 
 function trackEvent(name, meta = {}) {
