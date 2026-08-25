@@ -1,4 +1,28 @@
 User-agent: *
 Allow: /
 
+# Explicit AI Search Engine Crawlers (GEO & AI Search Discovery)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Sitemaps and LLM Discovery
 Sitemap: https://iq-test.icu/sitemap.xml
+Sitemap: https://iq-test.icu/sitemaps/sitemap-en.xml
