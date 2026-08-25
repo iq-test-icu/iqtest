@@ -40,29 +40,21 @@ alter table sessions add column if not exists tier text check (tier in ('basic',
 alter table sessions add column if not exists lead_only boolean default false;
 alter table sessions add column if not exists marketing_opt_in boolean default false;
 
--- Telemetry events table
+-- Telemetry events table (funnel instrumentation & live statistics)
 create table if not exists events (
   id uuid primary key default gen_random_uuid(),
   event_name text not null,
+  session_id text,
+  tier text,
+  status text,
+  error_code text,
+  email text,
+  ip text,
   meta jsonb,
+  environment text default 'production',
   created_at timestamptz not null default now()
 );
 
+create index if not exists events_event_name_idx on events (event_name, created_at);
 alter table events enable row level security;
-
--- Migration: abandoned-lead recovery sweep (CRO audit 2026-08-10).
--- recovery_sent tracks whether the one-time follow-up email has already gone
--- out, so the Cron Trigger sweep in worker.js never double-sends. The partial
--- index matches the sweep's WHERE clause exactly, keeping the scheduled query
--- cheap as the sessions table grows. Safe to run multiple times.
-alter table sessions add column if not exists recovery_sent boolean not null default false;
-
-create index if not exists sessions_recovery_sweep_idx on sessions (created_at)
-  where paid = false and recovery_sent = false and marketing_opt_in = true;
-
--- Migration: i18n locale capture and percentile calibration tracking (APEX-I18N-IQT-2026-08-14-v1.0)
-alter table sessions add column if not exists locale text
-  check (locale in ('en','de','fr','es','pt','it','nl','ja','ko','zh','ar','hi','tl'));
-alter table sessions add column if not exists locale_calibrated boolean not null default false;
-create index if not exists sessions_locale_idx on sessions (locale);
 
