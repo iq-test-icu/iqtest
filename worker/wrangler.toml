@@ -7,6 +7,11 @@ account_id = "ac6add7009ec690cb919dc97d13d6fc6"
 pattern = "iq-test.icu/api/*"
 zone_name = "iq-test.icu"
 
+# Daily abandoned-lead recovery sweep (see worker.js `scheduled`). 15:00 UTC
+# lands ~9am Mountain Time (Edmonton, AB) year-round give or take an hour of DST drift.
+[triggers]
+crons = ["0 15 * * *"]
+
 [vars]
 ALLOWED_ORIGIN = "https://iq-test.icu"
 RESEND_FROM = "IQ Test <report@iq-test.icu>"

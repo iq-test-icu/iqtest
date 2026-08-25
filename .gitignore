@@ -7,3 +7,9 @@
 
 # IDE / agent files
 .agents/
+
+# Supabase CLI local link state — machine-specific, never shared
+supabase/.temp/
+
+# FUSE mount placeholders (orphaned by in-place edits over a mounted volume)
+.fuse_hidden*

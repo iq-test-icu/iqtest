@@ -5,6 +5,10 @@
  *   POST /api/checkout      -> Stripe Checkout Session (tier: basic|detailed), return {url}
  *   POST /api/webhook       -> Stripe webhook (checkout.session.completed) -> report + email
  *   GET  /api/report?id=    -> {paid, report, tier}
+ *   GET  /api/unsubscribe?id= -> one-click CASL unsubscribe, sets marketing_opt_in=false
+ *
+ * Scheduled (Cron Trigger, see wrangler.toml [triggers]):
+ *   Daily recovery sweep — one follow-up email to opted-in, unpaid leads 48h+ old.
  *
  * Secrets (wrangler secret put <NAME>):
  *   SUPABASE_URL, SUPABASE_SERVICE_KEY
@@ -19,6 +23,10 @@
  *   - CASL: consent_given_at is always set server-side; client timestamp is never trusted.
  *   - No npm SDK dependencies — raw fetch() only.
  *   - Historical figure pairing in Detailed is THEMATIC, never numeric (no "Einstein's IQ was X").
+ *   - Recovery sweep only emails marketing_opt_in=true rows (promotional message under CASL,
+ *     not covered by the mandatory "send my score" consent) and every send carries a working
+ *     one-click unsubscribe link + List-Unsubscribe header. Engineering judgment, not legal
+ *     advice — confirm with counsel before relying on this for a live CASL obligation.
  */
 
 // ── Tier config ──────────────────────────────────────────────────────────────
@@ -98,6 +106,12 @@ function validateEmail(email) {
   return typeof email === "string" && email.length <= 254 && re.test(email);
 }
 
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+function isUuid(id) {
+  return typeof id === "string" && UUID_REGEX.test(id);
+}
+
 export default {
   async fetch(req, env) {
     const url  = new URL(req.url);
@@ -106,13 +120,6 @@ export default {
     if (req.method === "OPTIONS") return new Response(null, { headers: cors });
 
     const clientIp = req.headers.get("CF-Connecting-IP") || "127.0.0.1";
-
-    // T-09: Block WP scanner probes early at Worker level to clean logs & avoid 5xx noise
-    const scannerRegex = /^\/(wp-admin|wp-includes|wp-content|wp-login|xmlrpc|cms|\.env)/i;
-    if (scannerRegex.test(url.pathname)) {
-      logEvent(env, "bot_probe_blocked", { status: "blocked", ip: clientIp, path: url.pathname });
-      return new Response("Forbidden", { status: 403, headers: cors });
-    }
 
     try {
       let body = null;
@@ -126,7 +133,7 @@ export default {
           });
         }
 
-        if (url.pathname !== "/api/webhook") {
+        if (url.pathname !== "/api/webhook" && url.pathname !== "/api/unsubscribe") {
           try {
             body = JSON.parse(rawBody);
           } catch (err) {
@@ -136,7 +143,7 @@ export default {
             });
           }
         } else {
-          // Pass rawBody for signature checking in webhook
+          // Pass rawBody for signature checking in webhook / unsubscribe
           req.rawBody = rawBody;
         }
       }
@@ -155,12 +162,16 @@ export default {
         return await handleStats(env, cors);
       if (url.pathname === "/api/save-result" && req.method === "POST")
         return await handleSaveResult(body, env, cors);
+      if (url.pathname === "/api/track" && req.method === "POST")
+        return await handleTrackEvent(body, env, cors);
       if (url.pathname === "/api/checkout" && req.method === "POST")
         return await handleCheckout(body, env, cors);
       if (url.pathname === "/api/webhook" && req.method === "POST")
         return await handleWebhook(req, env, cors);
       if (url.pathname === "/api/report" && req.method === "GET")
         return await handleGetReport(url, env, cors);
+      if (url.pathname === "/api/unsubscribe" && (req.method === "GET" || req.method === "POST"))
+        return await handleUnsubscribe(req, url, env, cors);
 
       return new Response("Not found", { status: 404, headers: cors });
     } catch (err) {
@@ -168,6 +179,11 @@ export default {
       logEvent(env, "unhandled_exception", { status: "failed", errorCode: err.message });
       return json({ error: "internal_error" }, 500, cors);
     }
+  },
+
+  // Cloudflare Cron Trigger entry point — see wrangler.toml [triggers].
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(handleRecoverySweep(env));
   },
 };
 
@@ -189,6 +205,7 @@ async function sbInsert(env, table, row) {
 }
 
 async function sbSelect(env, id) {
+  if (!isUuid(id)) return null;
   const res = await fetch(
     `${env.SUPABASE_URL}/rest/v1/sessions?id=eq.${id}&select=*`,
     {
@@ -201,6 +218,28 @@ async function sbSelect(env, id) {
   if (!res.ok) throw new Error(`supabase select failed: ${await res.text()}`);
   const rows = await res.json();
   return rows[0] || null;
+}
+
+/** Rows eligible for the recovery sweep — bounded between minIso and maxIso
+ *  to ensure no accidental backfilling of historical leads. */
+async function sbSelectRecoveryCandidates(env, minIso, maxIso, limit) {
+  const params = new URLSearchParams();
+  params.append("paid", "eq.false");
+  params.append("recovery_sent", "eq.false");
+  params.append("marketing_opt_in", "eq.true");
+  params.append("created_at", `gte.${minIso}`);
+  params.append("created_at", `lt.${maxIso}`);
+  params.append("select", "id,email,cognitive_index,percentile_estimate");
+  params.append("limit", String(limit));
+
+  const res = await fetch(`${env.SUPABASE_URL}/rest/v1/sessions?${params.toString()}`, {
+    headers: {
+      apikey:        env.SUPABASE_SERVICE_KEY,
+      Authorization: `Bearer ${env.SUPABASE_SERVICE_KEY}`,
+    },
+  });
+  if (!res.ok) throw new Error(`supabase recovery query failed: ${await res.text()}`);
+  return await res.json();
 }
 
 async function sbUpdate(env, id, patch) {
@@ -306,6 +345,7 @@ async function handleSaveResult(body, env, cors) {
     return json({ error: "consent_required" }, 400, cors);
   }
 
+  const safeLocale = VALID_LOCALES.has(body.locale) ? body.locale : "en";
   const row = await sbInsert(env, "sessions", {
     email,
     answers,
@@ -316,21 +356,22 @@ async function handleSaveResult(body, env, cors) {
     paid:                 false,
     lead_only:            Boolean(leadOnly),
     marketing_opt_in:     Boolean(marketingOptIn),
+    locale:               safeLocale,
     consent_given_at:     new Date().toISOString(), // server-stamped, not client
     consent_text_version: "v1",
   });
 
-  logEvent(env, leadOnly ? "lead_captured" : "result_saved", { sessionId: row.id, status: "success", email, marketingOptIn: Boolean(marketingOptIn) });
+  logEvent(env, leadOnly ? "lead_captured" : "result_saved", { sessionId: row.id, status: "success", email, marketingOptIn: Boolean(marketingOptIn), locale: safeLocale });
   return json({ id: row.id }, 200, cors);
 }
 
 /** POST /api/checkout
- *  body: { id, email, tier }   tier: "basic" | "detailed"
+ *  body: { id, email, tier, locale }   tier: "basic" | "detailed"
  *  -> { url }
  */
 async function handleCheckout(body, env, cors) {
   if (!body) return json({ error: "invalid_payload" }, 400, cors);
-  const { id, email, tier } = body;
+  const { id, email, tier, locale } = body;
 
   if (!id || !validateEmail(email)) {
     logEvent(env, "checkout_failed", { status: "failed", errorCode: "invalid_payload", email });
@@ -343,8 +384,10 @@ async function handleCheckout(body, env, cors) {
 
   logEvent(env, "checkout_started", { sessionId: id, tier, status: "success", email });
 
-  // Store tier on the session row so the webhook can read it reliably
-  await sbUpdate(env, id, { tier });
+  // Store tier and locale on the session row so the webhook can read it reliably
+  const patch = { tier };
+  if (locale && VALID_LOCALES.has(locale)) patch.locale = locale;
+  await sbUpdate(env, id, patch);
 
   const successUrl = `${env.ALLOWED_ORIGIN}/?report=${id}`;
   const cancelUrl  = `${env.ALLOWED_ORIGIN}/`;
@@ -361,6 +404,10 @@ async function handleCheckout(body, env, cors) {
     "line_items[0][price_data][unit_amount]":        String(PRICE_CENTS[tier]),
     "line_items[0][price_data][product_data][name]": PRODUCT_NAME[tier],
   });
+
+  if (locale && VALID_LOCALES.has(locale)) {
+    params.set("locale", locale === "zh" ? "zh-Hans" : locale);
+  }
 
   const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
     method: "POST",
@@ -429,9 +476,56 @@ async function handleWebhook(req, env, cors) {
 async function handleGetReport(url, env, cors) {
   const id = url.searchParams.get("id");
   if (!id) return json({ error: "missing_id" }, 400, cors);
+  if (!isUuid(id)) return json({ error: "invalid_id" }, 400, cors);
   const row = await sbSelect(env, id);
   if (!row) return json({ error: "not_found" }, 404, cors);
   return json({ paid: row.paid, report: row.report || null, tier: row.tier || null }, 200, cors);
+}
+
+/** GET/POST /api/unsubscribe?id=<uuid>
+ *  One-click CASL / RFC 8058 unsubscribe — sets marketing_opt_in=false.
+ *  Handles RFC 8058 POST from email clients and GET from browser links.
+ */
+async function handleUnsubscribe(req, url, env, cors) {
+  const id = url.searchParams.get("id");
+  if (isUuid(id)) {
+    try {
+      await sbUpdate(env, id, { marketing_opt_in: false });
+      logEvent(env, "unsubscribed", { sessionId: id, status: "success", method: req.method });
+    } catch (err) {
+      logEvent(env, "unsubscribe_failed", { sessionId: id, status: "failed", errorCode: err.message });
+    }
+  }
+
+  // RFC 8058 One-Click POST request from email clients
+  if (req.method === "POST") {
+    return json({ ok: true, message: "unsubscribed" }, 200, cors);
+  }
+
+  const html = `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Unsubscribed | IQ·Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"></head>
+<body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; background:#0d0d0d; color:#eee; display:flex; align-items:center; justify-content:center; min-height:100vh; margin:0; text-align:center; padding:24px;">
+<div><h1 style="color:#B49048; font-size:1.4rem;">You're unsubscribed</h1>
+<p style="color:#aaa; max-width:360px; margin:0 auto;">You won't receive any more optional emails from IQ·Test. Your saved score, if any, is unaffected.</p>
+<p style="margin-top:20px;"><a href="https://iq-test.icu" style="color:#B49048;">Return to iq-test.icu</a></p></div>
+</body></html>`;
+  return new Response(html, { status: 200, headers: { ...cors, "Content-Type": "text/html; charset=utf-8" } });
+}
+
+/** POST /api/track
+ *  body: { name, meta }
+ *  -> { ok: true }
+ */
+async function handleTrackEvent(body, env, cors) {
+  if (!body || typeof body.name !== "string" || !body.name.trim()) {
+    return json({ error: "invalid_payload" }, 400, cors);
+  }
+  const { name, meta } = body;
+  await sbInsert(env, "events", {
+    event_name: name,
+    meta:       meta || {},
+  });
+  return json({ ok: true }, 200, cors);
 }
 
 // ── Report generation ─────────────────────────────────────────────────────────
@@ -564,7 +658,7 @@ STRICT RULES — violations are not acceptable:
 - Do NOT state or imply any numeric IQ score for the historical figure. Historical IQ estimates for real people are unreliable and must not appear.
 - Do NOT say "your IQ is X" or "clinical" or "diagnostic" — use "cognitive index" or "score" only.
 - Do NOT claim this is a clinical or validated psychometric result.
-- Do NOT invent statistics. Plain, warm, specific tone. No filler.`;
+- Do NOT invent statistics. Plain, warm, specific tone. No filler.${row.locale && row.locale !== "en" ? `\n- OUTPUT LANGUAGE: You MUST write the entire report in ${row.locale} language natively.` : ""}`;
 
   try {
     const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -604,6 +698,30 @@ STRICT RULES — violations are not acceptable:
 
 // ── Resend email ──────────────────────────────────────────────────────────────
 
+/**
+ * Single POST path to Resend for every outbound email.
+ *
+ * fetch() resolves normally on a 4xx/5xx, so an unchecked call silently reports
+ * success on a rejected send. That mattered in both call sites below: the paid
+ * path would mark the row paid + report_sent_at with no report ever delivered,
+ * and the recovery sweep would set recovery_sent=true and burn the lead forever.
+ * Throwing here pushes both into their existing retry paths — Stripe re-delivers
+ * the webhook (guarded by `!row.paid`, so it stays idempotent) and the next
+ * nightly sweep re-picks the untouched row.
+ */
+async function postResend(env, payload) {
+  const res = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization:  `Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ from: env.RESEND_FROM, ...payload }),
+  });
+  if (!res.ok) throw new Error(`resend send failed (${res.status}): ${await res.text()}`);
+  return res;
+}
+
 async function sendReportEmail(env, to, report, index, tier) {
   if (!to) return;
 
@@ -624,19 +742,108 @@ async function sendReportEmail(env, to, report, index, tier) {
     </div>
   `;
 
-  await fetch("https://api.resend.com/emails", {
-    method: "POST",
+  await postResend(env, {
+    to,
+    subject: `Your IQ·Test ${subjectLabel} — Cognitive Index ${index}`,
+    text:    `${report}\n\n---\n— IQ·Test\niq-test.icu`,
+    html:    htmlBody,
+  });
+}
+
+// ── Recovery sweep (abandoned-lead follow-up, CASL-gated) ────────────────────
+
+/**
+ * Fires once per Cron Trigger (see wrangler.toml [triggers]). Sends ONE
+ * follow-up email to leads who completed the free score, opted in to
+ * "occasional cognitive-science content" (marketing_opt_in=true), haven't
+ * purchased, haven't already been swept, and are 48h+ old. Capped at 200
+ * rows/run and never throws past a single row — one bad send must not block
+ * the rest of the batch or the next scheduled run.
+ */
+async function handleRecoverySweep(env) {
+  // Safe bounded lookback window: Leads between 48 hours and 14 days old (prevents backfill mass-emailing)
+  const maxCutoff = new Date(Date.now() - 48 * 60 * 60 * 1000).toISOString();
+  const minCutoff = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000).toISOString();
+
+  let candidates;
+  try {
+    candidates = await sbSelectRecoveryCandidates(env, minCutoff, maxCutoff, 200);
+  } catch (err) {
+    logEvent(env, "recovery_sweep_query_failed", { status: "failed", errorCode: err.message });
+    return;
+  }
+
+  logEvent(env, "recovery_sweep_started", { status: "success", meta: { candidateCount: candidates.length } });
+
+  for (const row of candidates) {
+    try {
+      await sendRecoveryEmail(env, row.email, row);
+      await sbUpdate(env, row.id, { recovery_sent: true });
+      logEvent(env, "recovery_email_sent", { sessionId: row.id, status: "success", email: row.email });
+    } catch (err) {
+      logEvent(env, "recovery_email_failed", { sessionId: row.id, status: "failed", errorCode: err.message, email: row.email });
+    }
+  }
+
+  logEvent(env, "recovery_sweep_completed", { status: "success", meta: { candidateCount: candidates.length } });
+}
+
+async function sendRecoveryEmail(env, to, row) {
+  if (!to) return;
+
+  const reportUrl = `${env.ALLOWED_ORIGIN}/?report=${row.id}`;
+  const unsubUrl  = `${env.ALLOWED_ORIGIN}/api/unsubscribe?id=${row.id}`;
+  const indexLine = row.cognitive_index != null
+    ? `Your cognitive index was ${row.cognitive_index}${row.percentile_estimate != null ? ` (around the ${row.percentile_estimate}th percentile)` : ""}.`
+    : "Your result is still saved.";
+
+  const text = `Hi,
+
+A little while ago you took the IQ·Test cognitive assessment and got your free score. ${indexLine}
+
+If you'd like the full percentile breakdown, or the written reasoning analysis and historical figure match, you can pick it up from the same link:
+
+${reportUrl}
+
+No pressure — if you're not interested, no action needed.
+
+---
+Consent Scope & Sender Identification (CASL Compliance):
+You received this message because you completed the cognitive assessment at iq-test.icu and opted in to receive occasional cognitive-science content.
+Sender: APEX Business Systems Ltd. · Edmonton, AB, Canada
+Unsubscribe instantly: ${unsubUrl}
+`;
+
+  const html = `
+    <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; line-height:1.6; color:#1a1a1a; max-width:600px; margin:0 auto; padding:24px; background-color:#ffffff; border:1px solid #eaeaea; border-radius:12px;">
+      <div style="text-align:center; margin-bottom:24px; border-bottom:1px solid #eaeaea; padding-bottom:16px;">
+        <span style="font-family:Georgia,serif; font-size:24px; font-weight:bold; letter-spacing:0.05em; color:#B49048;">IQ&middot;TEST</span>
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:#666666; margin-top:4px;">YOUR SAVED RESULT</div>
+      </div>
+      <div style="font-size:15px; margin-bottom:24px;">
+        <p>A little while ago you took the IQ·Test cognitive assessment and got your free score. ${indexLine}</p>
+        <p>If you'd like the full percentile breakdown, or the written reasoning analysis and historical figure match, you can pick it up from the same link:</p>
+        <p style="text-align:center; margin:24px 0;"><a href="${reportUrl}" style="background:#B49048; color:#ffffff; text-decoration:none; padding:12px 28px; border-radius:8px; font-weight:600; display:inline-block;">View my saved result</a></p>
+        <p style="font-size:13px; color:#666666;">No pressure — if you're not interested, no action needed.</p>
+      </div>
+      <div style="margin-top:32px; border-top:1px solid #eaeaea; padding-top:16px; font-size:12px; color:#888888; text-align:center; line-height:1.5;">
+        This is a self-insight quiz, not a clinical IQ test.<br>
+        You received this email because you opted in to occasional cognitive-science content when taking the assessment on <a href="https://iq-test.icu" style="color:#B49048; text-decoration:none;">iq-test.icu</a>.<br>
+        &copy; 2026 APEX Business Systems Ltd. &nbsp;&middot;&nbsp; Edmonton, AB, Canada<br>
+        <a href="${unsubUrl}" style="color:#888888; text-decoration:underline;">One-Click Unsubscribe</a>
+      </div>
+    </div>
+  `;
+
+  await postResend(env, {
+    to,
+    subject: "Your IQ·Test score is still saved",
+    text,
+    html,
     headers: {
-      Authorization:  `Bearer ${env.RESEND_API_KEY}`,
-      "Content-Type": "application/json",
+      "List-Unsubscribe":      `<${unsubUrl}>`,
+      "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
     },
-    body: JSON.stringify({
-      from:    env.RESEND_FROM,
-      to,
-      subject: `Your IQ·Test ${subjectLabel} — Cognitive Index ${index}`,
-      text:    `${report}\n\n---\n— IQ·Test\niq-test.icu`,
-      html:    htmlBody,
-    }),
   });
 }
 
