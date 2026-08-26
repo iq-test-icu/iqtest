@@ -533,8 +533,7 @@ async function handleWebhook(req, env, cors) {
         const report = await generateReport(env, row, resolvedTier);
         logEvent(env, "report_generated", { sessionId, tier: resolvedTier, status: "success", email });
 
-        await sendReportEmail(env, email, report, row.cognitive_index, resolvedTier);
-        logEvent(env, "report_emailed", { sessionId, tier: resolvedTier, status: "success", email });
+        // Fulfill and unlock report immediately in database so user can view it on screen
         await sbUpdate(env, sessionId, {
           paid:             true,
           tier:             resolvedTier,
@@ -542,6 +541,15 @@ async function handleWebhook(req, env, cors) {
           stripe_session_id: session.id,
           report_sent_at:   new Date().toISOString(),
         });
+
+        // Fail-safe email dispatch
+        try {
+          await sendReportEmail(env, email, report, row.cognitive_index, resolvedTier);
+          logEvent(env, "report_emailed", { sessionId, tier: resolvedTier, status: "success", email });
+        } catch (emailErr) {
+          console.error("Report email delivery failed:", emailErr);
+          logEvent(env, "report_email_failed", { sessionId, tier: resolvedTier, status: "failed", errorCode: emailErr.message, email });
+        }
       }
     }
   }
