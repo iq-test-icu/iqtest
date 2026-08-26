@@ -121,11 +121,13 @@ export default {
 
     const clientIp = req.headers.get("CF-Connecting-IP") || "127.0.0.1";
 
+    const isWebhook = url.pathname === "/api/webhook" || url.pathname === "/api/webhook/stripe" || url.pathname === "/api/stripe-webhook";
+
     try {
       let body = null;
       if (req.method === "POST") {
         const rawBody = await req.text();
-        if (rawBody.length > 10240 && url.pathname !== "/api/webhook") {
+        if (rawBody.length > 10240 && !isWebhook) {
           logEvent(env, "payload_too_large", { status: "failed", errorCode: "payload_too_large" });
           return new Response(JSON.stringify({ error: "payload_too_large" }), {
             status: 413,
@@ -133,7 +135,7 @@ export default {
           });
         }
 
-        if (url.pathname !== "/api/webhook" && url.pathname !== "/api/unsubscribe") {
+        if (!isWebhook && url.pathname !== "/api/unsubscribe") {
           try {
             body = JSON.parse(rawBody);
           } catch (err) {
@@ -164,11 +166,9 @@ export default {
         return handleBadge(url, env, cors);
       if (url.pathname === "/api/save-result" && req.method === "POST")
         return await handleSaveResult(body, env, cors);
-      if (url.pathname === "/api/track" && req.method === "POST")
-        return await handleTrackEvent(body, env, cors);
       if (url.pathname === "/api/checkout" && req.method === "POST")
         return await handleCheckout(body, env, cors);
-      if (url.pathname === "/api/webhook" && req.method === "POST")
+      if (isWebhook && req.method === "POST")
         return await handleWebhook(req, env, cors);
       if (url.pathname === "/api/report" && req.method === "GET")
         return await handleGetReport(url, env, cors);
@@ -263,19 +263,47 @@ async function sbUpdate(env, id, patch) {
 // ── Handlers ─────────────────────────────────────────────────────────────────
 
 /** POST /api/track
- *  body: { event: "page_view" | "quiz_started" | "quiz_completed_free", locale?: string }
+ *  Supports:
+ *    - Funnel telemetry: { event: "page_view" | "quiz_started" | "quiz_completed_free", locale?: string }
+ *    - Interaction telemetry: { name: "checkout_started", meta?: { tier: "detailed", ... } }
+ *    - Generic events: { event_name: "...", meta?: { ... } }
  *  -> { ok: true }
  */
 async function handleTrack(body, env, cors) {
-  if (!body || typeof body.event !== "string" || !VALID_EVENTS.has(body.event)) {
+  if (!body || typeof body !== "object") {
+    return json({ error: "invalid_payload" }, 400, cors);
+  }
+
+  const rawEvent = body.event || body.name || body.event_name;
+  if (!rawEvent || typeof rawEvent !== "string" || !rawEvent.trim()) {
     return json({ error: "invalid_event" }, 400, cors);
   }
-  const safeLocale = (typeof body.locale === "string" && VALID_LOCALES.has(body.locale.toLowerCase()))
-    ? body.locale.toLowerCase()
-    : "en";
 
-  // Strict PII constraint: meta contains only safe validated locale
-  logEvent(env, body.event, { status: "success", meta: { locale: safeLocale } });
+  const eventName = rawEvent.trim().slice(0, 64);
+  const meta = (body.meta && typeof body.meta === "object" && !Array.isArray(body.meta)) ? { ...body.meta } : {};
+  if (body.locale && typeof body.locale === "string" && VALID_LOCALES.has(body.locale.toLowerCase())) {
+    meta.locale = body.locale.toLowerCase();
+  }
+
+  const sessionId = body.sessionId || body.session_id || meta.sessionId || meta.id || null;
+  const tier = body.tier || meta.tier || null;
+
+  if (env.SUPABASE_URL && env.SUPABASE_SERVICE_KEY) {
+    try {
+      const eventRow = {
+        event_name: eventName,
+        session_id: sessionId ? String(sessionId) : null,
+        tier: tier || null,
+        status: "success",
+        environment: env.ENVIRONMENT || "production",
+      };
+      if (Object.keys(meta).length > 0) eventRow.meta = meta;
+      await sbInsert(env, "events", eventRow);
+    } catch (err) {
+      console.error("Async event logging to Supabase failed:", err);
+    }
+  }
+
   return json({ ok: true }, 200, cors);
 }
 
@@ -561,22 +589,6 @@ async function handleUnsubscribe(req, url, env, cors) {
 <p style="margin-top:20px;"><a href="https://iq-test.icu" style="color:#B49048;">Return to iq-test.icu</a></p></div>
 </body></html>`;
   return new Response(html, { status: 200, headers: { ...cors, "Content-Type": "text/html; charset=utf-8" } });
-}
-
-/** POST /api/track
- *  body: { name, meta }
- *  -> { ok: true }
- */
-async function handleTrackEvent(body, env, cors) {
-  if (!body || typeof body.name !== "string" || !body.name.trim()) {
-    return json({ error: "invalid_payload" }, 400, cors);
-  }
-  const { name, meta } = body;
-  await sbInsert(env, "events", {
-    event_name: name,
-    meta:       meta || {},
-  });
-  return json({ ok: true }, 200, cors);
 }
 
 // ── Report generation ─────────────────────────────────────────────────────────
