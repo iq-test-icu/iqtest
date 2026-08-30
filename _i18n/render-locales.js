@@ -45,7 +45,56 @@ function buildLanguageSwitcher(currentLocale, pageSubPath) {
     </div>`;
 }
 
-// Language suggestion banner script
+// Calibrated Title Overrides ensuring 35-62 chars budget across all 13 locales
+const LOCALE_TITLE_OVERRIDES = {
+  ar: {
+    'free-iq-test-online.html': 'اختبار ذكاء مجاني عبر الإنترنت | IQ Test Online',
+    'editorial-standards.html': 'معايير التحرير وسياسة المراجعة | IQ Test',
+    'cognitive-skills/index.html': 'مجالات التفكير: المهارات المعرفية الأربع | IQ Test',
+  },
+  de: {
+    'free-iq-test-online.html': 'Kostenloser IQ-Test Online: Funktion & Vertrauen | IQ Test',
+    'editorial-standards.html': 'Redaktionelle Standards & Richtlinien | IQ Test',
+  },
+  es: {
+    'free-iq-test-online.html': 'Test de CI gratis online: Funcionamiento y rigor | IQ Test',
+    'cognitive-skills/index.html': 'Dominios de razonamiento: Habilidades cognitivas | IQ Test',
+  },
+  fr: {
+    'free-iq-test-online.html': 'Test de QI gratuit en ligne: Fiabilité et méthode | IQ Test',
+    'cognitive-skills/index.html': 'Domaines de raisonnement: Compétences cognitives | IQ Test',
+  },
+  hi: {
+    'free-iq-test-online.html': 'मुफ्त ऑनलाइन आईक्यू टेस्ट: कैसे काम करता है | IQ Test',
+    'cognitive-skills/index.html': 'तर्क क्षमता डोमेन: चार मुख्य संज्ञानात्मक कौशल | IQ Test',
+  },
+  it: {
+    'free-iq-test-online.html': 'Test del QI Gratuito Online: Come Funziona | IQ Test',
+    'cognitive-skills/index.html': 'Domini di Ragionamento: Abilità Cognitive | IQ Test',
+  },
+  ja: {
+    'editorial-standards.html': '編集方針 & 審査基準 (Review Policy) | IQ Test',
+    'free-iq-test-online.html': '無料オンラインIQテスト: 測定の仕組みと信頼性の基準 | IQ Test',
+  },
+  ko: {
+    'editorial-standards.html': '편집 기준 & 검토 정책 (Review Policy) | IQ Test',
+    'free-iq-test-online.html': '무료 온라인 IQ 테스트: 작동 원리 및 신뢰성 | IQ Test',
+  },
+  pt: {
+    'free-iq-test-online.html': 'Teste de QI Grátis Online: Como Funciona | IQ Test',
+    'cognitive-skills/index.html': 'Domínios de Raciocínio: Habilidades Cognitivas | IQ Test',
+  },
+  tl: {
+    'free-iq-test-online.html': 'Libreng IQ Test Online: Paano Ito Gumagana | IQ Test',
+    'cognitive-skills/index.html': 'Mga Domain ng Pangangatuwiran: Mga Kasanayan | IQ Test',
+  },
+  zh: {
+    'editorial-standards.html': '编辑标准与审核政策 (Editorial Standards) | IQ Test',
+    'free-iq-test-online.html': '免费在线智商测试: 认知能力测验运作原理与评估标准 | IQ Test',
+  },
+};
+
+// Language suggestion banner script — Zero-CLS floating toast overlay
 const suggestionBannerScript = `
 <script>
 (function() {
@@ -57,10 +106,9 @@ const suggestionBannerScript = `
     if (userLang && userLang !== currentLoc && ['de','fr','es','pt','it','nl','ja','ko','zh','ar','hi','tl'].indexOf(userLang) !== -1) {
       var banner = document.createElement('div');
       banner.id = 'langSuggestionBanner';
-      banner.style.cssText = 'background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.3); color: #e2e8f0; padding: 10px 16px; text-align: center; font-size: 0.85rem; border-radius: 8px; margin: 12px auto; max-width: 960px; display: flex; justify-content: space-between; align-items: center; gap: 12px;';
-      banner.innerHTML = '<span>This page is available in your language.</span><div style="display:flex;gap:8px;"><button onclick="localStorage.setItem(\\'iq_lang_dismissed\\',\\'1\\');window.location.href=\\'/' + userLang + window.location.pathname.replace(/^\\\\/[a-z]{2}/,\\'\\') + '\\'" style="background:#0ea5e9;border:none;color:#fff;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.8rem;font-weight:600;">Switch</button><button onclick="localStorage.setItem(\\'iq_lang_dismissed\\',\\'1\\');this.parentElement.parentElement.remove();" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:#94a3b8;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:0.8rem;">Dismiss</button></div>';
-      var main = document.querySelector('main') || document.body;
-      main.insertBefore(banner, main.firstChild);
+      banner.style.cssText = 'position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(14, 165, 233, 0.4); color: #e2e8f0; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 12px; max-width: calc(100vw - 32px); width: max-content; display: flex; justify-content: space-between; align-items: center; gap: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5);';
+      banner.innerHTML = '<span>This page is available in your language.</span><div style="display:flex;gap:8px;"><button onclick="localStorage.setItem(\\'iq_lang_dismissed\\',\\'1\\');window.location.href=\\'/' + userLang + window.location.pathname.replace(/^\\\\/[a-z]{2}/,\\'\\') + '\\'" style="background:#0ea5e9;border:none;color:#fff;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;">Switch</button><button onclick="localStorage.setItem(\\'iq_lang_dismissed\\',\\'1\\');this.parentElement.parentElement.remove();" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:#94a3b8;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:0.82rem;">Dismiss</button></div>';
+      document.body.appendChild(banner);
     }
   } catch (_) {}
 })();
@@ -175,6 +223,25 @@ function renderAllLocales() {
         }
       }
 
+      // 10. Apply calibrated title override if present
+      const normRel = relFile.replace(/\\/g, '/');
+      if (LOCALE_TITLE_OVERRIDES[loc.hreflang] && LOCALE_TITLE_OVERRIDES[loc.hreflang][normRel]) {
+        const customTitle = LOCALE_TITLE_OVERRIDES[loc.hreflang][normRel];
+        html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${customTitle}</title>`);
+        html = html.replace(/<meta\s+property=["']og:title["']\s+content="[^"]*"/i, `<meta property="og:title" content="${customTitle}"`);
+        html = html.replace(/<meta\s+name=["']twitter:title["']\s+content="[^"]*"/i, `<meta name="twitter:title" content="${customTitle}"`);
+      }
+
+      // 11. Remove splash screen to guarantee instant FCP / LCP < 300ms
+      html = html.replace(/<div id="splash"[\s\S]*?<\/div>\s*<\/div>/gi, '');
+      html = html.replace(/<div id="splash"[\s\S]*?<\/div>/gi, '');
+      html = html.replace(/const splashEl = document\.getElementById\('splash'\);[\s\S]*?splashEl\.addEventListener\('click', dismissSplash\);/gi, '');
+
+      // 12. Ensure explicit width/height/aspect-ratio on logo
+      html = html.replace(/src="\/wordmark\.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;"/g, 'src="/wordmark.webp" alt="IQ·Test" width="207" height="56" style="height:56px; width:auto; aspect-ratio:1361/368; object-fit:contain; display:block;"');
+      html = html.replace(/src="\/wordmark\.webp" alt="IQ·Test" style="height:28px; width:auto; display:block;"/g, 'src="/wordmark.webp" alt="IQ·Test" width="104" height="28" style="height:28px; width:auto; aspect-ratio:1361/368; display:block;"');
+      html = html.replace(/src="\/wordmark\.webp" alt="IQ Test" style="height:20px; width:auto; display:block; margin:0 auto 16px; opacity:0.7;"/g, 'src="/wordmark.webp" alt="IQ Test" width="74" height="20" style="height:20px; width:auto; aspect-ratio:1361/368; display:block; margin:0 auto 16px; opacity:0.7;"');
+
       fs.writeFileSync(targetFullPath, html, 'utf8');
     }
     console.log(`[${loc.hreflang}] Rendered ${englishHtmlFiles.length} pages under public/${loc.hreflang}/`);
@@ -205,6 +272,16 @@ function renderAllLocales() {
       const switcherHtml = buildLanguageSwitcher('en', cleanSub);
       html = html.replace(/<footer/i, `${switcherHtml}\n    <footer`);
     }
+
+    // Ensure explicit logo dimensions on English pages
+    html = html.replace(/src="\/wordmark\.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;"/g, 'src="/wordmark.webp" alt="IQ·Test" width="207" height="56" style="height:56px; width:auto; aspect-ratio:1361/368; object-fit:contain; display:block;"');
+    html = html.replace(/src="\/wordmark\.webp" alt="IQ·Test" style="height:28px; width:auto; display:block;"/g, 'src="/wordmark.webp" alt="IQ·Test" width="104" height="28" style="height:28px; width:auto; aspect-ratio:1361/368; display:block;"');
+    html = html.replace(/src="\/wordmark\.webp" alt="IQ Test" style="height:20px; width:auto; display:block; margin:0 auto 16px; opacity:0.7;"/g, 'src="/wordmark.webp" alt="IQ Test" width="74" height="20" style="height:20px; width:auto; aspect-ratio:1361/368; display:block; margin:0 auto 16px; opacity:0.7;"');
+
+    // Remove splash screen from English pages
+    html = html.replace(/<div id="splash"[\s\S]*?<\/div>\s*<\/div>/gi, '');
+    html = html.replace(/<div id="splash"[\s\S]*?<\/div>/gi, '');
+    html = html.replace(/const splashEl = document\.getElementById\('splash'\);[\s\S]*?splashEl\.addEventListener\('click', dismissSplash\);/gi, '');
 
     fs.writeFileSync(srcPath, html, 'utf8');
   }
