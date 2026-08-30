@@ -3,30 +3,7 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   X-XSS-Protection: 1; mode=block
-  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
   Content-Security-Policy: default-src 'self' https: 'unsafe-inline' 'unsafe-eval'; img-src 'self' data: https:; frame-src 'self' https://js.stripe.com; connect-src 'self' https://api.stripe.com https://iq-test.icu;
-
-/fonts/*
-  Cache-Control: public, max-age=31536000, immutable
-
-/*.woff2
-  Cache-Control: public, max-age=31536000, immutable
-
-/*.webp
-  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
-
-/*.png
-  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
-
-/*.svg
-  Cache-Control: public, max-age=2592000, stale-while-revalidate=86400
-
-/*.js
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
-
-/*.css
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
 
 https://*.pages.dev/*
   X-Robots-Tag: noindex

@@ -62,8 +62,7 @@ console.log(`\n--- [GATE G2: TECHNICAL] ---`);
 
 // 1. Sitemap validation
 const sitemapContent = fs.readFileSync(path.join(publicDir, 'sitemap.xml'), 'utf8');
-const isSitemapValid = sitemapContent.startsWith('<?xml') && (sitemapContent.includes('<urlset') || sitemapContent.includes('<sitemapindex'));
-assertCheck(isSitemapValid, 'sitemap.xml valid XML header and structure (urlset or sitemapindex)');
+assertCheck(sitemapContent.startsWith('<?xml') && sitemapContent.includes('<urlset'), 'sitemap.xml valid XML header and urlset');
 assertCheck(!sitemapContent.includes('<priority>') && !sitemapContent.includes('<changefreq>'), 'sitemap.xml omits priority and changefreq tags');
 
 // 2. Robots.txt validation
@@ -179,18 +178,7 @@ for (const filePath of allHtmlFiles) {
 // ── GATE G5: Internal Link Architecture ───────────────────────────────────────
 console.log(`\n--- [GATE G5: ARCHITECTURE & LINK INTEGRITY] ---`);
 
-let sitemapUrls = [...sitemapContent.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
-if (sitemapContent.includes('<sitemapindex')) {
-  for (const sitemapLoc of sitemapUrls) {
-    const sitemapRel = sitemapLoc.replace('https://iq-test.icu/', '');
-    const childFile = path.join(publicDir, sitemapRel);
-    if (fs.existsSync(childFile)) {
-      const childContent = fs.readFileSync(childFile, 'utf8');
-      const childUrls = [...childContent.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
-      sitemapUrls = sitemapUrls.concat(childUrls);
-    }
-  }
-}
+const sitemapUrls = [...sitemapContent.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
 assertCheck(sitemapUrls.length >= 28, `Sitemap has complete entity cluster coverage`, `Total URLs: ${sitemapUrls.length}`);
 
 // Verify /historical-figures-iq is 200 and not redirected
