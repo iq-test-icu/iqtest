@@ -1227,7 +1227,7 @@
   [dir="rtl"] .lang-dropdown { right: auto; left: 0; }
 
 </style>
-                        <link rel="alternate" hreflang="en" href="https://iq-test.icu">
+                <link rel="alternate" hreflang="en" href="https://iq-test.icu">
   <link rel="alternate" hreflang="de" href="https://iq-test.icu/de">
   <link rel="alternate" hreflang="fr" href="https://iq-test.icu/fr">
   <link rel="alternate" hreflang="es" href="https://iq-test.icu/es">
@@ -1422,7 +1422,50 @@
   <div class="mural-vignette"></div>
 </div>
 
-
+<div id="splash" aria-hidden="true">
+  <svg viewBox="0 0 100 100">
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#C9A24B" stroke-width="1.2" class="splash-line"/>
+    <line x1="50" y1="50" x2="27" y2="27" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
+    <line x1="50" y1="50" x2="73" y2="27" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
+    <line x1="50" y1="50" x2="27" y2="73" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
+    <line x1="50" y1="50" x2="79" y2="21" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
+    <circle cx="27" cy="27" r="3.2" fill="#C9A24B"/>
+    <circle cx="73" cy="27" r="3.2" fill="#C9A24B"/>
+    <circle cx="27" cy="73" r="3.2" fill="#C9A24B"/>
+    <circle cx="79" cy="21" r="3.8" fill="#EDE3CB"/>
+    <circle cx="50" cy="50" r="5.5" fill="#EDE3CB"/>
+  </svg>
+</div>
+<div class="wrap">
+                    <header>
+    <div class="logo-wrap">
+      <img src="/wordmark.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;" onerror="this.style.display='none'">
+    </div>
+    <div class="header-lang-wrapper" id="headerLangWrapper">
+      <button class="lang-btn" id="headerLangBtn" aria-expanded="false" aria-haspopup="true" aria-controls="headerLangDropdown" onclick="toggleHeaderLangMenu(event)">
+        <span class="globe-icon" aria-hidden="true">🌐</span>
+        <span class="lang-current-label">简体中文</span>
+        <svg class="chevron-icon" aria-hidden="true" viewBox="0 0 16 16" width="12" height="12"><path fill="currentColor" d="M3.2 5.2a.75.75 0 0 1 1.06 0L8 8.94l3.74-3.74a.75.75 0 1 1 1.06 1.06l-4.27 4.27a.75.75 0 0 1-1.06 0L3.2 6.26a.75.75 0 0 1 0-1.06z"/></svg>
+      </button>
+      <nav id="headerLangDropdown" class="lang-dropdown" aria-label="Language Selector" hidden>
+        <div class="lang-dropdown-inner">
+          <div class="lang-dropdown-title">选择语言</div>
+          <div class="lang-grid">
+            <a href="/" class="lang-option" hreflang="en" lang="en"><span class="lang-code">EN</span> English</a>
+            <a href="/de/" class="lang-option" hreflang="de" lang="de"><span class="lang-code">DE</span> Deutsch</a>
+            <a href="/fr/" class="lang-option" hreflang="fr" lang="fr"><span class="lang-code">FR</span> Français</a>
+            <a href="/es/" class="lang-option" hreflang="es" lang="es"><span class="lang-code">ES</span> Español</a>
+            <a href="/pt/" class="lang-option" hreflang="pt" lang="pt"><span class="lang-code">PT</span> Português</a>
+            <a href="/it/" class="lang-option" hreflang="it" lang="it"><span class="lang-code">IT</span> Italiano</a>
+            <a href="/nl/" class="lang-option" hreflang="nl" lang="nl"><span class="lang-code">NL</span> Nederlands</a>
+            <a href="/ja/" class="lang-option" hreflang="ja" lang="ja"><span class="lang-code">JA</span> 日本語</a>
+            <a href="/ko/" class="lang-option" hreflang="ko" lang="ko"><span class="lang-code">KO</span> 한국어</a>
+            <a href="/zh/" class="lang-option" hreflang="zh-Hans" lang="zh-Hans"><span class="lang-code">ZH</span> 简体中文</a>
+            <a href="/ar/" class="lang-option" hreflang="ar" lang="ar"><span class="lang-code">AR</span> العربية</a>
+            <a href="/hi/" class="lang-option" hreflang="hi" lang="hi"><span class="lang-code">HI</span> हिन्दी</a>
+            <a href="/tl/" class="lang-option" hreflang="tl" lang="tl"><span class="lang-code">TL</span> Tagalog</a>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
@@ -1710,7 +1753,7 @@
       </nav>
     </div>
   <footer>
-    <img src="/wordmark.webp" alt="IQ Test" width="74" height="20" style="height:20px; width:auto; aspect-ratio:1361/368; display:block; margin:0 auto 16px; opacity:0.7;" onerror="this.style.display='none'">
+    <img src="/wordmark.webp" alt="IQ Test" style="height:20px; width:auto; display:block; margin:0 auto 16px; opacity:0.7;" onerror="this.style.display='none'">
     <div style="margin-bottom:15px; line-height: 1.8;">
       <a href="/">首页</a> &nbsp;&middot;&nbsp;
       <a href="/iq-scores/">智商分数</a> &nbsp;&middot;&nbsp;
@@ -1752,7 +1795,10 @@
 <script>
 const API_BASE = ""; // same-origin — Worker is routed at iq-test.icu/api/*
 
-
+const splashEl = document.getElementById('splash');
+function dismissSplash(){ splashEl.classList.add('gone'); }
+setTimeout(dismissSplash, 1400);
+splashEl.addEventListener('click', dismissSplash);
 
 const QUESTIONS = [
   {
@@ -2500,9 +2546,10 @@ document.addEventListener('keydown', function(e) {
     if (userLang && userLang !== currentLoc && ['de','fr','es','pt','it','nl','ja','ko','zh','ar','hi','tl'].indexOf(userLang) !== -1) {
       var banner = document.createElement('div');
       banner.id = 'langSuggestionBanner';
-      banner.style.cssText = 'position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(14, 165, 233, 0.4); color: #e2e8f0; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 12px; max-width: calc(100vw - 32px); width: max-content; display: flex; justify-content: space-between; align-items: center; gap: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5);';
-      banner.innerHTML = '<span>This page is available in your language.</span><div style="display:flex;gap:8px;"><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');window.location.href=\'/' + userLang + window.location.pathname.replace(/^\\/[a-z]{2}/,\'\') + '\'" style="background:#0ea5e9;border:none;color:#fff;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;">Switch</button><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');this.parentElement.parentElement.remove();" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:#94a3b8;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:0.82rem;">关闭</button></div>';
-      document.body.appendChild(banner);
+      banner.style.cssText = 'background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.3); color: #e2e8f0; padding: 10px 16px; text-align: center; font-size: 0.85rem; border-radius: 8px; margin: 12px auto; max-width: 960px; display: flex; justify-content: space-between; align-items: center; gap: 12px;';
+      banner.innerHTML = '<span>This page is available in your language.</span><div style="display:flex;gap:8px;"><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');window.location.href=\'/' + userLang + window.location.pathname.replace(/^\\/[a-z]{2}/,\'\') + '\'" style="background:#0ea5e9;border:none;color:#fff;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.8rem;font-weight:600;">Switch</button><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');this.parentElement.parentElement.remove();" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:#94a3b8;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:0.8rem;">关闭</button></div>';
+      var main = document.querySelector('main') || document.body;
+      main.insertBefore(banner, main.firstChild);
     }
   } catch (_) {}
 })();
