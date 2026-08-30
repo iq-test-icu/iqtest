@@ -269,6 +269,10 @@ async function sbUpdate(env, id, patch) {
  *    - Generic events: { event_name: "...", meta?: { ... } }
  *  -> { ok: true }
  */
+async function handleTrackEvent(body, env, cors) {
+  return await handleTrack(body, env, cors);
+}
+
 async function handleTrack(body, env, cors) {
   if (!body || typeof body !== "object") {
     return json({ error: "invalid_payload" }, 400, cors);

@@ -210,9 +210,13 @@ if (!html.includes('/* === HEADER LANGUAGE SWITCHER === */')) {
   html = html.replace('</style>', `${indexSwitcherStyles}\n</style>`);
 }
 
+// Remove splash screen element if present to ensure instant First Contentful Paint
+html = html.replace(/<div id="splash"[\s\S]*?<\/div>\s*<\/div>/gi, '');
+html = html.replace(/<div id="splash"[\s\S]*?<\/div>/gi, '');
+
 const headerSwitcherMarkup = `  <header>
     <div class="logo-wrap">
-      <img src="/wordmark.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;" onerror="this.style.display='none'">
+      <img src="/wordmark.webp" alt="IQ·Test" width="207" height="56" style="height:56px; width:auto; aspect-ratio:1361/368; object-fit:contain; display:block;" onerror="this.style.display='none'">
     </div>
     <div class="header-lang-wrapper" id="headerLangWrapper">
       <button class="lang-btn" id="headerLangBtn" aria-expanded="false" aria-haspopup="true" aria-controls="headerLangDropdown" onclick="toggleHeaderLangMenu(event)">
@@ -452,7 +456,7 @@ html = html.replace(/<div class="info-block" id="content-hub">[\s\S]*?<\/div>\s*
 
 // 7. Update Footer links in index.html to include new Hubs & Trust pages
 const newFooterContent = `  <footer>
-    <img src="/wordmark.webp" alt="IQ Test" style="height:20px; width:auto; display:block; margin:0 auto 16px; opacity:0.7;" onerror="this.style.display='none'">
+    <img src="/wordmark.webp" alt="IQ Test" width="74" height="20" style="height:20px; width:auto; aspect-ratio:1361/368; display:block; margin:0 auto 16px; opacity:0.7;" onerror="this.style.display='none'">
     <div style="margin-bottom:15px; line-height: 1.8;">
       <a href="/">Home</a> &nbsp;&middot;&nbsp;
       <a href="/iq-scores/">IQ Scores</a> &nbsp;&middot;&nbsp;
