@@ -28,7 +28,9 @@ html = html.replace(/<meta\s+name=["']twitter:description["']\s+content=["'][\s\
 // Replace meta robots
 html = html.replace(/<meta\s+name=["']robots["']\s+content=["'][\s\S]*?["']>/i, `<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">`);
 
-html = html.replace('src="mural_bg.webp"', 'src="/mural_bg.webp"');
+html = html.replace(/<img\s+src="[\/]?mural_bg\.webp"[^>]*>/i, '<img src="/mural_bg.webp" class="mural-bg" alt="" width="1024" height="1024" draggable="false" style="aspect-ratio:1/1;">');
+html = html.replace(/<img\s+src="[\/]?icon\.webp"[^>]*alt="Gold Medallion Centerpiece"[^>]*>/i, '<img src="/icon.webp" alt="Gold Medallion Centerpiece" width="180" height="180" style="aspect-ratio:1/1;">');
+html = html.replace(/<img\s+id="badgePreviewImg"[^>]*>/i, '<img id="badgePreviewImg" src="/api/badge?score=100&pct=50" alt="Verified Cognitive Index Badge" width="320" height="96" style="max-width:100%; height:auto; aspect-ratio:320/96; display:inline-block;" onerror="this.style.display=\'none\'">');
 
 // 2. Replace old JSON-LD scripts with single consolidated sitewide @graph + FAQPage + Product/Offer
 const homepageFaqs = [

@@ -155,9 +155,10 @@ function renderAllLocales() {
       html = html.replace(/<html[^>]*>/i, `<html lang="${loc.lang}" dir="${loc.dir}">`);
 
       // 2. Fix all relative asset paths to root absolute
-      html = html.replace(/src="mural_bg\.webp"/g, 'src="/mural_bg.webp"');
+      html = html.replace(/<img\s+src="[\/]?mural_bg\.webp"[^>]*>/gi, '<img src="/mural_bg.webp" class="mural-bg" alt="" width="1024" height="1024" draggable="false" style="aspect-ratio:1/1;">');
+      html = html.replace(/<img\s+src="[\/]?icon\.webp"[^>]*alt="Gold Medallion Centerpiece"[^>]*>/gi, '<img src="/icon.webp" alt="Gold Medallion Centerpiece" width="180" height="180" style="aspect-ratio:1/1;">');
+      html = html.replace(/<img\s+id="badgePreviewImg"[^>]*>/gi, '<img id="badgePreviewImg" src="/api/badge?score=100&pct=50" alt="Verified Cognitive Index Badge" width="320" height="96" style="max-width:100%; height:auto; aspect-ratio:320/96; display:inline-block;" onerror="this.style.display=\'none\'">');
       html = html.replace(/src="wordmark\.webp"/g, 'src="/wordmark.webp"');
-      html = html.replace(/src="icon\.webp"/g, 'src="/icon.webp"');
 
       // 3. Self-referencing canonical
       const cleanSub = relFile === 'index.html' ? '' : relFile.replace(/\.html$/, '').replace(/\/index$/, '');
@@ -254,10 +255,11 @@ function renderAllLocales() {
     let html = fs.readFileSync(srcPath, 'utf8');
     const cleanSub = relFile === 'index.html' ? '' : relFile.replace(/\.html$/, '').replace(/\/index$/, '');
     
-    // Ensure absolute image paths
-    html = html.replace(/src="mural_bg\.webp"/g, 'src="/mural_bg.webp"');
+    // Ensure absolute image paths with dimensions
+    html = html.replace(/<img\s+src="[\/]?mural_bg\.webp"[^>]*>/gi, '<img src="/mural_bg.webp" class="mural-bg" alt="" width="1024" height="1024" draggable="false" style="aspect-ratio:1/1;">');
+    html = html.replace(/<img\s+src="[\/]?icon\.webp"[^>]*alt="Gold Medallion Centerpiece"[^>]*>/gi, '<img src="/icon.webp" alt="Gold Medallion Centerpiece" width="180" height="180" style="aspect-ratio:1/1;">');
+    html = html.replace(/<img\s+id="badgePreviewImg"[^>]*>/gi, '<img id="badgePreviewImg" src="/api/badge?score=100&pct=50" alt="Verified Cognitive Index Badge" width="320" height="96" style="max-width:100%; height:auto; aspect-ratio:320/96; display:inline-block;" onerror="this.style.display=\'none\'">');
     html = html.replace(/src="wordmark\.webp"/g, 'src="/wordmark.webp"');
-    html = html.replace(/src="icon\.webp"/g, 'src="/icon.webp"');
 
     // Inject hreflang
     const hreflangBlock = buildHreflangTags(cleanSub);
