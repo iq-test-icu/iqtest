@@ -45,7 +45,56 @@ function buildLanguageSwitcher(currentLocale, pageSubPath) {
     </div>`;
 }
 
-// Language suggestion banner script
+// Calibrated Title Overrides ensuring 35-62 chars budget across all 13 locales
+const LOCALE_TITLE_OVERRIDES = {
+  ar: {
+    'free-iq-test-online.html': 'اختبار ذكاء مجاني عبر الإنترنت | IQ Test Online',
+    'editorial-standards.html': 'معايير التحرير وسياسة المراجعة | IQ Test',
+    'cognitive-skills/index.html': 'مجالات التفكير: المهارات المعرفية الأربع | IQ Test',
+  },
+  de: {
+    'free-iq-test-online.html': 'Kostenloser IQ-Test Online: Funktion & Vertrauen | IQ Test',
+    'editorial-standards.html': 'Redaktionelle Standards & Richtlinien | IQ Test',
+  },
+  es: {
+    'free-iq-test-online.html': 'Test de CI gratis online: Funcionamiento y rigor | IQ Test',
+    'cognitive-skills/index.html': 'Dominios de razonamiento: Habilidades cognitivas | IQ Test',
+  },
+  fr: {
+    'free-iq-test-online.html': 'Test de QI gratuit en ligne: Fiabilité et méthode | IQ Test',
+    'cognitive-skills/index.html': 'Domaines de raisonnement: Compétences cognitives | IQ Test',
+  },
+  hi: {
+    'free-iq-test-online.html': 'मुफ्त ऑनलाइन आईक्यू टेस्ट: कैसे काम करता है | IQ Test',
+    'cognitive-skills/index.html': 'तर्क क्षमता डोमेन: चार मुख्य संज्ञानात्मक कौशल | IQ Test',
+  },
+  it: {
+    'free-iq-test-online.html': 'Test del QI Gratuito Online: Come Funziona | IQ Test',
+    'cognitive-skills/index.html': 'Domini di Ragionamento: Abilità Cognitive | IQ Test',
+  },
+  ja: {
+    'editorial-standards.html': '編集方針 & 審査基準 (Review Policy) | IQ Test',
+    'free-iq-test-online.html': '無料オンラインIQテスト: 測定の仕組みと信頼性の基準 | IQ Test',
+  },
+  ko: {
+    'editorial-standards.html': '편집 기준 & 검토 정책 (Review Policy) | IQ Test',
+    'free-iq-test-online.html': '무료 온라인 IQ 테스트: 작동 원리 및 신뢰성 | IQ Test',
+  },
+  pt: {
+    'free-iq-test-online.html': 'Teste de QI Grátis Online: Como Funciona | IQ Test',
+    'cognitive-skills/index.html': 'Domínios de Raciocínio: Habilidades Cognitivas | IQ Test',
+  },
+  tl: {
+    'free-iq-test-online.html': 'Libreng IQ Test Online: Paano Ito Gumagana | IQ Test',
+    'cognitive-skills/index.html': 'Mga Domain ng Pangangatuwiran: Mga Kasanayan | IQ Test',
+  },
+  zh: {
+    'editorial-standards.html': '编辑标准与审核政策 (Editorial Standards) | IQ Test',
+    'free-iq-test-online.html': '免费在线智商测试: 认知能力测验运作原理与评估标准 | IQ Test',
+  },
+};
+
+// Language suggestion banner script — Zero-CLS floating toast overlay
 const suggestionBannerScript = `
 <script>
 (function() {
@@ -57,10 +106,9 @@ const suggestionBannerScript = `
     if (userLang && userLang !== currentLoc && ['de','fr','es','pt','it','nl','ja','ko','zh','ar','hi','tl'].indexOf(userLang) !== -1) {
       var banner = document.createElement('div');
       banner.id = 'langSuggestionBanner';
-      banner.style.cssText = 'background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.3); color: #e2e8f0; padding: 10px 16px; text-align: center; font-size: 0.85rem; border-radius: 8px; margin: 12px auto; max-width: 960px; display: flex; justify-content: space-between; align-items: center; gap: 12px;';
-      banner.innerHTML = '<span>This page is available in your language.</span><div style="display:flex;gap:8px;"><button onclick="localStorage.setItem(\\'iq_lang_dismissed\\',\\'1\\');window.location.href=\\'/' + userLang + window.location.pathname.replace(/^\\\\/[a-z]{2}/,\\'\\') + '\\'" style="background:#0ea5e9;border:none;color:#fff;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.8rem;font-weight:600;">Switch</button><button onclick="localStorage.setItem(\\'iq_lang_dismissed\\',\\'1\\');this.parentElement.parentElement.remove();" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:#94a3b8;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:0.8rem;">Dismiss</button></div>';
-      var main = document.querySelector('main') || document.body;
-      main.insertBefore(banner, main.firstChild);
+      banner.style.cssText = 'position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(14, 165, 233, 0.4); color: #e2e8f0; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 12px; max-width: calc(100vw - 32px); width: max-content; display: flex; justify-content: space-between; align-items: center; gap: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5);';
+      banner.innerHTML = '<span>This page is available in your language.</span><div style="display:flex;gap:8px;"><button onclick="localStorage.setItem(\\'iq_lang_dismissed\\',\\'1\\');window.location.href=\\'/' + userLang + window.location.pathname.replace(/^\\\\/[a-z]{2}/,\\'\\') + '\\'" style="background:#0ea5e9;border:none;color:#fff;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;">Switch</button><button onclick="localStorage.setItem(\\'iq_lang_dismissed\\',\\'1\\');this.parentElement.parentElement.remove();" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:#94a3b8;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:0.82rem;">Dismiss</button></div>';
+      document.body.appendChild(banner);
     }
   } catch (_) {}
 })();
@@ -107,9 +155,12 @@ function renderAllLocales() {
       html = html.replace(/<html[^>]*>/i, `<html lang="${loc.lang}" dir="${loc.dir}">`);
 
       // 2. Fix all relative asset paths to root absolute
-      html = html.replace(/src="mural_bg\.webp"/g, 'src="/mural_bg.webp"');
+      html = html.replace(/<img\s+src="[\/]?mural_bg\.webp"[^>]*>/gi, '<img src="/mural_bg.webp" class="mural-bg" alt="" width="1024" height="1024" draggable="false" style="aspect-ratio:1/1;">');
+      html = html.replace(/<img\s+src="[\/]?icon\.webp"[^>]*alt="Gold Medallion Centerpiece"[^>]*>/gi, '<img src="/icon.webp" alt="Gold Medallion Centerpiece" width="180" height="180" style="aspect-ratio:1/1;">');
+      html = html.replace(/<img\s+id="badgePreviewImg"[^>]*>/gi, '<img id="badgePreviewImg" src="/api/badge?score=100&pct=50" alt="Verified Cognitive Index Badge" width="320" height="96" style="max-width:100%; height:auto; aspect-ratio:320/96; display:inline-block;" onerror="this.style.display=\'none\'">');
+      html = html.replace(/<img\s+src="https:\/\/iq-test\.icu\/api\/badge\?score=100&pct=50"[^>]*\/>/g, '<img src="https://iq-test.icu/api/badge?score=100&pct=50" alt="Verified Cognitive Index | IQ·Test" width="320" height="96" />');
+      html = html.replace(/<img\s+src="\${badgeUrl}"[^>]*\/>/g, '<img src="${badgeUrl}" alt="Verified Cognitive Index: ${index} | IQ·Test" width="320" height="96" />');
       html = html.replace(/src="wordmark\.webp"/g, 'src="/wordmark.webp"');
-      html = html.replace(/src="icon\.webp"/g, 'src="/icon.webp"');
 
       // 3. Self-referencing canonical
       const cleanSub = relFile === 'index.html' ? '' : relFile.replace(/\.html$/, '').replace(/\/index$/, '');
@@ -144,7 +195,7 @@ function renderAllLocales() {
         html = html.replace(/<p style="text-align:center; font-size:0.92rem; color:var\(--text-secondary\); margin-top:-10px; margin-bottom:18px;">A 16-question cognitive skills test for self-insight and entertainment\. Not a clinical or diagnostic IQ assessment\.<\/p>/i, `<p style="text-align:center; font-size:0.92rem; color:var(--text-secondary); margin-top:-10px; margin-bottom:18px;">${dict.heroSubtitle}</p>`);
         html = html.replace(/<p class="lead" style="text-align:center;">16 questions\. About five minutes\. Your score is free the moment you finish\. Then decide if you want to know which historical figure you actually think like\.<\/p>/i, `<p class="lead" style="text-align:center;">${dict.heroLead}</p>`);
         html = html.replace(/<span class="chip"><b>16<\/b> questions<\/span>\s*<span class="chip"><b>4<\/b> categories<\/span>\s*<span class="chip"><b>5 min<\/b> average<\/span>/i, `<span class="chip">${dict.chipQuestions}</span>\n        <span class="chip">${dict.chipCategories}</span>\n        <span class="chip">${dict.chipTime}</span>`);
-        html = html.replace(/<button class="btn btn-primary" onclick="startTest\(\)">Start the test<\/button>/i, `<button class="btn btn-primary" onclick="startTest()">${dict.startBtn}</button>`);
+        html = html.replace(/<button class="btn btn-primary"[^>]*onclick="startTest\([^)]*\)">Start the test<\/button>/i, `<button class="btn btn-primary" onclick="startTest(false)">${dict.startBtn}</button>`);
         html = html.replace(/<p class="disclaimer" style="text-align:center;">This is a self-insight quiz, not a clinical IQ test\. Your score is for personal reflection only\. See the FAQ below for full methodology details\.<\/p>/i, `<p class="disclaimer" style="text-align:center;">${dict.heroDisclaimer}</p>`);
 
         // Localize entire #content-hub
@@ -175,6 +226,25 @@ function renderAllLocales() {
         }
       }
 
+      // 10. Apply calibrated title override if present
+      const normRel = relFile.replace(/\\/g, '/');
+      if (LOCALE_TITLE_OVERRIDES[loc.hreflang] && LOCALE_TITLE_OVERRIDES[loc.hreflang][normRel]) {
+        const customTitle = LOCALE_TITLE_OVERRIDES[loc.hreflang][normRel];
+        html = html.replace(/<title>[\s\S]*?<\/title>/i, `<title>${customTitle}</title>`);
+        html = html.replace(/<meta\s+property=["']og:title["']\s+content="[^"]*"/i, `<meta property="og:title" content="${customTitle}"`);
+        html = html.replace(/<meta\s+name=["']twitter:title["']\s+content="[^"]*"/i, `<meta name="twitter:title" content="${customTitle}"`);
+      }
+
+      // 11. Remove splash screen to guarantee instant FCP / LCP < 300ms
+      html = html.replace(/<div id="splash"[\s\S]*?<\/div>\s*<\/div>/gi, '');
+      html = html.replace(/<div id="splash"[\s\S]*?<\/div>/gi, '');
+      html = html.replace(/const splashEl = document\.getElementById\('splash'\);[\s\S]*?splashEl\.addEventListener\('click', dismissSplash\);/gi, '');
+
+      // 12. Ensure explicit width/height/aspect-ratio on logo
+      html = html.replace(/src="\/wordmark\.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;"/g, 'src="/wordmark.webp" alt="IQ·Test" width="207" height="56" style="height:56px; width:auto; aspect-ratio:1361/368; object-fit:contain; display:block;"');
+      html = html.replace(/src="\/wordmark\.webp" alt="IQ·Test" style="height:28px; width:auto; display:block;"/g, 'src="/wordmark.webp" alt="IQ·Test" width="104" height="28" style="height:28px; width:auto; aspect-ratio:1361/368; display:block;"');
+      html = html.replace(/src="\/wordmark\.webp" alt="IQ Test" style="height:20px; width:auto; display:block; margin:0 auto 16px; opacity:0.7;"/g, 'src="/wordmark.webp" alt="IQ Test" width="74" height="20" style="height:20px; width:auto; aspect-ratio:1361/368; display:block; margin:0 auto 16px; opacity:0.7;"');
+
       fs.writeFileSync(targetFullPath, html, 'utf8');
     }
     console.log(`[${loc.hreflang}] Rendered ${englishHtmlFiles.length} pages under public/${loc.hreflang}/`);
@@ -187,10 +257,11 @@ function renderAllLocales() {
     let html = fs.readFileSync(srcPath, 'utf8');
     const cleanSub = relFile === 'index.html' ? '' : relFile.replace(/\.html$/, '').replace(/\/index$/, '');
     
-    // Ensure absolute image paths
-    html = html.replace(/src="mural_bg\.webp"/g, 'src="/mural_bg.webp"');
+    // Ensure absolute image paths with dimensions
+    html = html.replace(/<img\s+src="[\/]?mural_bg\.webp"[^>]*>/gi, '<img src="/mural_bg.webp" class="mural-bg" alt="" width="1024" height="1024" draggable="false" style="aspect-ratio:1/1;">');
+    html = html.replace(/<img\s+src="[\/]?icon\.webp"[^>]*alt="Gold Medallion Centerpiece"[^>]*>/gi, '<img src="/icon.webp" alt="Gold Medallion Centerpiece" width="180" height="180" style="aspect-ratio:1/1;">');
+    html = html.replace(/<img\s+id="badgePreviewImg"[^>]*>/gi, '<img id="badgePreviewImg" src="/api/badge?score=100&pct=50" alt="Verified Cognitive Index Badge" width="320" height="96" style="max-width:100%; height:auto; aspect-ratio:320/96; display:inline-block;" onerror="this.style.display=\'none\'">');
     html = html.replace(/src="wordmark\.webp"/g, 'src="/wordmark.webp"');
-    html = html.replace(/src="icon\.webp"/g, 'src="/icon.webp"');
 
     // Inject hreflang
     const hreflangBlock = buildHreflangTags(cleanSub);
@@ -206,7 +277,25 @@ function renderAllLocales() {
       html = html.replace(/<footer/i, `${switcherHtml}\n    <footer`);
     }
 
+    // Ensure explicit logo dimensions on English pages
+    html = html.replace(/src="\/wordmark\.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;"/g, 'src="/wordmark.webp" alt="IQ·Test" width="207" height="56" style="height:56px; width:auto; aspect-ratio:1361/368; object-fit:contain; display:block;"');
+    html = html.replace(/src="\/wordmark\.webp" alt="IQ·Test" style="height:28px; width:auto; display:block;"/g, 'src="/wordmark.webp" alt="IQ·Test" width="104" height="28" style="height:28px; width:auto; aspect-ratio:1361/368; display:block;"');
+    html = html.replace(/src="\/wordmark\.webp" alt="IQ Test" style="height:20px; width:auto; display:block; margin:0 auto 16px; opacity:0.7;"/g, 'src="/wordmark.webp" alt="IQ Test" width="74" height="20" style="height:20px; width:auto; aspect-ratio:1361/368; display:block; margin:0 auto 16px; opacity:0.7;"');
+
+    // Remove splash screen from English pages
+    html = html.replace(/<div id="splash"[\s\S]*?<\/div>\s*<\/div>/gi, '');
+    html = html.replace(/<div id="splash"[\s\S]*?<\/div>/gi, '');
+    html = html.replace(/const splashEl = document\.getElementById\('splash'\);[\s\S]*?splashEl\.addEventListener\('click', dismissSplash\);/gi, '');
+
     fs.writeFileSync(srcPath, html, 'utf8');
+  }
+
+  // Generate multilingual sitemap index
+  try {
+    const { execSync } = require('child_process');
+    execSync(`node "${path.join(__dirname, 'sitemap-i18n.js')}"`, { cwd: rootDir });
+  } catch (e) {
+    console.error('Error generating multilingual sitemap:', e.message);
   }
 }
 

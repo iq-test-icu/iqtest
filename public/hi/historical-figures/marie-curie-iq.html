@@ -18,10 +18,42 @@
 <meta name="twitter:image" content="https://iq-test.icu/og.png">
 <meta name="robots" content="noindex, follow">
 <link rel="icon" type="image/webp" href="/favicon.webp">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Fraunces:opsz,wght@9..144,300..700&display=swap" rel="stylesheet">
+<link rel="preload" href="/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
 
+  @font-face {
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('/fonts/space-grotesk-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('/fonts/space-grotesk-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'Fraunces';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('/fonts/fraunces-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Fraunces';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('/fonts/fraunces-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
   html { font-size: 17px; }
   :root {
     --bg: oklch(0.06 0.002 95);
@@ -760,7 +792,7 @@
   ]
 }
 </script>
-  <link rel="alternate" hreflang="en" href="https://iq-test.icu/historical-figures/marie-curie-iq">
+    <link rel="alternate" hreflang="en" href="https://iq-test.icu/historical-figures/marie-curie-iq">
   <link rel="alternate" hreflang="de" href="https://iq-test.icu/de/historical-figures/marie-curie-iq">
   <link rel="alternate" hreflang="fr" href="https://iq-test.icu/fr/historical-figures/marie-curie-iq">
   <link rel="alternate" hreflang="es" href="https://iq-test.icu/es/historical-figures/marie-curie-iq">
@@ -780,7 +812,7 @@
 <header class="site-header" id="siteHeader">
   <div class="site-header-inner">
     <a href="/" class="site-logo-link" aria-label="IQ Test Home">
-      <img src="/wordmark.webp" alt="IQ·Test" style="height:28px; width:auto; display:block;" onerror="this.style.display='none'">
+      <img src="/wordmark.webp" alt="IQ·Test" width="104" height="28" style="height:28px; width:auto; aspect-ratio:1361/368; display:block;" onerror="this.style.display='none'">
     </a>
     <div class="header-lang-wrapper" id="headerLangWrapper">
       <button class="lang-btn" id="headerLangBtn" aria-expanded="false" aria-haspopup="true" aria-controls="headerLangDropdown" onclick="toggleHeaderLangMenu(event)">
@@ -1024,7 +1056,25 @@
   </div>
 </div>
 
-<footer>
+
+    <div class="lang-switcher-container" style="margin: 20px 0; text-align: center; font-size: 0.85rem;">
+      <nav aria-label="भाषा चुनें" class="lang-switcher" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 12px; opacity: 0.85;">
+        <a href="https://iq-test.icu/historical-figures/marie-curie-iq" hreflang="en" lang="en" rel="alternate" aria-current="page" class="active">English</a>
+        <a href="https://iq-test.icu/de/historical-figures/marie-curie-iq" hreflang="de" lang="de" rel="alternate">Deutsch</a>
+        <a href="https://iq-test.icu/fr/historical-figures/marie-curie-iq" hreflang="fr" lang="fr" rel="alternate">Français</a>
+        <a href="https://iq-test.icu/es/historical-figures/marie-curie-iq" hreflang="es" lang="es" rel="alternate">Español</a>
+        <a href="https://iq-test.icu/pt/historical-figures/marie-curie-iq" hreflang="pt" lang="pt" rel="alternate">Português</a>
+        <a href="https://iq-test.icu/it/historical-figures/marie-curie-iq" hreflang="it" lang="it" rel="alternate">Italiano</a>
+        <a href="https://iq-test.icu/nl/historical-figures/marie-curie-iq" hreflang="nl" lang="nl" rel="alternate">Nederlands</a>
+        <a href="https://iq-test.icu/ja/historical-figures/marie-curie-iq" hreflang="ja" lang="ja" rel="alternate">日本語</a>
+        <a href="https://iq-test.icu/ko/historical-figures/marie-curie-iq" hreflang="ko" lang="ko" rel="alternate">한국어</a>
+        <a href="https://iq-test.icu/zh/historical-figures/marie-curie-iq" hreflang="zh" lang="zh-Hans" rel="alternate">简体中文</a>
+        <a href="https://iq-test.icu/ar/historical-figures/marie-curie-iq" hreflang="ar" lang="ar" rel="alternate">العربية</a>
+        <a href="https://iq-test.icu/hi/historical-figures/marie-curie-iq" hreflang="hi" lang="hi" rel="alternate">हिन्दी</a>
+        <a href="https://iq-test.icu/tl/historical-figures/marie-curie-iq" hreflang="tl" lang="tl" rel="alternate">Tagalog</a>
+      </nav>
+    </div>
+    <footer>
   <a href="/">मुख्य पृष्ठ</a> &nbsp;&middot;&nbsp;
   <a href="/iq-scores/">आईक्यू स्कोर</a> &nbsp;&middot;&nbsp;
   <a href="/historical-figures-iq">ऐतिहासिक विचारक</a> &nbsp;&middot;&nbsp;
@@ -1091,10 +1141,9 @@ document.addEventListener('keydown', function(e) {
     if (userLang && userLang !== currentLoc && ['de','fr','es','pt','it','nl','ja','ko','zh','ar','hi','tl'].indexOf(userLang) !== -1) {
       var banner = document.createElement('div');
       banner.id = 'langSuggestionBanner';
-      banner.style.cssText = 'background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.3); color: #e2e8f0; padding: 10px 16px; text-align: center; font-size: 0.85rem; border-radius: 8px; margin: 12px auto; max-width: 960px; display: flex; justify-content: space-between; align-items: center; gap: 12px;';
-      banner.innerHTML = '<span>This page is available in your language.</span><div style="display:flex;gap:8px;"><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');window.location.href=\'/' + userLang + window.location.pathname.replace(/^\\/[a-z]{2}/,\'\') + '\'" style="background:#0ea5e9;border:none;color:#fff;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.8rem;font-weight:600;">Switch</button><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');this.parentElement.parentElement.remove();" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:#94a3b8;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:0.8rem;">बंद करें</button></div>';
-      var main = document.querySelector('main') || document.body;
-      main.insertBefore(banner, main.firstChild);
+      banner.style.cssText = 'position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(14, 165, 233, 0.4); color: #e2e8f0; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 12px; max-width: calc(100vw - 32px); width: max-content; display: flex; justify-content: space-between; align-items: center; gap: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5);';
+      banner.innerHTML = '<span>This page is available in your language.</span><div style="display:flex;gap:8px;"><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');window.location.href=\'/' + userLang + window.location.pathname.replace(/^\\/[a-z]{2}/,\'\') + '\'" style="background:#0ea5e9;border:none;color:#fff;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;">Switch</button><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');this.parentElement.parentElement.remove();" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:#94a3b8;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:0.82rem;">बंद करें</button></div>';
+      document.body.appendChild(banner);
     }
   } catch (_) {}
 })();

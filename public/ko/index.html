@@ -26,10 +26,44 @@
 <meta name="geo.placename" content="Edmonton, Alberta, Canada">
 <meta name="robots" content="noindex, follow">
 <link rel="icon" type="image/webp" href="/favicon.webp">
-<link rel="apple-touch-icon" href="/icon.webp">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Fraunces:opsz,wght@9..144,300..700&display=swap" rel="stylesheet">
+<!-- Preload primary self-hosted fonts -->
+<link rel="preload" href="/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
 <style>
+  /* Self-hosted Typography (zero external network dependency) */
+  @font-face {
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('/fonts/space-grotesk-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Space Grotesk';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('/fonts/space-grotesk-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'Fraunces';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('/fonts/fraunces-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Fraunces';
+    font-style: normal;
+    font-weight: 300 700;
+    font-display: swap;
+    src: url('/fonts/fraunces-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+
   html {
     font-size: 17px;
   }
@@ -1017,6 +1051,22 @@
     100% { transform: scale(2.5); opacity: 0; }
   }
 
+  /* Live report counter badge (P0-2) */
+  .live-counter-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(201, 162, 75, 0.08);
+    color: var(--gold);
+    border: 1px solid var(--border-gold);
+    padding: 4px 14px;
+    border-radius: 100px;
+    font-size: 0.76rem;
+    font-family: var(--font-mono);
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
   /* Phase 5: CRO Additions */
   .tier-badge {
     display: inline-block;
@@ -1177,7 +1227,7 @@
   [dir="rtl"] .lang-dropdown { right: auto; left: 0; }
 
 </style>
-              <link rel="alternate" hreflang="en" href="https://iq-test.icu">
+                        <link rel="alternate" hreflang="en" href="https://iq-test.icu">
   <link rel="alternate" hreflang="de" href="https://iq-test.icu/de">
   <link rel="alternate" hreflang="fr" href="https://iq-test.icu/fr">
   <link rel="alternate" hreflang="es" href="https://iq-test.icu/es">
@@ -1368,28 +1418,13 @@
 
 <!-- Unified genius mural — single panoramic oil painting, four figures, one scene -->
 <div class="mural-container" aria-hidden="true">
-  <img src="/mural_bg.webp" class="mural-bg" alt="" draggable="false">
+  <img src="/mural_bg.webp" class="mural-bg" alt="" width="1024" height="1024" draggable="false" style="aspect-ratio:1/1;">
   <div class="mural-vignette"></div>
 </div>
 
-<div id="splash" aria-hidden="true">
-  <svg viewBox="0 0 100 100">
-    <circle cx="50" cy="50" r="40" fill="none" stroke="#C9A24B" stroke-width="1.2" class="splash-line"/>
-    <line x1="50" y1="50" x2="27" y2="27" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
-    <line x1="50" y1="50" x2="73" y2="27" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
-    <line x1="50" y1="50" x2="27" y2="73" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
-    <line x1="50" y1="50" x2="79" y2="21" stroke="#C9A24B" stroke-width="1.4" class="splash-line"/>
-    <circle cx="27" cy="27" r="3.2" fill="#C9A24B"/>
-    <circle cx="73" cy="27" r="3.2" fill="#C9A24B"/>
-    <circle cx="27" cy="73" r="3.2" fill="#C9A24B"/>
-    <circle cx="79" cy="21" r="3.8" fill="#EDE3CB"/>
-    <circle cx="50" cy="50" r="5.5" fill="#EDE3CB"/>
-  </svg>
-</div>
-<div class="wrap">
-                  <header>
+    <header>
     <div class="logo-wrap">
-      <img src="/wordmark.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;" onerror="this.style.display='none'">
+      <img src="/wordmark.webp" alt="IQ·Test" width="207" height="56" style="height:56px; width:auto; aspect-ratio:1361/368; object-fit:contain; display:block;" onerror="this.style.display='none'">
     </div>
     <div class="header-lang-wrapper" id="headerLangWrapper">
       <button class="lang-btn" id="headerLangBtn" aria-expanded="false" aria-haspopup="true" aria-controls="headerLangDropdown" onclick="toggleHeaderLangMenu(event)">
@@ -1428,7 +1463,7 @@
         </div>
         <div class="orbital-ring-inner"></div>
         <div class="brand-logo-medallion">
-          <img src="/icon.webp" alt="Gold Medallion Centerpiece">
+          <img src="/icon.webp" alt="Gold Medallion Centerpiece" width="180" height="180" style="aspect-ratio:1/1;">
         </div>
       </div>
       
@@ -1443,9 +1478,19 @@
         <span class="chip">평균 <b>5분</b></span>
       </div>
       
-      <div style="text-align:center;">
-        <button class="btn btn-primary" onclick="startTest()">테스트 시작하기</button>
+      <div style="text-align:center; margin-top:10px;">
+        <button class="btn btn-primary" onclick="startTest(false)">테스트 시작하기</button>
       </div>
+
+      <!-- Session Resume Banner (P1-1) -->
+      <div id="resumeBanner" style="display:none; background:rgba(201,162,75,0.08); border:1px solid var(--border-gold); border-radius:10px; padding:14px 18px; margin: 16px 0; text-align:center;">
+        <p id="resumeText" style="font-size:0.88rem; color:var(--text-primary); margin-bottom:10px; font-weight:500;"></p>
+        <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
+          <button class="btn btn-primary" style="padding:8px 18px; font-size:0.85rem;" onclick="resumeTest()">Continue test &rarr;</button>
+          <button class="btn" style="background:rgba(255,255,255,0.04); border:1px solid var(--border-color); color:var(--text-muted); padding:8px 14px; font-size:0.85rem;" onclick="startTest(true)">Start fresh</button>
+        </div>
+      </div>
+
       <p class="disclaimer" style="text-align:center;">본 테스트는 자기 탐색용 퀴즈이며 임상 진단용 IQ 검사가 아닙니다. 점수는 개인 참고용입니다.</p>
     </div>
 
@@ -1555,6 +1600,9 @@
         </div>
 
         <div class="receipt">
+          <div id="liveReportCounter" style="display:none; text-align:center; margin-bottom:18px;">
+            <span class="live-counter-tag"><span id="reportsCountNum">0</span> reports generated</span>
+          </div>
           <h2 style="margin-bottom:8px;">Choose your report tier</h2>
           <p class="lead" style="font-size:0.9rem; margin-bottom:20px; color:var(--text-secondary);">One-time payment. No subscription. Emailed in under 60 seconds.</p>
 
@@ -1618,6 +1666,22 @@
           <button class="btn btn-primary" style="width:100%;" onclick="startCheckout()" id="checkoutBtn">Reveal my historical match &mdash; $3.99</button>
           <p class="disclaimer" style="font-size:0.75rem; text-align:center; margin-top:12px; font-weight:600; color:var(--text-secondary);">🔒 One-time payment. No subscription. No surprise charges. Processed securely by Stripe.</p>
         </div>
+
+        <!-- Backlink Multiplier: Embeddable Score Badge Widget -->
+        <div class="badge-embed-box" style="margin-top:28px; padding:20px 22px; background:rgba(201,162,75,0.06); border:1px solid var(--border-gold); border-radius:12px; text-align:left;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px;">
+            <h3 style="font-size:0.98rem; font-family:var(--font-display); color:var(--gold); margin:0; font-weight:600;">🏷️ Embed Your Verified Score Badge</h3>
+            <span style="font-size:0.72rem; color:var(--text-muted); background:rgba(255,255,255,0.05); padding:2px 8px; border-radius:4px;">Free Embed</span>
+          </div>
+          <p style="font-size:0.82rem; color:var(--text-secondary); margin-bottom:14px; line-height:1.5;">Showcase your verified cognitive evaluation on your personal website, blog, or GitHub profile:</p>
+          <div id="badgePreviewContainer" style="margin-bottom:14px; text-align:center; padding:12px; background:rgba(0,0,0,0.3); border-radius:8px;">
+            <img id="badgePreviewImg" src="/api/badge?score=100&pct=50" alt="Verified Cognitive Index Badge" width="320" height="96" style="max-width:100%; height:auto; aspect-ratio:320/96; display:inline-block;" onerror="this.style.display='none'">
+          </div>
+          <div style="position:relative;">
+            <textarea id="badgeEmbedCode" readonly style="width:100%; height:58px; background:rgba(0,0,0,0.5); border:1px solid var(--border-color); color:var(--text-primary); font-family:monospace; font-size:0.73rem; padding:8px 10px; border-radius:6px; resize:none; box-sizing:border-box;"><a href="https://iq-test.icu" target="_blank" rel="noopener"><img src="https://iq-test.icu/api/badge?score=100&pct=50" alt="Verified Cognitive Index | IQ·Test" width="320" height="96" /></a></textarea>
+            <button onclick="copyBadgeEmbed()" id="copyBadgeBtn" class="btn" style="position:absolute; right:8px; bottom:10px; padding:5px 12px; font-size:0.75rem; background:var(--gold); color:#121110; font-weight:700; border-radius:4px; border:none; cursor:pointer;">Copy HTML</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1650,7 +1714,7 @@
       </nav>
     </div>
   <footer>
-    <img src="/wordmark.webp" alt="IQ Test" style="height:20px; width:auto; display:block; margin:0 auto 16px; opacity:0.7;" onerror="this.style.display='none'">
+    <img src="/wordmark.webp" alt="IQ Test" width="74" height="20" style="height:20px; width:auto; aspect-ratio:1361/368; display:block; margin:0 auto 16px; opacity:0.7;" onerror="this.style.display='none'">
     <div style="margin-bottom:15px; line-height: 1.8;">
       <a href="/">홈</a> &nbsp;&middot;&nbsp;
       <a href="/iq-scores/">IQ 점수</a> &nbsp;&middot;&nbsp;
@@ -1692,10 +1756,7 @@
 <script>
 const API_BASE = ""; // same-origin — Worker is routed at iq-test.icu/api/*
 
-const splashEl = document.getElementById('splash');
-function dismissSplash(){ splashEl.classList.add('gone'); }
-setTimeout(dismissSplash, 1400);
-splashEl.addEventListener('click', dismissSplash);
+
 
 const QUESTIONS = [
   {
@@ -1896,13 +1957,89 @@ function percentileFor(index){
 let current = 0;
 let answers = [];
 
+function trackFunnel(eventName) {
+  try {
+    fetch(`${API_BASE}/api/track`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event: eventName })
+    }).catch(() => {});
+  } catch(e) {}
+}
+
+function saveSession(){
+  try {
+    localStorage.setItem('iqtest_session', JSON.stringify({
+      answers,
+      currentIndex: current,
+      startedAt: window.__quizStartedAt || Date.now()
+    }));
+  } catch(e) {}
+}
+
+function clearSession(){
+  try {
+    localStorage.removeItem('iqtest_session');
+    const resumeBanner = document.getElementById('resumeBanner');
+    if (resumeBanner) resumeBanner.style.display = 'none';
+  } catch(e) {}
+}
+
+function checkSavedSession(){
+  try {
+    const raw = localStorage.getItem('iqtest_session');
+    if (!raw) return;
+    const saved = JSON.parse(raw);
+    const isRecent = saved.startedAt && (Date.now() - saved.startedAt < 24 * 60 * 60 * 1000);
+    if (isRecent && Array.isArray(saved.answers) && saved.answers.length > 0 && typeof saved.currentIndex === 'number' && saved.currentIndex < QUESTIONS.length) {
+      current = saved.currentIndex;
+      answers = saved.answers;
+      window.__quizStartedAt = saved.startedAt;
+      
+      const resumeBanner = document.getElementById('resumeBanner');
+      const resumeText = document.getElementById('resumeText');
+      if (resumeBanner && resumeText) {
+        resumeText.textContent = `You have an unfinished test (Question ${current + 1} of ${QUESTIONS.length}).`;
+        resumeBanner.style.display = 'block';
+      }
+    }
+  } catch(e) {
+    clearSession();
+  }
+}
+
+async function fetchStats() {
+  try {
+    const res = await fetch(`${API_BASE}/api/stats`);
+    if (!res.ok) return;
+    const data = await res.json();
+    if (data && typeof data.reportsGenerated === 'number' && data.reportsGenerated >= 10) {
+      const counterEl = document.getElementById('liveReportCounter');
+      const countNumEl = document.getElementById('reportsCountNum');
+      if (counterEl && countNumEl) {
+        countNumEl.textContent = data.reportsGenerated.toLocaleString();
+        counterEl.style.display = 'block';
+      }
+    }
+  } catch (e) {}
+}
+
 function show(id){
   document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-function startTest(){
+function startTest(restart = false){
+  if (restart) clearSession();
   current = 0; answers = [];
+  window.__quizStartedAt = Date.now();
+  saveSession();
+  trackFunnel("quiz_started");
+  show('screen-test');
+  renderQuestion();
+}
+
+function resumeTest(){
   show('screen-test');
   renderQuestion();
 }
@@ -1931,7 +2068,7 @@ function renderQuestion(){
   });
 }
 
-// â”€â”€ Keyboard navigation (1-4 or A-D selects answer; Enter auto-advances on selection) â”€â”€
+// ── Keyboard navigation (1-4 or A-D selects answer; Enter auto-advances on selection) ──
 document.addEventListener('keydown', e => {
   const screen = document.querySelector('.screen.active');
   if (!screen || screen.id !== 'screen-test') return;
@@ -1948,6 +2085,7 @@ document.addEventListener('keydown', e => {
 function selectAnswer(i){
   answers[current] = i;
   current++;
+  saveSession();
   if(current < QUESTIONS.length){
     renderQuestion();
   } else {
@@ -2034,6 +2172,8 @@ function renderRadarChart(scores, maxScores) {
 }
 
 function finishTest(){
+  clearSession();
+  trackFunnel("quiz_completed_free");
   const catScores = {NUMERIC:0, VERBAL:0, LOGIC:0, PATTERN:0};
   const catMax = {NUMERIC:0, VERBAL:0, LOGIC:0, PATTERN:0};
   let raw = 0;
@@ -2092,7 +2232,39 @@ function finishTest(){
   // Render SVG Radar Chart
   renderRadarChart(catScores, catMax);
 
+  // Update Embed Badge Box
+  try {
+    const badgeImg = document.getElementById('badgePreviewImg');
+    const badgeCode = document.getElementById('badgeEmbedCode');
+    if (badgeImg && badgeCode) {
+      const badgeUrl = `https://iq-test.icu/api/badge?score=${index}&pct=${pct}`;
+      badgeImg.src = badgeUrl;
+      badgeCode.value = `<a href="https://iq-test.icu" target="_blank" rel="noopener" title="Verified Cognitive Assessment | IQ·Test"><img src="${badgeUrl}" alt="Verified Cognitive Index: ${index} | IQ·Test" width="320" height="96" /></a>`;
+    }
+  } catch(e) {}
+
   show('screen-result');
+}
+
+function copyBadgeEmbed() {
+  const el = document.getElementById('badgeEmbedCode');
+  if (!el) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(el.value).then(() => {
+      const btn = document.getElementById('copyBadgeBtn');
+      if (btn) {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = orig, 2000);
+      }
+    }).catch(() => {
+      el.select();
+      document.execCommand('copy');
+    });
+  } else {
+    el.select();
+    document.execCommand('copy');
+  }
 }
 
 function trackEvent(name, meta = {}) {
@@ -2279,6 +2451,13 @@ function toggleFaq(btn) {
     document.getElementById('reportBody').textContent = "Couldn't load your report. It's also on its way to your inbox.";
   }
 })();
+
+// ── Initial page load lifecycle (P0-1, P0-2, P1-1) ──
+document.addEventListener('DOMContentLoaded', () => {
+  trackFunnel('page_view');
+  checkSavedSession();
+  fetchStats();
+});
 </script>
 
 <script>
@@ -2325,10 +2504,9 @@ document.addEventListener('keydown', function(e) {
     if (userLang && userLang !== currentLoc && ['de','fr','es','pt','it','nl','ja','ko','zh','ar','hi','tl'].indexOf(userLang) !== -1) {
       var banner = document.createElement('div');
       banner.id = 'langSuggestionBanner';
-      banner.style.cssText = 'background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.3); color: #e2e8f0; padding: 10px 16px; text-align: center; font-size: 0.85rem; border-radius: 8px; margin: 12px auto; max-width: 960px; display: flex; justify-content: space-between; align-items: center; gap: 12px;';
-      banner.innerHTML = '<span>This page is available in your language.</span><div style="display:flex;gap:8px;"><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');window.location.href=\'/' + userLang + window.location.pathname.replace(/^\\/[a-z]{2}/,\'\') + '\'" style="background:#0ea5e9;border:none;color:#fff;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:0.8rem;font-weight:600;">Switch</button><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');this.parentElement.parentElement.remove();" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:#94a3b8;padding:4px 8px;border-radius:4px;cursor:pointer;font-size:0.8rem;">닫기</button></div>';
-      var main = document.querySelector('main') || document.body;
-      main.insertBefore(banner, main.firstChild);
+      banner.style.cssText = 'position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 9999; background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(14, 165, 233, 0.4); color: #e2e8f0; padding: 12px 20px; text-align: center; font-size: 0.85rem; border-radius: 12px; max-width: calc(100vw - 32px); width: max-content; display: flex; justify-content: space-between; align-items: center; gap: 16px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.5);';
+      banner.innerHTML = '<span>This page is available in your language.</span><div style="display:flex;gap:8px;"><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');window.location.href=\'/' + userLang + window.location.pathname.replace(/^\\/[a-z]{2}/,\'\') + '\'" style="background:#0ea5e9;border:none;color:#fff;padding:6px 14px;border-radius:6px;cursor:pointer;font-size:0.82rem;font-weight:600;">Switch</button><button onclick="localStorage.setItem(\'iq_lang_dismissed\',\'1\');this.parentElement.parentElement.remove();" style="background:transparent;border:1px solid rgba(255,255,255,0.2);color:#94a3b8;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:0.82rem;">닫기</button></div>';
+      document.body.appendChild(banner);
     }
   } catch (_) {}
 })();
