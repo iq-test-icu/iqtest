@@ -158,6 +158,8 @@ function renderAllLocales() {
       html = html.replace(/<img\s+src="[\/]?mural_bg\.webp"[^>]*>/gi, '<img src="/mural_bg.webp" class="mural-bg" alt="" width="1024" height="1024" draggable="false" style="aspect-ratio:1/1;">');
       html = html.replace(/<img\s+src="[\/]?icon\.webp"[^>]*alt="Gold Medallion Centerpiece"[^>]*>/gi, '<img src="/icon.webp" alt="Gold Medallion Centerpiece" width="180" height="180" style="aspect-ratio:1/1;">');
       html = html.replace(/<img\s+id="badgePreviewImg"[^>]*>/gi, '<img id="badgePreviewImg" src="/api/badge?score=100&pct=50" alt="Verified Cognitive Index Badge" width="320" height="96" style="max-width:100%; height:auto; aspect-ratio:320/96; display:inline-block;" onerror="this.style.display=\'none\'">');
+      html = html.replace(/<img\s+src="https:\/\/iq-test\.icu\/api\/badge\?score=100&pct=50"[^>]*\/>/g, '<img src="https://iq-test.icu/api/badge?score=100&pct=50" alt="Verified Cognitive Index | IQ·Test" width="320" height="96" />');
+      html = html.replace(/<img\s+src="\${badgeUrl}"[^>]*\/>/g, '<img src="${badgeUrl}" alt="Verified Cognitive Index: ${index} | IQ·Test" width="320" height="96" />');
       html = html.replace(/src="wordmark\.webp"/g, 'src="/wordmark.webp"');
 
       // 3. Self-referencing canonical
@@ -193,7 +195,7 @@ function renderAllLocales() {
         html = html.replace(/<p style="text-align:center; font-size:0.92rem; color:var\(--text-secondary\); margin-top:-10px; margin-bottom:18px;">A 16-question cognitive skills test for self-insight and entertainment\. Not a clinical or diagnostic IQ assessment\.<\/p>/i, `<p style="text-align:center; font-size:0.92rem; color:var(--text-secondary); margin-top:-10px; margin-bottom:18px;">${dict.heroSubtitle}</p>`);
         html = html.replace(/<p class="lead" style="text-align:center;">16 questions\. About five minutes\. Your score is free the moment you finish\. Then decide if you want to know which historical figure you actually think like\.<\/p>/i, `<p class="lead" style="text-align:center;">${dict.heroLead}</p>`);
         html = html.replace(/<span class="chip"><b>16<\/b> questions<\/span>\s*<span class="chip"><b>4<\/b> categories<\/span>\s*<span class="chip"><b>5 min<\/b> average<\/span>/i, `<span class="chip">${dict.chipQuestions}</span>\n        <span class="chip">${dict.chipCategories}</span>\n        <span class="chip">${dict.chipTime}</span>`);
-        html = html.replace(/<button class="btn btn-primary" onclick="startTest\(\)">Start the test<\/button>/i, `<button class="btn btn-primary" onclick="startTest()">${dict.startBtn}</button>`);
+        html = html.replace(/<button class="btn btn-primary"[^>]*onclick="startTest\([^)]*\)">Start the test<\/button>/i, `<button class="btn btn-primary" onclick="startTest(false)">${dict.startBtn}</button>`);
         html = html.replace(/<p class="disclaimer" style="text-align:center;">This is a self-insight quiz, not a clinical IQ test\. Your score is for personal reflection only\. See the FAQ below for full methodology details\.<\/p>/i, `<p class="disclaimer" style="text-align:center;">${dict.heroDisclaimer}</p>`);
 
         // Localize entire #content-hub
@@ -286,6 +288,14 @@ function renderAllLocales() {
     html = html.replace(/const splashEl = document\.getElementById\('splash'\);[\s\S]*?splashEl\.addEventListener\('click', dismissSplash\);/gi, '');
 
     fs.writeFileSync(srcPath, html, 'utf8');
+  }
+
+  // Generate multilingual sitemap index
+  try {
+    const { execSync } = require('child_process');
+    execSync(`node "${path.join(__dirname, 'sitemap-i18n.js')}"`, { cwd: rootDir });
+  } catch (e) {
+    console.error('Error generating multilingual sitemap:', e.message);
   }
 }
 

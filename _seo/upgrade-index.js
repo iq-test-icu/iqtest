@@ -31,6 +31,8 @@ html = html.replace(/<meta\s+name=["']robots["']\s+content=["'][\s\S]*?["']>/i, 
 html = html.replace(/<img\s+src="[\/]?mural_bg\.webp"[^>]*>/i, '<img src="/mural_bg.webp" class="mural-bg" alt="" width="1024" height="1024" draggable="false" style="aspect-ratio:1/1;">');
 html = html.replace(/<img\s+src="[\/]?icon\.webp"[^>]*alt="Gold Medallion Centerpiece"[^>]*>/i, '<img src="/icon.webp" alt="Gold Medallion Centerpiece" width="180" height="180" style="aspect-ratio:1/1;">');
 html = html.replace(/<img\s+id="badgePreviewImg"[^>]*>/i, '<img id="badgePreviewImg" src="/api/badge?score=100&pct=50" alt="Verified Cognitive Index Badge" width="320" height="96" style="max-width:100%; height:auto; aspect-ratio:320/96; display:inline-block;" onerror="this.style.display=\'none\'">');
+html = html.replace(/<img\s+src="https:\/\/iq-test\.icu\/api\/badge\?score=100&pct=50"[^>]*\/>/g, '<img src="https://iq-test.icu/api/badge?score=100&pct=50" alt="Verified Cognitive Index | IQ·Test" width="320" height="96" />');
+html = html.replace(/<img\s+src="\${badgeUrl}"[^>]*\/>/g, '<img src="${badgeUrl}" alt="Verified Cognitive Index: ${index} | IQ·Test" width="320" height="96" />');
 
 // 2. Replace old JSON-LD scripts with single consolidated sitewide @graph + FAQPage + Product/Offer
 const homepageFaqs = [
@@ -214,7 +216,7 @@ if (!html.includes('/* === HEADER LANGUAGE SWITCHER === */')) {
 
 const headerSwitcherMarkup = `  <header>
     <div class="logo-wrap">
-      <img src="/wordmark.webp" alt="IQ·Test" style="height:56px; width:auto; object-fit:contain; display:block;" onerror="this.style.display='none'">
+      <img src="/wordmark.webp" alt="IQ·Test" width="207" height="56" style="height:56px; width:auto; aspect-ratio:1361/368; object-fit:contain; display:block;" onerror="this.style.display='none'">
     </div>
     <div class="header-lang-wrapper" id="headerLangWrapper">
       <button class="lang-btn" id="headerLangBtn" aria-expanded="false" aria-haspopup="true" aria-controls="headerLangDropdown" onclick="toggleHeaderLangMenu(event)">
@@ -245,7 +247,13 @@ const headerSwitcherMarkup = `  <header>
     </div>
   </header>`;
 
-html = html.replace(/<header>[\s\S]*?<\/header>/i, headerSwitcherMarkup);
+if (html.includes('<header>')) {
+  html = html.replace(/<header>[\s\S]*?<\/header>/i, headerSwitcherMarkup);
+} else if (html.includes('</header>')) {
+  html = html.replace(/[\s\S]*?<\/header>/i, headerSwitcherMarkup);
+} else {
+  html = html.replace('<section class="screen active" id="screen-hero">', `${headerSwitcherMarkup}\n\n  <section class="screen active" id="screen-hero">`);
+}
 
 const indexHeaderScript = `
 <script>

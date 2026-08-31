@@ -1227,7 +1227,7 @@
   [dir="rtl"] .lang-dropdown { right: auto; left: 0; }
 
 </style>
-                    <link rel="alternate" hreflang="en" href="https://iq-test.icu">
+                        <link rel="alternate" hreflang="en" href="https://iq-test.icu">
   <link rel="alternate" hreflang="de" href="https://iq-test.icu/de">
   <link rel="alternate" hreflang="fr" href="https://iq-test.icu/fr">
   <link rel="alternate" hreflang="es" href="https://iq-test.icu/es">
@@ -1422,7 +1422,35 @@
   <div class="mural-vignette"></div>
 </div>
 
-
+    <header>
+    <div class="logo-wrap">
+      <img src="/wordmark.webp" alt="IQ·Test" width="207" height="56" style="height:56px; width:auto; aspect-ratio:1361/368; object-fit:contain; display:block;" onerror="this.style.display='none'">
+    </div>
+    <div class="header-lang-wrapper" id="headerLangWrapper">
+      <button class="lang-btn" id="headerLangBtn" aria-expanded="false" aria-haspopup="true" aria-controls="headerLangDropdown" onclick="toggleHeaderLangMenu(event)">
+        <span class="globe-icon" aria-hidden="true">🌐</span>
+        <span class="lang-current-label">English</span>
+        <svg class="chevron-icon" aria-hidden="true" viewBox="0 0 16 16" width="12" height="12"><path fill="currentColor" d="M3.2 5.2a.75.75 0 0 1 1.06 0L8 8.94l3.74-3.74a.75.75 0 1 1 1.06 1.06l-4.27 4.27a.75.75 0 0 1-1.06 0L3.2 6.26a.75.75 0 0 1 0-1.06z"/></svg>
+      </button>
+      <nav id="headerLangDropdown" class="lang-dropdown" aria-label="Language Selector" hidden>
+        <div class="lang-dropdown-inner">
+          <div class="lang-dropdown-title">Select Language</div>
+          <div class="lang-grid">
+            <a href="/" class="lang-option active" hreflang="en" lang="en"><span class="lang-code">EN</span> English</a>
+            <a href="/de/" class="lang-option" hreflang="de" lang="de"><span class="lang-code">DE</span> Deutsch</a>
+            <a href="/fr/" class="lang-option" hreflang="fr" lang="fr"><span class="lang-code">FR</span> Français</a>
+            <a href="/es/" class="lang-option" hreflang="es" lang="es"><span class="lang-code">ES</span> Español</a>
+            <a href="/pt/" class="lang-option" hreflang="pt" lang="pt"><span class="lang-code">PT</span> Português</a>
+            <a href="/it/" class="lang-option" hreflang="it" lang="it"><span class="lang-code">IT</span> Italiano</a>
+            <a href="/nl/" class="lang-option" hreflang="nl" lang="nl"><span class="lang-code">NL</span> Nederlands</a>
+            <a href="/ja/" class="lang-option" hreflang="ja" lang="ja"><span class="lang-code">JA</span> 日本語</a>
+            <a href="/ko/" class="lang-option" hreflang="ko" lang="ko"><span class="lang-code">KO</span> 한국어</a>
+            <a href="/zh/" class="lang-option" hreflang="zh-Hans" lang="zh-Hans"><span class="lang-code">ZH</span> 简体中文</a>
+            <a href="/ar/" class="lang-option" hreflang="ar" lang="ar"><span class="lang-code">AR</span> العربية</a>
+            <a href="/hi/" class="lang-option" hreflang="hi" lang="hi"><span class="lang-code">HI</span> हिन्दी</a>
+            <a href="/tl/" class="lang-option" hreflang="tl" lang="tl"><span class="lang-code">TL</span> Tagalog</a>
+          </div>
+        </div>
       </nav>
     </div>
   </header>
@@ -1450,8 +1478,12 @@
         <span class="chip"><b>5 min</b> average</span>
       </div>
       
+      <div style="text-align:center; margin-top:10px;">
+        <button class="btn btn-primary" onclick="startTest(false)">Start the test</button>
+      </div>
+
       <!-- Session Resume Banner (P1-1) -->
-      <div id="resumeBanner" style="display:none; background:rgba(201,162,75,0.08); border:1px solid var(--border-gold); border-radius:10px; padding:14px 18px; margin: 18px 0; text-align:center;">
+      <div id="resumeBanner" style="display:none; background:rgba(201,162,75,0.08); border:1px solid var(--border-gold); border-radius:10px; padding:14px 18px; margin: 16px 0; text-align:center;">
         <p id="resumeText" style="font-size:0.88rem; color:var(--text-primary); margin-bottom:10px; font-weight:500;"></p>
         <div style="display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
           <button class="btn btn-primary" style="padding:8px 18px; font-size:0.85rem;" onclick="resumeTest()">Continue test &rarr;</button>
@@ -1459,9 +1491,6 @@
         </div>
       </div>
 
-      <div style="text-align:center;">
-        <button class="btn btn-primary" onclick="startTest(false)">Start the test</button>
-      </div>
       <p class="disclaimer" style="text-align:center;">This is a self-insight quiz, not a clinical IQ test. Your score is for personal reflection only. See the FAQ below for full methodology details.</p>
     </div>
 
@@ -1799,7 +1828,7 @@
             <img id="badgePreviewImg" src="/api/badge?score=100&pct=50" alt="Verified Cognitive Index Badge" width="320" height="96" style="max-width:100%; height:auto; aspect-ratio:320/96; display:inline-block;" onerror="this.style.display='none'">
           </div>
           <div style="position:relative;">
-            <textarea id="badgeEmbedCode" readonly style="width:100%; height:58px; background:rgba(0,0,0,0.5); border:1px solid var(--border-color); color:var(--text-primary); font-family:monospace; font-size:0.73rem; padding:8px 10px; border-radius:6px; resize:none; box-sizing:border-box;"><a href="https://iq-test.icu" target="_blank" rel="noopener"><img src="https://iq-test.icu/api/badge?score=100&pct=50" alt="Verified Cognitive Index | IQ·Test" /></a></textarea>
+            <textarea id="badgeEmbedCode" readonly style="width:100%; height:58px; background:rgba(0,0,0,0.5); border:1px solid var(--border-color); color:var(--text-primary); font-family:monospace; font-size:0.73rem; padding:8px 10px; border-radius:6px; resize:none; box-sizing:border-box;"><a href="https://iq-test.icu" target="_blank" rel="noopener"><img src="https://iq-test.icu/api/badge?score=100&pct=50" alt="Verified Cognitive Index | IQ·Test" width="320" height="96" /></a></textarea>
             <button onclick="copyBadgeEmbed()" id="copyBadgeBtn" class="btn" style="position:absolute; right:8px; bottom:10px; padding:5px 12px; font-size:0.75rem; background:var(--gold); color:#121110; font-weight:700; border-radius:4px; border:none; cursor:pointer;">Copy HTML</button>
           </div>
         </div>
@@ -2200,7 +2229,7 @@ function finishTest(){
     if (badgeImg && badgeCode) {
       const badgeUrl = `https://iq-test.icu/api/badge?score=${index}&pct=${pct}`;
       badgeImg.src = badgeUrl;
-      badgeCode.value = `<a href="https://iq-test.icu" target="_blank" rel="noopener" title="Verified Cognitive Assessment | IQ·Test"><img src="${badgeUrl}" alt="Verified Cognitive Index: ${index} | IQ·Test" /></a>`;
+      badgeCode.value = `<a href="https://iq-test.icu" target="_blank" rel="noopener" title="Verified Cognitive Assessment | IQ·Test"><img src="${badgeUrl}" alt="Verified Cognitive Index: ${index} | IQ·Test" width="320" height="96" /></a>`;
     }
   } catch(e) {}
 
