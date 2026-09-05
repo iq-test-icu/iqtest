@@ -198,6 +198,233 @@ async function testRecoverySweepDoesNotMarkSentWhenResendFails() {
   }
 }
 
+async function generateMockStripeSignature(payload, secret) {
+  const timestamp = Math.floor(Date.now() / 1000);
+  const signedPayload = `${timestamp}.${payload}`;
+  const key = await crypto.subtle.importKey(
+    "raw",
+    new TextEncoder().encode(secret),
+    { name: "HMAC", hash: "SHA-256" },
+    false,
+    ["sign"]
+  );
+  const mac = await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(signedPayload));
+  const expected = [...new Uint8Array(mac)].map((b) => b.toString(16).padStart(2, "0")).join("");
+  return `t=${timestamp},v1=${expected}`;
+}
+
+async function testWebhookFulfillWithoutReportSentAtOnResendFailure() {
+  const originalFetch = globalThis.fetch;
+  const webhookSecret = "whsec_test_secret";
+  const env = {
+    ...mockEnv,
+    STRIPE_WEBHOOK_SECRET: webhookSecret,
+    RESEND_API_KEY: "mock_key",
+    RESEND_FROM: "IQ Test <report@iq-test.icu>",
+    GROQ_API_KEY: "mock_groq_key"
+  };
+
+  const sessionId = "123e4567-e89b-12d3-a456-426614174000";
+  const payloadObj = {
+    id: "evt_test",
+    type: "checkout.session.completed",
+    data: {
+      object: {
+        id: "cs_test_123",
+        customer_email: "buyer@example.com",
+        metadata: { session_id: sessionId, tier: "basic" }
+      }
+    }
+  };
+  const rawPayload = JSON.stringify(payloadObj);
+  const sig = await generateMockStripeSignature(rawPayload, webhookSecret);
+
+  let patches = [];
+  let loggedEvents = [];
+
+  globalThis.fetch = async (url, opts) => {
+    if (url.includes("rest/v1/sessions?id=eq.") && (!opts || opts.method === undefined)) {
+      return new Response(JSON.stringify([{
+        id: sessionId,
+        paid: false,
+        email: "buyer@example.com",
+        raw_score: 12,
+        cognitive_index: 110,
+        percentile_estimate: 75,
+        category_breakdown: { catScores: { NUMERIC: 3 }, catMax: { NUMERIC: 4 } },
+        tier: "basic"
+      }]), { status: 200, headers: { "Content-Type": "application/json" } });
+    }
+    if (url.includes("rest/v1/sessions") && opts && opts.method === "PATCH") {
+      const body = JSON.parse(opts.body);
+      patches.push(body);
+      return new Response(JSON.stringify([{ id: sessionId, ...body }]), { status: 200, headers: { "Content-Type": "application/json" } });
+    }
+    if (url.includes("rest/v1/events") && opts && opts.method === "POST") {
+      const evt = JSON.parse(opts.body);
+      loggedEvents.push(evt.event_name);
+      return new Response(JSON.stringify([evt]), { status: 201, headers: { "Content-Type": "application/json" } });
+    }
+    if (url.includes("api.resend.com/emails")) {
+      return new Response(JSON.stringify({ message: "rate limited" }), { status: 429 });
+    }
+    return new Response("Not found", { status: 404 });
+  };
+
+  try {
+    const req = new Request("https://iq-test.icu/api/webhook", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "stripe-signature": sig
+      },
+      body: rawPayload
+    });
+    const res = await worker.fetch(req, env);
+    assert.strictEqual(res.status, 200, "Webhook should return 200 ok to prevent Stripe webhook failure storms");
+
+    const fulfillPatch = patches.find(p => p.paid === true);
+    assert.ok(fulfillPatch, "Session must be unlocked with paid=true");
+    assert.strictEqual(fulfillPatch.report_sent_at, undefined, "report_sent_at must NOT be set when Resend fails");
+
+    const sentAtPatch = patches.find(p => p.report_sent_at !== undefined);
+    assert.strictEqual(sentAtPatch, undefined, "report_sent_at must never be marked on failed send");
+
+    assert.ok(loggedEvents.includes("resend_send_failed"), "resend_send_failed event must be logged");
+    console.log("✓ handleWebhook unlocks paid report on screen without marking report_sent_at when Resend fails");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+}
+
+async function testPaidReportsRetrySweepSendsAndMarksSent() {
+  const originalFetch = globalThis.fetch;
+  let emailSent = false;
+  let patchedRow = null;
+  let loggedEvents = [];
+
+  globalThis.fetch = async (url, opts) => {
+    if (url.includes("rest/v1/sessions") && url.includes("report_sent_at=is.null") && (!opts || opts.method === undefined)) {
+      return new Response(JSON.stringify([
+        { id: "123e4567-e89b-12d3-a456-426614174000", email: "buyer@example.com", report: "Your Detailed Cognitive Report...", cognitive_index: 125, tier: "detailed" }
+      ]), { status: 200, headers: { "Content-Type": "application/json" } });
+    }
+    if (url.includes("rest/v1/sessions") && (!opts || opts.method === undefined)) {
+      return new Response("[]", { status: 200, headers: { "Content-Type": "application/json" } });
+    }
+    if (url.includes("rest/v1/sessions") && opts && opts.method === "PATCH") {
+      patchedRow = JSON.parse(opts.body);
+      return new Response(JSON.stringify([{ id: "123e4567-e89b-12d3-a456-426614174000", ...patchedRow }]), {
+        status: 200,
+        headers: { "Content-Type": "application/json" }
+      });
+    }
+    if (url.includes("rest/v1/events") && opts && opts.method === "POST") {
+      const evt = JSON.parse(opts.body);
+      loggedEvents.push(evt.event_name);
+      return new Response(JSON.stringify([evt]), { status: 201, headers: { "Content-Type": "application/json" } });
+    }
+    if (url.includes("api.resend.com/emails")) {
+      emailSent = true;
+      return new Response(JSON.stringify({ id: "mock_resend_id" }), { status: 200, headers: { "Content-Type": "application/json" } });
+    }
+    return new Response("Not found", { status: 404 });
+  };
+
+  try {
+    let capturedPromise = Promise.resolve();
+    const ctx = { waitUntil: (p) => { capturedPromise = p; } };
+    const env = { ...mockEnv, RESEND_API_KEY: "mock_key", RESEND_FROM: "IQ Test <report@iq-test.icu>" };
+    await worker.scheduled({}, env, ctx);
+    await capturedPromise;
+
+    assert.strictEqual(emailSent, true, "Paid report retry email should be sent via Resend");
+    assert.ok(patchedRow && typeof patchedRow.report_sent_at === "string", "Row must be updated with report_sent_at timestamp");
+    assert.ok(loggedEvents.includes("report_emailed"), "report_emailed event must be logged on successful retry");
+    console.log("✓ scheduled() paid retry sweep retries undelivered reports and sets report_sent_at");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+}
+
+async function testPaidReportsRetrySweepDoesNotMarkSentWhenResendFails() {
+  const originalFetch = globalThis.fetch;
+  let patchAttempted = false;
+  let loggedEvents = [];
+
+  globalThis.fetch = async (url, opts) => {
+    if (url.includes("rest/v1/sessions") && url.includes("report_sent_at=is.null") && (!opts || opts.method === undefined)) {
+      return new Response(JSON.stringify([
+        { id: "123e4567-e89b-12d3-a456-426614174000", email: "buyer@example.com", report: "Report text", cognitive_index: 125, tier: "detailed" }
+      ]), { status: 200, headers: { "Content-Type": "application/json" } });
+    }
+    if (url.includes("rest/v1/sessions") && (!opts || opts.method === undefined)) {
+      return new Response("[]", { status: 200, headers: { "Content-Type": "application/json" } });
+    }
+    if (url.includes("rest/v1/sessions") && opts && opts.method === "PATCH") {
+      patchAttempted = true;
+      return new Response("[]", { status: 200, headers: { "Content-Type": "application/json" } });
+    }
+    if (url.includes("rest/v1/events") && opts && opts.method === "POST") {
+      const evt = JSON.parse(opts.body);
+      loggedEvents.push(evt.event_name);
+      return new Response(JSON.stringify([evt]), { status: 201, headers: { "Content-Type": "application/json" } });
+    }
+    if (url.includes("api.resend.com/emails")) {
+      return new Response(JSON.stringify({ message: "internal error" }), { status: 500 });
+    }
+    return new Response("Not found", { status: 404 });
+  };
+
+  try {
+    let capturedPromise = Promise.resolve();
+    const ctx = { waitUntil: (p) => { capturedPromise = p; } };
+    const env = { ...mockEnv, RESEND_API_KEY: "mock_key", RESEND_FROM: "IQ Test <report@iq-test.icu>" };
+    await worker.scheduled({}, env, ctx);
+    await capturedPromise;
+
+    assert.strictEqual(patchAttempted, false, "Row must not be marked sent when retry fails");
+    assert.ok(loggedEvents.includes("resend_send_failed"), "resend_send_failed event must be logged on failed retry");
+    console.log("✓ paid retry sweep leaves the row retryable when Resend rejects the send");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+}
+
+async function testStatsQueriesSessionsCount() {
+  const originalFetch = globalThis.fetch;
+  let queriedUrl = null;
+  let requestedHeaders = null;
+
+  globalThis.fetch = async (url, opts) => {
+    if (url.includes("rest/v1/sessions")) {
+      queriedUrl = url;
+      requestedHeaders = opts?.headers || {};
+      return new Response(JSON.stringify([]), {
+        status: 200,
+        headers: {
+          "Content-Type": "application/json",
+          "content-range": "0-0/42"
+        }
+      });
+    }
+    return new Response("Not found", { status: 404 });
+  };
+
+  try {
+    const req = new Request("https://iq-test.icu/api/stats", { method: "GET" });
+    const res = await worker.fetch(req, mockEnv);
+    assert.strictEqual(res.status, 200, "Stats endpoint must return 200");
+    const data = await res.json();
+    assert.strictEqual(data.reportsGenerated, 42, "Must parse count=42 from content-range header");
+    assert.ok(queriedUrl.includes("/rest/v1/sessions?paid=eq.true&select=count"), "Must query sessions where paid=true");
+    assert.strictEqual(requestedHeaders.Prefer, "count=exact", "Must request exact count");
+    console.log("✓ GET /api/stats queries sessions where paid=true and returns exact count");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+}
+
 async function runAllTests() {
   console.log("Running Worker Verification Tests...");
   await testInvalidUuidReport();
@@ -207,6 +434,10 @@ async function runAllTests() {
   await testUnsubscribeValidIdPatchesRow();
   await testRecoverySweepSendsAndMarksSent();
   await testRecoverySweepDoesNotMarkSentWhenResendFails();
+  await testWebhookFulfillWithoutReportSentAtOnResendFailure();
+  await testPaidReportsRetrySweepSendsAndMarksSent();
+  await testPaidReportsRetrySweepDoesNotMarkSentWhenResendFails();
+  await testStatsQueriesSessionsCount();
   console.log("All tests passed cleanly!");
 }
 

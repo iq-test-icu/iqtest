@@ -185,7 +185,7 @@ export default {
 
   // Cloudflare Cron Trigger entry point — see wrangler.toml [triggers].
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(handleRecoverySweep(env));
+    ctx.waitUntil(handleScheduled(env));
   },
 };
 
@@ -241,6 +241,24 @@ async function sbSelectRecoveryCandidates(env, minIso, maxIso, limit) {
     },
   });
   if (!res.ok) throw new Error(`supabase recovery query failed: ${await res.text()}`);
+  return await res.json();
+}
+
+/** Paid rows whose report email failed on initial checkout webhook */
+async function sbSelectUndeliveredPaidReports(env, limit = 50) {
+  const params = new URLSearchParams();
+  params.append("paid", "eq.true");
+  params.append("report_sent_at", "is.null");
+  params.append("select", "id,email,report,cognitive_index,tier");
+  params.append("limit", String(limit));
+
+  const res = await fetch(`${env.SUPABASE_URL}/rest/v1/sessions?${params.toString()}`, {
+    headers: {
+      apikey:        env.SUPABASE_SERVICE_KEY,
+      Authorization: `Bearer ${env.SUPABASE_SERVICE_KEY}`,
+    },
+  });
+  if (!res.ok) throw new Error(`supabase undelivered paid query failed: ${await res.text()}`);
   return await res.json();
 }
 
@@ -317,7 +335,7 @@ async function handleTrack(body, env, cors) {
 async function handleStats(env, cors) {
   try {
     const res = await fetch(
-      `${env.SUPABASE_URL}/rest/v1/events?event_name=eq.report_generated&select=count`,
+      `${env.SUPABASE_URL}/rest/v1/sessions?paid=eq.true&select=count`,
       {
         headers: {
           apikey:        env.SUPABASE_SERVICE_KEY,
@@ -537,22 +555,25 @@ async function handleWebhook(req, env, cors) {
         const report = await generateReport(env, row, resolvedTier);
         logEvent(env, "report_generated", { sessionId, tier: resolvedTier, status: "success", email });
 
-        // Fulfill and unlock report immediately in database so user can view it on screen
+        // Fulfill and unlock report immediately in database so user can view it on screen,
+        // but do NOT mark report_sent_at until email delivery genuinely succeeds.
         await sbUpdate(env, sessionId, {
           paid:             true,
           tier:             resolvedTier,
           report,
           stripe_session_id: session.id,
-          report_sent_at:   new Date().toISOString(),
         });
 
         // Fail-safe email dispatch
         try {
           await sendReportEmail(env, email, report, row.cognitive_index, resolvedTier);
+          await sbUpdate(env, sessionId, {
+            report_sent_at: new Date().toISOString(),
+          });
           logEvent(env, "report_emailed", { sessionId, tier: resolvedTier, status: "success", email });
         } catch (emailErr) {
           console.error("Report email delivery failed:", emailErr);
-          logEvent(env, "report_email_failed", { sessionId, tier: resolvedTier, status: "failed", errorCode: emailErr.message, email });
+          logEvent(env, "resend_send_failed", { sessionId, tier: resolvedTier, status: "failed", errorCode: emailErr.message, email });
         }
       }
     }
@@ -861,6 +882,43 @@ async function handleRecoverySweep(env) {
   }
 
   logEvent(env, "recovery_sweep_completed", { status: "success", meta: { candidateCount: candidates.length } });
+}
+
+async function handleScheduled(env) {
+  await handlePaidReportsRetry(env);
+  await handleRecoverySweep(env);
+}
+
+/**
+ * Retry delivery for paid sessions whose report email failed on initial checkout.
+ * Queries sessions where paid=true and report_sent_at is null, attempts sendReportEmail,
+ * marks report_sent_at only on success, and logs resend_send_failed on failure.
+ */
+async function handlePaidReportsRetry(env) {
+  let candidates;
+  try {
+    candidates = await sbSelectUndeliveredPaidReports(env, 50);
+  } catch (err) {
+    logEvent(env, "paid_retry_query_failed", { status: "failed", errorCode: err.message });
+    return;
+  }
+
+  if (!Array.isArray(candidates) || candidates.length === 0) return;
+
+  logEvent(env, "paid_retry_sweep_started", { status: "success", meta: { candidateCount: candidates.length } });
+
+  for (const row of candidates) {
+    if (!row.email || !row.report) continue;
+    try {
+      await sendReportEmail(env, row.email, row.report, row.cognitive_index, row.tier || "detailed");
+      await sbUpdate(env, row.id, { report_sent_at: new Date().toISOString() });
+      logEvent(env, "report_emailed", { sessionId: row.id, tier: row.tier, status: "success", email: row.email, meta: { retry: true } });
+    } catch (err) {
+      logEvent(env, "resend_send_failed", { sessionId: row.id, tier: row.tier, status: "failed", errorCode: err.message, email: row.email, meta: { retry: true } });
+    }
+  }
+
+  logEvent(env, "paid_retry_sweep_completed", { status: "success", meta: { candidateCount: candidates.length } });
 }
 
 async function sendRecoveryEmail(env, to, row) {
