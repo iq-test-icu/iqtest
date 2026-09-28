@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+(function(){var h=location.hostname;if(h==="www.iq-test.icu"||h==="apex-iqtest.pages.dev"){location.replace("https://iq-test.icu"+location.pathname+location.search+location.hash);}})();
+</script>
 <title>Free IQ Test — Get Your Score in 5 Minutes | IQ Test</title>
 <meta name="description" content="Take a free 16-question IQ test and get your cognitive index, percentile, and category breakdown instantly. Optional detailed reports from $1.99.">
 <link rel="canonical" href="https://iq-test.icu/pt">
@@ -843,6 +846,16 @@
     margin-bottom: 18px;
     font-family: var(--font-mono);
   }
+
+  /* Paid report body (server-rendered, escaped markdown subset) */
+  #reportBody h2, #reportBody h3, #reportBody h4 { font-family: var(--font-display); color: var(--text-primary); margin: 22px 0 8px; line-height: 1.3; }
+  #reportBody h2 { font-size: 1.3rem; }
+  #reportBody h3 { font-size: 1.15rem; }
+  #reportBody h4 { font-size: 1.02rem; color: var(--gold); }
+  #reportBody p { margin: 0 0 12px; }
+  #reportBody ul { margin: 0 0 12px; padding-left: 20px; }
+  #reportBody li { margin-bottom: 6px; }
+  #reportBody hr { border: 0; border-top: 1px solid var(--border-color); margin: 22px 0; }
   
   /* Interactive Accordion FAQs */
   .info-block {
@@ -1755,6 +1768,16 @@
 
 <script>
 const API_BASE = ""; // same-origin — Worker is routed at iq-test.icu/api/*
+const PAGE_LOCALE = (document.documentElement.lang || "en").slice(0,2).toLowerCase();
+// Runtime UI copy. Localized per page by _i18n/render-locales.js via the catalog (src → t).
+const UI_MSG = {
+  checkoutFailed:   "Não conseguimos acessar o pagamento. Suas respostas estão salvas — tente novamente em instantes.",
+  saveFailed:       "Não conseguimos salvar sua pontuação agora. Tente novamente em instantes.",
+  rateLimited:      "Muitas tentativas — aguarde um minuto e tente novamente.",
+  reportPolling:    "Confirmando seu pagamento — seu relatório aparecerá aqui em alguns segundos…",
+  reportTimeout:    "Pagamento ainda em processamento — atualize a página em alguns segundos ou verifique seu e-mail.",
+  reportLoadFailed: "Não foi possível carregar seu relatório. Ele também está a caminho da sua caixa de entrada."
+};
 
 
 
@@ -1962,7 +1985,7 @@ function trackFunnel(eventName) {
     fetch(`${API_BASE}/api/track`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ event: eventName })
+      body: JSON.stringify({ event: eventName, locale: PAGE_LOCALE })
     }).catch(() => {});
   } catch(e) {}
 }
@@ -2207,7 +2230,7 @@ function finishTest(){
       // Fade in upsell section after score lands
       setTimeout(() => {
         const upsell = document.getElementById('upsellSection');
-        if (upsell) upsell.classList.add('visible');
+        if (upsell) { upsell.classList.add('visible'); markPaywallViewed(); }
       }, 350);
     }
   }
@@ -2278,6 +2301,30 @@ function trackEvent(name, meta = {}) {
   } catch(e) {}
 }
 
+let paywallViewedSent = false;
+function markPaywallViewed() {
+  if (paywallViewedSent) return;
+  paywallViewedSent = true;
+  trackEvent("paywall_viewed", { locale: PAGE_LOCALE });
+}
+
+// Validation copy is reserved for validation failures; API/network failures get honest copy.
+function apiError(stage, status) {
+  const err = new Error(stage + "_failed");
+  err.stage = stage;
+  err.status = status;
+  return err;
+}
+function showValidationError(el) {
+  if (el.dataset.validationMsg) el.textContent = el.dataset.validationMsg;
+  el.style.display = "block";
+}
+function showApiError(el, err, msg) {
+  if (!el.dataset.validationMsg) el.dataset.validationMsg = el.textContent;
+  el.textContent = (err && err.status === 429) ? UI_MSG.rateLimited : msg;
+  el.style.display = "block";
+}
+
 function shareResult() {
   const index = window.__result ? window.__result.index : "";
   const shareText = `My cognitive index is ${index}! Take the free 5-minute test to see which historical figure thinks like you:`;
@@ -2304,7 +2351,7 @@ async function submitLead() {
   errorEl.style.display = "none";
   const email = emailInput.value.trim();
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !consentCheck.checked) {
-    errorEl.style.display = "block";
+    showValidationError(errorEl);
     return;
   }
   btn.disabled = true;
@@ -2318,22 +2365,25 @@ async function submitLead() {
         consentGiven: true,
         marketingOptIn: mktCheck.checked,
         leadOnly: true,
+        locale: PAGE_LOCALE,
         ...window.__result
       })
     });
-    if (!res.ok) throw new Error("Lead save failed");
+    if (!res.ok) throw apiError("save", res.status);
     const data = await res.json();
     window.__leadSavedId = data.id;
     document.getElementById("emailInput").value = email;
-    trackEvent("lead_captured", { email, marketingOptIn: mktCheck.checked, id: data.id });
+    trackEvent("lead_captured", { marketingOptIn: mktCheck.checked, id: data.id });
     document.getElementById("leadCaptureBox").style.display = "none";
     const upsell = document.getElementById("upsellSection");
     if (upsell) {
       upsell.classList.add("visible");
+      markPaywallViewed();
       upsell.scrollIntoView({ behavior: "smooth" });
     }
   } catch(e) {
-    errorEl.style.display = "block";
+    trackEvent("lead_error", { stage: "save", status: (e && e.status) || "network" });
+    showApiError(errorEl, e, UI_MSG.saveFailed);
     btn.disabled = false;
     btn.textContent = "Save Score & View Historical Match →";
   }
@@ -2362,35 +2412,38 @@ async function startCheckout(){
   const errEl = document.getElementById('checkoutError');
   errEl.style.display = 'none';
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !consented){
-    errEl.style.display = 'block';
+    showValidationError(errEl);
     return;
   }
   const btn = document.getElementById('checkoutBtn');
   btn.disabled = true; btn.textContent = 'Loading checkout…';
-  trackEvent("checkout_started", { email, tier });
+  trackEvent("checkout_started", { tier });
+  let stage = 'save';
   try{
     let id = window.__leadSavedId;
     if (!id) {
       const saveRes = await fetch(`${API_BASE}/api/save-result`, {
         method:'POST', headers:{'Content-Type':'application/json'},
-        body: JSON.stringify({email, consentGiven:consented, ...window.__result})
+        body: JSON.stringify({email, consentGiven:consented, locale:PAGE_LOCALE, ...window.__result})
       });
-      if(!saveRes.ok) throw new Error('save failed');
+      if(!saveRes.ok) throw apiError('save', saveRes.status);
       const saveData = await saveRes.json();
       id = saveData.id;
       window.__leadSavedId = id;
     }
 
+    stage = 'checkout';
     const checkoutRes = await fetch(`${API_BASE}/api/checkout`, {
       method:'POST', headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({id, email, tier})
+      body: JSON.stringify({id, email, tier, locale:PAGE_LOCALE})
     });
-    if(!checkoutRes.ok) throw new Error('checkout failed');
+    if(!checkoutRes.ok) throw apiError('checkout', checkoutRes.status);
     const {url} = await checkoutRes.json();
     window.location.href = url;
   } catch(e){
-    errEl.style.display = 'block';
-    btn.disabled = false; btn.textContent = `Unlock my result — $${TIER_PRICE[tier]}`;
+    trackEvent("checkout_error", { stage, status: (e && e.status) || "network" });
+    showApiError(errEl, e, stage === 'checkout' ? UI_MSG.checkoutFailed : UI_MSG.saveFailed);
+    btn.disabled = false; btn.textContent = TIER_CTA[tier];
   }
 }
 
@@ -2428,27 +2481,56 @@ function toggleFaq(btn) {
   }
 }
 
+function renderPaidReport(bodyEl, data) {
+  const content = document.createElement('div');
+  if (data.report_html) {
+    content.innerHTML = data.report_html; // server-escaped subset (worker renderReportHtml)
+  } else {
+    content.style.whiteSpace = 'pre-wrap';
+    content.textContent = data.report;
+  }
+  bodyEl.innerHTML = `<div class="receipt" style="margin-top:32px; border-color:var(--border-color); text-align:center;">
+        <h3 style="font-family:var(--font-display); font-size:1.1rem; margin-bottom:8px; color:var(--text-primary);">🔗 Share your result</h3>
+        <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:16px;">Know someone who'd find this interesting? Challenge them to take the test.</p>
+        <button class="btn" style="background:rgba(255,255,255,0.06); border:1px solid var(--border-color); color:var(--text-secondary);" onclick="shareResult()">Copy / Share Test Link</button>
+      </div>`;
+  bodyEl.prepend(content);
+}
+
 (async function checkReportView(){
   const params = new URLSearchParams(window.location.search);
   const reportId = params.get('report');
   if(!reportId) return;
   show('screen-report');
-  try{
-    const res = await fetch(`${API_BASE}/api/report?id=${encodeURIComponent(reportId)}`);
-    const data = await res.json();
-    if(data.paid && data.report){
-      document.getElementById('reportBody').innerHTML = `<div style="white-space:pre-wrap;">${data.report}</div>
-      <div class="receipt" style="margin-top:32px; border-color:var(--border-color); text-align:center;">
-        <h3 style="font-family:var(--font-display); font-size:1.1rem; margin-bottom:8px; color:var(--text-primary);">🔗 Share your result</h3>
-        <p style="font-size:0.88rem; color:var(--text-secondary); margin-bottom:16px;">Know someone who'd find this interesting? Challenge them to take the test.</p>
-        <button class="btn" style="background:rgba(255,255,255,0.06); border:1px solid var(--border-color); color:var(--text-secondary);" onclick="shareResult()">Copy / Share Test Link</button>
-      </div>`;
+  const bodyEl = document.getElementById('reportBody');
+  // Stripe redirects before the webhook may land: poll with backoff (1s..5s, then 5s steps, ~40s max).
+  const delays = [1000, 2000, 3000, 4000, 5000];
+  const maxWaitMs = 40000;
+  let waited = 0;
+  for (let attempt = 0; ; attempt++) {
+    let data = null;
+    try {
+      const res = await fetch(`${API_BASE}/api/report?id=${encodeURIComponent(reportId)}`);
+      if (res.status === 400 || res.status === 404) {
+        bodyEl.textContent = UI_MSG.reportLoadFailed;
+        return;
+      }
+      if (res.ok) data = await res.json();
+    } catch(e) {}
+    if (data && data.paid && data.report) {
+      renderPaidReport(bodyEl, data);
       trackEvent("report_viewed", { reportId });
-    } else {
-      document.getElementById('reportBody').textContent = "Payment still processing — refresh in a few seconds, or check your email.";
+      return;
     }
-  } catch(e){
-    document.getElementById('reportBody').textContent = "Couldn't load your report. It's also on its way to your inbox.";
+    const delay = delays[Math.min(attempt, delays.length - 1)];
+    if (waited + delay > maxWaitMs) {
+      bodyEl.textContent = UI_MSG.reportTimeout;
+      trackEvent("report_poll_timeout", { reportId });
+      return;
+    }
+    bodyEl.textContent = UI_MSG.reportPolling;
+    await new Promise(r => setTimeout(r, delay));
+    waited += delay;
   }
 })();
 

@@ -168,5 +168,29 @@
   "table.copied": {
     "src": "✓ Copied!",
     "ctx": "Table copied confirmation state"
+  },
+  "runtime.checkout_failed": {
+    "src": "We couldn't reach checkout. Your answers are saved — please try again in a moment.",
+    "ctx": "Checkout API/network failure message (not a validation error)"
+  },
+  "runtime.save_failed": {
+    "src": "We couldn't save your score right now. Please try again in a moment.",
+    "ctx": "Score save API/network failure message"
+  },
+  "runtime.rate_limited": {
+    "src": "Too many attempts — please wait a minute and try again.",
+    "ctx": "HTTP 429 rate-limit message"
+  },
+  "runtime.report_polling": {
+    "src": "Confirming your payment — your report will appear here in a few seconds…",
+    "ctx": "Status while waiting for payment confirmation after Stripe redirect"
+  },
+  "runtime.report_timeout": {
+    "src": "Payment still processing — refresh in a few seconds, or check your email.",
+    "ctx": "Fallback after report polling times out"
+  },
+  "runtime.report_load_failed": {
+    "src": "Couldn't load your report. It's also on its way to your inbox.",
+    "ctx": "Report could not be loaded (not found / invalid id)"
   }
 }

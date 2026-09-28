@@ -294,5 +294,47 @@
     "ctx": "Table copied confirmation state",
     "srcHash": "4e45a91772b8f5dd",
     "status": "reviewed"
+  },
+  "runtime.checkout_failed": {
+    "src": "We couldn't reach checkout. Your answers are saved — please try again in a moment.",
+    "t": "We konden de betaalpagina niet bereiken. Je antwoorden zijn opgeslagen — probeer het zo opnieuw.",
+    "ctx": "Checkout API/network failure message (not a validation error)",
+    "srcHash": "9ec7d5889b63d5bb",
+    "status": "machine"
+  },
+  "runtime.save_failed": {
+    "src": "We couldn't save your score right now. Please try again in a moment.",
+    "t": "We konden je score nu niet opslaan. Probeer het zo opnieuw.",
+    "ctx": "Score save API/network failure message",
+    "srcHash": "9484e8d62411b3e1",
+    "status": "machine"
+  },
+  "runtime.rate_limited": {
+    "src": "Too many attempts — please wait a minute and try again.",
+    "t": "Te veel pogingen — wacht een minuut en probeer het opnieuw.",
+    "ctx": "HTTP 429 rate-limit message",
+    "srcHash": "54f9baa7b40ce61a",
+    "status": "machine"
+  },
+  "runtime.report_polling": {
+    "src": "Confirming your payment — your report will appear here in a few seconds…",
+    "t": "Je betaling wordt bevestigd — je rapport verschijnt hier binnen enkele seconden…",
+    "ctx": "Status while waiting for payment confirmation after Stripe redirect",
+    "srcHash": "0c4600af4277c69a",
+    "status": "machine"
+  },
+  "runtime.report_timeout": {
+    "src": "Payment still processing — refresh in a few seconds, or check your email.",
+    "t": "Betaling wordt nog verwerkt — vernieuw de pagina over een paar seconden of controleer je e-mail.",
+    "ctx": "Fallback after report polling times out",
+    "srcHash": "3b7f73cc61aade14",
+    "status": "machine"
+  },
+  "runtime.report_load_failed": {
+    "src": "Couldn't load your report. It's also on its way to your inbox.",
+    "t": "Je rapport kon niet worden geladen. Het is ook onderweg naar je inbox.",
+    "ctx": "Report could not be loaded (not found / invalid id)",
+    "srcHash": "2f88ed1c5271c28d",
+    "status": "machine"
   }
 }

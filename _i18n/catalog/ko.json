@@ -294,5 +294,47 @@
     "ctx": "Table copied confirmation state",
     "srcHash": "4e45a91772b8f5dd",
     "status": "reviewed"
+  },
+  "runtime.checkout_failed": {
+    "src": "We couldn't reach checkout. Your answers are saved — please try again in a moment.",
+    "t": "결제 페이지에 연결할 수 없습니다. 답변은 저장되어 있으니 잠시 후 다시 시도해 주세요.",
+    "ctx": "Checkout API/network failure message (not a validation error)",
+    "srcHash": "9ec7d5889b63d5bb",
+    "status": "machine"
+  },
+  "runtime.save_failed": {
+    "src": "We couldn't save your score right now. Please try again in a moment.",
+    "t": "지금은 점수를 저장할 수 없습니다. 잠시 후 다시 시도해 주세요.",
+    "ctx": "Score save API/network failure message",
+    "srcHash": "9484e8d62411b3e1",
+    "status": "machine"
+  },
+  "runtime.rate_limited": {
+    "src": "Too many attempts — please wait a minute and try again.",
+    "t": "시도 횟수가 너무 많습니다. 1분 후에 다시 시도해 주세요.",
+    "ctx": "HTTP 429 rate-limit message",
+    "srcHash": "54f9baa7b40ce61a",
+    "status": "machine"
+  },
+  "runtime.report_polling": {
+    "src": "Confirming your payment — your report will appear here in a few seconds…",
+    "t": "결제를 확인하는 중입니다. 몇 초 후 여기에 리포트가 표시됩니다…",
+    "ctx": "Status while waiting for payment confirmation after Stripe redirect",
+    "srcHash": "0c4600af4277c69a",
+    "status": "machine"
+  },
+  "runtime.report_timeout": {
+    "src": "Payment still processing — refresh in a few seconds, or check your email.",
+    "t": "결제가 아직 처리 중입니다. 몇 초 후 새로고침하거나 이메일을 확인해 주세요.",
+    "ctx": "Fallback after report polling times out",
+    "srcHash": "3b7f73cc61aade14",
+    "status": "machine"
+  },
+  "runtime.report_load_failed": {
+    "src": "Couldn't load your report. It's also on its way to your inbox.",
+    "t": "리포트를 불러오지 못했습니다. 리포트는 이메일로도 발송됩니다.",
+    "ctx": "Report could not be loaded (not found / invalid id)",
+    "srcHash": "2f88ed1c5271c28d",
+    "status": "machine"
   }
 }
