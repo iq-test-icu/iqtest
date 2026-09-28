@@ -51,8 +51,10 @@ console.log(`==================================================================\
 console.log(`--- [GATE G1: REGRESSION] ---`);
 try {
   const e2eOut = execSync('node test-e2e.js', { cwd: rootDir, encoding: 'utf8' });
-  const e2ePass = e2eOut.includes('SUMMARY: 35 PASSED | 0 FAILED');
-  assertCheck(e2ePass, 'test-e2e.js regression suite', '35/35 assertions passed');
+  // Suite grows over time: require the 35-assertion baseline (or more) with zero failures
+  const e2eSummary = e2eOut.match(/SUMMARY: (\d+) PASSED \| (\d+) FAILED/);
+  const e2ePass = !!e2eSummary && Number(e2eSummary[1]) >= 35 && Number(e2eSummary[2]) === 0;
+  assertCheck(e2ePass, 'test-e2e.js regression suite', e2eSummary ? `${e2eSummary[1]} passed, ${e2eSummary[2]} failed (baseline ≥35, 0 failed)` : 'summary not found');
 } catch (err) {
   assertCheck(false, 'test-e2e.js regression suite', err.message);
 }
