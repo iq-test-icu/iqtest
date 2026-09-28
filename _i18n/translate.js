@@ -261,14 +261,16 @@ async function processAllLocales() {
       }
       
       const vetted = fullDictionaries[loc.hreflang] && fullDictionaries[loc.hreflang][k];
-      const translated = vetted || v.src;
+      // Keep an existing translation while its source text is unchanged (never regress it to English)
+      const existing = catalog[k] && catalog[k].srcHash === sha256(v.src) && catalog[k].t && catalog[k].t !== v.src ? catalog[k] : null;
+      const translated = vetted || (existing && existing.t) || v.src;
 
       catalog[k] = {
         src: v.src,
         t: translated,
         ctx: v.ctx,
         srcHash: sha256(v.src),
-        status: vetted ? 'reviewed' : 'machine'
+        status: vetted ? 'reviewed' : (existing ? existing.status : 'machine')
       };
     }
 
