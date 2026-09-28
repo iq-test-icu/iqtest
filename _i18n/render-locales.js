@@ -170,7 +170,7 @@ function renderAllLocales() {
       // 4. Inject full bidirectional hreflang set
       const hreflangBlock = buildHreflangTags(cleanSub);
       if (html.includes('<link rel="alternate"')) {
-        html = html.replace(/(<link rel="alternate"[^>]*>\s*)+/i, hreflangBlock + '\n');
+        html = html.replace(/([ \t]*)(<link rel="alternate"[^>]*>\s*)+/i, (m, indent) => indent + hreflangBlock.replace(/^\s+/, '') + '\n');
       } else {
         html = html.replace('</head>', `${hreflangBlock}\n</head>`);
       }
@@ -266,7 +266,7 @@ function renderAllLocales() {
     // Inject hreflang
     const hreflangBlock = buildHreflangTags(cleanSub);
     if (html.includes('<link rel="alternate"')) {
-      html = html.replace(/(<link rel="alternate"[^>]*>\s*)+/i, hreflangBlock + '\n');
+      html = html.replace(/([ \t]*)(<link rel="alternate"[^>]*>\s*)+/i, (m, indent) => indent + hreflangBlock.replace(/^\s+/, '') + '\n');
     } else {
       html = html.replace('</head>', `${hreflangBlock}\n</head>`);
     }
