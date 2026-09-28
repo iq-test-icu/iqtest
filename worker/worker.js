@@ -4,7 +4,7 @@
  *   POST /api/save-result   -> insert session row, return {id}
  *   POST /api/checkout      -> Stripe Checkout Session (tier: basic|detailed), return {url}
  *   POST /api/webhook       -> Stripe webhook (checkout.session.completed) -> report + email
- *   GET  /api/report?id=    -> {paid, report, tier}
+ *   GET  /api/report?id=    -> {paid, report, tier, report_html}
  *   GET  /api/unsubscribe?id= -> one-click CASL unsubscribe, sets marketing_opt_in=false
  *
  * Scheduled (Cron Trigger, see wrangler.toml [triggers]):
@@ -34,7 +34,14 @@ const PRICE_CENTS   = { basic: 199, detailed: 399, complete: 699 };
 const PRODUCT_NAME  = { basic: "IQ·Test Basic Result", detailed: "IQ·Test Detailed Result", complete: "IQ·Test Complete Report + Printable Certificate" };
 const VALID_TIERS   = new Set(["basic", "detailed", "complete"]);
 const VALID_EVENTS  = new Set(["page_view", "quiz_started", "quiz_completed_free"]);
-const VALID_LOCALES = new Set(["en", "de", "es", "fr", "it", "ja", "ko", "nl", "pl", "pt", "ru", "tr", "zh"]);
+const VALID_LOCALES = new Set(["en", "de", "es", "fr", "it", "ja", "ko", "nl", "pl", "pt", "ru", "tr", "zh", "ar", "hi", "tl"]);
+// Stripe Checkout Session `locale` enum (verified against the Stripe API reference). Unsupported → "auto".
+const STRIPE_LOCALE = { en: "en", de: "de", fr: "fr", es: "es", pt: "pt", it: "it", nl: "nl", ja: "ja", ko: "ko",
+                        zh: "zh", pl: "pl", ru: "ru", tr: "tr", tl: "fil", ar: "auto", hi: "auto" };
+// Groq is prompted with a language name, not an ISO code.
+const LANG_NAME = { de: "German", fr: "French", es: "Spanish", pt: "Portuguese", it: "Italian", nl: "Dutch",
+                    ja: "Japanese", ko: "Korean", zh: "Simplified Chinese", ar: "Arabic", hi: "Hindi",
+                    tl: "Tagalog (Filipino)", pl: "Polish", ru: "Russian", tr: "Turkish" };
 
 // ── CORS ─────────────────────────────────────────────────────────────────────
 const corsHeaders = (origin) => ({
@@ -45,25 +52,35 @@ const corsHeaders = (origin) => ({
 
 // ── Entry ────────────────────────────────────────────────────────────────────
 const ipCache = new Map();
+const RATE_LIMIT_WINDOW_MS = 60000;
+const RATE_LIMIT_MAX_KEYS  = 10000;
 
-function isRateLimited(ip) {
+// Per-isolate sliding window, keyed by `${bucket}:${ip}` so telemetry can never starve checkout.
+function isRateLimited(ip, bucket = "core", maxRequests = 15) {
   const now = Date.now();
-  const windowMs = 60000;
-  const maxRequests = 15;
-
-  if (!ipCache.has(ip)) {
-    ipCache.set(ip, [now]);
-    return false;
-  }
-
-  const timestamps = ipCache.get(ip).filter(t => now - t < windowMs);
+  const key = `${bucket}:${ip}`;
+  const timestamps = (ipCache.get(key) || []).filter(t => now - t < RATE_LIMIT_WINDOW_MS);
   if (timestamps.length >= maxRequests) {
+    ipCache.set(key, timestamps);
     return true;
   }
 
   timestamps.push(now);
-  ipCache.set(ip, timestamps);
+  ipCache.delete(key); // re-insert so Map order tracks recency
+  ipCache.set(key, timestamps);
+  if (ipCache.size > RATE_LIMIT_MAX_KEYS) pruneRateLimitCache(now);
   return false;
+}
+
+function pruneRateLimitCache(now) {
+  for (const [key, timestamps] of ipCache) {
+    if (!timestamps.some(t => now - t < RATE_LIMIT_WINDOW_MS)) ipCache.delete(key);
+  }
+  // Still over the cap: drop the least recently used keys (Map iterates in insertion order).
+  for (const key of ipCache.keys()) {
+    if (ipCache.size <= RATE_LIMIT_MAX_KEYS) break;
+    ipCache.delete(key);
+  }
 }
 
 function logEvent(env, eventName, { sessionId = null, tier = null, status, errorCode = null, email = null, ip = null, meta = null } = {}) {
@@ -150,7 +167,11 @@ export default {
         }
       }
 
-      if (req.method === "POST" && isRateLimited(clientIp)) {
+      // Webhooks are exempt (signature check is the protection). Telemetry has its own quiet bucket.
+      if (req.method === "POST" && !isWebhook && url.pathname === "/api/track" && isRateLimited(clientIp, "track", 60)) {
+        return new Response(null, { status: 204, headers: cors });
+      }
+      if (req.method === "POST" && !isWebhook && url.pathname !== "/api/track" && isRateLimited(clientIp, "core", 15)) {
         logEvent(env, "rate_limit_exceeded", { status: "failed", errorCode: "too_many_requests", ip: clientIp });
         return new Response(JSON.stringify({ error: "too_many_requests" }), {
           status: 429,
@@ -506,9 +527,7 @@ async function handleCheckout(body, env, cors) {
     "line_items[0][price_data][product_data][name]": PRODUCT_NAME[tier],
   });
 
-  if (locale && VALID_LOCALES.has(locale)) {
-    params.set("locale", locale === "zh" ? "zh-Hans" : locale);
-  }
+  if (locale && VALID_LOCALES.has(locale)) params.set("locale", STRIPE_LOCALE[locale] || "auto");
 
   const res = await fetch("https://api.stripe.com/v1/checkout/sessions", {
     method: "POST",
@@ -591,7 +610,12 @@ async function handleGetReport(url, env, cors) {
   if (!isUuid(id)) return json({ error: "invalid_id" }, 400, cors);
   const row = await sbSelect(env, id);
   if (!row) return json({ error: "not_found" }, 404, cors);
-  return json({ paid: row.paid, report: row.report || null, tier: row.tier || null }, 200, cors);
+  return json({
+    paid: row.paid,
+    report: row.report || null,
+    tier: row.tier || null,
+    report_html: row.paid && row.report ? renderReportHtml(row.report) : null,
+  }, 200, cors);
 }
 
 /** GET/POST /api/unsubscribe?id=<uuid>
@@ -629,7 +653,22 @@ async function handleUnsubscribe(req, url, env, cors) {
 function validateReportContent(content) {
   if (!content || typeof content !== "string" || content.length < 100) return false;
   const lower = content.toLowerCase();
-  const banned = ["your iq is", "clinical", "diagnostic", "whose iq was", "certified iq", "official iq", "iq score"];
+  const banned = ["your iq is", "clinical", "diagnostic", "whose iq was", "certified iq", "official iq", "iq score",
+    // Localized equivalents of "clinical" / "diagnostic" / "your IQ is" (lower-cased substrings)
+    "klinisch", "diagnostisch", "ihr iq ist", "dein iq ist",                // de, nl
+    "clinique", "diagnostique", "votre qi est", "ton qi est",               // fr
+    "clínic", "diagnóstic", "tu ci es", "su ci es", "seu qi é", "teu qi é", // es, pt
+    "clinic", "il tuo qi è", "il suo qi è",                                 // it (diagnostic* covered above)
+    "je iq is", "jouw iq is", "uw iq is",                                   // nl
+    "臨床", "診断", "あなたのiqは",                                           // ja
+    "임상", "진단", "당신의 iq는",                                            // ko
+    "临床", "诊断", "你的智商是", "您的智商是",                                 // zh
+    "سريري", "تشخيص", "معدل ذكائك هو", "ذكاؤك هو",                           // ar
+    "नैदानिक", "क्लिनिकल", "आपका आईक्यू", "आपका iq",                          // hi
+    "klinikal", "diyagnostiko", "ang iyong iq ay",                          // tl
+    "kliniczn", "diagnostyczn", "twoje iq",                                 // pl
+    "клиническ", "диагност", "ваш iq",                                      // ru
+    "klinik", "tanısal", "iq'nuz"];                                         // tr
   for (const word of banned) {
     if (lower.includes(word)) return false;
   }
@@ -705,7 +744,7 @@ async function generateReport(env, row, tier) {
         const score = catScores[cat] ?? 0;
         const max   = catMax[cat]   ?? 4;
         const pct   = Math.round((score / max) * 100);
-        lines.push(`  ${cat}: ${score}/${max} (${pct}th percentile in this category)`);
+        lines.push(`  ${cat}: ${score}/${max} (${pct}% correct)`);
       }
     }
     lines.push("");
@@ -748,13 +787,13 @@ Practical personal reflection.
 Name ONE real historical figure (scientist, artist, writer, inventor, leader — any field) whose general reputation for the SAME reasoning strength this person showed (use their strongest category) is well known. Explain the connection in 1–2 sentences. Frame it as a thematic pairing: "Your [category] result echoes the kind of thinking associated with [figure]..." NOT as a numeric comparison.
 
 ### Disclaimer
-Strict disclosure of non-clinical nature.
+One sentence stating this is a self-insight reflection for curiosity and entertainment only, not a medical or professional assessment (do not use the words "clinical" or "diagnostic", even negated).
 
 STRICT RULES — violations are not acceptable:
 - Do NOT state or imply any numeric IQ score for the historical figure. Historical IQ estimates for real people are unreliable and must not appear.
 - Do NOT say "your IQ is X" or "clinical" or "diagnostic" — use "cognitive index" or "score" only.
 - Do NOT claim this is a clinical or validated psychometric result.
-- Do NOT invent statistics. Plain, warm, specific tone. No filler.${row.locale && row.locale !== "en" ? `\n- OUTPUT LANGUAGE: You MUST write the entire report in ${row.locale} language natively.` : ""}`;
+- Do NOT invent statistics. Plain, warm, specific tone. No filler.${LANG_NAME[row.locale] ? `\n- OUTPUT LANGUAGE: You MUST write the entire report natively in ${LANG_NAME[row.locale]}. Translate the ### section headings into ${LANG_NAME[row.locale]} too, but keep "###" as the heading marker.` : ""}`;
 
   try {
     const res = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -790,6 +829,45 @@ STRICT RULES — violations are not acceptable:
     return fallback + `\n\n---\n### Printable Certificate of Cognitive Assessment\n**IQ·TEST COGNITIVE ASSESSMENT INDEX: ${cognitive_index}**\n*Estimated Population Percentile: ${percentile_estimate ?? 'N/A'}th Percentile*\n*Issued by APEX Business Systems Ltd. (Edmonton, AB)*\n*Verification ID: ${row.id}*\n\nThis certificate verifies completion of the 16-item self-insight cognitive reasoning evaluation across numeric, verbal, logical, and spatial reasoning domains.`;
   }
   return fallback;
+}
+
+// ── Report rendering (escaped markdown subset, no dependencies) ──────────────
+
+function escapeHtml(s) {
+  return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+}
+
+function inlineMd(s) {
+  return s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/(^|[^*])\*(?!\s)([^*]+?)\*(?!\*)/g, "$1<em>$2</em>");
+}
+
+/** Escapes first, then converts only: #–#### headings, **bold**, *italic*, --- rules, -/* lists, paragraphs.
+ *  email:true emits inline styles (email clients strip <style>). */
+function renderReportHtml(md, { email = false } = {}) {
+  const st = email
+    ? { h: ' style="font-family:Georgia,serif;color:#1a1a1a;margin:20px 0 8px;"', p: ' style="margin:0 0 12px;"', hr: ' style="border:0;border-top:1px solid #eaeaea;margin:20px 0;"', ul: ' style="margin:0 0 12px;padding-left:20px;"' }
+    : { h: "", p: "", hr: "", ul: "" };
+  const out = [];
+  let para = [], list = [];
+  const flushPara = () => { if (para.length) { out.push(`<p${st.p}>${inlineMd(para.join("<br>"))}</p>`); para = []; } };
+  const flushList = () => { if (list.length) { out.push(`<ul${st.ul}>${list.map(i => `<li>${inlineMd(i)}</li>`).join("")}</ul>`); list = []; } };
+  for (const raw of escapeHtml(md || "").split(/\r?\n/)) {
+    const line = raw.trim();
+    let m;
+    if (!line) { flushPara(); flushList(); continue; }
+    if (/^-{3,}$/.test(line)) { flushPara(); flushList(); out.push(`<hr${st.hr}>`); continue; }
+    if ((m = line.match(/^(#{1,4})\s+(.*)$/))) {
+      flushPara(); flushList();
+      const level = Math.min(m[1].length + 1, 4);
+      out.push(`<h${level}${st.h}>${inlineMd(m[2])}</h${level}>`);
+      continue;
+    }
+    if ((m = line.match(/^[-*]\s+(.*)$/))) { flushPara(); list.push(m[1]); continue; }
+    flushList();
+    para.push(line);
+  }
+  flushPara(); flushList();
+  return out.join("\n");
 }
 
 // ── Resend email ──────────────────────────────────────────────────────────────
@@ -829,7 +907,7 @@ async function sendReportEmail(env, to, report, index, tier) {
         <span style="font-family:Georgia,serif; font-size:24px; font-weight:bold; letter-spacing:0.05em; color:#B49048;">IQ&middot;TEST</span>
         <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:#666666; margin-top:4px;">COGNITIVE ASSESSMENT</div>
       </div>
-      <div style="font-size:15px; margin-bottom:24px; white-space: pre-wrap;">${report}</div>
+      <div style="font-size:15px; margin-bottom:24px;">${renderReportHtml(report, { email: true })}</div>
       <div style="margin-top:32px; border-top:1px solid #eaeaea; padding-top:16px; font-size:12px; color:#888888; text-align:center; line-height:1.5;">
         This is a self-insight quiz, not a clinical IQ test.<br>
         &copy; 2026 APEX Business Systems Ltd. &nbsp;&middot;&nbsp; Edmonton, AB<br>
