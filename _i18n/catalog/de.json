@@ -294,5 +294,47 @@
     "ctx": "Table copied confirmation state",
     "srcHash": "4e45a91772b8f5dd",
     "status": "reviewed"
+  },
+  "runtime.checkout_failed": {
+    "src": "We couldn't reach checkout. Your answers are saved — please try again in a moment.",
+    "t": "Wir konnten den Bezahlvorgang nicht erreichen. Ihre Antworten sind gespeichert – bitte versuchen Sie es gleich noch einmal.",
+    "ctx": "Checkout API/network failure message (not a validation error)",
+    "srcHash": "9ec7d5889b63d5bb",
+    "status": "machine"
+  },
+  "runtime.save_failed": {
+    "src": "We couldn't save your score right now. Please try again in a moment.",
+    "t": "Wir konnten Ihr Ergebnis gerade nicht speichern. Bitte versuchen Sie es gleich noch einmal.",
+    "ctx": "Score save API/network failure message",
+    "srcHash": "9484e8d62411b3e1",
+    "status": "machine"
+  },
+  "runtime.rate_limited": {
+    "src": "Too many attempts — please wait a minute and try again.",
+    "t": "Zu viele Versuche – bitte warten Sie eine Minute und versuchen Sie es erneut.",
+    "ctx": "HTTP 429 rate-limit message",
+    "srcHash": "54f9baa7b40ce61a",
+    "status": "machine"
+  },
+  "runtime.report_polling": {
+    "src": "Confirming your payment — your report will appear here in a few seconds…",
+    "t": "Ihre Zahlung wird bestätigt – Ihr Bericht erscheint in wenigen Sekunden hier…",
+    "ctx": "Status while waiting for payment confirmation after Stripe redirect",
+    "srcHash": "0c4600af4277c69a",
+    "status": "machine"
+  },
+  "runtime.report_timeout": {
+    "src": "Payment still processing — refresh in a few seconds, or check your email.",
+    "t": "Die Zahlung wird noch verarbeitet – laden Sie die Seite in ein paar Sekunden neu oder prüfen Sie Ihre E-Mails.",
+    "ctx": "Fallback after report polling times out",
+    "srcHash": "3b7f73cc61aade14",
+    "status": "machine"
+  },
+  "runtime.report_load_failed": {
+    "src": "Couldn't load your report. It's also on its way to your inbox.",
+    "t": "Ihr Bericht konnte nicht geladen werden. Er ist auch auf dem Weg in Ihren Posteingang.",
+    "ctx": "Report could not be loaded (not found / invalid id)",
+    "srcHash": "2f88ed1c5271c28d",
+    "status": "machine"
   }
 }

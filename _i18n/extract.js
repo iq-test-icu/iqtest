@@ -67,7 +67,15 @@ const enCatalog = {
   "puzzle.reveal_btn": { "src": "🔍 Reveal Step-by-Step Solution", "ctx": "Interactive puzzle reveal button" },
   "puzzle.hide_btn": { "src": "▲ Hide Solution", "ctx": "Interactive puzzle hide button" },
   "table.copy_md": { "src": "📋 Copy Markdown", "ctx": "Table copy button label" },
-  "table.copied": { "src": "✓ Copied!", "ctx": "Table copied confirmation state" }
+  "table.copied": { "src": "✓ Copied!", "ctx": "Table copied confirmation state" },
+
+  // ── Runtime UI copy (public/index.html UI_MSG) ─────────────────────────────
+  "runtime.checkout_failed": { "src": "We couldn't reach checkout. Your answers are saved — please try again in a moment.", "ctx": "Checkout API/network failure message (not a validation error)" },
+  "runtime.save_failed": { "src": "We couldn't save your score right now. Please try again in a moment.", "ctx": "Score save API/network failure message" },
+  "runtime.rate_limited": { "src": "Too many attempts — please wait a minute and try again.", "ctx": "HTTP 429 rate-limit message" },
+  "runtime.report_polling": { "src": "Confirming your payment — your report will appear here in a few seconds…", "ctx": "Status while waiting for payment confirmation after Stripe redirect" },
+  "runtime.report_timeout": { "src": "Payment still processing — refresh in a few seconds, or check your email.", "ctx": "Fallback after report polling times out" },
+  "runtime.report_load_failed": { "src": "Couldn't load your report. It's also on its way to your inbox.", "ctx": "Report could not be loaded (not found / invalid id)" }
 };
 
 fs.writeFileSync(path.join(catalogDir, 'en.json'), JSON.stringify(enCatalog, null, 2), 'utf8');

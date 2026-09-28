@@ -294,5 +294,47 @@
     "ctx": "Table copied confirmation state",
     "srcHash": "4e45a91772b8f5dd",
     "status": "reviewed"
+  },
+  "runtime.checkout_failed": {
+    "src": "We couldn't reach checkout. Your answers are saved — please try again in a moment.",
+    "t": "Não conseguimos acessar o pagamento. Suas respostas estão salvas — tente novamente em instantes.",
+    "ctx": "Checkout API/network failure message (not a validation error)",
+    "srcHash": "9ec7d5889b63d5bb",
+    "status": "machine"
+  },
+  "runtime.save_failed": {
+    "src": "We couldn't save your score right now. Please try again in a moment.",
+    "t": "Não conseguimos salvar sua pontuação agora. Tente novamente em instantes.",
+    "ctx": "Score save API/network failure message",
+    "srcHash": "9484e8d62411b3e1",
+    "status": "machine"
+  },
+  "runtime.rate_limited": {
+    "src": "Too many attempts — please wait a minute and try again.",
+    "t": "Muitas tentativas — aguarde um minuto e tente novamente.",
+    "ctx": "HTTP 429 rate-limit message",
+    "srcHash": "54f9baa7b40ce61a",
+    "status": "machine"
+  },
+  "runtime.report_polling": {
+    "src": "Confirming your payment — your report will appear here in a few seconds…",
+    "t": "Confirmando seu pagamento — seu relatório aparecerá aqui em alguns segundos…",
+    "ctx": "Status while waiting for payment confirmation after Stripe redirect",
+    "srcHash": "0c4600af4277c69a",
+    "status": "machine"
+  },
+  "runtime.report_timeout": {
+    "src": "Payment still processing — refresh in a few seconds, or check your email.",
+    "t": "Pagamento ainda em processamento — atualize a página em alguns segundos ou verifique seu e-mail.",
+    "ctx": "Fallback after report polling times out",
+    "srcHash": "3b7f73cc61aade14",
+    "status": "machine"
+  },
+  "runtime.report_load_failed": {
+    "src": "Couldn't load your report. It's also on its way to your inbox.",
+    "t": "Não foi possível carregar seu relatório. Ele também está a caminho da sua caixa de entrada.",
+    "ctx": "Report could not be loaded (not found / invalid id)",
+    "srcHash": "2f88ed1c5271c28d",
+    "status": "machine"
   }
 }
