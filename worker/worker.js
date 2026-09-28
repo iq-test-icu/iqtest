@@ -83,6 +83,17 @@ function pruneRateLimitCache(now) {
   }
 }
 
+// Fire-and-forget writes must be registered with ctx.waitUntil, otherwise the runtime may cancel
+// them once the response is returned (or the cron handler settles) and the event is silently lost.
+const WAIT_UNTIL = Symbol("waitUntil");
+
+function withWaitUntil(env, ctx) {
+  if (!ctx || typeof ctx.waitUntil !== "function") return env;
+  const scoped = Object.create(env);
+  scoped[WAIT_UNTIL] = (promise) => ctx.waitUntil(promise);
+  return scoped;
+}
+
 function logEvent(env, eventName, { sessionId = null, tier = null, status, errorCode = null, email = null, ip = null, meta = null } = {}) {
   const logObj = {
     timestamp: new Date().toISOString(),
@@ -112,9 +123,10 @@ function logEvent(env, eventName, { sessionId = null, tier = null, status, error
     if (ip) row.ip = ip;
     if (meta) row.meta = meta;
 
-    sbInsert(env, "events", row).catch(err => {
+    const pending = sbInsert(env, "events", row).catch(err => {
       console.error("Async event logging to Supabase failed:", err);
     });
+    if (env[WAIT_UNTIL]) env[WAIT_UNTIL](pending);
   }
 }
 
@@ -130,7 +142,8 @@ function isUuid(id) {
 }
 
 export default {
-  async fetch(req, env) {
+  async fetch(req, baseEnv, ctx) {
+    const env  = withWaitUntil(baseEnv, ctx);
     const url  = new URL(req.url);
     const cors = corsHeaders(env.ALLOWED_ORIGIN || "*");
 
@@ -206,7 +219,7 @@ export default {
 
   // Cloudflare Cron Trigger entry point — see wrangler.toml [triggers].
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(handleScheduled(env));
+    ctx.waitUntil(handleScheduled(withWaitUntil(env, ctx)));
   },
 };
 
