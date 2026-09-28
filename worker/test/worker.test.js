@@ -659,6 +659,34 @@ async function testRateLimiterBuckets() {
   }
 }
 
+async function testLogEventsRegisteredWithWaitUntil() {
+  const originalFetch = globalThis.fetch;
+  const captures = rrCaptures();
+  globalThis.fetch = async (url, opts = {}) => {
+    if (url.includes("rest/v1/sessions?") && !opts.method) {
+      return new Response("[]", { status: 200, headers: { "Content-Type": "application/json" } });
+    }
+    return rrStub({ captures })(url, opts);
+  };
+  try {
+    const pending = [];
+    const ctx = { waitUntil: (p) => { pending.push(p); } };
+    const res = await worker.fetch(rrPost("/api/save-result", { email: "lead@example.com", raw: 10, consentGiven: true, leadOnly: true }, "10.6.0.1"), RR_ENV, ctx);
+    assert.strictEqual(res.status, 200, "save-result should succeed");
+    assert.ok(pending.length >= 1, "logEvent must register its Supabase write with ctx.waitUntil");
+    await Promise.all(pending);
+    assert.ok(captures.events.some(e => e.event_name === "lead_captured"), "lead_captured must be persisted, not dropped after the response");
+
+    const cronPending = [];
+    await worker.scheduled({}, RR_ENV, { waitUntil: (p) => { cronPending.push(p); } });
+    for (let i = 0; i < cronPending.length; i++) await cronPending[i]; // later entries are registered while earlier ones run
+    assert.ok(captures.events.some(e => e.event_name === "recovery_sweep_completed"), "cron events must survive until the write completes");
+    console.log("✓ server-side events are registered with ctx.waitUntil (request + cron) so they are not dropped");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+}
+
 async function runAllTests() {
   console.log("Running Worker Verification Tests...");
   await testInvalidUuidReport();
@@ -678,6 +706,7 @@ async function runAllTests() {
   await testReportHtmlEscapesAndRendersSubset();
   await testReportEmailRendersHtmlNotRawMarkdown();
   await testRateLimiterBuckets();
+  await testLogEventsRegisteredWithWaitUntil();
   console.log("All tests passed cleanly!");
 }
 
