@@ -66,7 +66,14 @@ function buildXhtmlAlternates(subPath) {
   return alts.join('\n');
 }
 
-const today = new Date().toISOString().split('T')[0];
+// Deterministic lastmod (zero generator drift): explicit SITEMAP_LASTMOD (YYYY-MM-DD) wins,
+// else keep the date already published in /sitemap.xml, else fall back to today.
+const existingIndexPath = path.join(publicDir, 'sitemap.xml');
+const existingLastmod = fs.existsSync(existingIndexPath)
+  ? (fs.readFileSync(existingIndexPath, 'utf8').match(/<lastmod>(\d{4}-\d{2}-\d{2})<\/lastmod>/) || [])[1]
+  : undefined;
+const envLastmod = /^\d{4}-\d{2}-\d{2}$/.test(process.env.SITEMAP_LASTMOD || '') ? process.env.SITEMAP_LASTMOD : undefined;
+const today = envLastmod || existingLastmod || new Date().toISOString().split('T')[0];
 
 // 1. Generate English Sitemap
 let enXml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n`;
